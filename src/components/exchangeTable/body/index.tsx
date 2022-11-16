@@ -5,6 +5,10 @@ interface IProps {
   listInfo: IEurInfo;
 }
 
+const MathCeil = (number: number | undefined) => {
+  return Math.ceil(Number(number));
+};
+
 const TableBody = ({ listInfo }: IProps) => {
   const {
     name,
@@ -18,29 +22,26 @@ const TableBody = ({ listInfo }: IProps) => {
     ttBuyingPrice,
   } = listInfo;
 
-  const base = Math.ceil(Number(basePrice));
-  const opening = Math.ceil(Number(openingPrice));
-  const change = Math.ceil(Number(changePrice));
-  const cashBuying = Math.ceil(Number(cashBuyingPrice));
-  const cashSelling = Math.ceil(Number(cashSellingPrice));
-  const ttSelling = Math.ceil(Number(ttSellingPrice));
-  const ttBuying = Math.ceil(Number(ttBuyingPrice));
-  const changePricePercent = Math.ceil((change / base) * 10000) / 100;
+  const changePricePercent = Math.ceil((MathCeil(changePrice) / MathCeil(basePrice)) * 10000) / 100;
 
   return (
     <tbody>
       <tr>
         <td>{name}</td>
         <td>{currencyName}</td>
-        <td>{base.toLocaleString()}</td>
-        <UpDownPrice basePrice={base} openingPrice={opening}>
-          {base - opening > 0 ? '▲' : base - opening < 0 ? '▼' : ''}
-          {change.toLocaleString()}원 ({changePricePercent}%)
+        <td>{MathCeil(basePrice).toLocaleString()}</td>
+        <UpDownPrice basePrice={MathCeil(basePrice)} openingPrice={MathCeil(openingPrice)}>
+          {MathCeil(basePrice) - MathCeil(openingPrice) > 0
+            ? '▲'
+            : MathCeil(basePrice) - MathCeil(openingPrice) < 0
+            ? '▼'
+            : ''}
+          {MathCeil(changePrice).toLocaleString()}원 ({changePricePercent}%)
         </UpDownPrice>
-        <td>{cashBuying.toLocaleString()}</td>
-        <td>{cashSelling.toLocaleString()}</td>
-        <td>{ttSelling.toLocaleString()}</td>
-        <td>{ttBuying.toLocaleString()}</td>
+        <td>{MathCeil(cashBuyingPrice).toLocaleString()}</td>
+        <td>{MathCeil(cashSellingPrice).toLocaleString()}</td>
+        <td>{MathCeil(ttSellingPrice).toLocaleString()}</td>
+        <td>{MathCeil(ttBuyingPrice).toLocaleString()}</td>
       </tr>
     </tbody>
   );
