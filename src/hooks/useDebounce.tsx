@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 
 type inputType = number | string;
 
-function useDebounce<T>(number: inputType, delay?: number): inputType {
-  const [debouncedValue, setDebouncedValue] = useState<inputType>(number);
+function useDebounce<T>(value: inputType, delay?: number): inputType {
+  const [debouncedValue, setDebouncedValue] = useState<inputType>(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(number), delay || 500);
+    setDebouncedValue("로딩중");
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [number]);
+  }, [value]);
 
   return debouncedValue;
 }

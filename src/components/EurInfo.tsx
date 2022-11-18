@@ -1,5 +1,9 @@
 import React from "react";
 
+type eurInfoType = {
+  [key: string]: number | string;
+};
+
 const EurInfo = ({ eurInfo }: any): React.ReactElement => {
   const {
     basePrice,
