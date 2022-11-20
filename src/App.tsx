@@ -19,14 +19,19 @@ export const App = () => {
 
   useEffect(() => {
     getEurInfo();
-    return () => {};
+    // return () => {};
   }, []);
 
-  if (!isReady) return null;
   return (
     <>
-      <EurInfo eurInfo={eurInfo} />
-      <ChangeInputEur basePrice={eurInfo.basePrice} />
+      {isReady ? (
+        <div>
+          <EurInfo eurInfo={eurInfo} />
+          <ChangeInputEur basePrice={eurInfo.basePrice} />
+        </div>
+      ) : (
+        <div>잠시만 기다려 주세요.</div>
+      )}
     </>
   );
 };

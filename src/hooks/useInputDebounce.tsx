@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 
-type inputType = number | string;
+type inputType = number | string | undefined;
 
-function useDebounce<T>(value: inputType, delay?: number): inputType {
+function useInputDebounce<T>(
+  value: inputType,
+  delay?: number,
+  loadingText?: string
+): inputType {
   const [debouncedValue, setDebouncedValue] = useState<inputType>(value);
 
   useEffect(() => {
-    setDebouncedValue("로딩중");
+    setDebouncedValue(loadingText);
     const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
 
     return () => {
@@ -17,4 +21,4 @@ function useDebounce<T>(value: inputType, delay?: number): inputType {
   return debouncedValue;
 }
 
-export default useDebounce;
+export default useInputDebounce;
