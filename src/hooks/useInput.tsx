@@ -6,6 +6,7 @@ const useInput = (initialValue: string) => {
     const {
       target: { value },
     } = event;
+    
     setValue(value);
   };
 
