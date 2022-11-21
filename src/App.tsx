@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Loading from './view/Loading';
+import ExchangeRate from "./view/ExchangeRate";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -15,32 +17,17 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
   useEffect(() => {
     getEurInfo();
     return () => {};
   }, []);
 
-  if (!isReady) return null;
+  if (!isReady) return (
+    <Loading></Loading>
+  );
   return (
     <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <ExchangeRate props={eurInfo}></ExchangeRate>
     </div>
   );
 };
