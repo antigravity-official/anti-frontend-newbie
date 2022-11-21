@@ -14,7 +14,10 @@ export default function useHandleStates() {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    exchangeEurToKrw(Number(e.target.value));
+    const { value } = e.target;
+    if (/^[\d]*\.?[\d]{0,2}$/.test(value)) {
+      exchangeEurToKrw(Number(value));
+    } else return;
   };
 
   useEffect(() => {
