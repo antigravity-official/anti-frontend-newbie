@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { GetEurInfoReturnType } from "../types";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<
+    GetEurInfoReturnType | Record<string, never>
+  >({});
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -10,7 +13,6 @@ export const App = () => {
     )
       .then((response) => response.json())
       .then((array) => array[0]);
-
     setEurInfo(krweur);
     setReady(true);
   };
