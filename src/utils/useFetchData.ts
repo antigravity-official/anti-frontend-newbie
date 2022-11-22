@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface ResponseResult<T> {
-  data?: Promise<T>;
+  data: T | undefined;
   loading: boolean;
   error?: Error;
 }
