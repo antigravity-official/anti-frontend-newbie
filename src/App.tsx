@@ -1,14 +1,8 @@
-import ExchangeView from "./view/ExchangeView";
+import ExchangeProvider from "./viewModel/ExchangeProvider";
 import "../src/styles/globals.css";
-import { useExchangeViewModel } from "./viewModel/useExchangeViewModel";
 
 export const App = () => {
-  const ExchangeViewModel = useExchangeViewModel();
-  return (
-    <>
-      <ExchangeView viewModel={ExchangeViewModel} />
-    </>
-  );
+  return <ExchangeProvider />;
 };
 
 export default App;
