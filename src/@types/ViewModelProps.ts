@@ -1,12 +1,13 @@
-import { ViewProps } from "./ViewProps";
+import { EurInfoProps } from "./EurInfoProps";
 
-export interface ViewModelProps {
-  viewModel: {
-    isReady: boolean;
-    eurInfo: ViewProps | undefined;
-    eur: string;
-    Krw: string;
-    getEurInfo: () => Promise<void>;
-    exchangeEurToKrw: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  };
+export interface ViewModelProps extends HomePageExchangeInputProps {
+  isReady: boolean;
+  eurInfo?: EurInfoProps;
+  eur: string;
+}
+
+export interface HomePageExchangeInputProps {
+  exchangeEurToKrw: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  eur: string;
+  Krw: string;
 }
