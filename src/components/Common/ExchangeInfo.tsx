@@ -1,16 +1,14 @@
-import { useContext, useEffect } from "react";
-import { ExchangeData } from "../../models";
-import { Arrow } from "../../viewmodels";
-
-export const ExchangeInfo = () => {
+import { useContext } from "react";
+import { ExchangeData } from "../../VM";
+import { ArrowChecktype } from "../../types/Type";
+export const ExchangeInfo = (prop: ArrowChecktype) => {
   const { data } = useContext(ExchangeData);
-  useEffect(() => {
-    Arrow(data);
-  }, [data]);
+  const { ArrowCheck } = prop.ArrowCheck;
+
   return (
     <div>
       {data?.basePrice}
-      {Arrow(data) > 0 ? "▲" : "▼"}
+      {Number(ArrowCheck) > 0 ? "▲" : "▼"}
     </div>
   );
 };

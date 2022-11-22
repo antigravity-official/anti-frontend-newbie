@@ -1,2 +1,2 @@
 export * from "./Common/Content";
-export * from "./pages/Home";
+// export * from "./pages/Home";

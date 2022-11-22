@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { ExchangeData } from "../../models";
+import { Spinner } from "./Spinner";
+import { ExchangeData } from "../../VM";
 
-export const Loading = () => {
-  const { boolean } = useContext(ExchangeData);
-
-  console.log(boolean);
+export const Loading = (prop: any) => {
+  const { isChange } = useContext(ExchangeData);
+  console.log(isChange);
   return (
-    <div>{!boolean ? <div>로딩중입니다 잠시만 기달려주세요</div> : null}</div>
+    <>
+      <Spinner />{" "}
+    </>
   );
 };

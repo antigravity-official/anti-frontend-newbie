@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Content } from "../Common/Content";
-import { ExchangeData } from "../../models";
-export const MarketPrice = () => {
-  const { data } = useContext(ExchangeData);
+import { ExchangeData } from "../../VM";
+export const MarketPrice = (prop: any) => {
+  const data = prop.data;
 
   return (
     <>
