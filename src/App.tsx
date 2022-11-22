@@ -17,14 +17,14 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (amount: number) => amount * eurInfo.basePrice;
 
   useEffect(() => {
     getEurInfo();
-    return () => {};
   }, []);
 
   if (!isReady) return null;
+
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
