@@ -25,7 +25,7 @@ export const App = () => {
   if (!isReady) return null;
   return (
     <div className="App">
-      <div>환율기준 (1 유로)</div>
+      <div className="text-lg border-2 border-red-400 ">환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
