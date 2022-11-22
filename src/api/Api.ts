@@ -4,6 +4,5 @@ export const getData = async () => {
   )
     .then((res) => res.json())
     .then((array) => array[0]);
-  console.log(response);
   return response;
 };
