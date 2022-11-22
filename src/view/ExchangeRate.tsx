@@ -4,7 +4,6 @@ import styled from "styled-components";
 const ExchangeRate = (eurInfo: any) => {
   const [money, setMoney] = useState<number>(0);
 
-  console.log(eurInfo.props);
   const exchangeEurToKrw = (krw: number): string => {
     let price = krw * eurInfo.props.basePrice;
     var twoPrice = price.toFixed(2);
