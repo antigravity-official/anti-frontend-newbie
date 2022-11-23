@@ -43,7 +43,7 @@ interface PropsType {
 const ExchangeInfoSection = ({ info }: PropsType) => {
   return (
     <>
-      <div>환율기준 (1 {`${info.currencyName}`})</div>
+      <div>환율기준 (1 {info.currencyName})</div>
       <div>
         {info.basePrice}
         {info.basePrice - info.openingPrice > 0 && "▲"}

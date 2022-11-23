@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetEurInfoReturnType } from "../../../types";
 import getEurInfo from "../../apis/getEurInfo";
 import ExchangeInfoSection from "../../components/ExchangeInfoSection";
+import MoneyInputSection from "../../components/MoneyInputSection";
 
 const Home = () => {
   const [exchangeInfo, setExchangeInfo] = useState<GetEurInfoReturnType>();
@@ -18,7 +19,10 @@ const Home = () => {
         <>
           <ExchangeInfoSection info={exchangeInfo} />
           <hr />
-          <input /> 유로 ▶︎ <input disabled /> 원
+          <MoneyInputSection
+            currency={exchangeInfo.currencyName}
+            ratio={exchangeInfo.changeRate}
+          />
         </>
       ) : null}
     </div>
