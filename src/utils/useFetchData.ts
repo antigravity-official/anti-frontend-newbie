@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 
+type FetchError = {
+  message: string;
+};
+
 interface ResponseResult<T> {
   data: T | undefined;
   loading: boolean;
-  error?: Error;
+  error?: FetchError | unknown;
 }
 
 export function useFetchData<T>(url: string): ResponseResult<T> {
@@ -20,7 +24,7 @@ export function useFetchData<T>(url: string): ResponseResult<T> {
         const json = await data.json();
 
         setResponse({ ...response, data: json[0], loading: false });
-      } catch (err: any) {
+      } catch (err: unknown) {
         setResponse({ ...response, error: err });
       }
     };
