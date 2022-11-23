@@ -7,7 +7,7 @@ export interface GetEurInfoReturnType {
   changeRate: number;
   code: "FRX.KRWEUR";
   country: "유로";
-  createdAt: "2016-10-21T06:13:30.000+0000";
+  createdAt: string;
   currencyCode: "EUR";
   currencyName: "유로";
   currencyUnit: 1;
@@ -21,7 +21,7 @@ export interface GetEurInfoReturnType {
   low52wDate: string;
   low52wPrice: number;
   lowPrice: number;
-  modifiedAt: Date;
+  modifiedAt: string;
   name: "유로 (KRW/EUR)";
   openingPrice: number;
   provider: "하나은행";
