@@ -7,10 +7,18 @@ export class DetailModel {
   ttBuyingPrice: number;
 
   constructor(data: PriceInfo | undefined) {
-    this.cashBuyingPrice = data?.cashBuyingPrice ? data?.cashBuyingPrice : 0;
-    this.cashSellingPrice = data?.cashSellingPrice ? data?.cashSellingPrice : 0;
-    this.ttBuyingPrice = data?.ttBuyingPrice ? data?.ttBuyingPrice : 0;
-    this.ttSellingPrice = data?.ttSellingPrice ? data?.ttSellingPrice : 0;
+    this.cashBuyingPrice = data?.cashBuyingPrice
+      ? Math.ceil(data?.cashBuyingPrice)
+      : 0;
+    this.cashSellingPrice = data?.cashSellingPrice
+      ? Math.ceil(data?.cashSellingPrice)
+      : 0;
+    this.ttBuyingPrice = data?.ttBuyingPrice
+      ? Math.ceil(data?.ttBuyingPrice)
+      : 0;
+    this.ttSellingPrice = data?.ttSellingPrice
+      ? Math.ceil(data?.ttSellingPrice)
+      : 0;
   }
 }
 
@@ -20,9 +28,9 @@ export class InfoModel {
   changePrice: number;
 
   constructor(data: PriceInfo | undefined) {
-    this.basePrice = data?.basePrice ? data?.basePrice : 0;
-    this.openingPrice = data?.openingPrice ? data?.openingPrice : 0;
-    this.changePrice = data?.changePrice ? data?.changePrice : 0;
+    this.basePrice = data?.basePrice ? Math.ceil(data?.basePrice) : 0;
+    this.openingPrice = data?.openingPrice ? Math.ceil(data?.openingPrice) : 0;
+    this.changePrice = data?.changePrice ? Math.ceil(data?.changePrice) : 0;
   }
 
   updown() {
@@ -30,6 +38,6 @@ export class InfoModel {
   }
 
   percent() {
-    return `${(this.changePrice / this.basePrice) * 100}%`;
+    return `${((this.changePrice / this.basePrice) * 100).toFixed(2)}%`;
   }
 }
