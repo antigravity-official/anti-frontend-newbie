@@ -25,16 +25,16 @@ const ExchangeInfoSection = ({
     <>
       <div>환율기준 (1 {currencyName})</div>
       <div>
-        {basePrice}
-        {change === "RISE" ? "▲" : null}
-        {change === "FALL" ? "▼" : null}
-        {changePrice}원 ({(changePrice / basePrice) * 100}%)
+        {basePrice}원{change === "RISE" ? " ▲ " : null}
+        {change === "FALL" ? " ▼ " : null}
+        {/*TODO : Change 가 같을 때?*/}
+        {changePrice}원 ({((changePrice / basePrice) * 100).toFixed(3)}%)
       </div>
       <div>
-        <div>살때 : {cashBuyingPrice}</div>
-        <div>팔때 : {cashSellingPrice}</div>
-        <div>보낼때 : {ttSellingPrice}</div>
-        <div>받을때 : {ttBuyingPrice}</div>
+        <div>살때 : {cashBuyingPrice.toLocaleString("ko-KR")}원</div>
+        <div>팔때 : {cashSellingPrice.toLocaleString("ko-KR")}원</div>
+        <div>보낼때 : {ttSellingPrice.toLocaleString("ko-KR")}원</div>
+        <div>받을때 : {ttBuyingPrice.toLocaleString("ko-KR")}원</div>
       </div>
     </>
   );
