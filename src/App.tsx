@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getEurInfo } from './apis';
-import { EruInfo } from './types/eruInfo';
+import { useQuery } from 'react-query';
+import LoadingIcon from './components/LoadingIcon/LoadingIcon';
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<EruInfo | undefined>({
-    basePrice: 0,
-    openingPrice: 0,
-    changePrice: 0,
-    cashBuyingPrice: 0,
-    cashSellingPrice: 0,
-    ttSellingPrice: 0,
-    ttBuyingPrice: 0,
-  });
+  const { data, isLoading, error } = useQuery('v1/forex', getEurInfo);
+
   const [krw, setKrw] = useState(0);
   const [eur, setEur] = useState<string>();
 
-  const exchangeEurToKrw = (krw: number) =>
-    Math.floor(krw * eurInfo!.basePrice);
+  const exchangeEurToKrw = (krw: number) => Math.floor(krw * data!.basePrice);
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await getEurInfo();
-      setEurInfo(response[0]);
-    };
-    getData();
-    setReady(true);
-  }, []);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let regexp = /^\d*.?\d{0,2}$/;
     if (!regexp.test(e.target.value)) {
@@ -37,24 +21,25 @@ export const App = () => {
     setKrw(exchangeEurToKrw(Number(e.target.value)));
   };
 
-  if (!isReady) return null;
+  if (isLoading)
+    return <div>{<LoadingIcon strokeWidth='45' width='80' />}</div>;
   return (
-    <div className='App'>
-      {eurInfo && (
-        <>
+    <>
+      {' '}
+      {!isLoading && (
+        <div className='App'>
           <div>환율기준 (1 유로)</div>
           <div>
-            {eurInfo.basePrice}
-            {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-            {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
-            {eurInfo.changePrice}원 (
-            {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+            {data.basePrice}
+            {data.basePrice - data.openingPrice > 0 && '▲'}
+            {data.basePrice - data.openingPrice < 0 && '▼'}
+            {data.changePrice}원 ({(data.changePrice / data.basePrice) * 100}%)
           </div>
           <div>
-            <div>살때 : {eurInfo.cashBuyingPrice}</div>
-            <div>팔때 : {eurInfo.cashSellingPrice}</div>
-            <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-            <div>받을때 : {eurInfo.ttBuyingPrice}</div>
+            <div>살때 : {data.cashBuyingPrice}</div>
+            <div>팔때 : {data.cashSellingPrice}</div>
+            <div>보낼때 : {data.ttSellingPrice}</div>
+            <div>받을때 : {data.ttBuyingPrice}</div>
           </div>
           <hr />
           <input onChange={handleChange} value={eur || ''} /> 유로 ▶︎{' '}
@@ -62,9 +47,9 @@ export const App = () => {
             value={krw.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             disabled
           />
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
