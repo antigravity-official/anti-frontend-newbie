@@ -8,8 +8,6 @@ const Home = () => {
     GetEurInfoReturnType | Record<string, never>
   >({});
 
-  const exchangeEurToKrw = (amount: number) => amount * eurInfo.basePrice;
-
   useEffect(() => {
     getEurInfo().then((data) => {
       setEurInfo(data);
