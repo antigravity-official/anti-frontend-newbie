@@ -1,24 +1,26 @@
 import { PriceInfo } from "../type/page";
 
 type MoneyPriceInfo = Pick<
-  PriceInfo,
+  Partial<PriceInfo>,
   "basePrice" | "openingPrice" | "changePrice"
 >;
+
+interface MoneyPriceModel extends MoneyPriceInfo {
+  updown: () => string;
+  percent: () => string;
+}
 
 export default function MoneyPrice({
   moneyInfo,
 }: {
-  moneyInfo: MoneyPriceInfo;
+  moneyInfo: MoneyPriceModel;
 }) {
-  let updown = moneyInfo.basePrice - moneyInfo.openingPrice > 0 ? "▲" : "▼";
-
   return (
     <div className="flex  gap-1">
-      <span>{moneyInfo.basePrice}</span>
-      <span>{updown}</span>
+      <span className="font-bold">{moneyInfo?.basePrice}</span>
+      <span>{moneyInfo.updown()}</span>
       <span>
-        {moneyInfo.changePrice}원 (
-        {(moneyInfo.changePrice / moneyInfo.basePrice) * 100}%)
+        {moneyInfo?.changePrice}원 ({moneyInfo.percent()})
       </span>
     </div>
   );
