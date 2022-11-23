@@ -1,3 +1,3 @@
-export const exchangeEurToKrw = (amount: number, eur: number) => {
-  return amount * eur;
-};
+const exchanger = (amount: number, ratio: number) => amount * ratio;
+
+export default exchanger;
