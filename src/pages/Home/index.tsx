@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetEurInfoReturnType } from "../../../types";
+import getEurInfo from "../../apis/getEurInfo";
 
 const Home = () => {
   const [isReady, setReady] = useState(false);
@@ -7,20 +8,13 @@ const Home = () => {
     GetEurInfoReturnType | Record<string, never>
   >({});
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
   const exchangeEurToKrw = (amount: number) => amount * eurInfo.basePrice;
 
   useEffect(() => {
-    getEurInfo();
+    getEurInfo().then((data) => {
+      setEurInfo(data);
+      setReady(true);
+    });
   }, []);
 
   if (!isReady) return null;
