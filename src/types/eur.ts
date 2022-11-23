@@ -35,3 +35,10 @@ export type EurInfo = {
   changeRate: number;
   signedChangeRate: number;
 };
+
+export type ExchangedPrices = {
+  cashBuyingPrice: number;
+  cashSellingPrice: number;
+  ttSellingPrice: number;
+  ttBuyingPrice: number;
+};
