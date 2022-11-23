@@ -1,15 +1,14 @@
 import React from "react";
-import { useGetExchangeInfoByCodeQuery } from "../../apis/exchange/ExchangeApi.query";
+import { GetExchangeInfoByCodeReturnType } from "../../apis/exchange/ExchangeApi.type";
 
 interface PropsType {
-  code: string;
+  info: GetExchangeInfoByCodeReturnType;
 }
 
-const MoneyInputSection = ({ code }: PropsType) => {
-  const { data: info } = useGetExchangeInfoByCodeQuery(code);
+const MoneyInputSection = ({ info }: PropsType) => {
   return (
     <>
-      <input /> {info?.currencyName} ▶︎ <input disabled /> 원
+      <input /> {info.currencyName} ▶︎ <input disabled /> 원
     </>
   );
 };
