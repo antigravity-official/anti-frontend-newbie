@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { EurInfo } from './types/eur';
 import { getEurInfo } from './api/eurInfoApi';
 import { ExchangedPrices, ExchangeRate } from './components/eurInfo';
+import ExchangeForm from './components/exchange/ExchangeForm';
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,11 +19,6 @@ export const App = () => {
     }
     setIsLoading(false);
   }, []);
-
-  const exchangeEurToKrw = (krw: any) => {
-    if (!eurInfo) return;
-    return krw * eurInfo.basePrice;
-  };
 
   useEffect(() => {
     fetchEurInfo();
@@ -47,7 +43,7 @@ export const App = () => {
         ttBuyingPrice={eurInfo.ttBuyingPrice}
       />
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <ExchangeForm basePrice={eurInfo.basePrice} />
     </div>
   );
 };
