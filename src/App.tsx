@@ -1,47 +1,38 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import ExchangeMoneyInput from "./components/ExchangeMoneyInput";
+import Loading from "./components/Loading";
+import MoneyDetail from "./components/MoneyDetail";
+import MoneyPrice from "./components/MoneyPrice";
+import RateTitle from "./components/RateTitle";
+import { PriceInfo } from "./type/page";
+import { useFetchData } from "./utils/useFetchData";
+import { DetailModel, InfoModel } from "./VM/context";
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const { data, loading, error } = useFetchData<PriceInfo>(
+    "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
+  );
 
   useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
+    if (error) return alert(error);
+  }, [error]);
 
-  if (!isReady) return null;
+  const moneyDetail = new DetailModel(data);
+  const moneyInfo = new InfoModel(data);
+
   return (
-    <div className="App">
-      <div className="text-lg border-2 border-red-400 ">환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
-    </div>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="flex flex-col items-center mt-16 gap-5 border-2 border-dotted border-black mx-10 py-16">
+          <RateTitle country="유로" />
+          <MoneyPrice moneyInfo={moneyInfo} />
+          <MoneyDetail moneyDetail={moneyDetail} />
+          <ExchangeMoneyInput country="유로" basePrice={data?.basePrice} />
+        </div>
+      )}
+    </>
   );
 };
 
