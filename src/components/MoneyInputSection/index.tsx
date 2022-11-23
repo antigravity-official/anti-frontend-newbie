@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import exchanger from "../../utils/exchanger";
 
 interface PropsType {
   currencyName: string;
@@ -22,7 +23,12 @@ const MoneyInputSection = ({ currencyName, basePrice }: PropsType) => {
         onChange={onChangeInput}
       />{" "}
       {currencyName} ▶︎{" "}
-      <input data-testid="wonInput" value={+value * basePrice} disabled /> 원
+      <input
+        data-testid="wonInput"
+        value={exchanger(+value, basePrice)}
+        disabled
+      />{" "}
+      원
     </>
   );
 };
