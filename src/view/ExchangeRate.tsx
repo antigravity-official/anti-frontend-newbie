@@ -1,22 +1,14 @@
 import { useState } from "react";
-import styled from "styled-components";
+import { exchangeEurToKrw } from '../viewModel/caculateFuncs';
 
 const ExchangeRate = (eurInfo: any) => {
   const [money, setMoney] = useState<number>(0);
-
-  const exchangeEurToKrw = (krw: number): string => {
-    let price = krw * eurInfo.props.basePrice;
-    var twoPrice = price.toFixed(2);
-    let result = twoPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return result;
-  };
 
   const changeInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     // e => element  요소 그자체를 가져온거, 요소는 input
     const { value } = e.target;
     setMoney(Number(value));
   };
-
   
   return (
       <>
@@ -36,7 +28,7 @@ const ExchangeRate = (eurInfo: any) => {
         </ul>
         <hr />
         <input onChange={changeInputData} value={money} /> 유로 <br />
-        <input disabled value={exchangeEurToKrw(money)} /> 원
+        <input disabled value={exchangeEurToKrw(money, eurInfo)} /> 원
         </>
 
   );
