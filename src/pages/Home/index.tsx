@@ -10,9 +10,21 @@ const Home = () => {
     <div className="App">
       {isSuccess ? (
         <>
-          <ExchangeInfoSection info={info[0]} />
+          <ExchangeInfoSection
+            currencyName={info[0].currencyName}
+            basePrice={info[0].basePrice}
+            change={info[0].change}
+            changePrice={info[0].changePrice}
+            cashBuyingPrice={info[0].cashBuyingPrice}
+            cashSellingPrice={info[0].cashSellingPrice}
+            ttSellingPrice={info[0].ttSellingPrice}
+            ttBuyingPrice={info[0].ttBuyingPrice}
+          />
           <hr />
-          <MoneyInputSection info={info[0]} />
+          <MoneyInputSection
+            currencyName={info[0].currencyName}
+            basePrice={info[0].basePrice}
+          />
         </>
       ) : null}
     </div>

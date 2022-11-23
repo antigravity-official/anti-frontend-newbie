@@ -1,14 +1,14 @@
 import React from "react";
-import { GetExchangeInfoByCodeReturnType } from "../../apis/exchange/ExchangeApi.type";
 
 interface PropsType {
-  info: GetExchangeInfoByCodeReturnType;
+  currencyName: string;
+  basePrice: number;
 }
 
-const MoneyInputSection = ({ info }: PropsType) => {
+const MoneyInputSection = ({ currencyName, basePrice }: PropsType) => {
   return (
     <>
-      <input /> {info.currencyName} ▶︎ <input disabled /> 원
+      <input /> {currencyName} ▶︎ <input disabled /> 원
     </>
   );
 };
