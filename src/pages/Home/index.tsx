@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { GetEurInfoReturnType } from "../../../types";
-import getEurInfo from "../../apis/getEurInfo";
+import React, { useState } from "react";
 import ExchangeInfoSection from "../../components/ExchangeInfoSection";
 import MoneyInputSection from "../../components/MoneyInputSection";
+import { useGetExchangeInfoByCodeQuery } from "../../apis/exchange/ExchangeApi.query";
 
 const Home = () => {
-  const [exchangeInfo, setExchangeInfo] = useState<GetEurInfoReturnType>();
-
-  useEffect(() => {
-    getEurInfo().then((data) => {
-      setExchangeInfo(data);
-    });
-  }, []);
-
+  const [code, setCode] = useState("FRX.KRWEUR");
+  const { isLoading } = useGetExchangeInfoByCodeQuery(code);
   return (
     <div className="App">
-      {exchangeInfo ? (
+      {isLoading ? (
         <>
-          <ExchangeInfoSection info={exchangeInfo} />
+          <ExchangeInfoSection code={code} />
           <hr />
-          <MoneyInputSection
-            currency={exchangeInfo.currencyName}
-            ratio={exchangeInfo.changeRate}
-          />
+          <MoneyInputSection code={code} />
         </>
       ) : null}
     </div>
