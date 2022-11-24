@@ -26,7 +26,9 @@ const Home = () => {
             basePrice={info[0].basePrice}
           />
         </>
-      ) : null}
+      ) : (
+        <span>환율 정보를 가져오고 있습니다...</span>
+      )}
     </div>
   );
 };
