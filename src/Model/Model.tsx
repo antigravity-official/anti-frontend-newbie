@@ -13,6 +13,7 @@ export default class Model {
   };
   private krw: string = '';
   private eur: string = '';
+  changePercent: string = '';
   setEur;
   setKrw;
 
@@ -24,6 +25,10 @@ export default class Model {
     setKrw: Dispatch<SetStateAction<string | undefined>>
   ) {
     this.eurInfo = eurInfo;
+    this.changePercent = (
+      (this.eurInfo.changePrice / this.eurInfo.basePrice) *
+      100
+    ).toFixed(2);
     this.eur = eur;
     this.setEur = setEur;
     this.krw = krw;
@@ -31,7 +36,12 @@ export default class Model {
   }
 
   getAllEruInfo() {
-    return { eurInfo: this.eurInfo, krw: this.krw, eur: this.eur };
+    return {
+      eurInfo: this.eurInfo,
+      krw: this.krw,
+      eur: this.eur,
+      changePercent: this.changePercent,
+    };
   }
   setKrwState(newNum: number) {
     this.setKrw(newNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
