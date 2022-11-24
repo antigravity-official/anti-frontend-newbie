@@ -20,16 +20,15 @@ const EurInfo = ({ viewModel }: Props) => {
     <>
       <div>환율기준 (1 유로)</div>
       <div>
-        {basePrice}
-        {basePrice - openingPrice > 0 && '▲'}
+        {basePrice}원{basePrice - openingPrice > 0 && '▲'}
         {basePrice - openingPrice < 0 && '▼'}
         {changePrice}원 ({changePercent}%)
       </div>
       <div>
-        <div>살때 : {cashBuyingPrice}</div>
-        <div>팔때 : {cashSellingPrice}</div>
-        <div>보낼때 : {ttSellingPrice}</div>
-        <div>받을때 : {ttBuyingPrice}</div>
+        <div>살때 : {cashBuyingPrice}원</div>
+        <div>팔때 : {cashSellingPrice}원</div>
+        <div>보낼때 : {ttSellingPrice}원</div>
+        <div>받을때 : {ttBuyingPrice}원</div>
       </div>
     </>
   );

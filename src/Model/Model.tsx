@@ -33,6 +33,12 @@ export default class Model {
     this.setEur = setEur;
     this.krw = krw;
     this.setKrw = setKrw;
+
+    this.eurInfo.basePrice = Math.ceil(this.eurInfo.basePrice);
+    this.eurInfo.cashBuyingPrice = Math.ceil(this.eurInfo.cashBuyingPrice);
+    this.eurInfo.cashSellingPrice = Math.ceil(this.eurInfo.cashSellingPrice);
+    this.eurInfo.ttSellingPrice = Math.ceil(this.eurInfo.ttSellingPrice);
+    this.eurInfo.ttBuyingPrice = Math.ceil(this.eurInfo.ttBuyingPrice);
   }
 
   getAllEruInfo() {
