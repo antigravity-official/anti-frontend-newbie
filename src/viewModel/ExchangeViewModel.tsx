@@ -1,44 +1,30 @@
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { EurInfoProps } from "../@types/EurInfoProps";
-import { getData } from "../api/Api";
-import { ExchangeEurState } from "../model/Atom";
-import { ExchangeEurSelector } from "../model/Selector";
 
-export const useExchangeViewModel = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<EurInfoProps>();
-  const [eur, setEur] = useRecoilState(ExchangeEurState);
+export class exchangeViewModel {
+  basePrice: number;
+  openingPrice: number;
+  changePrice: number;
+  cashBuyingPrice: number;
+  cashSellingPrice: number;
+  ttSellingPrice: number;
+  ttBuyingPrice: number;
 
-  const basePrice = eurInfo?.basePrice ?? 0;
+  constructor(eurInfo?: EurInfoProps) {
+    this.basePrice = eurInfo?.basePrice ?? 0;
+    this.openingPrice = eurInfo?.openingPrice ?? 0;
+    this.changePrice = eurInfo?.changePrice ?? 0;
+    this.cashBuyingPrice = eurInfo?.cashBuyingPrice ?? 0;
+    this.cashSellingPrice = eurInfo?.cashSellingPrice ?? 0;
+    this.ttSellingPrice = eurInfo?.ttSellingPrice ?? 0;
+    this.ttBuyingPrice = eurInfo?.ttBuyingPrice ?? 0;
+  }
 
-  const Krw = useRecoilValue(ExchangeEurSelector(basePrice));
+  moneyState() {
+    if (this.basePrice === this.openingPrice) return "-";
+    return this.basePrice - this.openingPrice > 0 ? "▲" : "▼";
+  }
 
-  const getEurInfo = async () => {
-    const eurData = await getData();
-    setEurInfo(eurData);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let regexp = /^\d*.?\d{0,2}$/;
-    if (regexp.test(e.currentTarget.value)) {
-      setEur(e.currentTarget.value);
-    } else {
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  return {
-    isReady,
-    eurInfo,
-    eur,
-    Krw,
-    exchangeEurToKrw,
-  };
-};
+  percent() {
+    return `${((this.changePrice / this.basePrice) * 100).toFixed(2)}%`;
+  }
+}
