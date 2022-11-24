@@ -7,21 +7,19 @@ import { exchangeViewModel } from "./viewModel/exchangeViewModel";
 
 export const App = () => {
   const { isReady, eurInfo } = useFetch();
-
   const priceDetail = new exchangeViewModel(eurInfo);
   return (
     <main>
-      <article>
+      <section>
         {!isReady || !eurInfo ? (
           <Loading />
         ) : (
           <>
             <EurInfoContainer priceDetail={priceDetail} />
-            <hr />
             <ExchangeInput basePrice={eurInfo.basePrice} />
           </>
         )}
-      </article>
+      </section>
     </main>
   );
 };
