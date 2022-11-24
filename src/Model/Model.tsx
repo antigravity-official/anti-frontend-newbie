@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { EruInfo } from '../types/eruInfo';
 
 export default class Model {
-  private data: EruInfo = {
+  private eurInfo: EruInfo = {
     basePrice: 0,
     openingPrice: 0,
     changePrice: 0,
@@ -17,13 +17,13 @@ export default class Model {
   setKrw;
 
   constructor(
-    data: EruInfo,
+    eurInfo: EruInfo,
     eur: string,
     setEur: Dispatch<SetStateAction<string | undefined>>,
     krw: string,
     setKrw: Dispatch<SetStateAction<string | undefined>>
   ) {
-    this.data = data;
+    this.eurInfo = eurInfo;
     this.eur = eur;
     this.setEur = setEur;
     this.krw = krw;
@@ -31,7 +31,7 @@ export default class Model {
   }
 
   getAllEruInfo() {
-    return { data: this.data, krw: this.krw, eur: this.eur };
+    return { eurInfo: this.eurInfo, krw: this.krw, eur: this.eur };
   }
   setKrwState(newNum: number) {
     this.setKrw(newNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));

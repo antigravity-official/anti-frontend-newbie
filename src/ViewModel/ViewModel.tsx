@@ -2,6 +2,7 @@ import Model from '../Model/Model';
 
 export default class ViewModel {
   private model: Model;
+
   constructor(model: Model) {
     this.model = model;
   }

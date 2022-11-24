@@ -5,21 +5,22 @@ interface Props {
 }
 
 const EurInfo = ({ viewModel }: Props) => {
-  const { data } = viewModel.getEurInfo();
+  const { eurInfo } = viewModel.getEurInfo();
   return (
     <>
       <div>환율기준 (1 유로)</div>
       <div>
-        {data.basePrice}
-        {data.basePrice - data.openingPrice > 0 && '▲'}
-        {data.basePrice - data.openingPrice < 0 && '▼'}
-        {data.changePrice}원 ({(data.changePrice / data.basePrice) * 100}%)
+        {eurInfo.basePrice}
+        {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
+        {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
+        {eurInfo.changePrice}원 (
+        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
       </div>
       <div>
-        <div>살때 : {data.cashBuyingPrice}</div>
-        <div>팔때 : {data.cashSellingPrice}</div>
-        <div>보낼때 : {data.ttSellingPrice}</div>
-        <div>받을때 : {data.ttBuyingPrice}</div>
+        <div>살때 : {eurInfo.cashBuyingPrice}</div>
+        <div>팔때 : {eurInfo.cashSellingPrice}</div>
+        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
+        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
     </>
   );

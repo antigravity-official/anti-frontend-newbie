@@ -5,14 +5,14 @@ interface Props {
 }
 
 const ExchangeInput = ({ viewModel }: Props) => {
-  const { data, eur, krw } = viewModel.getEurInfo();
+  const { eurInfo, eur, krw } = viewModel.getEurInfo();
 
   return (
     <div>
       <input
         type={'number'}
         onChange={(e) => {
-          viewModel.onChange(e.target.value, data.basePrice);
+          viewModel.onChange(e.target.value, eurInfo.basePrice);
         }}
         value={eur}
       />
