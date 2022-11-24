@@ -7,10 +7,12 @@ export const useFetch = () => {
   const [eurInfo, setEurInfo] = useState<EurInfoProps>();
 
   useEffect(() => {
-    getData().then((res) => {
-      setEurInfo(res);
-      setReady(true);
-    });
+    setTimeout(() => {
+      getData().then((res) => {
+        setEurInfo(res);
+        setReady(true);
+      });
+    }, 500);
   }, []);
 
   return { isReady, eurInfo };
