@@ -1,15 +1,34 @@
-import React from "react";
-import { useGetExchangeInfoByCodeQuery } from "../../apis/exchange/ExchangeApi.query";
+import React, { useCallback, useState } from "react";
+import exchanger from "../../utils/exchanger";
 
 interface PropsType {
-  code: string;
+  currencyName: string;
+  basePrice: number;
 }
 
-const MoneyInputSection = ({ code }: PropsType) => {
-  const { data: info } = useGetExchangeInfoByCodeQuery(code);
+const MoneyInputSection = ({ currencyName, basePrice }: PropsType) => {
+  const [value, setValue] = useState("");
+  const onChangeInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+    },
+    []
+  );
   return (
     <>
-      <input /> {info?.currencyName} ▶︎ <input disabled /> 원
+      <input
+        data-testid="foreignInput"
+        type="number"
+        value={value}
+        onChange={onChangeInput}
+      />{" "}
+      {currencyName} ▶︎{" "}
+      <input
+        data-testid="wonInput"
+        value={exchanger(+value, basePrice)}
+        disabled
+      />{" "}
+      원
     </>
   );
 };

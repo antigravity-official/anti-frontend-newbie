@@ -5,14 +5,26 @@ import { useGetExchangeInfoByCodeQuery } from "../../apis/exchange/ExchangeApi.q
 
 const Home = () => {
   const [code, setCode] = useState("FRX.KRWEUR");
-  const { isLoading } = useGetExchangeInfoByCodeQuery(code);
+  const { data: info, isSuccess } = useGetExchangeInfoByCodeQuery(code);
   return (
     <div className="App">
-      {isLoading ? (
+      {isSuccess ? (
         <>
-          <ExchangeInfoSection code={code} />
+          <ExchangeInfoSection
+            currencyName={info[0].currencyName}
+            basePrice={info[0].basePrice}
+            change={info[0].change}
+            changePrice={info[0].changePrice}
+            cashBuyingPrice={info[0].cashBuyingPrice}
+            cashSellingPrice={info[0].cashSellingPrice}
+            ttSellingPrice={info[0].ttSellingPrice}
+            ttBuyingPrice={info[0].ttBuyingPrice}
+          />
           <hr />
-          <MoneyInputSection code={code} />
+          <MoneyInputSection
+            currencyName={info[0].currencyName}
+            basePrice={info[0].basePrice}
+          />
         </>
       ) : null}
     </div>
