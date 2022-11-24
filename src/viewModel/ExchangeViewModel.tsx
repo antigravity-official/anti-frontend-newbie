@@ -4,19 +4,13 @@ export class exchangeViewModel {
   basePrice: number;
   openingPrice: number;
   changePrice: number;
-  cashBuyingPrice: number;
-  cashSellingPrice: number;
-  ttSellingPrice: number;
-  ttBuyingPrice: number;
+  modifiedAt: string;
 
   constructor(eurInfo?: EurInfoProps) {
     this.basePrice = eurInfo?.basePrice ?? 0;
     this.openingPrice = eurInfo?.openingPrice ?? 0;
     this.changePrice = eurInfo?.changePrice ?? 0;
-    this.cashBuyingPrice = eurInfo?.cashBuyingPrice ?? 0;
-    this.cashSellingPrice = eurInfo?.cashSellingPrice ?? 0;
-    this.ttSellingPrice = eurInfo?.ttSellingPrice ?? 0;
-    this.ttBuyingPrice = eurInfo?.ttBuyingPrice ?? 0;
+    this.modifiedAt = eurInfo?.modifiedAt ?? "정보 없음";
   }
 
   moneyState() {
@@ -26,5 +20,11 @@ export class exchangeViewModel {
 
   percent() {
     return `${((this.changePrice / this.basePrice) * 100).toFixed(2)}%`;
+  }
+
+  exchangeDate() {
+    return this.modifiedAt !== "정보 없음"
+      ? this.modifiedAt.split("T")[0]
+      : "정보 없음";
   }
 }
