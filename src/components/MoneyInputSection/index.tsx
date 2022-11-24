@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import exchanger from "../../utils/exchanger";
+import decimalPlaceController from "../../utils/decimalPlaceController";
 
 interface PropsType {
   currencyName: string;
@@ -10,10 +11,11 @@ const MoneyInputSection = ({ currencyName, basePrice }: PropsType) => {
   const [value, setValue] = useState("");
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
+      setValue(decimalPlaceController(e.target.value));
     },
     []
   );
+
   return (
     <>
       <input
