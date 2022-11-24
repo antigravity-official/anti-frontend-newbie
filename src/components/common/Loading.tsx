@@ -1,8 +1,8 @@
 const Loading = () => {
   return (
-    <section className="h-48 w-full">
-      <span>Loading...</span>
-    </section>
+    <article>
+      <span>환율 정보 가져오는 중...</span>
+    </article>
   );
 };
 
