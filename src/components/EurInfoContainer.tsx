@@ -6,20 +6,23 @@ const EurInfoContainer = ({
   priceDetail: EurInfoContainerProps;
 }) => {
   return (
-    <section className="h-48 w-full">
-      <p>환율기준 (1 유로)</p>
+    <article className="h-24 w-full">
+      <p>1 유로 =</p>
       <div>
-        {priceDetail.basePrice}
-        {priceDetail.moneyState()}
-        {priceDetail.changePrice}원 ({priceDetail.percent()})
+        <strong>{priceDetail.basePrice}원</strong>
+        <span
+          className={`${
+            priceDetail.moneyState() === "▼" ? " text-red-500" : "text-blue-700"
+          } ml-2`}
+        >
+          {priceDetail.moneyState()}
+          {priceDetail.changePrice}원 ({priceDetail.percent()})
+        </span>
+        <p>
+          <small>{priceDetail.exchangeDate()}</small>
+        </p>
       </div>
-      <div>
-        <p>살때 : {priceDetail.cashBuyingPrice}</p>
-        <p>팔때 : {priceDetail.cashSellingPrice}</p>
-        <p>보낼때 : {priceDetail.ttSellingPrice}</p>
-        <p>받을때 : {priceDetail.ttBuyingPrice}</p>
-      </div>
-    </section>
+    </article>
   );
 };
 
