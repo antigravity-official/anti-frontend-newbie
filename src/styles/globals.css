@@ -4,6 +4,22 @@
 
 @layer base {
   input {
-    @apply border
+    @apply bg-transparent outline-none;
+  }
+
+  main {
+    @apply flex h-screen w-full ;
+  }
+
+  section {
+    @apply m-auto h-[300px] w-[400px] rounded-lg border p-4 flex flex-col justify-between;
+  }
+
+  .inputBox {
+    @apply flex h-10 w-full items-center rounded-lg border px-2;
+  }
+
+  .exChangeSpan {
+    @apply w-36 px-2 text-right;
   }
 }
