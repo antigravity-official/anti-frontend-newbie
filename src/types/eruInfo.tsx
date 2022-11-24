@@ -1,4 +1,5 @@
 export interface EruInfo {
+  [key: string]: number;
   basePrice: number;
   openingPrice: number;
   changePrice: number;
@@ -6,4 +7,5 @@ export interface EruInfo {
   cashSellingPrice: number;
   ttSellingPrice: number;
   ttBuyingPrice: number;
+  changeRate: number;
 }

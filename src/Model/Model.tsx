@@ -10,10 +10,11 @@ export default class Model {
     cashSellingPrice: 0,
     ttSellingPrice: 0,
     ttBuyingPrice: 0,
+    changeRate: 0,
   };
   private krw: string = '';
   private eur: string = '';
-  changePercent: string = '';
+
   setEur;
   setKrw;
 
@@ -25,28 +26,18 @@ export default class Model {
     setKrw: Dispatch<SetStateAction<string | undefined>>
   ) {
     this.eurInfo = eurInfo;
-    this.changePercent = (
-      (this.eurInfo.changePrice / this.eurInfo.basePrice) *
-      100
-    ).toFixed(2);
+
     this.eur = eur;
     this.setEur = setEur;
     this.krw = krw;
     this.setKrw = setKrw;
-
-    this.eurInfo.basePrice = Math.ceil(this.eurInfo.basePrice);
-    this.eurInfo.cashBuyingPrice = Math.ceil(this.eurInfo.cashBuyingPrice);
-    this.eurInfo.cashSellingPrice = Math.ceil(this.eurInfo.cashSellingPrice);
-    this.eurInfo.ttSellingPrice = Math.ceil(this.eurInfo.ttSellingPrice);
-    this.eurInfo.ttBuyingPrice = Math.ceil(this.eurInfo.ttBuyingPrice);
   }
 
-  getAllEruInfo() {
+  getEruInfo() {
     return {
       eurInfo: this.eurInfo,
       krw: this.krw,
       eur: this.eur,
-      changePercent: this.changePercent,
     };
   }
   setKrwState(newNum: number) {

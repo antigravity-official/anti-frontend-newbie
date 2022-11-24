@@ -5,10 +5,9 @@ interface Props {
 }
 
 const EurInfo = ({ viewModel }: Props) => {
-  const { eurInfo, changePercent } = viewModel.getEurInfo();
+  const { eurInfo, updownMark, changeRate } = viewModel.getAllEurInfo();
   const {
     basePrice,
-    openingPrice,
     changePrice,
     cashBuyingPrice,
     cashSellingPrice,
@@ -20,9 +19,8 @@ const EurInfo = ({ viewModel }: Props) => {
     <>
       <div>환율기준 (1 유로)</div>
       <div>
-        {basePrice}원{basePrice - openingPrice > 0 && '▲'}
-        {basePrice - openingPrice < 0 && '▼'}
-        {changePrice}원 ({changePercent}%)
+        {basePrice}원{updownMark}
+        {changePrice}원 ({changeRate}%)
       </div>
       <div>
         <div>살때 : {cashBuyingPrice}원</div>

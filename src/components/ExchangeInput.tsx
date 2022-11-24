@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ExchangeInput = ({ viewModel }: Props) => {
-  const { eurInfo, eur, krw } = viewModel.getEurInfo();
+  const { eurInfo, eur, krw } = viewModel.getAllEurInfo();
 
   return (
     <div>

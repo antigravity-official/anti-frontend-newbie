@@ -7,8 +7,19 @@ export default class ViewModel {
     this.model = model;
   }
 
-  getEurInfo() {
-    return this.model.getAllEruInfo();
+  getAllEurInfo() {
+    const { eurInfo, eur, krw } = this.model.getEruInfo();
+    const changeRate = (eurInfo.changeRate * 100).toFixed(2);
+
+    Object.keys(eurInfo).forEach((price) => {
+      if (typeof eurInfo[price] === 'number' && price !== 'changeRate') {
+        eurInfo[price] = Math.floor(eurInfo[price]);
+      }
+    });
+
+    const updownMark = eurInfo.basePrice - eurInfo.openingPrice > 0 ? '▲' : '▼';
+
+    return { eurInfo, changeRate, updownMark, eur, krw };
   }
 
   exchangeEurToKrw = (krw: number, basePrice: number) =>
