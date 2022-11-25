@@ -3,10 +3,11 @@ import ExchangeInput from './components/ExchangeInput';
 import Model from './Model/Model';
 import ViewModel from './ViewModel/ViewModel';
 import { useState } from 'react';
-import { useEruInfo } from './hooks/useEurInfo';
+import { useEurInfo } from './hooks/useEurInfo';
+import styled from '@emotion/styled';
 
 export const App = () => {
-  const { eurInfo, error } = useEruInfo();
+  const { eurInfo, error } = useEurInfo();
   const [eur, setEur] = useState<string | undefined>('');
   const [krw, setKrw] = useState<string | undefined>('');
 
@@ -20,11 +21,20 @@ export const App = () => {
       </div>
     );
   return (
-    <>
+    <Container>
       <EurInfo viewModel={viewModel} />
       <ExchangeInput viewModel={viewModel} />
-    </>
+    </Container>
   );
 };
 
 export default App;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+`;

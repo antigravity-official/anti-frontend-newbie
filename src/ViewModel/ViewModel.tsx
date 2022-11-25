@@ -8,7 +8,7 @@ export default class ViewModel {
   }
 
   getAllEurInfo() {
-    const { eurInfo, eur, krw } = this.model.getEruInfo();
+    const { eurInfo, eur, krw } = this.model.getEurInfo();
     const changeRate = (eurInfo.changeRate * 100).toFixed(2);
 
     Object.keys(eurInfo).forEach((price) => {
@@ -29,6 +29,10 @@ export default class ViewModel {
     if (!/^\d*.?\d{0,2}$/.test(value)) return;
     else this.model.setEurState(value);
 
-    this.model.setKrwState(this.exchangeEurToKrw(Number(value), basePrice));
+    this.model.setKrwState(
+      this.exchangeEurToKrw(Number(value), basePrice)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    );
   }
 }

@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { getEurInfo } from '../apis';
-export const useEruInfo = () => {
+export const useEurInfo = () => {
   const { data, isLoading, error } = useQuery('v1/forex', getEurInfo, {
     suspense: true,
   });

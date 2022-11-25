@@ -1,4 +1,4 @@
-export interface EruInfo {
+export interface EurInfo {
   [key: string]: number;
   basePrice: number;
   openingPrice: number;

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
-import { EruInfo } from '../types/eruInfo';
+import { EurInfo } from '../types';
 
 export default class Model {
-  private eurInfo: EruInfo = {
+  private eurInfo: EurInfo = {
     basePrice: 0,
     openingPrice: 0,
     changePrice: 0,
@@ -14,36 +14,36 @@ export default class Model {
   };
   private krw: string = '';
   private eur: string = '';
-
   setEur;
   setKrw;
 
   constructor(
-    eurInfo: EruInfo,
+    eurInfo: EurInfo,
     eur: string,
     setEur: Dispatch<SetStateAction<string | undefined>>,
     krw: string,
     setKrw: Dispatch<SetStateAction<string | undefined>>
   ) {
     this.eurInfo = eurInfo;
-
     this.eur = eur;
     this.setEur = setEur;
     this.krw = krw;
     this.setKrw = setKrw;
   }
 
-  getEruInfo() {
+  getEurInfo(): { eurInfo: EurInfo; krw: string; eur: string } {
     return {
       eurInfo: this.eurInfo,
       krw: this.krw,
       eur: this.eur,
     };
   }
-  setKrwState(newNum: number) {
-    this.setKrw(newNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+
+  setKrwState(newNum: string): void {
+    this.setKrw(newNum);
   }
-  setEurState(value: string) {
+
+  setEurState(value: string): void {
     this.setEur(value);
   }
 }
