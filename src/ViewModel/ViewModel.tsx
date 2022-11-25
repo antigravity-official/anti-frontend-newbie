@@ -19,7 +19,13 @@ export default class ViewModel {
 
     const updownMark = eurInfo.basePrice - eurInfo.openingPrice > 0 ? '▲' : '▼';
 
-    return { eurInfo, changeRate, updownMark, eur, krw };
+    return {
+      eurInfo,
+      changeRate,
+      updownMark,
+      eur,
+      krw: krw === '0' || krw === '' ? '' : `${krw}원`,
+    };
   }
 
   exchangeEurToKrw = (krw: number, basePrice: number) =>

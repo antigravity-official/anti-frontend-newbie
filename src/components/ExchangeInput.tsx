@@ -32,7 +32,10 @@ const ExchangeInput = ({ viewModel }: Props) => {
         <span>한화</span>
         <Input placeholder={`${eurInfo.basePrice}원`} value={krw} disabled />
       </Flex>
-      <Footer>-하나은행 제공</Footer>
+      <Footer>
+        <input readOnly checked type={'radio'} />
+        하나은행
+      </Footer>
     </Flex>
   );
 };
