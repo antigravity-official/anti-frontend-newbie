@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from "react";
+import EurInfo from './components/EurInfo';
+import ExchangeInput from './components/ExchangeInput';
+import Model from './Model/Model';
+import ViewModel from './ViewModel/ViewModel';
+import { useState } from 'react';
+import { useEurInfo } from './hooks/useEurInfo';
+import styled from '@emotion/styled';
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const { eurInfo, error } = useEurInfo();
+  const [eur, setEur] = useState<string | undefined>('');
+  const [krw, setKrw] = useState<string | undefined>('');
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
+  const model = new Model(eurInfo, eur!, setEur, krw!, setKrw);
+  const viewModel = new ViewModel(model);
 
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
+  if (error)
+    return (
+      <div>
+        <h1>데이터 요청에 실패하였습니다. 잠시후 다시 시도해주세요.</h1>
+      </div>
+    );
   return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
-    </div>
+    <Container>
+      <EurInfo viewModel={viewModel} />
+      <ExchangeInput viewModel={viewModel} />
+    </Container>
   );
 };
 
 export default App;
+
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+`;
