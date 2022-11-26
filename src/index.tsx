@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import LoadingIcon from './components/LoadingIcon/LoadingIcon';
 import { Global } from '@emotion/react';
 import { global } from './styles/global';
+import { Flex } from './styles/common';
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,9 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <Suspense
         fallback={
-          <div>
+          <Flex>
             <LoadingIcon width={80} />
-          </div>
+          </Flex>
         }
       >
         <Global styles={global} />
