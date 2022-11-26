@@ -1,48 +1,34 @@
-import React, { useEffect, useState } from "react";
+import styled from 'styled-components';
+import Calculator from './components/Calculator/Calculator';
+import ExchangeBoard from './components/ExchageBoard/ExchageBoard';
+import Loading from './components/Loading/Loading';
+import useExchange from './hooks/useExchage';
+import useGetData from './hooks/useGetData';
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const { isReady, eurInfo } = useGetData();
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
+  const { eurToKrw, exchangeEurToKrw } = useExchange();
 
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
+  if (!isReady) return <Loading />;
   return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
-    </div>
+    <Wrap>
+      <ExchangeBoard data={eurInfo} />
+      <Calculator
+        exchange={exchangeEurToKrw}
+        eurToKrw={eurToKrw}
+        basePrice={eurInfo.basePrice}
+      />
+    </Wrap>
   );
 };
 
 export default App;
+
+const Wrap = styled.div`
+  width: ${({ theme }) => theme.small};
+  height: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 2px solid black;
+`;
