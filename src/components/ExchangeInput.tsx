@@ -11,8 +11,8 @@ const ExchangeInput = ({ viewModel }: Props) => {
 
   return (
     <Flex
-      margin='25px 0px 0px 0px'
-      padding='30px'
+      margin='20px 0px 0px 0px'
+      padding='20px'
       direction='column'
       border='1px solid white'
       justify='center'
@@ -20,6 +20,7 @@ const ExchangeInput = ({ viewModel }: Props) => {
       <Flex>
         <span>유로</span>
         <Input
+          data-testid='eurInput'
           type={'number'}
           placeholder='유로 1'
           onChange={(e) => {
@@ -30,7 +31,12 @@ const ExchangeInput = ({ viewModel }: Props) => {
       </Flex>
       <Flex direction='flex'>
         <span>한화</span>
-        <Input placeholder={`${eurInfo.basePrice}원`} value={krw} disabled />
+        <Input
+          data-testid='krwInput'
+          placeholder={`${eurInfo.basePrice}원`}
+          value={krw}
+          disabled
+        />
       </Flex>
       <Footer>
         <input readOnly checked type={'radio'} />
@@ -43,11 +49,11 @@ const ExchangeInput = ({ viewModel }: Props) => {
 export default ExchangeInput;
 
 const Input = styled.input`
-  height: 40px;
+  height: 35px;
   background-color: #202124;
   color: white;
-  font-size: 20px;
-  padding-left: 30px;
+  font-size: 18px;
+  padding-left: 25px;
   outline: none;
   border: 1px solid #a4a7ac;
   border-radius: 6px;
@@ -55,8 +61,8 @@ const Input = styled.input`
 
 const Footer = styled.div`
   color: #00df9a;
-  font-size: 15px;
+  font-size: 13px;
   text-align: end;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
 `;

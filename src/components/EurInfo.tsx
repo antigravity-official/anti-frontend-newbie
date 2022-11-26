@@ -12,9 +12,9 @@ const EurInfo = ({ viewModel }: Props) => {
   return (
     <Flex
       direction='column'
-      margin='80px 0px 0px 0px'
+      margin='60px 0px 0px 0px'
       border='1px solid white'
-      padding='40px'
+      padding='50px'
     >
       <Title>
         <h1>환율기준 (1 유로)</h1>
@@ -44,24 +44,24 @@ const EurInfo = ({ viewModel }: Props) => {
 export default EurInfo;
 
 const Title = styled.div`
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   color: #00df9a;
 `;
 
 const MainInfo = styled.div`
   color: #bbbec3;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 const DetailInfo = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   border: 1px solid white;
   border-radius: 6px;
-  padding: 15px;
-  width: 200px;
+  padding: 10px;
+  width: 170px;
   font-size: 18px;
   color: #bbbec3;
   & > span {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["assets"],
+    "types": ["jest", "node"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

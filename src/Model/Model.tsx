@@ -20,7 +20,7 @@ export default class Model {
   constructor(
     eurInfo: EurInfo,
     eur: string,
-    setEur: Dispatch<SetStateAction<string | undefined>>,
+    setEur: (eur: string) => void,
     krw: string,
     setKrw: Dispatch<SetStateAction<string | undefined>>
   ) {
