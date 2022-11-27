@@ -15,4 +15,5 @@ const TitleNameContainer = styled.span`
   font-weight: bold;
   border: 1rem;
   margin-right: 1rem;
+  width: 10%;
 `;

@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Main from '../pages/Main';
-import LoadingSpanner from '../components/LoadingSpinner';
+import LoadingSpanner from '../components/common/LoadingSpinner';
 
 import styled from '@emotion/styled';
 

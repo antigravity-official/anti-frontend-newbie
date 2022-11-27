@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import ExchangeRate from '../components/ExchangeRate';
+import ExchangeInput from '../components/ExchangeInput';
 import useEurInfo from '../hooks/useEurInfo';
 import { EurInfo } from '../types/EurInfo.types';
 
@@ -22,6 +23,7 @@ const Main = () => {
   return (
     <>
       <ExchangeRate eurInfo={eurInfos} />
+      <ExchangeInput eurInfo={eurInfos} />
     </>
   );
 };

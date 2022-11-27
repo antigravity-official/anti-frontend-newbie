@@ -19,8 +19,7 @@ const ExchangeRate = ({ eurInfo }: ExchangeRateProps) => {
           <TitleName title='실시간 환율' />
           <div>
             {eurInfo.basePrice}
-            {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-            {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
+            {eurInfo.basePrice - eurInfo.openingPrice > 0 ? '▲' : '▼'}
             {eurInfo.changePrice}원 (
             {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
           </div>
