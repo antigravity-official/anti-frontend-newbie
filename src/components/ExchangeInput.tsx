@@ -3,6 +3,7 @@ import { useState } from 'react';
 import TitleName from './common/TitleName';
 import InputBox from './common/InputBox';
 import Input from './common/Input';
+import { decimalReturn, exchangeToMoney } from '../utils/moneyProcessing';
 
 interface EuroInfo {
   basePrice: number;
@@ -16,10 +17,7 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const ExchangeInput = ({ eurInfo }: ExchangeInputProps) => {
   const [enterAmount, setEnterAmount] = useState<number>(0);
-  const exchangeEurToKrw = (krw: number): number => krw * eurInfo.basePrice;
-  const exchangeToMoney = Math.floor(exchangeEurToKrw(enterAmount))
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const Krw = exchangeToMoney(enterAmount, eurInfo.basePrice);
 
   const handleTextInputChange = (event: ChangeEvent) => {
     const float = parseFloat(event.target.value);
@@ -35,11 +33,16 @@ const ExchangeInput = ({ eurInfo }: ExchangeInputProps) => {
           type='number'
           value={enterAmount || ''}
           onChange={handleTextInputChange}
+          placeholder='금액을 입력해주세요.'
         />
       </InputBox>
       <InputBox>
         <TitleName title={'원화'} />
-        <Input disabled value={enterAmount ? exchangeToMoney : ''} />
+        <Input
+          disabled
+          value={enterAmount ? `${Krw}원` : ''}
+          placeholder={`${decimalReturn(eurInfo.basePrice)}원`}
+        />
       </InputBox>
     </>
   );

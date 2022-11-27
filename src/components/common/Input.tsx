@@ -7,15 +7,23 @@ interface InputProps {
   value: string | number;
   onChange?: (event: ChangeEvent) => void;
   disabled?: boolean;
+  placeholder?: string;
 }
 
-const Input = ({ type, value, onChange, disabled }: InputProps) => {
+const Input = ({
+  type,
+  value,
+  onChange,
+  disabled,
+  placeholder,
+}: InputProps) => {
   return (
     <InputContainer
       type={type}
       value={value}
       onChange={onChange}
       disabled={disabled}
+      placeholder={placeholder}
     />
   );
 };
@@ -27,4 +35,5 @@ const InputContainer = styled.input`
   font-size: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
+  padding-left: 0.3rem;
 `;

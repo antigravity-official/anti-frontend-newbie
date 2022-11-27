@@ -6,4 +6,5 @@ export interface EurInfo {
   openingPrice: number;
   ttBuyingPrice: number;
   ttSellingPrice: number;
+  changeRate: number;
 }
