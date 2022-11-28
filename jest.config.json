@@ -1,0 +1,9 @@
+{
+  "roots": ["<rootDir>/"],
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTest.ts"],
+  "testing-library/no-render-in-setup": [
+    "error",
+    { "allowTestingFrameworkSetupHook": "beforeAll" }
+  ]
+}

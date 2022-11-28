@@ -17,7 +17,7 @@ type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 const ExchangeInput = ({ eurInfo }: ExchangeInputProps) => {
   const [enterAmount, setEnterAmount] = useState<number>(0);
-  const Krw = exchangeToMoney(enterAmount, eurInfo.basePrice);
+  const krw = exchangeToMoney(enterAmount, eurInfo.basePrice);
 
   const handleTextInputChange = (event: ChangeEvent) => {
     const float = parseFloat(event.target.value);
@@ -40,7 +40,7 @@ const ExchangeInput = ({ eurInfo }: ExchangeInputProps) => {
         <TitleName title={'원화'} />
         <Input
           disabled
-          value={enterAmount ? `${Krw}원` : ''}
+          value={enterAmount ? `${krw}원` : ''}
           placeholder={`${decimalReturn(eurInfo.basePrice)}원`}
         />
       </InputBox>
