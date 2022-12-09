@@ -53,3 +53,6 @@ src/stores/coverage
 .history
 yarn-error.log
 checkstyle-result.xml
+
+# api
+src/api
