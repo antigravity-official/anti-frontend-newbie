@@ -25,20 +25,12 @@ const PriceCaseComponent = ({
   return (
     <PriceComponent>
       <SeparationBox>
-        <CaseElement color={"#ff4646"}>
-          살때 : {cashBuyingPrice.toLocaleString("es-Us")}
-        </CaseElement>
-        <CaseElement color={"#1e96ff"}>
-          팔때 : {cashSellingPrice.toLocaleString("es-Us")}
-        </CaseElement>
+        <CaseElement color={"#ff4646"}>살때 : {cashBuyingPrice.toLocaleString()}</CaseElement>
+        <CaseElement color={"#1e96ff"}>팔때 : {cashSellingPrice.toLocaleString()}</CaseElement>
       </SeparationBox>
       <SeparationBox>
-        <CaseElement color={"#ff4646"}>
-          보낼때 : {ttSellingPrice.toLocaleString("es-Us")}
-        </CaseElement>
-        <CaseElement color={"#1e96ff"}>
-          받을때 : {ttBuyingPrice.toLocaleString("es-Us")}
-        </CaseElement>
+        <CaseElement color={"#ff4646"}>보낼때 : {ttSellingPrice.toLocaleString()}</CaseElement>
+        <CaseElement color={"#1e96ff"}>받을때 : {ttBuyingPrice.toLocaleString()}</CaseElement>
       </SeparationBox>
     </PriceComponent>
   );

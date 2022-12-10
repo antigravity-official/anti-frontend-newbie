@@ -8,7 +8,7 @@ const StyledPriceComponent = styled.div`
   align-items: center;
   border: 1px solid #000;
   border-radius: 1rem;
-
+  margin: 1rem;
   width: 10rem;
   height: 10rem;
 `;

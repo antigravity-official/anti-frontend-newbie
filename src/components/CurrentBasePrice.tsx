@@ -26,7 +26,7 @@ const CurrentBasePrice = ({ basePrice, openingPrice, changePrice }: PriceType): 
   return (
     <PriceComponent>
       <ElementInPriceComponent fontSize={"1.3rem"} fontWeight={700} marginBottom={"0.2rem"}>
-        {basePrice.toLocaleString("es-Us")}원
+        {basePrice.toLocaleString()}원
       </ElementInPriceComponent>
       <ElementInPriceComponent fontSize={"1.2rem"} fontWeight={500} marginBottom={"0.7rem"}>
         {basePrice > openingPrice ? "📈 " : "📉 "}
