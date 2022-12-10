@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { ApiReturnInfoType } from "../types/types";
 
 export function useGetData(API_KEY: string) {
-  const [data, setData] = useState();
+  const [data, setData] = useState<ApiReturnInfoType | Record<string, never>>({});
 
   const getData = async () => {
     const fetchData = await fetch(API_KEY)
@@ -13,7 +14,6 @@ export function useGetData(API_KEY: string) {
 
   useEffect(() => {
     getData();
-
     setInterval(() => {
       getData();
     }, 5000);
