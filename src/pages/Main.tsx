@@ -36,14 +36,14 @@ const Main = () => {
 
   if (!isReady) return <Loading />;
   return (
-    <>
+    <div className="container">
       <div>환율기준 (1 유로)</div>
       <div>
-        {eurInfo.basePrice.toLocaleString().split(".")[0]}
+        <p>{eurInfo.basePrice.toLocaleString().split(".")[0]}</p>
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
         {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(3)}%)
       </div>
       <div>
         <div>
@@ -61,7 +61,7 @@ const Main = () => {
       </div>
       <hr />
       <ExchangeInput eurInfo={eurInfo} />
-    </>
+    </div>
   );
 };
 

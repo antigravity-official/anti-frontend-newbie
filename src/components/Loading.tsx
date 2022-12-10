@@ -2,7 +2,7 @@ import { ReactComponent as SpinnerIcon } from "../assets/icon/spinner.svg";
 
 const Loading = () => {
   return (
-    <div className="container">
+    <div className="loading-container">
       <div className="loading-wrapper">
         <SpinnerIcon
           width="80px"
