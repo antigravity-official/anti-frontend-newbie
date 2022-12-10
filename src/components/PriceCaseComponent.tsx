@@ -3,6 +3,19 @@ import styled from "styled-components";
 import { PriceType } from "../types/types";
 import PriceComponent from "./public/PriceComponent";
 
+interface ElementType {
+  color?: string;
+}
+
+const SeparationBox = styled.div`
+  margin: 0.6rem;
+`;
+
+const CaseElement = styled.div<ElementType>`
+  font-weight: 500;
+  color: ${props => props.color};
+`;
+
 const PriceCaseComponent = ({
   cashBuyingPrice,
   cashSellingPrice,
@@ -11,21 +24,16 @@ const PriceCaseComponent = ({
 }: PriceType) => {
   return (
     <PriceComponent>
-      <div>살때 : {cashBuyingPrice}</div>
-      <div>팔때 : {cashSellingPrice}</div>
-      <div>보낼때 : {ttSellingPrice}</div>
-      <div>받을때 : {ttBuyingPrice}</div>
+      <SeparationBox>
+        <CaseElement color={"#ff4646"}>살때 : {cashBuyingPrice}</CaseElement>
+        <CaseElement color={"#1e96ff"}>팔때 : {cashSellingPrice}</CaseElement>
+      </SeparationBox>
+      <SeparationBox>
+        <CaseElement color={"#ff4646"}>보낼때 : {ttSellingPrice}</CaseElement>
+        <CaseElement color={"#1e96ff"}>받을때 : {ttBuyingPrice}</CaseElement>
+      </SeparationBox>
     </PriceComponent>
   );
 };
 
 export default PriceCaseComponent;
-
-{
-  /* <div>
-<div>살때 : {data.cashBuyingPrice}</div>
-<div>팔때 : {data.cashSellingPrice}</div>
-<div>보낼때 : {data.ttSellingPrice}</div>
-<div>받을때 : {data.ttBuyingPrice}</div>
-</div> */
-}
