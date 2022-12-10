@@ -13,7 +13,6 @@ const FlexComponent = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  border: 1px solid red;
 `;
 
 const PriceBoxComponent = styled.div`
