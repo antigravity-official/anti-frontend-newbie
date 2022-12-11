@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import useExchangeEurToKrw from "../Hook/useExchangeEurToKrw";
 import { PriceType } from "../types/types";
 
 const ExchangeComponent = styled.div`
@@ -45,13 +46,10 @@ const CurrencyDisplay = styled.span`
 
 const ExchangeEurToKrw = ({ basePrice }: PriceType) => {
   const [value, setValue] = useState<number>(0);
+  const exchangeKrw = useExchangeEurToKrw(value, basePrice);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(+event.target.value);
-  };
-
-  const exchangeEurToKrw = (): string => {
-    return Number(Math.floor(value * basePrice)).toLocaleString();
   };
 
   return (
@@ -63,7 +61,7 @@ const ExchangeEurToKrw = ({ basePrice }: PriceType) => {
       <Arrow>👇</Arrow>
       <InputBox>
         <CurrencyDisplay>원</CurrencyDisplay>
-        <InputEl value={exchangeEurToKrw()} disabled />
+        <InputEl value={exchangeKrw} disabled />
       </InputBox>
     </ExchangeComponent>
   );
