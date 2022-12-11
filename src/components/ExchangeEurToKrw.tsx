@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import useExchangeEurToKrw from "../Hook/useExchangeEurToKrw";
+import useExchange from "../Hook/useExchange";
 import { PriceType } from "../types/types";
 
 const ExchangeComponent = styled.div`
@@ -46,7 +46,7 @@ const CurrencyDisplay = styled.span`
 
 const ExchangeEurToKrw = ({ basePrice }: PriceType) => {
   const [value, setValue] = useState<number>(0);
-  const exchangeKrw = useExchangeEurToKrw(value, basePrice);
+  const exchangeKrw = useExchange(value, basePrice);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(+event.target.value);
