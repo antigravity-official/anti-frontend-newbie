@@ -47,3 +47,7 @@ export interface PriceType {
   ttSellingPrice?: number;
   ttBuyingPrice?: number;
 }
+
+export interface JsxType {
+  children: JSX.Element | JSX.Element[];
+}

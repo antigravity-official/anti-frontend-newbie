@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { JsxType } from "../../types/types";
 
 const StyledPriceComponent = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const StyledPriceComponent = styled.div`
   height: 10rem;
 `;
 
-const PriceComponent = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+const PriceComponent = ({ children }: JsxType) => {
   return <StyledPriceComponent>{children}</StyledPriceComponent>;
 };
 
