@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { API_KEY } from "./api/API_KEY";
 import { useGetData } from "./Hook/useGetData";
@@ -7,18 +7,8 @@ import CurrentBasePrice from "./components/CurrentBasePrice";
 import PriceCaseComponent from "./components/PriceCaseComponent";
 import ExchangeEurToKrw from "./components/ExchangeEurToKrw";
 import Loading from "./components/Loading";
-
-const FlexComponent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-`;
-
-const PriceBoxComponent = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import FlexComponent from "./components/public/FlexComponent";
+import PriceBoxComponent from "./components/public/PriceBoxComponent";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
