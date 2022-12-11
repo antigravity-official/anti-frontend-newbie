@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { API_KEY } from "./api/API_KEY";
 import { useGetData } from "./Hook/useGetData";
 import Title from "./components/Title";
