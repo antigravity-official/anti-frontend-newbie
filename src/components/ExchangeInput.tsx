@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Price } from "../pages/Main";
 
 const ExchangeInput = (props: { eurInfo: Price }) => {
-  // const [inputPrice, setInputPrice] = useState("");
   const [krwPrice, setKrwPrice] = useState<number | string>("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,14 +22,6 @@ const ExchangeInput = (props: { eurInfo: Price }) => {
       setKrwPrice("");
       setErrorMessage("");
     }
-    // if (/^[\d]*\.?[\d]{0,2}$/.test(value)) {
-    //   // console.log(value);
-    //   setErrorMessage("");
-    //   setInputPrice(value);
-    //   exchangeEurToKrw(Number(value));
-    // } else {
-    //   setErrorMessage("숫자만 입력해주세요.(소수점 둘째자리까지 입력 가능)");
-    // }
   };
 
   const exchangeEurToKrw = (krw: number) => {
@@ -39,11 +30,7 @@ const ExchangeInput = (props: { eurInfo: Price }) => {
 
   return (
     <div className="input-wrapper">
-      <input
-        type="text"
-        // onChange={(e) => exchangeEurToKrw(Number(e.target.value))}
-        onChange={(e) => handleInputValue(e.target.value)}
-      />{" "}
+      <input type="text" onChange={(e) => handleInputValue(e.target.value)} />{" "}
       유로 ▶︎{" "}
       <input value={krwPrice.toLocaleString().split(".")[0] || ""} disabled />{" "}
       원<div className="error-message">{errorMessage}</div>
