@@ -1,46 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { API_KEY } from "./api/API_KEY";
+import { useGetData } from "./Hook/useGetData";
+import Title from "./components/Title";
+import CurrentBasePrice from "./components/CurrentBasePrice";
+import PriceCaseComponent from "./components/PriceCaseComponent";
+import ExchangeEurToKrw from "./components/ExchangeEurToKrw";
+import Loading from "./components/Loading";
+import FlexComponent from "./components/public/FlexComponent";
+import PriceBoxComponent from "./components/public/PriceBoxComponent";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const data = useGetData(API_KEY);
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
+  setInterval(() => {
     setReady(true);
-  };
+  }, 3000);
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
+  if (!isReady) return <Loading />;
   return (
     <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <FlexComponent>
+        <Title />
+        <PriceBoxComponent>
+          <CurrentBasePrice
+            basePrice={data.basePrice}
+            openingPrice={data.openingPrice}
+            changePrice={data.changePrice}
+          />
+          <PriceCaseComponent
+            cashBuyingPrice={data.cashBuyingPrice}
+            cashSellingPrice={data.cashSellingPrice}
+            ttSellingPrice={data.ttSellingPrice}
+            ttBuyingPrice={data.ttBuyingPrice}
+          />
+        </PriceBoxComponent>
+        <ExchangeEurToKrw basePrice={data.basePrice} />
+      </FlexComponent>
     </div>
   );
 };
