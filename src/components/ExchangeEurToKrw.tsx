@@ -51,7 +51,7 @@ const ExchangeEurToKrw = ({ basePrice }: PriceType) => {
   };
 
   const exchangeEurToKrw = (): string => {
-    return Number((value * basePrice).toFixed(2)).toLocaleString();
+    return Number(Math.floor(value * basePrice)).toLocaleString();
   };
 
   return (
