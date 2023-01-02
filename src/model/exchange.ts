@@ -1,3 +1,5 @@
+import { formatCurrency, CurrencyFormatOptions } from "./currency";
+
 export interface ExchangeInfo {
   basePrice: number;
   openingPrice: number;
@@ -8,4 +10,10 @@ export interface ExchangeInfo {
   ttBuyingPrice: number;
 }
 
-export const exchange = (amount: number, rate: number) => amount * rate;
+export function exchange(
+  amount: number,
+  rate: number,
+  currencyFormatOptions?: CurrencyFormatOptions
+): string {
+  return formatCurrency(amount * rate, currencyFormatOptions);
+}

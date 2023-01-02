@@ -6,7 +6,8 @@ export const App = () => {
     <div className="App">
       <ExchangeInfoPage
         getExchangeInfo={() => getExchangeInfo("FRX.KRWEUR")}
-        currencyInKorean="유로"
+        fromCurrency="유로"
+        toCurrency="원"
       />
     </div>
   );

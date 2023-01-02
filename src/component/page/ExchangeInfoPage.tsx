@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
-import { ExchangeInfo } from "../../model/exchange";
+import { formatCurrency } from "../../model/currency";
+import { exchange, ExchangeInfo } from "../../model/exchange";
 
 interface Props {
   getExchangeInfo: () => Promise<ExchangeInfo>;
-  currencyInKorean: string;
+  fromCurrency: string;
+  toCurrency: string;
 }
 
 type ExchangeInfoState = ExchangeInfo | undefined;
 type AmountState = string;
 
-const ExchangeInfoPage = ({ getExchangeInfo, currencyInKorean }: Props) => {
+const ExchangeInfoPage = ({
+  getExchangeInfo,
+  fromCurrency,
+  toCurrency,
+}: Props) => {
   const [exchangeInfo, setExchangeInfo] =
     useState<ExchangeInfoState>(undefined);
   const [amount, setAmount] = useState<AmountState>("");
@@ -26,19 +32,28 @@ const ExchangeInfoPage = ({ getExchangeInfo, currencyInKorean }: Props) => {
 
   return (
     <>
-      <div>환율기준 (1 {currencyInKorean})</div>
+      <div>환율기준 (1 {fromCurrency})</div>
       <div>
-        {exchangeInfo.basePrice}
+        {formatCurrency(exchangeInfo.basePrice) + toCurrency}
         {exchangeInfo.basePrice - exchangeInfo.openingPrice > 0 && "▲"}
         {exchangeInfo.basePrice - exchangeInfo.openingPrice < 0 && "▼"}
-        {exchangeInfo.changePrice}원 (
-        {(exchangeInfo.changePrice / exchangeInfo.basePrice) * 100}%)
+        {formatCurrency(exchangeInfo.changePrice) + toCurrency}(
+        {(exchangeInfo.changePrice / exchangeInfo.basePrice) * 100}
+        %)
       </div>
       <div>
-        <div>살때 : {exchangeInfo.cashBuyingPrice}</div>
-        <div>팔때 : {exchangeInfo.cashSellingPrice}</div>
-        <div>보낼때 : {exchangeInfo.ttSellingPrice}</div>
-        <div>받을때 : {exchangeInfo.ttBuyingPrice}</div>
+        <div>
+          살때 : {formatCurrency(exchangeInfo.cashBuyingPrice) + toCurrency}
+        </div>
+        <div>
+          팔때 : {formatCurrency(exchangeInfo.cashSellingPrice) + toCurrency}
+        </div>
+        <div>
+          보낼때 : {formatCurrency(exchangeInfo.ttSellingPrice) + toCurrency}
+        </div>
+        <div>
+          받을때 : {formatCurrency(exchangeInfo.ttBuyingPrice) + toCurrency}
+        </div>
       </div>
       <hr />
       <input
@@ -46,7 +61,17 @@ const ExchangeInfoPage = ({ getExchangeInfo, currencyInKorean }: Props) => {
         value={amount}
         onChange={(event) => setAmount(event.target.value)}
       />
-      {" " + currencyInKorean} ▶︎ <input disabled /> 원
+      {" " + fromCurrency}
+      {" ▶︎ "}
+      <input
+        disabled
+        value={
+          !!amount.length
+            ? exchange(parseFloat(amount), exchangeInfo.basePrice)
+            : ""
+        }
+      />
+      {" " + toCurrency}
     </>
   );
 };
