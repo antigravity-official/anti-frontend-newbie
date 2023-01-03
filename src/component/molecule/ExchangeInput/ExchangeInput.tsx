@@ -1,25 +1,23 @@
 import { ChangeEventHandler, useState } from "react";
 
 interface Props {
-  exchangeRate: number;
   fromCurrencyUnit: string;
   toCurrencyUnit: string;
   fromCurrencyFormatter: (amount: string) => string;
   toCurrencyFormatter: (amount: string) => string;
+  exchange: (amount: number) => number;
 }
 
 type AmountState = string;
 
 const ExchangeInput = ({
-  exchangeRate,
   fromCurrencyUnit,
   toCurrencyUnit,
   fromCurrencyFormatter,
   toCurrencyFormatter,
+  exchange,
 }: Props) => {
   const [amount, setAmount] = useState<AmountState>("0");
-
-  const exchange = (amount: number) => amount * exchangeRate;
 
   const handleFromCurrencyChange: ChangeEventHandler<HTMLInputElement> = (
     event

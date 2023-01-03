@@ -7,12 +7,14 @@ interface Props {
   exchangeInfo: ExchangeInfo;
   fromCurrencyFormat: CurrencyFormat;
   toCurrencyFormat: CurrencyFormat;
+  exchange: (amount: number) => number;
 }
 
 const ExchangeInfoBox = ({
   exchangeInfo,
   fromCurrencyFormat,
   toCurrencyFormat,
+  exchange,
 }: Props) => {
   const fromCurrencyFormatter = (amount: string) => {
     amount = amount.replaceAll(/[^0-9.]/g, "");
@@ -57,11 +59,11 @@ const ExchangeInfoBox = ({
       />
       <hr />
       <ExchangeInput
-        exchangeRate={exchangeInfo.basePrice}
         fromCurrencyUnit={fromCurrencyFormat.inKorean}
         toCurrencyUnit={toCurrencyFormat.inKorean}
         fromCurrencyFormatter={fromCurrencyFormatter}
         toCurrencyFormatter={(amount: string) => toCurrencyFormatter(amount)}
+        exchange={exchange}
       />
     </>
   );
