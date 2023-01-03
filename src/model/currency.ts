@@ -4,6 +4,27 @@ export enum CommaPosition {
   thoudsands = 3,
 }
 
+export type CurrencyCode = "EUR" | "KRW";
+
+export interface CurrencyFormat {
+  commaPosition: CommaPosition;
+  decimalPlace: number;
+  inKorean: string;
+}
+
+export const CURRENCY_FORMAT: { [key in CurrencyCode]: CurrencyFormat } = {
+  EUR: {
+    commaPosition: CommaPosition.thoudsands,
+    decimalPlace: 2,
+    inKorean: "유로",
+  },
+  KRW: {
+    commaPosition: CommaPosition.thoudsands,
+    decimalPlace: 0,
+    inKorean: "원",
+  },
+};
+
 export interface CurrencyFormatOptions {
   commaPosition?: CommaPosition;
   decimalPlace?: number;
