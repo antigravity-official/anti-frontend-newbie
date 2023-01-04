@@ -1,5 +1,5 @@
-import { CurrencyFormat } from "../../../model/currency";
-import { ExchangeInfo } from "../../../model/exchange";
+import { CurrencyFormat } from "../../../../model/currency";
+import { ExchangeInfo } from "../../../../model/exchange";
 import ExchangeInfoBoard from "../../molecule/ExchangeInfoBoard";
 import ExchangeInput from "../../molecule/ExchangeInput";
 

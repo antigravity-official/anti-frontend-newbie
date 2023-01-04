@@ -1,4 +1,4 @@
-import ExchangeInfoPage from "./component/page/ExchangeInfoPage";
+import ExchangeInfoPage from "./view/component/page/ExchangeInfoPage";
 
 export const App = () => {
   return (

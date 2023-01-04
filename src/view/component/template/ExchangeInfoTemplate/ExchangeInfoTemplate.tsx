@@ -1,5 +1,5 @@
-import { CurrencyFormat } from "../../../model/currency";
-import { ExchangeInfo } from "../../../model/exchange";
+import { CurrencyFormat } from "../../../../model/currency";
+import { ExchangeInfo } from "../../../../model/exchange";
 import LoadingMessage from "../../atom/LoadingMessage";
 import ExchangeInfoBox from "../../organism/ExchangeInfoBox";
 

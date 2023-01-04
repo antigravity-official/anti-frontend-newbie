@@ -1,4 +1,4 @@
-import { ExchangeInfo } from "../../../model/exchange";
+import { ExchangeInfo } from "../../../../model/exchange";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
