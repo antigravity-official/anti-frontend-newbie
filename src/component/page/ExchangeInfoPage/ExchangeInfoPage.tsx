@@ -1,6 +1,14 @@
 import { useRef } from "react";
-import { CurrencyCode, CURRENCY_FORMAT } from "../../../model/currency";
+import {
+  CurrencyCode,
+  TextCurrencyFormatModel,
+  InputCurrencyFormatModel,
+} from "../../../model/currency";
 import { ExchangeInfoModel } from "../../../model/exchange";
+import {
+  MemoryCurrencyFormatRepository,
+  useCurrencyFormatViewModel,
+} from "../../../viewmodel/currency";
 import {
   HTTPExchangeInfoRepository,
   useExchangeViewModel,
@@ -14,12 +22,29 @@ interface Props {
 }
 
 const ExchangeInfoPage = ({ fromCurrencyCode, toCurrencyCode }: Props) => {
-  const { current: model } = useRef(
+  const { current: exchangeViewModel } = useRef(
     new ExchangeInfoModel(new HTTPExchangeInfoRepository())
   );
 
+  const { current: currencyFormatRepository } = useRef(
+    new MemoryCurrencyFormatRepository()
+  );
+
+  const { current: inputCurrencyFormatModel } = useRef(
+    new InputCurrencyFormatModel(currencyFormatRepository)
+  );
+  const { current: textCurrencyFormatModel } = useRef(
+    new TextCurrencyFormatModel(currencyFormatRepository)
+  );
+
+  const { formatter: fromCurrencyFormatter, format: fromCurrencyFormat } =
+    useCurrencyFormatViewModel(inputCurrencyFormatModel, fromCurrencyCode);
+
+  const { formatter: toCurrencyFormatter, format: toCurrencyFormat } =
+    useCurrencyFormatViewModel(textCurrencyFormatModel, toCurrencyCode);
+
   const { exchangeInfo } = useExchangeViewModel(
-    model,
+    exchangeViewModel,
     fromCurrencyCode,
     toCurrencyCode
   );
@@ -30,9 +55,11 @@ const ExchangeInfoPage = ({ fromCurrencyCode, toCurrencyCode }: Props) => {
     <>
       <ExchangeInfoBox
         exchangeInfo={exchangeInfo}
-        fromCurrencyFormat={CURRENCY_FORMAT[fromCurrencyCode]}
-        toCurrencyFormat={CURRENCY_FORMAT[toCurrencyCode]}
-        exchange={model.exchange}
+        fromCurrencyFormat={fromCurrencyFormat}
+        toCurrencyFormat={toCurrencyFormat}
+        fromCurrencyFormatter={fromCurrencyFormatter}
+        toCurrencyFormatter={toCurrencyFormatter}
+        exchange={exchangeViewModel.exchange}
       />
     </>
   );

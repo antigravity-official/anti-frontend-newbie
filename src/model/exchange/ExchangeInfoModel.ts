@@ -24,7 +24,7 @@ export default class ExchangeInfoModel {
 
   exchange(amount: number): number {
     if (this.info === undefined) {
-      throw new Error("get an ExchangeInfo first");
+      throw new Error("Get an ExchangeInfo first");
     }
 
     return amount * this.info.basePrice;
