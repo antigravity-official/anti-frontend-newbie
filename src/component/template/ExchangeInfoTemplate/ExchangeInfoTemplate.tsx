@@ -20,18 +20,21 @@ const ExchangeInfoTemplate = ({
   toCurrencyFormatter,
   exchange,
 }: Props) => {
-  if (!exchangeInfo) return <LoadingMessage message="환율 정보 로딩 중" />;
-
   return (
     <>
-      <ExchangeInfoBox
-        exchangeInfo={exchangeInfo}
-        fromCurrencyFormat={fromCurrencyFormat}
-        toCurrencyFormat={toCurrencyFormat}
-        fromCurrencyFormatter={fromCurrencyFormatter}
-        toCurrencyFormatter={toCurrencyFormatter}
-        exchange={exchange}
-      />
+      <LoadingMessage
+        isLoading={!exchangeInfo}
+        message="환율 정보를 불러오고 있습니다"
+      >
+        <ExchangeInfoBox
+          exchangeInfo={exchangeInfo!}
+          fromCurrencyFormat={fromCurrencyFormat}
+          toCurrencyFormat={toCurrencyFormat}
+          fromCurrencyFormatter={fromCurrencyFormatter}
+          toCurrencyFormatter={toCurrencyFormatter}
+          exchange={exchange}
+        />
+      </LoadingMessage>
     </>
   );
 };

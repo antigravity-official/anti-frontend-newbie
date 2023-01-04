@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 
 interface Props {
+  isLoading: boolean;
   message?: string;
 }
 
-const LoadingMessage = ({ message }: Props) => {
+const LoadingMessage = ({
+  isLoading,
+  message,
+  children,
+}: PropsWithChildren<Props>) => {
   const [progress, setProgress] = useState<string>("");
 
   useEffect(() => {
@@ -20,7 +25,9 @@ const LoadingMessage = ({ message }: Props) => {
     return () => clearInterval(interval);
   }, []);
 
-  return <div>{(message || "Loading") + progress}</div>;
+  if (isLoading) return <div>{(message || "Loading") + progress}</div>;
+
+  return <>{children}</>;
 };
 
 export default LoadingMessage;
