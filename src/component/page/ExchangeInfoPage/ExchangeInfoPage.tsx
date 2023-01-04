@@ -13,8 +13,7 @@ import {
   HTTPExchangeInfoRepository,
   useExchangeViewModel,
 } from "../../../viewmodel/exchange";
-import LoadingMessage from "../../atom/LoadingMessage";
-import ExchangeInfoBox from "../../organism/ExchangeInfoBox";
+import { ExchangeInfoTemplate } from "../../template/ExchangeInfoTemplate";
 
 interface Props {
   fromCurrencyCode: CurrencyCode;
@@ -33,6 +32,7 @@ const ExchangeInfoPage = ({ fromCurrencyCode, toCurrencyCode }: Props) => {
   const { current: inputCurrencyFormatModel } = useRef(
     new InputCurrencyFormatModel(currencyFormatRepository)
   );
+
   const { current: textCurrencyFormatModel } = useRef(
     new TextCurrencyFormatModel(currencyFormatRepository)
   );
@@ -49,19 +49,15 @@ const ExchangeInfoPage = ({ fromCurrencyCode, toCurrencyCode }: Props) => {
     toCurrencyCode
   );
 
-  if (!exchangeInfo) return <LoadingMessage message="환율 정보 로딩 중" />;
-
   return (
-    <>
-      <ExchangeInfoBox
-        exchangeInfo={exchangeInfo}
-        fromCurrencyFormat={fromCurrencyFormat}
-        toCurrencyFormat={toCurrencyFormat}
-        fromCurrencyFormatter={fromCurrencyFormatter}
-        toCurrencyFormatter={toCurrencyFormatter}
-        exchange={exchangeViewModel.exchange}
-      />
-    </>
+    <ExchangeInfoTemplate
+      exchangeInfo={exchangeInfo}
+      fromCurrencyFormat={fromCurrencyFormat}
+      toCurrencyFormat={toCurrencyFormat}
+      fromCurrencyFormatter={fromCurrencyFormatter}
+      toCurrencyFormatter={toCurrencyFormatter}
+      exchange={exchangeViewModel.exchange}
+    />
   );
 };
 
