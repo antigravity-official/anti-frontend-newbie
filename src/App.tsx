@@ -45,10 +45,22 @@ export type priceInformation = {
 };
 export const App = () => {
   const [userWritePrice, setUserWritePrice] = useState<number>(0);
+  const [userWrite, setUserWrite] = useState<string>("");
+  console.log(userWrite);
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const userPrice = Number(e.target.value);
-    if (eurInfo && userPrice !== 0) {
-      setUserWritePrice(userPrice * eurInfo.basePrice);
+    const userPrice = e.target.value;
+    let regexp = /^\d*.?\d{0,2}$/;
+    if (eurInfo && userPrice !== "0") {
+      setUserWrite(userPrice);
+      if (!regexp.test(userPrice)) {
+        alert("소수점 둘째자리까지 입력가능합니다.");
+        setUserWrite("");
+        return false;
+      } else {
+        setUserWritePrice(Number(userPrice) * eurInfo.basePrice);
+      }
+    } else {
+      return false;
     }
   };
   const { eurInfo, isReady } = useFetch();
@@ -66,7 +78,14 @@ export const App = () => {
         <div>받을때 : {eurInfo ? eurInfo.ttBuyingPrice : ""}</div>
       </div>
       <hr />
-      <input type="number" onChange={exchangeEurToKrw} /> 유로 ▶︎
+      <input
+        className="keyOff"
+        value={userWrite}
+        step="0.1"
+        type="number"
+        onChange={exchangeEurToKrw}
+      />{" "}
+      유로 ▶︎
       <input disabled value={Math.floor(userWritePrice).toLocaleString("en")} />
       원
     </div>
