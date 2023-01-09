@@ -1,46 +1,74 @@
 import React, { useEffect, useState } from "react";
+import { useFetch } from "./components/useFetch";
+import { NowRate } from "./components/NowRate";
+import { RateDeal } from "./components/RateDeal";
+//1. get 요청 커스텀 훅으로 뺴기
+//2. 환율 정보 따로 폴더 뺴기
+//3. 인풋창이랑 변환함수 따로 빼기
 
+export type priceInformation = {
+  basePrice: number;
+  cashBuyingPrice: number;
+  cashSellingPrice: number;
+  change: string;
+  changePrice: number;
+  changeRate: number;
+  code: string;
+  country: string;
+  createdAt: string;
+  currencyCode: string;
+  currencyName: string;
+  currencyUnit: number;
+  date: string;
+  exchangeCommission: number;
+  fcSellingPrice: null;
+  high52wDate: string;
+  high52wPrice: number;
+  highPrice: number;
+  id: number;
+  low52wDate: string;
+  low52wPrice: number;
+  lowPrice: number;
+  modifiedAt: string;
+  name: string;
+  openingPrice: number;
+  provider: string;
+  recurrenceCount: number;
+  signedChangePrice: number;
+  signedChangeRate: number;
+  tcBuyingPrice: null;
+  time: string;
+  timestamp: number;
+  ttBuyingPrice: number;
+  ttSellingPrice: number;
+  usDollarRate: number;
+};
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
+  const [userWritePrice, setUserWritePrice] = useState<number>(0);
+  const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const userPrice = Number(e.target.value);
+    if (eurInfo && userPrice !== 0) {
+      setUserWritePrice(userPrice * eurInfo.basePrice);
+    }
   };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
+  const { eurInfo, isReady } = useFetch();
 
   if (!isReady) return null;
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
+      {eurInfo ? <NowRate eurInfo={eurInfo} /> : ""}
+      <RateDeal />
       <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
+        <div>살때 : {eurInfo ? eurInfo.cashBuyingPrice : ""}</div>
+        <div>팔때 : {eurInfo ? eurInfo.cashSellingPrice : ""}</div>
+        <div>보낼때 : {eurInfo ? eurInfo.ttSellingPrice : ""}</div>
+        <div>받을때 : {eurInfo ? eurInfo.ttBuyingPrice : ""}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input type="number" onChange={exchangeEurToKrw} /> 유로 ▶︎
+      <input disabled value={Math.floor(userWritePrice).toLocaleString("en")} />
+      원
     </div>
   );
 };
