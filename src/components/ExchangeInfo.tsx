@@ -28,7 +28,7 @@ export default function ExchangeInfo() {
         {eurInfo.basePrice}
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 ( //{" "}
+        {eurInfo.changePrice}원 (
         {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
       </div>
 
