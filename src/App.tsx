@@ -23,15 +23,15 @@ export const App = () => {
 
   const handleEurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regEx = /^\d*.?\d{0,2}$/;
-    let input = e.target.value;
+    let input = e.target.value.replaceAll(",", "");
+
     if (!regEx.test(input)) {
       input = input.substring(0, input.length - 1);
-      setEurInput(input);
-    } else {
-      setEurInput(input);
     }
+    setEurInput(Number(input).toLocaleString());
+
     let krw = exchangeEurToKrw(Number(input));
-    krw && setExchangedKrw(Math.floor(krw));
+    krw != null && setExchangedKrw(Math.floor(krw));
   };
 
   useEffect(() => {
@@ -59,8 +59,8 @@ export const App = () => {
         <div>받을때 : {eurInfo?.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input type="number" value={eurInput} onChange={handleEurInput} /> 유로 ▶︎{" "}
-      <input value={exchangedKrw} disabled /> 원
+      <input type="text" value={eurInput} onChange={handleEurInput} /> 유로 ▶︎{" "}
+      <input value={exchangedKrw?.toLocaleString()} disabled /> 원
     </div>
   );
 };
