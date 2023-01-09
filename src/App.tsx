@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFetch } from "./components/useFetch";
 import { NowRate } from "./components/NowRate";
 import { RateDeal } from "./components/RateDeal";
+import { Input } from "./components/Input";
 //1. get 요청 커스텀 훅으로 뺴기
 //2. 환율 정보 따로 폴더 뺴기
 //3. 인풋창이랑 변환함수 따로 빼기
@@ -44,22 +45,6 @@ export type priceInformation = {
   usDollarRate: number;
 };
 export const App = () => {
-  const [userWritePrice, setUserWritePrice] = useState<number>(0);
-  const [userWrite, setUserWrite] = useState<string>("");
-  const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const userPrice = e.target.value;
-    let regexp = /^\d*.?\d{0,2}$/;
-    if (eurInfo && userPrice !== "0") {
-      setUserWrite(userPrice);
-      if (!regexp.test(userPrice)) {
-        alert("소수점 둘째자리까지 입력가능합니다.");
-        setUserWrite("");
-        setUserWritePrice(0);
-      } else {
-        setUserWritePrice(Number(userPrice) * eurInfo.basePrice);
-      }
-    }
-  };
   const { eurInfo, isReady } = useFetch();
 
   if (!isReady) return null;
@@ -68,17 +53,8 @@ export const App = () => {
       <div>환율기준 (1 유로)</div>
       {eurInfo ? <NowRate eurInfo={eurInfo} /> : ""}
       {eurInfo ? <RateDeal eurInfo={eurInfo} /> : ""}
+      {eurInfo ? <Input eurInfo={eurInfo} /> : ""}
       <hr />
-      <input
-        className="keyOff"
-        value={userWrite}
-        step="0.1"
-        type="number"
-        onChange={exchangeEurToKrw}
-      />{" "}
-      유로 ▶︎
-      <input disabled value={Math.floor(userWritePrice).toLocaleString("en")} />
-      원
     </div>
   );
 };
