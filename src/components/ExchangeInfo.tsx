@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
+import { ExchangeInfoType } from "../type/exchange";
 import { getInfo } from "../api/exchangeInfo";
+import ExchangeCalc from "./ExchangeCalc";
 
 export default function ExchangeInfo() {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<
+    ExchangeInfoType | Record<string, never>
+  >({});
 
   const getEurInfo = async () => {
     const krweur = await getInfo();
     setEurInfo(krweur);
     setReady(true);
   };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
   useEffect(() => {
     getEurInfo();
@@ -36,6 +38,7 @@ export default function ExchangeInfo() {
         <div>보낼때 : {eurInfo.ttSellingPrice}</div>
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
+      <ExchangeCalc eurInfo={eurInfo} />
     </div>
   );
 }
