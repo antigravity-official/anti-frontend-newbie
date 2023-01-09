@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+
+/// 첫번째 커밋 테스트
+
 export const App = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
