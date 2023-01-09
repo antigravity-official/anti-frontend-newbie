@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export const App = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
+  const [exchangedKrw, setExchangedKrw] = useState<number>();
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -15,7 +16,11 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (eur: number) => eur * eurInfo.basePrice;
+
+  const handleEurInput = (e: any) => {
+    setExchangedKrw(Math.floor(exchangeEurToKrw(e.target.value)));
+  };
 
   useEffect(() => {
     getEurInfo();
@@ -40,7 +45,8 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input onChange={handleEurInput} /> 유로 ▶︎{" "}
+      <input value={exchangedKrw} disabled /> 원
     </div>
   );
 };
