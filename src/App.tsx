@@ -4,6 +4,7 @@ import EurInfo from "./interfaces/EurInfo";
 export const App = () => {
   const [isReady, setReady] = useState<boolean>(false);
   const [eurInfo, setEurInfo] = useState<EurInfo | null>(null);
+  const [eurInput, setEurInput] = useState<string>("");
   const [exchangedKrw, setExchangedKrw] = useState<number>();
 
   const getEurInfo = async () => {
@@ -21,7 +22,15 @@ export const App = () => {
     eurInfo ? eur * eurInfo.basePrice : null;
 
   const handleEurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const krw = exchangeEurToKrw(Number(e.target.value));
+    const regEx = /^\d*.?\d{0,2}$/;
+    let input = e.target.value;
+    if (!regEx.test(input)) {
+      input = input.substring(0, input.length - 1);
+      setEurInput(input);
+    } else {
+      setEurInput(input);
+    }
+    let krw = exchangeEurToKrw(Number(input));
     krw && setExchangedKrw(Math.floor(krw));
   };
 
@@ -50,7 +59,7 @@ export const App = () => {
         <div>받을때 : {eurInfo?.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input type="number" onChange={handleEurInput} /> 유로 ▶︎{" "}
+      <input type="number" value={eurInput} onChange={handleEurInput} /> 유로 ▶︎{" "}
       <input value={exchangedKrw} disabled /> 원
     </div>
   );
