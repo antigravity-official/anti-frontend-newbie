@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { getEurInfo } from './api/exchange';
 import { ExchangeInfo } from './model/Model';
 
 
 export const App = () => {
   const [eurInfo, setEurInfo] = useState<ExchangeInfo | undefined>(undefined);
+  const [eurInput, setEurInput] = useState<string>();
+  const [krw, setkrw] = useState<string>();
 
+  const getEurInput = (e :ChangeEvent<HTMLInputElement>) => {
+    setEurInput(e.target.value);
+    // let eurInput :string = e.target.value;
+    console.log('eurInput:',eurInput)
+  }
   // const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
   useEffect(() => {
     getEurInfo().then((priceValue) => { setEurInfo(priceValue) });
     return () => {}
   }, []);
+
+  useEffect(() => {
+    if (eurInput != undefined && eurInfo?.basePrice) {
+      let totalPrice = parseFloat(eurInput) * eurInfo.basePrice;
+      setkrw(totalPrice.toLocaleString('ko-KR'));
+    }
+  },[eurInput]);
+
 
   console.log('eurInfo:',eurInfo);
   if (!eurInfo) return null;
@@ -32,7 +47,7 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input onChange={getEurInput}/> 유로 ▶︎ <input disabled value={krw}/> 원
     </div>
   );
 };
