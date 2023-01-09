@@ -4,16 +4,17 @@ import { ExchangeInfo } from './model/Model';
 
 
 export const App = () => {
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<ExchangeInfo | undefined>(undefined);
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  // const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
   useEffect(() => {
-    getEurInfo();
-    return () => {};
+    getEurInfo().then((priceValue) => { setEurInfo(priceValue) });
+    return () => {}
   }, []);
 
-  // if (!isReady) return null;
+  console.log('eurInfo:',eurInfo);
+  if (!eurInfo) return null;
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
