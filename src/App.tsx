@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { getEurInfo } from './api/exchange';
+import { ExchangeInfo } from './model/Model';
+
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
 
   const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
@@ -22,7 +13,7 @@ export const App = () => {
     return () => {};
   }, []);
 
-  if (!isReady) return null;
+  // if (!isReady) return null;
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
