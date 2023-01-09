@@ -46,7 +46,6 @@ export type priceInformation = {
 export const App = () => {
   const [userWritePrice, setUserWritePrice] = useState<number>(0);
   const [userWrite, setUserWrite] = useState<string>("");
-  console.log(userWrite);
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userPrice = e.target.value;
     let regexp = /^\d*.?\d{0,2}$/;
@@ -55,12 +54,10 @@ export const App = () => {
       if (!regexp.test(userPrice)) {
         alert("소수점 둘째자리까지 입력가능합니다.");
         setUserWrite("");
-        return false;
+        setUserWritePrice(0);
       } else {
         setUserWritePrice(Number(userPrice) * eurInfo.basePrice);
       }
-    } else {
-      return false;
     }
   };
   const { eurInfo, isReady } = useFetch();
@@ -70,13 +67,7 @@ export const App = () => {
     <div className="App">
       <div>환율기준 (1 유로)</div>
       {eurInfo ? <NowRate eurInfo={eurInfo} /> : ""}
-      <RateDeal />
-      <div>
-        <div>살때 : {eurInfo ? eurInfo.cashBuyingPrice : ""}</div>
-        <div>팔때 : {eurInfo ? eurInfo.cashSellingPrice : ""}</div>
-        <div>보낼때 : {eurInfo ? eurInfo.ttSellingPrice : ""}</div>
-        <div>받을때 : {eurInfo ? eurInfo.ttBuyingPrice : ""}</div>
-      </div>
+      {eurInfo ? <RateDeal eurInfo={eurInfo} /> : ""}
       <hr />
       <input
         className="keyOff"
