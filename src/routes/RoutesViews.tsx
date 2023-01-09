@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import App from "../App";
+import ExchangeRate from "../views";
 
 const RoutesPage = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<ExchangeRate />} />
     </Routes>
   );
 };
