@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NumericFormat } from "react-number-format";
 
 export const App = () => {
   type EuroInfo = {
@@ -21,7 +22,7 @@ export const App = () => {
     ttSellingPrice: 0,
     ttBuyingPrice: 0,
   });
-  const [eurCurrencyInput, setEurCurrencyInput] = useState<number>(0);
+  const [currInput, setCurrInput] = useState<number>(0);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -58,7 +59,9 @@ export const App = () => {
 
   // const exchangeEurToKrw = (krw: number) => krw * eurInfo?.basePrice;
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEurCurrencyInput(eurInfo.basePrice * Number(e.target.value));
+    const value: string = e.target.value;
+    const removedCommaValue = Number(value.replaceAll(",", ""));
+    setCurrInput(eurInfo.basePrice * removedCommaValue);
   };
 
   useEffect(() => {
@@ -84,8 +87,19 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input onChange={(e) => exchangeEurToKrw(e)} /> 유로 ▶︎{" "}
-      <input value={eurCurrencyInput} disabled /> 원
+      <NumericFormat
+        onChange={(e) => exchangeEurToKrw(e)}
+        decimalScale={2}
+        thousandSeparator=","
+      ></NumericFormat>
+      유로 ▶︎
+      <NumericFormat
+        value={currInput}
+        decimalScale={0}
+        thousandSeparator=","
+        disabled
+      ></NumericFormat>
+      원
     </div>
   );
 };
