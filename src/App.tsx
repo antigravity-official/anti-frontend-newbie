@@ -1,8 +1,10 @@
 import useFetchData from "./hooks/useFetchData";
+import EurModel from "./model/EurModel";
 
 export const App = () => {
   const eurData = useFetchData();
-  console.log(eurData);
+  const model = new EurModel(eurData.eurData);
+  console.log(model);
 
   // if (!isReady) return null;
   return (
