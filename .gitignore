@@ -52,3 +52,5 @@ src/stores/coverage
 .history
 yarn-error.log
 checkstyle-result.xml
+.env
+yarn.lock
