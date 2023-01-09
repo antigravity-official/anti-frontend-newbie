@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from "react";
 
 export const App = () => {
+  type EuroInfo = {
+    basePrice: number;
+    openingPrice: number;
+    changePrice: number;
+    cashBuyingPrice: number;
+    cashSellingPrice: number;
+    ttSellingPrice: number;
+    ttBuyingPrice: number;
+  };
+
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<EuroInfo>({
+    basePrice: 0,
+    openingPrice: 0,
+    changePrice: 0,
+    cashBuyingPrice: 0,
+    cashSellingPrice: 0,
+    ttSellingPrice: 0,
+    ttBuyingPrice: 0,
+  });
+  const [eurCurrencyInput, setEurCurrencyInput] = useState<number>(0);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -10,12 +29,37 @@ export const App = () => {
     )
       .then((response) => response.json())
       .then((array) => array[0]);
-
-    setEurInfo(krweur);
+    // console.log(krweur);
+    // {
+    //   "code": "FRX.KRWEUR",
+    //   "currencyCode": "EUR",
+    //   "currencyName": "유로",
+    //   "country": "유로",
+    //   "name": "유로 (KRW/EUR)",
+    //   "date": "2023-01-09",
+    //   "time": "12:56:31",
+    //   "recurrenceCount": 583,
+    //   "basePrice": 1328.68,
+    //   "openingPrice": 1348.81,
+    //   "highPrice": 1348.81,
+    //   "lowPrice": 1327.35,
+    // }
+    setEurInfo({
+      basePrice: krweur.basePrice,
+      openingPrice: krweur.openingPrice,
+      changePrice: krweur.changePrice,
+      cashBuyingPrice: krweur.cashBuyingPrice,
+      cashSellingPrice: krweur.cashSellingPrice,
+      ttSellingPrice: krweur.ttSellingPrice,
+      ttBuyingPrice: krweur.ttBuyingPrice,
+    });
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  // const exchangeEurToKrw = (krw: number) => krw * eurInfo?.basePrice;
+  const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEurCurrencyInput(eurInfo.basePrice * Number(e.target.value));
+  };
 
   useEffect(() => {
     getEurInfo();
@@ -40,7 +84,8 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input onChange={(e) => exchangeEurToKrw(e)} /> 유로 ▶︎{" "}
+      <input value={eurCurrencyInput} disabled /> 원
     </div>
   );
 };
