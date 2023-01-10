@@ -7,5 +7,6 @@ export interface EurModel {
   getChangePrice(): number;
   getChangeRate(): number;
   getBuyingAndSellingPriceGroup(): { name: string; price: number }[];
-  getExchangeEurToKrw(eur: number): number;
+  getExchangeEurToKrw(eur: string, length: number): string;
+  getToLocaleString(value: string): string;
 }

@@ -29,8 +29,12 @@ class EurViewModel {
     return this.model.getBuyingAndSellingPriceGroup();
   }
 
-  getExchangeEurToKrw(eur: number) {
-    return this.model.getExchangeEurToKrw(eur);
+  getExchangeEurToKrw(eur: string, length: number) {
+    return this.model.getExchangeEurToKrw(eur, length);
+  }
+
+  getToLocaleString(value: string) {
+    return this.model.getToLocaleString(value);
   }
 }
 

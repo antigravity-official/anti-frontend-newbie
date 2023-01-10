@@ -6,7 +6,8 @@ interface HomeProp {
   viewModel: EurModel;
 }
 const Home = ({ viewModel }: HomeProp) => {
-  const [eur, setEur] = useState(1);
+  const [eur, setEur] = useState("1");
+
   const marketPriceGroup = viewModel.getBuyingAndSellingPriceGroup();
 
   return (
@@ -19,16 +20,21 @@ const Home = ({ viewModel }: HomeProp) => {
         {viewModel.getChangePrice()}원{viewModel.getChangeRate()}%
       </div>
       <div>
-        {marketPriceGroup.map((price: any) => (
-          <div key={price.name}>
-            {price.name} : {price.price}
+        {marketPriceGroup.map((item: { name: string; price: number }) => (
+          <div key={item.price}>
+            {item.name} : {item.price}
           </div>
         ))}
       </div>
-      <TextInput type='number' setValue={setEur} value={eur} name='유로' />
       <TextInput
-        type='number'
-        value={viewModel.getExchangeEurToKrw(eur)}
+        type='text'
+        setValue={setEur}
+        value={viewModel.getToLocaleString(eur)}
+        name='유로'
+      />
+      <TextInput
+        type='text'
+        value={viewModel.getExchangeEurToKrw(eur, 0)}
         name='원'
         disabled
         readOnly

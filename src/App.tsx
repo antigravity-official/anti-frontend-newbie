@@ -8,6 +8,7 @@ export const App = () => {
   const eurData = useFetchData();
   const model = new EurModel(eurData.eurData);
   const viewModel = new EurViewModel(model);
+  console.log(eurData);
 
   const { isLoading } = eurData;
   return (

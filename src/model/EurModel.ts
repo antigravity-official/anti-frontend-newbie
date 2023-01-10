@@ -39,8 +39,18 @@ class EurModel {
     ];
   }
 
-  getExchangeEurToKrw(eur: number) {
-    return eur * this.eurData.basePrice;
+  getExchangeEurToKrw(eur: string, length: number) {
+    const option = { maximumFractionDigits: length };
+    const removedCommaEur = eur.replaceAll(",", "");
+    const eurToKrw = Number(removedCommaEur) * this.eurData.basePrice;
+    const result = eurToKrw.toLocaleString("ko-KR", option);
+    return result;
+  }
+
+  getToLocaleString(value: string) {
+    const removedCommaValue = value.replaceAll(",", "");
+    const result = Number(removedCommaValue).toLocaleString("ko-KR");
+    return result;
   }
 }
 

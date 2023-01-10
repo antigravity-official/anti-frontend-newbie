@@ -2,8 +2,8 @@ import React, { ChangeEvent } from "react";
 
 interface TextInputProp {
   type: string;
-  setValue?: (str: number) => void;
-  value: number;
+  setValue?: (str: string) => void;
+  value: string;
   disabled?: boolean;
   readOnly?: boolean;
   name: string;
@@ -17,11 +17,11 @@ const TextInput = ({
   name,
 }: TextInputProp) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue && setValue(e.target.valueAsNumber);
+    setValue && setValue(e.target.value);
   };
 
   return (
-    <>
+    <div>
       <input
         type={type}
         onChange={onChangeHandler}
@@ -30,7 +30,7 @@ const TextInput = ({
         readOnly={readOnly}
       />
       <span>{name}</span>
-    </>
+    </div>
   );
 };
 
