@@ -1,46 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useGetEurInfo from "./hooks/useGetEurInfo";
 
 const ExchangeRate = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const { data, isLoading } = useGetEurInfo();
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
+  // const exchangeEurToKrw = (krw: number) => krw * data.basePrice;
 
-    setEurInfo(krweur);
-    setReady(true);
-  };
+  if (isLoading) {
+    <div>loading...</div>;
+  }
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
   return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+    <div>
+      {!isLoading && data && (
+        <div>
+          <div>환율기준 (1 유로)</div>
+          <div>
+            {data.basePrice}
+            {data.basePrice - data.openingPrice > 0 && "▲"}
+            {data.basePrice - data.openingPrice < 0 && "▼"}
+            {data.changePrice}원 ({(data.changePrice / data.basePrice) * 100}%)
+          </div>
+          <div>
+            <div>살때 : {data.cashBuyingPrice}</div>
+            <div>팔때 : {data.cashSellingPrice}</div>
+            <div>보낼때 : {data.ttSellingPrice}</div>
+            <div>받을때 : {data.ttBuyingPrice}</div>
+          </div>
+          <hr />
+          <input /> 유로 ▶︎ <input disabled /> 원
+        </div>
+      )}
     </div>
   );
 };
