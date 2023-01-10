@@ -1,0 +1,19 @@
+html {
+  list-style: none;
+  box-sizing: border-box;
+}
+
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.up {
+  color: #ff0000;
+}
+
+.down {
+  color: #0000ff;
+}

@@ -1,6 +1,12 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import {
+  getFluctuationIcon,
+  addComma,
+  transformInt,
+} from './assets/utils/involvedInTexts';
 
-interface EuroInfo {
+export interface EuroInfo {
   basePrice: number;
   openingPrice: number;
   changePrice: number;
@@ -33,15 +39,6 @@ export const App = () => {
     }
   };
 
-  const addComma = (money: number | string | undefined) => {
-    if (money === '' || typeof money === 'undefined') return '';
-    return money?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-
-  const transferInt = (float: number) => {
-    return Math.floor(float);
-  };
-
   const handleWriteEuro = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     if (value.includes('.')) {
@@ -55,25 +52,36 @@ export const App = () => {
     return () => {};
   }, []);
 
-  if (!isReady) return null;
-  return (
+  return !isReady ? (
+    <>
+      <CircularProgress />
+      <p>환율을 로딩 중입니다.</p>
+    </>
+  ) : (
     <div className='App'>
-      <div>환율기준 (1 유로)</div>
+      <h4>환율기준 (1 유로)</h4>
       {!!eurInfo && (
         <>
-          <div>
-            {addComma(transferInt(eurInfo.basePrice))}
-            {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-            {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
+          <p
+            className={
+              eurInfo.basePrice - eurInfo.openingPrice > 0
+                ? 'up'
+                : eurInfo.basePrice - eurInfo.openingPrice != 0
+                ? 'down'
+                : ''
+            }
+          >
+            {addComma(transformInt(eurInfo.basePrice))}
+            {getFluctuationIcon(eurInfo)}
             {addComma(eurInfo.changePrice)}원 (
             {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-          </div>
-          <div>
-            <div>살때 : {addComma(transferInt(eurInfo.cashBuyingPrice))}</div>
-            <div>팔때 : {addComma(transferInt(eurInfo.cashSellingPrice))}</div>
-            <div>보낼때 : {addComma(transferInt(eurInfo.ttSellingPrice))}</div>
-            <div>받을때 : {addComma(transferInt(eurInfo.ttBuyingPrice))}</div>
-          </div>
+          </p>
+          <ul>
+            <li>살때 : {addComma(transformInt(eurInfo.cashBuyingPrice))}</li>
+            <li>팔때 : {addComma(transformInt(eurInfo.cashSellingPrice))}</li>
+            <li>보낼때 : {addComma(transformInt(eurInfo.ttSellingPrice))}</li>
+            <li>받을때 : {addComma(transformInt(eurInfo.ttBuyingPrice))}</li>
+          </ul>
         </>
       )}
       <hr />
