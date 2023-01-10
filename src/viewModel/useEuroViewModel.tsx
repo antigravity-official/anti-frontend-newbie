@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { EuroInfoType } from "../types/EuroInfoType";
+import { EuroInfoType } from "../types/euroInfoType";
 import { BASE_URL } from "../const";
 import { InitialData } from "../const";
 
-const EuroViewModel = () => {
+const useEuroViewModel = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<EuroInfoType>(InitialData);
 
@@ -22,4 +22,4 @@ const EuroViewModel = () => {
   return { isReady, eurInfo, getEurInfo };
 };
 
-export default EuroViewModel;
+export default useEuroViewModel;

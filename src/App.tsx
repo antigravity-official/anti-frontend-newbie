@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import EuroViewModel from "./viewModel/EuroViewModel";
+import useEuroViewModel from "./viewModel/useEuroViewModel";
 import Spinner from "./components/Spinner";
 import InfoContent from "./views/InfoContent";
 import InputContent from "./views/InputContent";
 import AppContext from "./AppContext";
 
 const App = () => {
-  const { isReady, eurInfo, getEurInfo } = EuroViewModel();
+  const { isReady, eurInfo, getEurInfo } = useEuroViewModel();
 
   useEffect(() => {
     getEurInfo();
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <AppContext.Provider value={{ eurInfo }}>
+      <AppContext.Provider value={eurInfo}>
         <InfoContent />
         <hr />
         <InputContent />

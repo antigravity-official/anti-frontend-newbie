@@ -1,17 +1,17 @@
-import InputViewModel from "../viewModel/InputViewModel";
+import useInputViewModel from "../viewModel/useInputViewModel";
 
 const InputContent = () => {
-  const { eurValue, onChangeEurValue, KWT } = InputViewModel();
+  const { euroValue, onChangeEuroValue, KWT } = useInputViewModel();
 
   return (
     <>
       <input
         type="text"
-        value={eurValue}
-        onChange={(e) => onChangeEurValue(e)}
+        value={euroValue}
+        onChange={(e) => onChangeEuroValue(e)}
       />
       유로 ▶︎
-      <input disabled value={KWT()} />원
+      <input disabled value={KWT} />원
     </>
   );
 };

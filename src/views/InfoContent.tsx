@@ -1,14 +1,14 @@
-import InfoContentViewModel from "../viewModel/InfoContentViewModel";
+import useInfoContentViewModel from "../viewModel/useInfoContentViewModel";
 import { useContext } from "react";
 import AppContext from "../AppContext";
 
 const InfoContent = () => {
-  const { eurInfo } = useContext(AppContext);
-  const { changeGap, changeRate } = InfoContentViewModel();
+  const eurInfo = useContext(AppContext);
+  const { changeGap, changeRate } = useInfoContentViewModel();
 
   return (
     <>
-      <div>환율기준 (1 유로)</div>
+      <div>환율기준 &#40;1 유로 &#41;</div>
       <div>
         {eurInfo.basePrice}
         {changeGap ? "▲" : "▼"}

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import AppContext from "../AppContext";
 
-const InfoContentViewModel = () => {
-  const { eurInfo } = useContext(AppContext);
+const useInfoContentViewModel = () => {
+  const eurInfo = useContext(AppContext);
   const { basePrice, openingPrice, changePrice } = eurInfo;
 
   const changeGap = basePrice - openingPrice;
@@ -11,4 +11,4 @@ const InfoContentViewModel = () => {
   return { changeGap, changeRate };
 };
 
-export default InfoContentViewModel;
+export default useInfoContentViewModel;

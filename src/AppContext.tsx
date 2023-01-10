@@ -1,9 +1,7 @@
 import React from "react";
-import { EuroInfoType } from "./types/EuroInfoType";
+import { EuroInfoType } from "./types/euroInfoType";
 import { InitialData } from "./const";
 
-const AppContext = React.createContext<{ eurInfo: EuroInfoType }>({
-  eurInfo: InitialData,
-});
+const AppContext = React.createContext<EuroInfoType>(InitialData);
 
 export default AppContext;
