@@ -4,7 +4,7 @@ import { getInfo } from "../api/exchangeInfo";
 import ExchangeCalc from "./ExchangeCalc";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { currency } from "../util/currency";
+import { currency } from "../utils/currency";
 
 export default function ExchangeInfo() {
   const [isReady, setReady] = useState(false);

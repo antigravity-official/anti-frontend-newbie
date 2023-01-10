@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ExchangeInfoType } from "../type/exchange";
-import { currency, exchangeEurToKrw } from "../util/currency";
+import { currency, exchangeEurToKrw } from "../utils/currency";
 
 interface ExchangeCalcType {
   eurInfo: ExchangeInfoType | Record<string, never>;
