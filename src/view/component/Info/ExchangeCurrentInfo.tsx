@@ -6,7 +6,7 @@ type AppProps = {
     eurInfo: ExchangeInfo
 }
 
-export const ExchangeTotalInfo = (props: AppProps) => {
+export const ExchangeCurrentInfo = (props: AppProps) => {
 
     let eurInfo = props.eurInfo;
     const [isReady, setIsReady] = useState(false);

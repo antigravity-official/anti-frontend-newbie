@@ -13,9 +13,15 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #6E6ED7;
     font-size: 18px;
   }
-  input, button {
-    background-color: transparent;
+  input{
+    background-color: white;
     border: none;
+    border-radius:5px;
     outline: none;
+    width:100%;
+    height:40px;
+    text-align:right;
+    font-size:20px;
+    padding:20px;
   }
 `;

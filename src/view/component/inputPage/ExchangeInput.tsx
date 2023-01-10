@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { ExchangeInfo } from '../../../model/Model';
+import { InputSection,EachInput, EachInputLabel } from '../../../styles/input/InputSection';
 
 type AppProps = {
     eurInfo: ExchangeInfo
@@ -28,9 +29,18 @@ export const ExchangeInput = (props: AppProps) => {
 
     return (
         <>
-        <div>
-            <input onChange={getEurInput}/> 유로 ▶︎ <input disabled value={krw}/> 원
-        </div>
+        <InputSection>
+            <EachInput>
+                <input onChange={getEurInput}/>
+                <EachInputLabel>EUR</EachInputLabel>
+            </EachInput>
+            <br />
+            <br />
+            <EachInput>
+                <input disabled value={krw}/>
+                <EachInputLabel>KRW</EachInputLabel>
+            </EachInput>
+        </InputSection>
         </>
     )
 }
