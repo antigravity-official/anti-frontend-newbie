@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 import EurInfo from "./interfaces/EurInfo";
+import { getEurInfo } from "./library/getEurInfo";
 
 export const App = () => {
   const [isReady, setReady] = useState<boolean>(false);
   const [eurInfo, setEurInfo] = useState<EurInfo | null>(null);
   const [eurInput, setEurInput] = useState<string>("");
   const [exchangedKrw, setExchangedKrw] = useState<number>();
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
 
   const exchangeEurToKrw = (eur: number) =>
     eurInfo ? eur * eurInfo.basePrice : null;
