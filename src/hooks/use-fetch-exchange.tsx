@@ -6,7 +6,7 @@ const useFetchExchange = () => {
   const [eurInfo, setEurInfo] = useState<EurInfoTypes>();
 
   const getEurInfo = useCallback(async () => {
-    const response = await fetch('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR');
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}`);
     const data = await response.json();
     const krweur = data[0];
 
