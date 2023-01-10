@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { EuroInfoType } from "./types/EuroInfoType";
+import { EuroInfoType } from "../types/EuroInfoType";
+import { BASE_URL } from "../const";
+import { InitialData } from "../const";
 
-const ViewModel = () => {
+const EuroViewModel = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<EuroInfoType>(InitialData);
 
   const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
+    const krweur = await fetch(BASE_URL)
       .then((response) => response.json())
       .then((array) => array[0]);
 
@@ -22,14 +22,4 @@ const ViewModel = () => {
   return { isReady, eurInfo, getEurInfo };
 };
 
-export default ViewModel;
-
-const InitialData = {
-  basePrice: 0,
-  openingPrice: 0,
-  changePrice: 0,
-  cashBuyingPrice: 0,
-  cashSellingPrice: 0,
-  ttSellingPrice: 0,
-  ttBuyingPrice: 0,
-};
+export default EuroViewModel;
