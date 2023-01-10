@@ -1,10 +1,11 @@
-import EurInfo from "../interfaces/EurInfo";
+import useEurInfo from "../hooks/useEurInfo";
 
-interface Props {
-  data: EurInfo;
-}
+export default function ExchangeInfo() {
+  const { data, isLoading, isError } = useEurInfo();
 
-export default function ExchangeInfo({ data }: Props) {
+  if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading</div>;
+
   return (
     <div>
       <div>환율기준 (1 유로)</div>

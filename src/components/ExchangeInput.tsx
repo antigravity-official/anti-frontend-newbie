@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
-import EurInfo from "../interfaces/EurInfo";
-import { getEurInfo } from "../library/getEurInfo";
+import { useState } from "react";
+import useEurInfo from "../hooks/useEurInfo";
 
-interface Props {
-  data: EurInfo;
-}
-
-export default function ExchangeInput({ data }: Props) {
+export default function ExchangeInput() {
   const [eurInput, setEurInput] = useState<string>("");
   const [exchangedKrw, setExchangedKrw] = useState<number>();
+  const { data, isLoading, isError } = useEurInfo();
 
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
+  if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading</div>;
 
   const exchangeEurToKrw = (eur: number) =>
     data ? eur * data.basePrice : null;
