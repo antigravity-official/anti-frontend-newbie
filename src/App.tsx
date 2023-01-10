@@ -1,46 +1,44 @@
 import React, { useEffect, useState } from "react";
+import Loading from "./components/Loading";
+import getEurInfo from "./helper/fetch";
+import CurrInfo from './components/CurrInfo';
 
-export const App = () => {
+export const App: React.FC = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
+  const [inputValue, setInputValue] = useState<number>(0);
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (krw: any) => (krw * eurInfo.basePrice).toLocaleString('ko-kr');
+  
+  const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.value.includes('.')){
+      let idx = e.target.value.indexOf('.')
+      let length = e.target.value.slice(idx+1).length
+      if(length > 2){
+        e.target.value = (Math.floor(Number(e.target.value) * 100) / 100).toString()
+      }
+    }
+    setInputValue(Number(e.target.value))
+  }
 
   useEffect(() => {
-    getEurInfo();
+    getEurInfo(setEurInfo, setReady);
     return () => {};
   }, []);
 
-  if (!isReady) return null;
+  if (!isReady) {
+    return <Loading />;
+  }
   return (
     <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
+      <CurrInfo eurInfo={eurInfo}/>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input
+        type='number'
+        placeholder="금액을 입력해주세요"
+        onChange={(e)=>onChangeInput(e)}
+      />{" "}
+      유로 ▶︎ <input disabled value={exchangeEurToKrw(inputValue)} /> 원
     </div>
   );
 };
