@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useFetch } from "./components/useFetch";
-import { NowRate } from "./components/NowRate";
-import { RateDeal } from "./components/RateDeal";
-import { Input } from "./components/Input";
-//1. get 요청 커스텀 훅으로 뺴기
-//2. 환율 정보 따로 폴더 뺴기
-//3. 인풋창이랑 변환함수 따로 빼기
+import { Spinners } from "./components/Spinners";
+import useFetch from "./components/useFetch";
+import NowRate from "./components/NowRate";
+import RateDeal from "./components/RateDeal";
+import Input from "./components/Input";
 
 export type priceInformation = {
   basePrice: number;
@@ -47,14 +44,14 @@ export type priceInformation = {
 export const App = () => {
   const { eurInfo, isReady } = useFetch();
 
-  if (!isReady) return null;
+  if (!isReady) return <Spinners />;
   return (
-    <div className="App">
+    <div>
       <div>환율기준 (1 유로)</div>
       {eurInfo ? <NowRate eurInfo={eurInfo} /> : ""}
       {eurInfo ? <RateDeal eurInfo={eurInfo} /> : ""}
+      <br />
       {eurInfo ? <Input eurInfo={eurInfo} /> : ""}
-      <hr />
     </div>
   );
 };

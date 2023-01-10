@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { priceInformation } from "../App";
 
-export const Input = ({ eurInfo }: { eurInfo: priceInformation }) => {
+function Input({ eurInfo }: { eurInfo: priceInformation }) {
   const [userWritePrice, setUserWritePrice] = useState<number>(0);
   const [userWrite, setUserWrite] = useState<string>("");
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,4 +33,6 @@ export const Input = ({ eurInfo }: { eurInfo: priceInformation }) => {
       원
     </div>
   );
-};
+}
+
+export default Input;

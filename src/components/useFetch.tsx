@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { priceInformation } from "../App";
 
-export const useFetch = () => {
+function useFetch() {
   const [isReady, setReady] = useState(false); // 비동기 통신
   const [eurInfo, setEurInfo] = useState<priceInformation>(); // get요청 값 가져오는값
 
@@ -22,4 +22,6 @@ export const useFetch = () => {
   }, []);
 
   return { eurInfo, isReady };
-};
+}
+
+export default useFetch;

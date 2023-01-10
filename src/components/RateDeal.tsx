@@ -1,7 +1,6 @@
-import React from "react";
 import { priceInformation } from "../App";
 
-export const RateDeal = ({ eurInfo }: { eurInfo: priceInformation }) => {
+function rateDeal({ eurInfo }: { eurInfo: priceInformation }) {
   return (
     <div>
       <div>살때 : {eurInfo ? eurInfo.cashBuyingPrice : ""}</div>
@@ -10,4 +9,6 @@ export const RateDeal = ({ eurInfo }: { eurInfo: priceInformation }) => {
       <div>받을때 : {eurInfo ? eurInfo.ttBuyingPrice : ""}</div>
     </div>
   );
-};
+}
+
+export default rateDeal;
