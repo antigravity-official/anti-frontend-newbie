@@ -14,7 +14,22 @@ export const ExchangeInput = (props: AppProps) => {
     const [krw, setkrw] = useState<string>('0');
 
     const getEurInput = (e :ChangeEvent<HTMLInputElement>) => {
-        setEurInput(parseFloat(e.target.value));
+
+        let inputPrice = e.target.value;
+
+        if (e.target.value == '') setkrw('0')
+        if (e.target.value.includes('.')) {
+            if(inputPrice.split('.')[1].length > 2) {
+                alert('소수 둘째자리까지만 입력해주세요.');
+                e.target.value='';
+            } else if(inputPrice.split('').filter(v => v =='.').length >= 2){
+                alert('잘못된 입력입니다.');
+                e.target.value='';
+            } else{
+                setEurInput(parseFloat(inputPrice));
+            }
+        } 
+        setEurInput(parseFloat(inputPrice));
     }
 
     if(krw == 'NaN') setkrw('0')
