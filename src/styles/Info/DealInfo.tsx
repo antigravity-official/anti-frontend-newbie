@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CurrentDealbox=styled.div`
-    margin-top:50px;
+    margin-top:22px;
     display:flex;
     justify-content:space-between;
 `;

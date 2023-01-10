@@ -4,6 +4,7 @@ import { Loading } from '../Loading/Loading';
 import { CurrentBox } from '../../../styles/Info/ExchangeCurrentBox';
 import { CurrentDealInfo } from './CurrentDealInfo';
 import { CurrentPrice, Unit, DetailBtn } from '../../../styles/Info/ExchangeCurrentInfo';
+import { DealDate } from './DealDate';
 
 type AppProps = {
     eurInfo: ExchangeInfo
@@ -33,6 +34,7 @@ export const ExchangeCurrentInfo = (props: AppProps) => {
                     {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
                 </Unit>
             </CurrentPrice>
+            <DealDate />
             {
                 detailModal ? <CurrentDealInfo eurInfo={eurInfo}/> : <DetailBtn onClick={() => setDetailModal(true)}>Detail View</DetailBtn>
             }
