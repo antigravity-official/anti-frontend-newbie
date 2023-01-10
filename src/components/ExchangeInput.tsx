@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useEurInfo from "../hooks/useEurInfo";
+import styled from "styled-components";
 
 export default function ExchangeInput() {
   const [eurInput, setEurInput] = useState<string>("");
@@ -25,9 +26,16 @@ export default function ExchangeInput() {
     krw != null && setExchangedKrw(Math.floor(krw));
   };
   return (
-    <div>
+    <Container>
       <input type="text" value={eurInput} onChange={handleEurInput} /> 유로 ▶︎{" "}
       <input value={exchangedKrw?.toLocaleString()} disabled /> 원
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  padding: 1rem;
+  input:focus {
+    outline: none;
+  }
+`;
