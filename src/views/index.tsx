@@ -4,8 +4,6 @@ import useGetEurInfo from "./hooks/useGetEurInfo";
 const ExchangeRate = () => {
   const { data, isLoading, isError } = useGetEurInfo();
 
-  // const exchangeEurToKrw = (krw: number) => krw * data.basePrice;
-
   if (isLoading) {
     <div>loading...</div>;
   }
