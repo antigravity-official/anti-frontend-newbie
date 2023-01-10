@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { EuroInfoType } from "./types/EuroInfoType";
 
 const ViewModel = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<EuroInfoType>(InitialData);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -22,3 +23,13 @@ const ViewModel = () => {
 };
 
 export default ViewModel;
+
+const InitialData = {
+  basePrice: 0,
+  openingPrice: 0,
+  changePrice: 0,
+  cashBuyingPrice: 0,
+  cashSellingPrice: 0,
+  ttSellingPrice: 0,
+  ttBuyingPrice: 0,
+};

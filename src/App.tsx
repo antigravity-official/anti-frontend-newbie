@@ -6,9 +6,7 @@ export const App = () => {
   const { isReady, eurInfo, getEurInfo } = ViewModel();
   const [eurValue, setEurValue] = useState<string>("1");
 
-  console.log(isReady);
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (krw: string) => +krw * eurInfo.basePrice;
 
   const onChangeEurValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = e.target;
@@ -31,6 +29,7 @@ export const App = () => {
     setEurValue(value);
   };
 
+  // [TODO]스피너랑 useEffect 정리
   useEffect(() => {
     getEurInfo();
     // cleanup fn
@@ -43,7 +42,7 @@ export const App = () => {
 
   return (
     <>
-      {!isReady ? (
+      {isReady ? (
         <div className="App">
           <div>환율기준 (1 유로)</div>
           <div>
