@@ -12,7 +12,10 @@ const ViewModel = () => {
       .then((array) => array[0]);
 
     setEurInfo(krweur);
-    setReady(true);
+
+    setTimeout(() => {
+      setReady(true);
+    }, 1000);
   };
 
   return { isReady, eurInfo, getEurInfo };
