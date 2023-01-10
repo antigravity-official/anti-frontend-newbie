@@ -2,6 +2,7 @@
 .Exchange {
   width: 40vw;
   height: 80vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +16,12 @@
 }
 .Exchange-title {
   font-size: 2.2rem;
-  color: #a2aae5;
+  color: #3c4271;
+}
+.Exchange strong {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #656da5;
 }
 .Exchange-eur {
   font-size: 1.2rem;
@@ -32,11 +38,12 @@
 
 /* buy-sell box */
 .Exchange-buy-sell {
+  height: 20%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 20%;
 }
 .Exchange-buy-sell div {
   font-size: 1.1rem;
@@ -45,16 +52,20 @@
 
 /* Input box */
 .Input-box {
+  height: 35%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: end;
-  height: 35%;
 }
 .Exchange-input {
   width: 350px;
   height: 30px;
+
+  padding: 5px 15px;
   margin-bottom: 30px;
+
   border: none;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -62,5 +73,6 @@
 .Input-box label {
   font-size: 1.2rem;
   font-weight: bold;
+
   margin-bottom: 5px;
 }
