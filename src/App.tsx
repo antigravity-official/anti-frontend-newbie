@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -6,7 +6,7 @@ export const App = () => {
 
   const getEurInfo = async () => {
     const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
+      'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
     )
       .then((response) => response.json())
       .then((array) => array[0]);
@@ -28,8 +28,8 @@ export const App = () => {
       <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
+        {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
+        {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
         {eurInfo.changePrice}원 (
         {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
       </div>
