@@ -11,6 +11,11 @@ export default function ExchangeInfo() {
     ExchangeInfoType | Record<string, never>
   >({});
 
+  const eurUnit = (eur: number) => {
+    const eurOption = { maximumFractionDigits: 2 };
+    return eur.toLocaleString("en-US", eurOption);
+  };
+
   const getEurInfo = async () => {
     const krweur = await getInfo();
     setEurInfo(krweur);
@@ -29,18 +34,17 @@ export default function ExchangeInfo() {
       ) : (
         <>
           <div>
-            {eurInfo.basePrice}
-            {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-            {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-            {eurInfo.changePrice}원 (
-            {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+            {eurUnit(eurInfo.basePrice)}
+            {+eurUnit(eurInfo.basePrice - eurInfo.openingPrice) > 0 ? "▲" : "▼"}
+            {eurUnit(eurInfo.changePrice)}원{" "}
+            {eurUnit((eurInfo.changePrice / eurInfo.basePrice) * 100)}%
           </div>
 
           <div>
-            <div>살때 : {eurInfo.cashBuyingPrice}</div>
-            <div>팔때 : {eurInfo.cashSellingPrice}</div>
-            <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-            <div>받을때 : {eurInfo.ttBuyingPrice}</div>
+            <div>살때 : {eurUnit(eurInfo.cashBuyingPrice)}</div>
+            <div>팔때 : {eurUnit(eurInfo.cashSellingPrice)}</div>
+            <div>보낼때 : {eurUnit(eurInfo.ttSellingPrice)}</div>
+            <div>받을때 : {eurUnit(eurInfo.ttBuyingPrice)}</div>
           </div>
           <ExchangeCalc eurInfo={eurInfo} />
         </>

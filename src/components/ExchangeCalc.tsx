@@ -5,14 +5,18 @@ interface ExchangeCalcType {
   eurInfo: ExchangeInfoType | Record<string, never>;
 }
 export default function ExchangeCalc({ eurInfo }: ExchangeCalcType) {
-  const [eurValue, setEurValue] = useState(0);
-  const [krwValue, setKrwValue] = useState(0);
+  const [eurValue, setEurValue] = useState("");
+  const [krwValue, setKrwValue] = useState("");
 
-  const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
+  const krwOption = { maximumFractionDigits: 0 };
 
-  const handleChange = (e: any) => {
-    setKrwValue(exchangeEurToKrw(e.target.value));
-    setEurValue(e.target.value);
+  const exchangeEurToKrw = (krw: number) =>
+    (krw * eurInfo.basePrice).toLocaleString("ko-KR", krwOption);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setKrwValue(exchangeEurToKrw(+value));
+    setEurValue(value);
   };
 
   return (
