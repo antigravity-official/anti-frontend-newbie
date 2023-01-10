@@ -1,28 +1,40 @@
 import React, { useEffect, useState } from "react";
+import ViewModel from "./ViewModel";
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
+  const { isReady, eurInfo, getEurInfo } = ViewModel();
+  const [eurValue, setEurValue] = useState<number>(1);
 
   const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
+  const onChangeEurValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { value } = e.target;
+    console.log(value);
+
+    // 숫자만 입력 가능하도록 처리 [더 나은 방법 있을지?]
+    if (isNaN(+value)) {
+      return null;
+    }
+
+    if (value.includes(",")) {
+      value = value.replace(/,/g, "");
+    }
+
+    setEurValue(+value);
+  };
+
+  const makeComma = (money: number) => {
+    return money.toLocaleString();
+  };
+
   useEffect(() => {
     getEurInfo();
+    // cleanup fn
     return () => {};
   }, []);
 
   if (!isReady) return null;
+
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
@@ -31,7 +43,7 @@ export const App = () => {
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
         {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
       </div>
       <div>
         <div>살때 : {eurInfo.cashBuyingPrice}</div>
@@ -40,7 +52,12 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input
+        value={eurValue.toLocaleString()}
+        onChange={(e) => onChangeEurValue(e)}
+      />
+      유로 ▶︎
+      <input disabled value={exchangeEurToKrw(eurValue).toLocaleString()} /> 원
     </div>
   );
 };
