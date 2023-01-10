@@ -11,8 +11,7 @@ export const ExchangeInput = (props: AppProps) => {
 
     const [eurInput, setEurInput] = useState<number>();
     const [krw, setkrw] = useState<string>('0');
-  
-  
+
     const getEurInput = (e :ChangeEvent<HTMLInputElement>) => {
         setEurInput(parseFloat(e.target.value));
     }
@@ -29,7 +28,9 @@ export const ExchangeInput = (props: AppProps) => {
 
     return (
         <>
+        <div>
             <input onChange={getEurInput}/> 유로 ▶︎ <input disabled value={krw}/> 원
+        </div>
         </>
     )
 }

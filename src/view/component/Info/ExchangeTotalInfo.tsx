@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import { ExchangeInfo } from '../../../model/Model';
+import { Loading } from '../loading/Loading';
 
 type AppProps = {
     eurInfo: ExchangeInfo
@@ -7,6 +9,13 @@ type AppProps = {
 export const ExchangeTotalInfo = (props: AppProps) => {
 
     let eurInfo = props.eurInfo;
+    const [isReady, setIsReady] = useState(false);
+
+    setInterval(() => {
+      setIsReady(true);
+    },3000);
+
+    if (!isReady) return <Loading />
 
     return(
         <>
