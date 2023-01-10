@@ -1,4 +1,4 @@
-import Axios from "../../api/apiController";
+import Axios from "../../../api/apiController";
 
 export const getEurInfo = async () => {
   const apiURL =
