@@ -12,7 +12,6 @@ Axios.interceptors.request.use(
   (error) => {
     // 요청에 대한 오류 발생 시, 오류 내용을 출력하고 요청을 거절함
     console.log("🚀 ~ request error : ", error);
-    alert("🚀 ~ response error ");
     Promise.reject(error);
   }
 );
@@ -22,7 +21,6 @@ Axios.interceptors.response.use(
   (response) => response,
   (error) => {
     console.log("🚀 ~ response error : ", error);
-    alert("🚀 ~ response error ");
     Promise.reject(error);
   }
 );

@@ -2,7 +2,7 @@ import React from "react";
 import useGetEurInfo from "./hooks/useGetEurInfo";
 
 const ExchangeRate = () => {
-  const { data, isLoading } = useGetEurInfo();
+  const { data, isLoading, isError } = useGetEurInfo();
 
   // const exchangeEurToKrw = (krw: number) => krw * data.basePrice;
 
@@ -12,6 +12,7 @@ const ExchangeRate = () => {
 
   return (
     <div>
+      {isError && <>something went wrong</>}
       {!isLoading && data && (
         <div>
           <div>환율기준 (1 유로)</div>
