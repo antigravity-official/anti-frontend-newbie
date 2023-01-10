@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import EurInfo from "../interfaces/EurInfo";
 import { getEurInfo } from "../library/getEurInfo";
 
-export default function ExchangeInput() {
+interface Props {
+  data: EurInfo;
+}
+
+export default function ExchangeInput({ data }: Props) {
   const [eurInput, setEurInput] = useState<string>("");
   const [exchangedKrw, setExchangedKrw] = useState<number>();
-  const { data, isLoading, isError } = useQuery<EurInfo>("eurInfo", getEurInfo);
 
   useEffect(() => {
     getEurInfo();

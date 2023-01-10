@@ -1,9 +1,10 @@
-import { useQuery } from "react-query";
 import EurInfo from "../interfaces/EurInfo";
-import { getEurInfo } from "../library/getEurInfo";
 
-export default function ExchangeInfo() {
-  const { data, isLoading, isError } = useQuery<EurInfo>("eurInfo", getEurInfo);
+interface Props {
+  data: EurInfo;
+}
+
+export default function ExchangeInfo({ data }: Props) {
   return (
     <div>
       <div>환율기준 (1 유로)</div>
