@@ -1,7 +1,7 @@
 import { EurInfo } from "../types/EurInfo";
 
 class EurModel {
-  eurData;
+  eurData: EurInfo;
 
   constructor(eurData: EurInfo) {
     this.eurData = eurData;
@@ -31,7 +31,12 @@ class EurModel {
     const cashSellingPrice = this.eurData.cashSellingPrice;
     const ttBuyingPrice = this.eurData.ttBuyingPrice;
     const ttSellingPrice = this.eurData.ttSellingPrice;
-    return { cashBuyingPrice, cashSellingPrice, ttBuyingPrice, ttSellingPrice };
+    return [
+      { name: "살 때", price: cashBuyingPrice },
+      { name: "팔 때", price: cashSellingPrice },
+      { name: "받을 때", price: ttBuyingPrice },
+      { name: "보낼 때", price: ttSellingPrice },
+    ];
   }
 
   getExchangeEurToKrw(eur: number) {

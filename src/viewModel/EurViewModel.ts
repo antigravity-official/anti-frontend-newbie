@@ -1,7 +1,7 @@
 import { EurModel } from "../types/EurModel";
 
 class EurViewModel {
-  model;
+  model: EurModel;
   constructor(model: EurModel) {
     this.model = model;
   }

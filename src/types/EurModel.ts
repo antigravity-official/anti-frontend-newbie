@@ -6,6 +6,6 @@ export interface EurModel {
   getIconForOpeningPriceComparison(): string;
   getChangePrice(): number;
   getChangeRate(): number;
-  getBuyingAndSellingPriceGroup(): { [key: string]: number };
+  getBuyingAndSellingPriceGroup(): { name: string; price: number }[];
   getExchangeEurToKrw(eur: number): number;
 }
