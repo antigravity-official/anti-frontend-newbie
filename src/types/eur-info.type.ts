@@ -2,7 +2,7 @@ export interface EurInfoTypes {
   basePrice: number;
   cashBuyingPrice: number;
   cashSellingPrice: number;
-  change?: string;
+  change: string;
   changePrice: number;
   changeRate: number;
   code: string;
