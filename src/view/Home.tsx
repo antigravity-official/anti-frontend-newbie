@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
+import TextInput from "../components/TextInput";
 import { EurModel } from "../types/EurModel";
 
 interface HomeProp {
   viewModel: EurModel;
 }
 const Home = ({ viewModel }: HomeProp) => {
+  const [eur, setEur] = useState(1);
   const marketPriceGroup = viewModel.getBuyingAndSellingPriceGroup();
 
   return (
@@ -23,6 +25,14 @@ const Home = ({ viewModel }: HomeProp) => {
           </div>
         ))}
       </div>
+      <TextInput type='number' setValue={setEur} value={eur} name='유로' />
+      <TextInput
+        type='number'
+        value={viewModel.getExchangeEurToKrw(eur)}
+        name='원'
+        disabled
+        readOnly
+      />
     </div>
   );
 };

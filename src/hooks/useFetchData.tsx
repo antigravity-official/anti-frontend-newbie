@@ -15,7 +15,7 @@ const initial = {
 
 const useFetchData = () => {
   const [eurData, setEurData] = useState<EurInfo>(initial);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getEurData = async () => {
     const response = await fetch(
@@ -25,7 +25,7 @@ const useFetchData = () => {
     const data = result[0];
 
     setEurData(data);
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   useEffect(() => {

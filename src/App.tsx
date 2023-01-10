@@ -1,17 +1,18 @@
 import useFetchData from "./hooks/useFetchData";
 import EurModel from "./model/EurModel";
-import Home from "./pages/Home";
+import Home from "./view/Home";
 import EurViewModel from "./viewModel/EurViewModel";
+import Loading from "./components/Loading";
 
 export const App = () => {
   const eurData = useFetchData();
   const model = new EurModel(eurData.eurData);
   const viewModel = new EurViewModel(model);
 
-  // if (!isReady) return null;
+  const { isLoading } = eurData;
   return (
     <div className='App'>
-      <Home viewModel={viewModel} />
+      {isLoading ? <Loading /> : <Home viewModel={viewModel} />}
       {/* <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
