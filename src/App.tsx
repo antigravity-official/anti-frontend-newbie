@@ -1,44 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import ExchangeInfo from './components/ExchangeInfo';
+import ExchangeInput from './components/ExchangeInput';
+import ExchangeRate from './components/ExchangeRate';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>();
+  const [eurInfo, setEurInfo] = useState<any>({});
 
-  const getEurInfo = async () => {
-    const krweur = await fetch('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR')
-      .then((response) => response.json())
-      .then((array) => array[0]);
+  const getEurInfo = useCallback(async () => {
+    const response = await fetch('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR');
+    const data = await response.json();
+    const krweur = data[0];
 
     setEurInfo(krweur);
     setReady(true);
-  };
-  console.log(eurInfo);
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  }, []);
 
   useEffect(() => {
     getEurInfo();
-  }, []);
+  }, [getEurInfo]);
 
-  if (!isReady) return null;
+  if (!isReady) return <p>Exchange Info Loading...</p>;
+
   return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
-        {eurInfo.changePrice}원 ({(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
+    <>
+      <ExchangeRate eurInfo={eurInfo} />
+      <ExchangeInfo eurInfo={eurInfo} />
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
-    </div>
+      <ExchangeInput />
+    </>
   );
 };
 
