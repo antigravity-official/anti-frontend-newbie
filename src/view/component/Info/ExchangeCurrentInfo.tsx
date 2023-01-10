@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { ExchangeInfo } from '../../../model/Model';
-import { Loading } from '../loading/Loading';
+import { Loading } from '../Loading/Loading';
+import { CurrentBox } from '../../../styles/Info/ExchangeCurrentBox';
+import { CurrentDealInfo } from './CurrentDealInfo';
+import { CurrentPrice, Unit, DetailBtn } from '../../../styles/Info/ExchangeCurrentInfo';
 
 type AppProps = {
     eurInfo: ExchangeInfo
@@ -10,6 +13,7 @@ export const ExchangeCurrentInfo = (props: AppProps) => {
 
     let eurInfo = props.eurInfo;
     const [isReady, setIsReady] = useState(false);
+    const [detailModal, setDetailModal] = useState(false);
 
     setInterval(() => {
       setIsReady(true);
@@ -18,21 +22,20 @@ export const ExchangeCurrentInfo = (props: AppProps) => {
     if (!isReady) return <Loading />
 
     return(
-        <>
-            <div>환율기준 (1 유로)</div>
-            <div>
+        <CurrentBox>
+            <CurrentPrice>
                 {eurInfo.basePrice}
-                {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-                {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-                {eurInfo.changePrice}원 (
-                {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-            </div>
-            <div>
-                <div>살때 : {eurInfo.cashBuyingPrice}</div>
-                <div>팔때 : {eurInfo.cashSellingPrice}</div>
-                <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-                <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-            </div>
-      </>
+                <Unit>EUR</Unit>
+                <span style={{marginRight:'5px'}}>=</span>
+                {eurInfo.changePrice}
+                <Unit>
+                    KRW({eurInfo.basePrice - eurInfo.openingPrice > 0 ? <span style={{color:'red'}}>▲</span> : <span style={{color:'blue'}}>▼</span>}
+                    {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
+                </Unit>
+            </CurrentPrice>
+            {
+                detailModal ? <CurrentDealInfo eurInfo={eurInfo}/> : <DetailBtn onClick={() => setDetailModal(true)}>Detail View</DetailBtn>
+            }
+      </CurrentBox>
     )
 }

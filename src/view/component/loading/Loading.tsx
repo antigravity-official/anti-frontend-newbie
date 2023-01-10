@@ -1,7 +1,10 @@
+import TypeIt from 'typeit-react'
+import { LodingBox } from '../../../styles/Loading/LoadingMsg'
+
 export const Loading = () => {
     return(
-        <>
-            <h1>로딩중입니다.</h1>
-        </>
+        <LodingBox>
+            <TypeIt>로딩중입니다. . .</TypeIt>
+        </LodingBox>
     )
 }

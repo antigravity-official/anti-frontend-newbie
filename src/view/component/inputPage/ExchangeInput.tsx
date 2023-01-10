@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { ExchangeInfo } from '../../../model/Model';
-import { InputSection,EachInput, EachInputLabel } from '../../../styles/input/InputSection';
+import { InputSection,EachInput, EachInputLabel } from '../../../styles/InputPageStyle/InputSection';
 
 type AppProps = {
     eurInfo: ExchangeInfo
