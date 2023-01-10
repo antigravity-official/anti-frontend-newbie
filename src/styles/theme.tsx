@@ -1,8 +1,21 @@
-const fontSize = {};
+const fontSize = {
+  small: '12px',
+  medium: '14px',
+  large: '16px',
+  title: '24px',
+};
 
-const fontWeight = {};
+const fontWeight = {
+  light: '200',
+  regular: '400',
+  bold: '700',
+};
 
-const colors = {};
+const colors = {
+  black: '#000',
+  red: '#fe1515',
+  blue: '#1980e8',
+};
 
 const theme = { fontSize, fontWeight, colors };
 
