@@ -9,20 +9,18 @@ export default function useInput(
 ): [string, EventHandler, number?] {
   const [value, setValue] = useState(initialValue ?? "");
   const [exchangedKrw, setExchangedKrw] = useState<number>();
-  const { data, isLoading, isError } = useEurInfo();
+  const { data } = useEurInfo();
 
   const exchangeEurToKrw = (eur: number) =>
     data ? eur * data.basePrice : null;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regEx = /^\d*.?\d{0,2}$/;
-    // let input = e.target.value.replaceAll(",", "");
     let input = e.target.value;
 
     if (!regEx.test(input)) {
       input = input.substring(0, input.length - 1);
     }
-    // setValue(Number(input).toLocaleString());
     setValue(input);
 
     let krw = exchangeEurToKrw(Number(input));

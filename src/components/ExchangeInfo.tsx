@@ -6,10 +6,7 @@ interface isPositiveProp {
 }
 
 export default function ExchangeInfo() {
-  const { data, isLoading, isError } = useEurInfo();
-
-  if (isError) return <div>Error</div>;
-  if (isLoading) return <div>Loading</div>;
+  const { data } = useEurInfo();
 
   return (
     <Container>
@@ -76,6 +73,7 @@ const TitleWrapper = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
+  justify-content: space-evenly;
 `;
 
 const PriceContainer = styled.div`
