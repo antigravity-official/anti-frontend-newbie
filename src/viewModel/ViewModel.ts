@@ -31,11 +31,11 @@ export default class ViewModel {
   }
 
   exchangeEurToKrw(
-    krw: string,
+    input: string,
     euroInfo: ViewModelEuroInfo | undefined
   ): string {
     if (!!euroInfo) {
-      return addComma(Math.floor(Number(krw) * euroInfo.basePrice));
+      return addComma(Math.floor(Number(input) * euroInfo.basePrice));
     } else {
       return this.euroInfo.basePriceStr;
     }
