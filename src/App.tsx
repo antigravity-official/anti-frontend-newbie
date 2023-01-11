@@ -14,6 +14,7 @@ export const App = () => {
 
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<EuroInfo>();
+  const [inputValue, setInputValue] = useState<number>(0);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -27,6 +28,15 @@ export const App = () => {
   };
 
   const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
+
+  const onChangeInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value);
+    setInputValue(value);
+  };
+
+  const getResultValue = (): number => {
+    return inputValue ? exchangeEurToKrw(inputValue) : 0;
+  };
 
   useEffect(() => {
     getEurInfo();
@@ -51,7 +61,9 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input type="number" onChange={onChangeInputValue} />
+      유로 ▶︎
+      <input disabled value={getResultValue()} /> 원
     </div>
   );
 };
