@@ -13,7 +13,7 @@ export const ExchangeInput = (props: AppProps) => {
     const [eurInput, setEurInput] = useState<number>();
     const [krw, setkrw] = useState<string>('0');
 
-    const getEurInput = (e :ChangeEvent<HTMLInputElement>) => {
+    const exchangeEurToKrw = (e :ChangeEvent<HTMLInputElement>) => {
 
         let inputPrice = e.target.value;
 
@@ -46,7 +46,7 @@ export const ExchangeInput = (props: AppProps) => {
         <>
         <InputSection>
             <EachInput>
-                <input onChange={getEurInput}/>
+                <input onChange={exchangeEurToKrw }/>
                 <EachInputLabel>EUR</EachInputLabel>
             </EachInput>
             <br />
