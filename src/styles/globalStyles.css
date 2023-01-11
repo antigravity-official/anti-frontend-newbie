@@ -1,0 +1,31 @@
+html {
+  list-style: none;
+  box-sizing: border-box;
+}
+
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+table,
+th,
+td {
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #eee;
+}
+
+.up {
+  color: #ff0000;
+}
+
+.down {
+  color: #0000ff;
+}
