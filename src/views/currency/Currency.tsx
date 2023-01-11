@@ -1,12 +1,13 @@
 import React from "react";
 import useGetEurInfo from "./hooks/useGetEurInfo";
 import Exchange from "../exchange/Exchange";
+import Loader from "../../components/loader";
 
 const Currency = () => {
   const { data, isLoading, isError } = useGetEurInfo();
 
   if (isLoading) {
-    <div>loading...</div>;
+    <Loader />;
   }
 
   return (
