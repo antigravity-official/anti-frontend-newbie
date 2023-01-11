@@ -1,10 +1,11 @@
-import Model from '../model/Model';
+import EuroInfoTypes from '../types/EuroInfoTypes';
 import GetEuroViewModel from './GetEuroViewModel';
+import getEuroData from '../apis/getEuroData';
 
 export default class ViewModel {
-  _euroInfo: Model | undefined;
+  _euroInfo: EuroInfoTypes | undefined;
 
-  constructor(public euroInfo?: Model) {
+  constructor(public euroInfo?: EuroInfoTypes) {
     this._euroInfo = euroInfo ?? {
       basePrice: 0,
       openingPrice: 0,
@@ -17,12 +18,8 @@ export default class ViewModel {
   }
 
   public async getEurInfo() {
-    const krweur = await fetch(
-      'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
+    const data = await getEuroData();
 
-    this._euroInfo = new GetEuroViewModel(krweur);
+    this._euroInfo = new GetEuroViewModel(data);
   }
 }

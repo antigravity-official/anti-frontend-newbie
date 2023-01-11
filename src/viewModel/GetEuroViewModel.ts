@@ -1,4 +1,4 @@
-import Model from '../model/Model';
+import EuroInfoTypes from '../types/EuroInfoTypes';
 
 export default class GetEuroViewModel {
   basePrice: number;
@@ -9,7 +9,7 @@ export default class GetEuroViewModel {
   ttSellingPrice: number;
   ttBuyingPrice: number;
 
-  constructor(euroInfo: Model) {
+  constructor(euroInfo: EuroInfoTypes) {
     this.basePrice = euroInfo.basePrice;
     this.openingPrice = euroInfo.openingPrice;
     this.changePrice = euroInfo.changePrice;

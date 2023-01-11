@@ -1,20 +1,15 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import ViewModel from '../viewModel/ViewModel';
-import {
-  getFluctuationIcon,
-  addComma,
-  transformInt,
-} from '../assets/utils/involvedInTexts';
-import Model from '../model/Model';
 
-interface ViewProps {
-  viewModel: ViewModel;
-}
+import transformInt from '../utils/transformInt';
+import getFluctuationIcon from '../utils/getFluctuationIcon';
+import addComma from '../utils/addComma';
+import ViewProps from '../types/ViewProps';
+import EuroInfoTypes from '../types/EuroInfoTypes';
 
 const View = ({ viewModel }: ViewProps) => {
   const [isReady, setIsReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<Model | undefined>();
+  const [eurInfo, setEurInfo] = useState<EuroInfoTypes | undefined>();
   const [inputEuro, setInputEuro] = useState('');
 
   useEffect(() => {
