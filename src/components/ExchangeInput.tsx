@@ -6,7 +6,7 @@ export default function ExchangeInput() {
 
   return (
     <Container>
-      <input type="text" value={value} onChange={onChangeInputText} /> 유로 ▶︎{" "}
+      <input type="number" value={value} onChange={onChangeInputText} /> 유로 ▶︎{" "}
       <input value={exchangedKrw?.toLocaleString()} disabled /> 원
     </Container>
   );

@@ -16,12 +16,14 @@ export default function useInput(
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regEx = /^\d*.?\d{0,2}$/;
-    let input = e.target.value.replaceAll(",", "");
+    // let input = e.target.value.replaceAll(",", "");
+    let input = e.target.value;
 
     if (!regEx.test(input)) {
       input = input.substring(0, input.length - 1);
     }
-    setValue(Number(input).toLocaleString());
+    // setValue(Number(input).toLocaleString());
+    setValue(input);
 
     let krw = exchangeEurToKrw(Number(input));
     krw != null && setExchangedKrw(Math.floor(krw));
