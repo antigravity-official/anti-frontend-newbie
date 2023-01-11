@@ -23,8 +23,8 @@ class EurViewModel {
     return this.model.getChangeRate();
   }
 
-  getBuyingAndSellingPriceGroup() {
-    return this.model.getBuyingAndSellingPriceGroup();
+  getTransactionPriceGroup() {
+    return this.model.getTransactionPriceGroup();
   }
 
   getExchangeEurToKrw(eur: string, length: number) {

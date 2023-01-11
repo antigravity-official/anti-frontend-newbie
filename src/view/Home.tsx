@@ -19,7 +19,7 @@ const Home = ({ viewModel }: HomeProp) => {
         </b>
       </div>
       {viewModel
-        .getBuyingAndSellingPriceGroup()
+        .getTransactionPriceGroup()
         .map((item: { name: string; price: number }) => (
           <PriceGroup key={item.price}>
             {item.name} : {item.price}

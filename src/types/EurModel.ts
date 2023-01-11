@@ -3,7 +3,7 @@ export interface EurModel {
   getIconForOpeningPriceComparison(): string;
   getChangePrice(): number;
   getChangeRate(): number;
-  getBuyingAndSellingPriceGroup(): { name: string; price: number }[];
+  getTransactionPriceGroup(): { name: string; price: number }[];
   getExchangeEurToKrw(eur: string, length: number): string;
   getToLocaleString(value: string): string;
 }

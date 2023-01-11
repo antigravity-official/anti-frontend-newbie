@@ -23,7 +23,7 @@ class EurModel {
     return (this.eurData.changePrice / this.eurData.basePrice) * 100;
   }
 
-  getBuyingAndSellingPriceGroup() {
+  getTransactionPriceGroup() {
     const cashBuyingPrice = this.eurData.cashBuyingPrice;
     const cashSellingPrice = this.eurData.cashSellingPrice;
     const ttBuyingPrice = this.eurData.ttBuyingPrice;
