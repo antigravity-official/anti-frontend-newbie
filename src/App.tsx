@@ -1,4 +1,4 @@
-import EuroInfoLoader from "./container/EuroLoader"
+import EuroInfoLoader from "./container/EuroInfoLoader"
 
 const App = () => {
     return (

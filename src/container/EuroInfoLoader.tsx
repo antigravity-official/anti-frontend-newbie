@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import EuroInfo from "../component/EuroInfo";
+import EuroInfo from "../components/EuroInfo";
 import { RootState } from '../module';
 import { getEuroInfoThunk } from '../module/euro';
 
