@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import EurToKrw from './components/EurToKrw';
 import ExchangeRate from './components/ExchangeRate';
 import Margin from './components/Margin';
@@ -13,7 +13,7 @@ export const App = () => {
 
   const exchangeEurToKrw = (event) => setKrw(event.target.value * eurInfo.basePrice);
 
-  function commify(n) {
+  function commify(n) { //https://www.codingem.com/comma-thousand-separator-in-javascript/
     const parts = n.toString().split(".");
     const numberPart = parts[0];
     const decimalPart = parts[1];
@@ -31,7 +31,6 @@ export const App = () => {
   if (!isReady) return <Loading />
   return (
     <div>
-      <div>환율기준 (1 유로)</div>
       <ExchangeRate eurInfo={eurInfo} commify={commify} />
       <Margin eurInfo={eurInfo} commify={commify} />
       <hr />

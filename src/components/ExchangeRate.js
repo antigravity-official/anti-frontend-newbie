@@ -1,6 +1,7 @@
 const ExchangeRate = ({eurInfo, commify}) => {
     return (
       <div>
+          <div>환율기준 (1 유로)</div>
           {commify(Math.round(eurInfo.basePrice))}
           {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
           {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
