@@ -1,16 +1,15 @@
 /* Exchange box*/
 .Exchange {
-  width: 40vw;
+  width: 35vw;
   height: 80vh;
+  padding: 10px 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  padding: 10px 0;
-  border-radius: 5px;
-
+  border-radius: 10px;
   background-color: rgb(242, 242, 242);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
@@ -26,7 +25,6 @@
 .Exchange-eur {
   font-size: 1.2rem;
   font-weight: bold;
-
   margin-bottom: 15px;
 }
 
@@ -73,6 +71,5 @@
 .Input-box label {
   font-size: 1.2rem;
   font-weight: bold;
-
   margin-bottom: 5px;
 }

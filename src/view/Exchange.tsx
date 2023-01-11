@@ -7,14 +7,12 @@ import { exchangeEurToKrw } from "../viewModel/ExchangeEurKrw";
 function Exchange(eurInfo: EurInfoTypes) {
   const { props } = eurInfo;
 
-  const [eurValue, setEurValue] = useState<number>(0);
-
-  let fixedEurValue = eurValue / 100;
-
-  console.log(fixedEurValue);
+  const [eurValue, setEurValue] = useState(null);
 
   const exchangeData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEurValue(Number(e.target.value));
+    return /^\d*.?\d{0,2}$/.test(e.target.value)
+      ? setEurValue(+e.target.value)
+      : alert("소수점 2자리 까지만 입력해주세요.");
   };
 
   return (
@@ -38,12 +36,14 @@ function Exchange(eurInfo: EurInfoTypes) {
         <label htmlFor="EUR">EUR</label>
         <input
           id="EUR"
+          type="number"
           onChange={exchangeData}
-          value={fixedEurValue}
+          value={eurValue || ""}
           className="Exchange-input"
         />
         <label htmlFor="KRW">KRW</label>
         <input
+          disabled
           id="KRW"
           value={`${exchangeEurToKrw(eurValue, props)} 원`}
           className="Exchange-input"
