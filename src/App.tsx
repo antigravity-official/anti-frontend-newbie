@@ -14,7 +14,8 @@ export const App = () => {
 
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<EuroInfo>();
-  const [inputValue, setInputValue] = useState<number>(0);
+  const [eurString, setEurString] = useState<string>("");
+  const [eurNumber, setEurNumber] = useState<number>(0);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -30,12 +31,18 @@ export const App = () => {
   const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
 
   const onChangeInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    setInputValue(value);
+    const eurValue: string = event.target.value;
+    const nonCommaEur: number = Number(eurValue.replaceAll(",", ""));
+    const commaEur: string = nonCommaEur.toLocaleString();
+
+    setEurString(commaEur);
+    setEurNumber(nonCommaEur);
   };
 
-  const getResultValue = (): number => {
-    return inputValue ? exchangeEurToKrw(inputValue) : 0;
+  const getResultValue = () => {
+    const krwValue: number = exchangeEurToKrw(eurNumber);
+    const commaKrw: string = krwValue.toLocaleString();
+    return commaKrw;
   };
 
   useEffect(() => {
@@ -61,7 +68,7 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input type="number" onChange={onChangeInputValue} />
+      <input type="text" value={eurString} onChange={onChangeInputValue} />
       유로 ▶︎
       <input disabled value={getResultValue()} /> 원
     </div>
