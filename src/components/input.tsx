@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { priceInformation } from "../App";
+import styled from "styled-components";
 
 function Input({ eurInfo }: { eurInfo: priceInformation }) {
   const [userWritePrice, setUserWritePrice] = useState<number>(0);
@@ -20,19 +21,24 @@ function Input({ eurInfo }: { eurInfo: priceInformation }) {
   };
 
   return (
-    <div>
+    <InputSpace>
       <input
         className="keyOff"
         value={userWrite}
         step="0.1"
         type="number"
         onChange={exchangeEurToKrw}
-      />{" "}
+      />
       유로 ▶︎
       <input disabled value={Math.floor(userWritePrice).toLocaleString("en")} />
       원
-    </div>
+    </InputSpace>
   );
 }
+
+const InputSpace = styled.div`
+  width: 100%;
+  height: 30%;
+`;
 
 export default Input;
