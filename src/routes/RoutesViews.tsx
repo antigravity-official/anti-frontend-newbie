@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import ExchangeRate from "../views/exchangeRate/ExchangeRate";
+import ExchangeRate from "../views/exchangeRateView/ExchangeRate";
 
 const RoutesPage = () => {
   return (
