@@ -1,3 +1,29 @@
+## 기술 스택
+
+- `React`
+- `Axios`: 객체 데이터를 더 쉽게 핸들링하고 더 많은 브라우저를 지원하며 추후 확장 가능성을 고려하며 데이터를 다루기 용이한 Axios로 Fetch를 대체하였습니다.
+- `React-query`: 데이터 캐싱과 동기화를 효율적으로 관리하고 데이터 로딩 상태를 간편하게 받아올 수 있도록 도입하였습니다.
+- `Styled-components`: 구조화된 CSS 커스텀 컴포넌트를 위해 도입하였습니다.
+
+<br>
+
+## 리팩토링 구조: MVVM 패턴
+
+- **Model**
+  - `getEurInfo`: axios를 통해 API를 호출합니다.
+- **View Model**
+  - `useEurInfo`: react-query로 데이터를 캐싱하여 view에게 넘겨줍니다. 계속해서 변동하는 환율의 특성 상 3초마다 refetch 하도록 설정했습니다.
+  - `useInput`: input 값을 처리하는 로직을 view로부터 분리하여 커스텀 hook을 생성했습니다. input 값이 변경될때마다 값을 validate하고 계산된 환율 금액을 반환해줍니다.
+- **View**
+  - View Model로 부터 받아온 데이터를 렌더링해줍니다.
+  - react-query의 isLoading 기능을 이용하여 데이터 로딩 시 LoadingIndicator 컴포넌트를 띄워줍니다.
+  - input값이 들어오면 view model의 메소드를 호출합니다.
+
+<br>
+<br>
+<hr/>
+<br>
+
 # 안티그래비티 프론트엔드 입사자 기술과제
 
 이 프로젝트는 Typescript 언어를 사용하는 React 앱 입니다.
@@ -25,7 +51,6 @@
 
 1. git 레포지토리를 fork하여 작성한 후 PR을 보내세요
 2. 리팩토링 의도와 구조에 대한 간략한 설명을 PR본문에 적어주세요
-
 
 ## 기타
 
