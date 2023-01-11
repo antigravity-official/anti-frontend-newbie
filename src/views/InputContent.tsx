@@ -8,7 +8,7 @@ const InputContent = () => {
       <input
         type="text"
         value={euroValue}
-        onChange={(e) => onChangeEuroValue(e)}
+        onChange={(e) => onChangeEuroValue(e.target.value)}
       />
       유로 ▶︎
       <input disabled value={KWT} />원
