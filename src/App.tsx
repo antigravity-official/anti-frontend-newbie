@@ -1,46 +1,41 @@
 import React, { useEffect, useState } from "react";
+import EurToKrw from './components/EurToKrw';
+import ExchangeRate from './components/ExchangeRate';
+import Margin from './components/Margin';
+import Loading from './components/Loading';
+import euroService from './services/euros';
+
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState({});
+  const [krw, setKrw] = useState(0);
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
+  const exchangeEurToKrw = (event) => setKrw(event.target.value * eurInfo.basePrice);
 
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  function commify(n) {
+    const parts = n.toString().split(".");
+    const numberPart = parts[0];
+    const decimalPart = parts[1];
+    const thousands = /\B(?=(\d{3})+(?!\d))/g;
+    return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
+}
 
   useEffect(() => {
-    getEurInfo();
-    return () => {};
+      euroService.getEurInfo().then(krweur => {
+        setEurInfo(krweur);
+        setReady(true);
+      })
   }, []);
 
-  if (!isReady) return null;
+  if (!isReady) return <Loading />
   return (
-    <div className="App">
+    <div>
       <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
+      <ExchangeRate eurInfo={eurInfo} commify={commify} />
+      <Margin eurInfo={eurInfo} commify={commify} />
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <EurToKrw exchangeEurToKrw={exchangeEurToKrw} krw={krw} commify={commify} />
     </div>
   );
 };
