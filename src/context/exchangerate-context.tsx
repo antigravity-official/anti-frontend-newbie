@@ -22,9 +22,7 @@ export const ExchangeContext = createContext({
 
 export const ExchangeContextProvider = ({ children }: Children) => {
   const { isFetching, data } = useQuery('exchangeData', async () => {
-    const response = await fetch(
-      'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
-    )
+    const response = await fetch(`${process.env.REACT_APP_API_URL}`)
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
