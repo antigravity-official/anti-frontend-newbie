@@ -8,5 +8,5 @@ export default interface ViewModelEuroInfo {
   ttSellingPrice: string;
   ttBuyingPrice: string;
   fluctuationPrice: number;
-  changePercent: number;
+  changePercent: string;
 }

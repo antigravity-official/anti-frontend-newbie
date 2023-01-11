@@ -17,7 +17,7 @@ export default class ViewModel {
       ttSellingPrice: addComma(transformInt(model.ttSellingPrice)),
       ttBuyingPrice: addComma(transformInt(model.ttBuyingPrice)),
       fluctuationPrice: model.basePrice - model.openingPrice,
-      changePercent: (model.changePrice / model.basePrice) * 100,
+      changePercent: ((model.changePrice / model.basePrice) * 100).toFixed(2),
     };
   }
 
