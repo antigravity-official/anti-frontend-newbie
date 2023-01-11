@@ -1,6 +1,7 @@
 ### 🚀 프로젝트 실행 방법
 ```git clone https://github.com/klmhyeonwoo/anti-frontend-newbie.git``` <br/>
-```npm install``` <br/>
+```cd anti-frontend-newbie``` <br/>
+```npm install (만약 install 중에 에러가 뜬다면, --legacy-peer-deps를 붙여주세요)``` <br/>
 ```npm start``` <br/>
 
 ### 🧀 사용한 기술
