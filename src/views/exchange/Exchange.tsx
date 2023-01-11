@@ -2,7 +2,7 @@ import React from "react";
 import { exchangeEurToKrw } from "./hooks/exchangeEurToKrw";
 
 const Exchange = ({ basePrice }: { basePrice: number }) => {
-  const [inputEur, setInputEur] = React.useState(0);
+  const [inputEur, setInputEur] = React.useState<number>(0);
   const exchangeKrw = exchangeEurToKrw(inputEur, basePrice);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -11,7 +11,7 @@ const Exchange = ({ basePrice }: { basePrice: number }) => {
 
   return (
     <>
-      <input onChange={handleOnChange} /> 유로 ▶︎ {exchangeKrw} 원
+      <input type="number" onChange={handleOnChange} /> 유로 ▶︎ {exchangeKrw} 원
     </>
   );
 };
