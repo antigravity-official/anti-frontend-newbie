@@ -22,22 +22,18 @@ const MainPage = () => {
   const showView = (requestState: 'hasValue' | 'loading' | 'hasError') => {
     switch (requestState) {
       case 'hasValue':
-        return (
-          euroInfoState.length && (
-            <div>
-              <Referenced />
-              <Exchanged />
-            </div>
-          )
+        return euroInfoState.length ? (
+          <>
+            <Referenced />
+            <Exchanged />
+          </>
+        ) : (
+          <S.ErrorMessage>환율 정보를 불러올 수 없습니다</S.ErrorMessage>
         );
       case 'loading':
-        return (
-          <div>
-            <Loading color={'black'} size={42} height='20vh' />
-          </div>
-        );
+        return <Loading color={'black'} size={42} height='20vh' />;
       case 'hasError':
-        return <div>환율 정보를 불러올 수 없습니다</div>;
+        return <S.ErrorMessage>환율 정보를 불러올 수 없습니다</S.ErrorMessage>;
     }
   };
 

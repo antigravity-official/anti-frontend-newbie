@@ -7,3 +7,9 @@ export const Wrapper = styled.div`
   height: 100%;
   padding: 20px;
 `;
+
+export const ErrorMessage = styled.span`
+  margin: 16px;
+  font-size: ${({ theme: { fontSize } }) => fontSize.large};
+  font-weight: ${({ theme: { fontWeight } }) => fontWeight.regular};
+`;
