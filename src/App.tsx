@@ -1,11 +1,14 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ExchangeContextProvider } from './context/exchangerate-context'
 
 const App = () => {
   const queryClient = new QueryClient()
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className='App' />
+      <ExchangeContextProvider>
+        <div className='App' />
+      </ExchangeContextProvider>
     </QueryClientProvider>
   )
 }
