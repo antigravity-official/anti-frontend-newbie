@@ -22,7 +22,7 @@ const Home = ({ viewModel }: HomeProp) => {
         .getTransactionPriceGroup()
         .map((item: { name: string; price: number }) => (
           <PriceGroup key={item.price}>
-            {item.name} : {item.price}
+            {item.name} : {item.price.toFixed(2)}
           </PriceGroup>
         ))}
       <TextInput
