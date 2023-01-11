@@ -3,7 +3,9 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 import { ExchangeContextProvider } from './context/exchangerate-context'
 
-import ViewModel from './ViewModel'
+import ExchangeRateViewModel from './ExchangeRateViewModel'
+
+import styles from './app.module.scss'
 
 const App = () => {
   const queryClient = new QueryClient()
@@ -11,8 +13,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ExchangeContextProvider>
-        {/* <div className='App' /> */}
-        <ViewModel />
+        <div className={styles.app}>
+          <ExchangeRateViewModel />
+        </div>
       </ExchangeContextProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
