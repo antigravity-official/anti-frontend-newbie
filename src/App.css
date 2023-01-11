@@ -1,0 +1,17 @@
+.Info {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Exchange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loading {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  

@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import Exchange from './components/Exchange';
+import Info from './components/Info';
+import { EurInfo } from './type';
+import './App.css';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
-
+  const [eurInfo, setEurInfo] = useState<EurInfo>();
+  console.log(eurInfo);
   const getEurInfo = async () => {
     const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
+      'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
     )
       .then((response) => response.json())
       .then((array) => array[0]);
@@ -15,32 +19,26 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
   useEffect(() => {
     getEurInfo();
     return () => {};
   }, []);
 
-  if (!isReady) return null;
   return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+    <div>
+      {/*  isReady의 상태에 따라 loading 구현을 하였습니다.  */}
+      {isReady ? (
+        <>
+          {/* 환율기준표와 환율을 계산해주는 기능에 따라 컴포넌트를 분리하였습니다. */}
+          <Info eurInfo={eurInfo} />
+          <hr />
+          <Exchange eurInfo={eurInfo} />
+        </>
+      ) : (
+        <div className='loading'>
+          <div>Loading...</div>
+        </div>
+      )}
     </div>
   );
 };
