@@ -1,14 +1,14 @@
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 
-import { ExchangeContext } from './context/exchangerate-context'
+import { ExchangeContext } from '../context/exchangerate-context'
 
-import useFormatting from './hooks/useFormatting'
+import useFormatting from '../hooks/useFormatting'
 
-import ExchangeRateBoard from './components/ExchangeRateList/ExchangeRateList'
-import ExchangeInput from './components/ExchangeInput/ExchangeInput'
+import ExchangeRateBoard from '../components/ExchangeRateList/ExchangeRateList'
+import ExchangeInput from '../components/ExchangeInput/ExchangeInput'
 
 import styles from './wrapper.module.scss'
-import Loading from './components/Loading/Loading'
+import Loading from '../components/Loading/Loading'
 
 const ExchangeRateViewModel = () => {
   const [eur, setEur] = useState<string>()

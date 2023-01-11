@@ -3,7 +3,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 import { ExchangeContextProvider } from './context/exchangerate-context'
 
-import ExchangeRateViewModel from './ExchangeRateViewModel'
+import ExchangeRateViewModel from './viewModel/ExchangeRateViewModel'
 
 import styles from './app.module.scss'
 
