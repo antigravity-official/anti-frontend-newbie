@@ -15,14 +15,14 @@ const Home = ({ viewModel }: HomeProp) => {
           <span>{viewModel.getBasePrice()}</span>
           <span>{viewModel.getIconForOpeningPriceComparison()}</span>
           <span>{viewModel.getChangePrice()}원</span>
-          <span>({viewModel.getChangeRate().toFixed(3)}%)</span>
+          <span>({viewModel.getChangeRate()}%)</span>
         </b>
       </div>
       {viewModel
         .getTransactionPriceGroup()
-        .map((item: { name: string; price: number }) => (
+        .map((item: { name: string; price: string }) => (
           <PriceGroup key={item.price}>
-            {item.name} : {item.price.toFixed(2)}
+            {item.name} : {item.price}
           </PriceGroup>
         ))}
       <TextInput

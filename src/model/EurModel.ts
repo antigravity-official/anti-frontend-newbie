@@ -20,7 +20,9 @@ class EurModel {
   }
 
   getChangeRate() {
-    return (this.eurData.changePrice / this.eurData.basePrice) * 100;
+    return ((this.eurData.changePrice / this.eurData.basePrice) * 100).toFixed(
+      3
+    );
   }
 
   getTransactionPriceGroup() {
@@ -29,10 +31,10 @@ class EurModel {
     const ttBuyingPrice = this.eurData.ttBuyingPrice;
     const ttSellingPrice = this.eurData.ttSellingPrice;
     return [
-      { name: "살 때", price: cashBuyingPrice },
-      { name: "팔 때", price: cashSellingPrice },
-      { name: "받을 때", price: ttBuyingPrice },
-      { name: "보낼 때", price: ttSellingPrice },
+      { name: "살 때", price: cashBuyingPrice.toFixed(2) },
+      { name: "팔 때", price: cashSellingPrice.toFixed(2) },
+      { name: "받을 때", price: ttBuyingPrice.toFixed(2) },
+      { name: "보낼 때", price: ttSellingPrice.toFixed(2) },
     ];
   }
 
