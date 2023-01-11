@@ -1,15 +1,18 @@
-import React from 'react'
+import { eurInfoType } from "../types/types";
 
-const CurrInfo = ({eurInfo}: {eurInfo:any}) => {
+const CurrInfo = ({ eurInfo }: { eurInfo: eurInfoType }) => {
+  const isPositive = eurInfo.basePrice! - eurInfo.openingPrice! > 0;
+  
   return (
     <>
       <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
+        <span style={{ color: isPositive ? "red" : "blue" }}>
+          {isPositive ? "▲" : "▼"}
+        </span>
         {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {(eurInfo.changePrice! / eurInfo.basePrice!) * 100}%)
       </div>
       <div>
         <div>살때 : {eurInfo.cashBuyingPrice}</div>
@@ -18,7 +21,7 @@ const CurrInfo = ({eurInfo}: {eurInfo:any}) => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CurrInfo
+export default CurrInfo;

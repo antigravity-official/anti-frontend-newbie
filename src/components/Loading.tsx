@@ -9,7 +9,7 @@ const Loading: React.FC = () => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundColor: "gray",
+        backgroundColor: "#ffffffb7",
       }}
     >
       <h3
@@ -23,7 +23,7 @@ const Loading: React.FC = () => {
           opacity:0.8
         }}
       >
-        Loading...
+        <img src='/spinner.gif' alt="loading" width={40}/>
       </h3>
     </div>
   );
