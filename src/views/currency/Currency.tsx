@@ -2,6 +2,7 @@ import React from "react";
 import useGetEurInfo from "./hooks/useGetEurInfo";
 import Exchange from "../exchange/Exchange";
 import Loader from "../../components/loader";
+import ErrorPage from "../../components/errorPage";
 
 const Currency = () => {
   const { data, isLoading, isError } = useGetEurInfo();
@@ -12,7 +13,7 @@ const Currency = () => {
 
   return (
     <div>
-      {isError && <>something went wrong</>}
+      {isError && <ErrorPage />}
       {!isLoading && data && (
         <div>
           <div>환율기준 (1 유로)</div>
