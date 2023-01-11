@@ -9,7 +9,8 @@ const Exchange = ({ basePrice }: { basePrice: number }) => {
     if (/^\d*.?\d{0,2}$/.test(e.target.value)) {
       setInputEur(+e.target.value);
     } else {
-      inputEur.toFixed(2);
+      e.target.value = (+e.target.value).toFixed(2);
+      setInputEur((pre) => +pre.toFixed(2));
     }
   };
 
