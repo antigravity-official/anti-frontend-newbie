@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { FetchData } from "../types";
+import { EurInfoTypes } from "../types";
 
-const Currency = ({ eurInfo }: { eurInfo: FetchData }) => {
+const Currency = ({ eurInfo }: { eurInfo: EurInfoTypes }) => {
   return (
     <div>
       <Title>환율기준 (1 유로)</Title>
@@ -10,18 +10,22 @@ const Currency = ({ eurInfo }: { eurInfo: FetchData }) => {
         {Math.floor(eurInfo.basePrice).toLocaleString()}{" "}
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice.toLocaleString()}원 (
+        {Math.floor(eurInfo.changePrice).toLocaleString()}원 (
         {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
       </ContentContainer>
       <PriceContainer>
-        <PriceList>살때 : {eurInfo.cashBuyingPrice.toLocaleString()}</PriceList>
         <PriceList>
-          팔때 : {eurInfo.cashSellingPrice.toLocaleString()}
+          살때 : {Math.floor(eurInfo.cashBuyingPrice).toLocaleString()}
         </PriceList>
         <PriceList>
-          보낼때 : {eurInfo.ttSellingPrice.toLocaleString()}
+          팔때 : {Math.floor(eurInfo.cashSellingPrice).toLocaleString()}
         </PriceList>
-        <PriceList>받을때 : {eurInfo.ttBuyingPrice.toLocaleString()}</PriceList>
+        <PriceList>
+          보낼때 : {Math.floor(eurInfo.ttSellingPrice).toLocaleString()}
+        </PriceList>
+        <PriceList>
+          받을때 : {Math.floor(eurInfo.ttBuyingPrice).toLocaleString()}
+        </PriceList>
       </PriceContainer>
     </div>
   );

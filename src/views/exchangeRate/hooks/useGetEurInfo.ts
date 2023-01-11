@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { getEurInfo } from "../api/api";
 import { AxiosError } from "axios";
-import { FetchData } from "../types";
+import { EurInfoTypes } from "../types";
 
 const useGetEurInfo = () => {
-  return useQuery<FetchData, AxiosError>(["eur"], () => getEurInfo(), {
+  return useQuery<EurInfoTypes, AxiosError>(["eur"], () => getEurInfo(), {
     refetchInterval: 60000,
     retry: false,
   });

@@ -1,4 +1,4 @@
-export interface FetchData {
+export interface EurInfoTypes {
   basePrice: number;
   openingPrice: number;
   changePrice: number;

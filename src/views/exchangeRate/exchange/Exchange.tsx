@@ -6,7 +6,11 @@ const Exchange = ({ basePrice }: { basePrice: number }) => {
   const exchangeKrw = exchangeEurToKrw(inputEur, basePrice);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setInputEur(+e.target.value);
+    if (/^\d*.?\d{0,2}$/.test(e.target.value)) {
+      setInputEur(+e.target.value);
+    } else {
+      inputEur.toFixed(2);
+    }
   };
 
   return (
