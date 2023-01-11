@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../../component/Index";
 
 export const fetchAPI = createAsyncThunk(
     'fetcher/fetcherSlice',
@@ -26,7 +27,7 @@ export const fetcherSlice = createSlice({
         ttBuyingPrice: '',
         changePrice: '',
         loading: true,
-    },
+    } as RootState,
     reducers: {},
     extraReducers: {
         [fetchAPI.fulfilled.type]: (state, action) => {

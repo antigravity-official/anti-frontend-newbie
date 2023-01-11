@@ -10,7 +10,7 @@ import women from '../images/women.png';
 import eur from '../images/EUR.png';
 import kor from '../images/KOR.png';
 import loading from '../images/loading.gif';
-import { AppDispatch } from '../app/store';
+import { AppDispatch, TestState } from '../app/store';
 
 const fadeLeft = keyframes`
 0% {
@@ -102,7 +102,11 @@ const Difference = ({ children }: WrapperProps) => {
     )
 };
 
-const Country = (props: any) => {
+interface CountryType {
+    name: string;
+}
+
+const Country = (props: CountryType) => {
     return (
         <div css={css`
             position: absolute;
@@ -215,7 +219,15 @@ const UnitEUR = () => {
     )
 }
 
-const Input = (props: any) => {
+interface InputType {
+    value: string;
+    name: string;
+    placeholder: string;
+    disabled?: boolean;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Input = (props: InputType) => {
     return (
         <input css={css`
         font-family: 'Pretendard-Medium';
@@ -308,29 +320,36 @@ const DivStyle = ({ children }: WrapperProps) => {
     )
 };
 
+// interface 타입 지정
+export interface RootState {
+    fetcher: string | object,
+    data: string | object,
+    loading: boolean,
+    basePrice: string | number,
+    openingPrice: string | number,
+    cashBuyingPrice: string | number,
+    cashSellingPrice: string | number,
+    ttSellingPrice: string | number,
+    ttBuyingPrice: string | number,
+    changePrice: string | number,
+}
+
 // JSX 시작, 위에는 Emotion CSS IN JS
 export default function Index() {
 
-    // interface 타입 지정
-    interface RootState {
-        fetcher: any;
-        data?: string | object,
-        loading?: boolean,
-        basePrice?: string,
-    }
 
     const [eurValue, setEurValue] = useState<string>('');
     const [scaledKor, setScaledKor] = useState<string>('');
 
     // redux 사용
-    const loading = useSelector((state: RootState) => state.fetcher.loading);
-    const basePrice = useSelector((state: RootState) => state.fetcher.basePrice);
-    const openingPrice = useSelector((state: RootState) => state.fetcher.openingPrice);
-    const cashBuyingPrice = useSelector((state: RootState) => state.fetcher.cashBuyingPrice);
-    const cashSellingPrice = useSelector((state: RootState) => state.fetcher.cashSellingPrice);
-    const ttSellingPrice = useSelector((state: RootState) => state.fetcher.ttSellingPrice);
-    const ttBuyingPrice = useSelector((state: RootState) => state.fetcher.ttBuyingPrice);
-    const changePrice = useSelector((state: RootState) => state.fetcher.changePrice);
+    const loading = useSelector((state: TestState) => state.fetcher.loading);
+    const basePrice = useSelector((state: TestState) => state.fetcher.basePrice);
+    const openingPrice = useSelector((state: TestState) => state.fetcher.openingPrice);
+    const cashBuyingPrice = useSelector((state: TestState) => state.fetcher.cashBuyingPrice);
+    const cashSellingPrice = useSelector((state: TestState) => state.fetcher.cashSellingPrice);
+    const ttSellingPrice = useSelector((state: TestState) => state.fetcher.ttSellingPrice);
+    const ttBuyingPrice = useSelector((state: TestState) => state.fetcher.ttBuyingPrice);
+    const changePrice = useSelector((state: TestState) => state.fetcher.changePrice);
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -339,7 +358,7 @@ export default function Index() {
     }, []);
 
     useEffect(() => {
-        setScaledKor((Number(eurValue.replaceAll(',', '')) * basePrice).toLocaleString('ko-KR').split(".")[0]);
+        setScaledKor((Number(eurValue.replaceAll(',', '')) * Number(basePrice)).toLocaleString('ko-KR').split(".")[0]);
     }, [eurValue]);
 
     /* 사용자의 원화 및 유로를 입력을 받는 함수 */
@@ -362,9 +381,9 @@ export default function Index() {
                                 <DivStyle>
                                     {basePrice} 원
                                     <Difference>
-                                        {basePrice - openingPrice > 0 && <Increment />}
-                                        {basePrice - openingPrice < 0 && <Decrement />}
-                                        {changePrice} 원 ({changePrice / basePrice * 100}%)
+                                        {Number(basePrice) - Number(openingPrice) > 0 && <Increment />}
+                                        {Number(basePrice) - Number(openingPrice) < 0 && <Decrement />}
+                                        {changePrice} 원 ({Number(changePrice) / Number(basePrice) * 100}%)
                                     </Difference>
                                 </DivStyle>
                             </RowBox>
