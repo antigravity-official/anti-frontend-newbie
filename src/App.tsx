@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./components/Loading";
-import getEurInfo from "./helper/fetch";
+import getEurInfo from "./model/fetch";
 import { apiTypes } from "./types/types";
-import Index from "./pages/Index";
+import CurrInfo from './components/CurrInfo';
+import InputBox from './components/InputBox';
 
 export const App: React.FC = () => {
   const [isReady, setReady] = useState(false);
@@ -17,10 +18,16 @@ export const App: React.FC = () => {
   if (!isReady) {
     return <Loading />;
   }
-  
+
   return (
     <div className="App">
-      <Index eurInfo={eurInfo} inputValue={inputValue} setInputValue={setInputValue}/>
+      <CurrInfo eurInfo={eurInfo} />
+      <hr />
+      <InputBox
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        eurInfo={eurInfo}
+      />
     </div>
   );
 };

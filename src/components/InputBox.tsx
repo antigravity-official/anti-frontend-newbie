@@ -1,4 +1,4 @@
-import {onChangeInput, exchangeEurToKrw} from '../helper/functions'
+import {onChangeInput, exchangeEurToKrw} from '../viewModel/functions'
 import { inputPropsType } from '../types/types'
 
 const InputBox = (props: inputPropsType) => {
