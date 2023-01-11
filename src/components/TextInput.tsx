@@ -11,7 +11,9 @@ const TextInput = ({
   name,
 }: TextInputProp) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue && setValue(e.target.value);
+    const { value } = e.target;
+    const regEur = value.replace(/[^0-9]/g, "");
+    setValue && setValue(regEur);
   };
 
   return (
