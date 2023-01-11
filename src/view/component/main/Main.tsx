@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getEurInfo } from '../../../api/exchange';
-import { ExchangeInfo } from '../../../model/Model';
-import { ExchangeInput } from '../InputPage/ExchangeInput';
+import { getEurInfo } from '../../../model/api/exchange';
+import { ExchangeInfo } from '../../../model/type';
+import { ExchangeInput } from '../../../viewmodel/CurrentInputViewModel/ExchangeInput';
 import { ExchangeCurrentInfo } from '../Info/ExchangeCurrentInfo';
 import { GlobalStyle } from '../../../styles/Main/GlobalStyle';
 import { BoxStyle } from '../../../styles/Main/BoxStyle';

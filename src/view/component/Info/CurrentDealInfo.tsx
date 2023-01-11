@@ -1,4 +1,4 @@
-import { ExchangeInfo } from '../../../model/Model';
+import { ExchangeInfo } from '../../../model/type';
 import { CurrentDealbox,EachDeal, EachDealTxt } from '../../../styles/Info/DealInfo';
 
 type AppProps = {

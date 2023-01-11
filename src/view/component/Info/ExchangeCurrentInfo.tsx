@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ExchangeInfo } from '../../../model/Model';
+import { ExchangeInfo } from '../../../model/type';
 import { Loading } from '../Loading/Loading';
 import { CurrentBox } from '../../../styles/Info/ExchangeCurrentBox';
 import { CurrentDealInfo } from './CurrentDealInfo';
