@@ -12,7 +12,9 @@ export const ExchangeRateInfoViewModel = (model: ExchangeRateInfoModel) => {
     ttSellingPrice: 0,
     ttBuyingPrice: 0,
   });
+
   useEffect(() => {
+    // setTimeout(() => {
     model.getKrwEurData().then((krweur) =>
       setEurInfo({
         basePrice: krweur.basePrice,
@@ -24,8 +26,13 @@ export const ExchangeRateInfoViewModel = (model: ExchangeRateInfoModel) => {
         ttBuyingPrice: krweur.ttBuyingPrice,
       })
     );
+    // }, 3000);
     return () => {};
   }, [model]);
 
-  return eurInfo;
+  const exchangeEurToKrw = (krw: number): number => {
+    return krw * eurInfo.basePrice;
+  };
+
+  return { eurInfo, exchangeEurToKrw };
 };
