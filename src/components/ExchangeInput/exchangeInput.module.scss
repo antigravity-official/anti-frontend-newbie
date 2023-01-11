@@ -1,0 +1,30 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+
+  label {
+    align-self: flex-start;
+    color: #898989;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  input {
+    width: 95%;
+    height: 40px;
+    margin-bottom: 10px;
+    background-color: #202020;
+    border: 0.5px solid #898989;
+    border-radius: 10px;
+    padding: 3px 10px;
+    color: #eeeeee;
+    font-size: 16px;
+  }
+
+  .krwInput {
+    background-color: #383838;
+  }
+}
