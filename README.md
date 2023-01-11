@@ -1,3 +1,6 @@
+![화면 기록 2023-01-12 오전 1 09 27](https://user-images.githubusercontent.com/19422885/211858496-0fabdd31-b89c-4278-bfa6-59bc93884a55.gif)
+
+
 ### 🚀 프로젝트 실행 방법
 ```git clone https://github.com/klmhyeonwoo/anti-frontend-newbie.git``` <br/>
 ```cd anti-frontend-newbie``` <br/>
