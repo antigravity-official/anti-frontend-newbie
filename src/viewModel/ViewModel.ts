@@ -1,26 +1,24 @@
-import EuroInfoTypes from '../types/EuroInfoTypes';
-import GetEuroViewModel from './GetEuroViewModel';
-import getEuroData from '../apis/getEuroData';
+import Model from '../model/Model';
+import ViewModelEuroInfo from '../types/ViewModelEuroInfo';
+import addComma from '../utils/addComma';
+import transformInt from '../utils/transformInt';
 
 export default class ViewModel {
-  _euroInfo: EuroInfoTypes | undefined;
+  euroInfo: ViewModelEuroInfo;
 
-  constructor(public euroInfo?: EuroInfoTypes) {
-    this._euroInfo = euroInfo ?? {
-      basePrice: 0,
-      openingPrice: 0,
-      changePrice: 0,
-      cashBuyingPrice: 0,
-      cashSellingPrice: 0,
-      ttSellingPrice: 0,
-      ttBuyingPrice: 0,
+  constructor(public model: Model) {
+    this.euroInfo = {
+      basePrice: model.basePrice,
+      basePriceStr: addComma(transformInt(model.basePrice)),
+      openingPrice: model.openingPrice,
+      changePrice: addComma(model.changePrice),
+      cashBuyingPrice: addComma(transformInt(model.cashBuyingPrice)),
+      cashSellingPrice: addComma(transformInt(model.cashSellingPrice)),
+      ttSellingPrice: addComma(transformInt(model.ttSellingPrice)),
+      ttBuyingPrice: addComma(transformInt(model.ttBuyingPrice)),
+      fluctuationPrice: model.basePrice - model.openingPrice,
+      changePercent: (model.changePrice / model.basePrice) * 100,
     };
-  }
-
-  async getEurInfo() {
-    const data = await getEuroData();
-
-    this._euroInfo = new GetEuroViewModel(data);
   }
 
   writeEuroInput(value: string, prev: string): string {
@@ -30,5 +28,16 @@ export default class ViewModel {
       value = value.split('.')[0] + '.' + value.split('.')[1].slice(0, 2);
     }
     return value;
+  }
+
+  exchangeEurToKrw(
+    krw: string,
+    euroInfo: ViewModelEuroInfo | undefined
+  ): string {
+    if (!!euroInfo) {
+      return addComma(Math.floor(Number(krw) * euroInfo.basePrice));
+    } else {
+      return this.euroInfo.basePriceStr;
+    }
   }
 }

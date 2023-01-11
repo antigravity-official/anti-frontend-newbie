@@ -1,30 +1,21 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import transformInt from '../utils/transformInt';
 import getFluctuationIcon from '../utils/getFluctuationIcon';
-import addComma from '../utils/addComma';
 import ViewProps from '../types/ViewProps';
-import EuroInfoTypes from '../types/EuroInfoTypes';
+import ViewModelEuroInfo from '../types/ViewModelEuroInfo';
 
 const View = ({ viewModel }: ViewProps) => {
   const [isReady, setIsReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<EuroInfoTypes | undefined>();
+  const [euroInfo, setEuroInfo] = useState<ViewModelEuroInfo | undefined>();
   const [EuroInput, setEuroInput] = useState('1');
 
   useEffect(() => {
-    (async () => {
-      await viewModel.getEurInfo();
-      setEurInfo(viewModel._euroInfo);
-    })();
-    setIsReady(true);
-  }, []);
-
-  const exchangeEurToKrw = (krw: string) => {
-    if (!!eurInfo) {
-      return Math.floor(Number(krw) * eurInfo.basePrice);
+    if (!!viewModel.euroInfo.basePrice) {
+      setIsReady(true);
+      setEuroInfo(viewModel.euroInfo);
     }
-  };
+  }, [viewModel.euroInfo]);
 
   const handleWriteEuro = (e: ChangeEvent<HTMLInputElement>) => {
     setEuroInput(viewModel.writeEuroInput(e.target.value, EuroInput));
@@ -39,39 +30,38 @@ const View = ({ viewModel }: ViewProps) => {
     <div className='ViewModel'>
       <h1>유로 현재 환율</h1>
       <p>환율기준 (1 유로)</p>
-      {!!eurInfo && (
+      {!!euroInfo && (
         <>
           <p
             className={
-              eurInfo.basePrice - eurInfo.openingPrice > 0
+              euroInfo.fluctuationPrice > 0
                 ? 'up'
-                : eurInfo.basePrice - eurInfo.openingPrice !== 0
+                : euroInfo.fluctuationPrice !== 0
                 ? 'down'
                 : ''
             }
           >
-            {addComma(transformInt(eurInfo.basePrice))}
-            {getFluctuationIcon(eurInfo)}
-            {addComma(eurInfo.changePrice)}원 (
-            {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+            {euroInfo.basePriceStr}
+            {getFluctuationIcon(euroInfo)}
+            {euroInfo.changePrice}원 ({euroInfo.changePercent}%)
           </p>
           <table>
             <tbody>
               <tr>
                 <th>살때</th>
-                <td>{addComma(transformInt(eurInfo.cashBuyingPrice))}</td>
+                <td>{euroInfo.cashBuyingPrice}</td>
               </tr>
               <tr>
                 <th>팔때</th>
-                <td>{addComma(transformInt(eurInfo.cashSellingPrice))}</td>
+                <td>{euroInfo.cashSellingPrice}</td>
               </tr>
               <tr>
                 <th>보낼때</th>
-                <td>{addComma(transformInt(eurInfo.ttSellingPrice))}</td>
+                <td>{euroInfo.ttSellingPrice}</td>
               </tr>
               <tr>
                 <th>받을때</th>
-                <td>{addComma(transformInt(eurInfo.ttBuyingPrice))}</td>
+                <td>{euroInfo.ttBuyingPrice}</td>
               </tr>
             </tbody>
           </table>
@@ -79,7 +69,8 @@ const View = ({ viewModel }: ViewProps) => {
       )}
       <hr />
       <input value={EuroInput} onChange={handleWriteEuro} /> 유로 ▶︎&nbsp;
-      <input disabled value={addComma(exchangeEurToKrw(EuroInput))} /> 원
+      <input disabled value={viewModel.exchangeEurToKrw(EuroInput, euroInfo)} />
+      &nbsp;원
     </div>
   );
 };

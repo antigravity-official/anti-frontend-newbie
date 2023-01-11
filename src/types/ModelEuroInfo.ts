@@ -1,4 +1,4 @@
-export default interface EuroInfoTypes {
+export default interface ModelEuroInfo {
   basePrice: number;
   openingPrice: number;
   changePrice: number;

@@ -1,10 +1,10 @@
-import EuroInfoTypes from '../types/EuroInfoTypes';
+import ViewModelEuroInfo from '../types/ViewModelEuroInfo';
 
-const getFluctuationIcon = (eurInfo: EuroInfoTypes) => {
-  if (!eurInfo) return;
-  if (eurInfo.basePrice - eurInfo.openingPrice > 0) {
+const getFluctuationIcon = (euroInfo: ViewModelEuroInfo) => {
+  if (!euroInfo) return;
+  if (euroInfo.fluctuationPrice > 0) {
     return '▲';
-  } else if (eurInfo.basePrice - eurInfo.openingPrice < 0) {
+  } else if (euroInfo.fluctuationPrice < 0) {
     return '▼';
   } else {
     return '';
