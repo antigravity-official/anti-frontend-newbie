@@ -6,7 +6,7 @@ interface propsType {
   data: IexchangeRate | undefined
 }
 
-const ExchangeRateBoard = (props: propsType) => {
+const ExchangeRateList = (props: propsType) => {
   const { data } = props
 
   return (
@@ -31,4 +31,4 @@ const ExchangeRateBoard = (props: propsType) => {
   )
 }
 
-export default ExchangeRateBoard
+export default ExchangeRateList
