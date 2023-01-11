@@ -16,10 +16,10 @@ Axios.interceptors.request.use(
   }
 );
 
-// 오류 처리를 위한 별도 errorController
 Axios.interceptors.response.use(
   (response) => response,
   (error) => {
+    // 응답에 대한 오류 발생 시, 오류 내용을 출력하고 요청을 거절함
     console.log("🚀 ~ response error : ", error);
     Promise.reject(error);
   }
