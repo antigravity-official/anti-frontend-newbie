@@ -1,0 +1,46 @@
+.App {
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+@keyframes spinnerAnima {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-wrapper {
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #383636;
+  border-radius: 50%;
+  animation: spinnerAnima 1.5s linear infinite;
+}
