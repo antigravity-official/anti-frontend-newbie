@@ -1,6 +1,6 @@
-import { EuroInfo } from '../../App';
+import Model from '../../model/Model';
 
-export const getFluctuationIcon = (eurInfo: EuroInfo) => {
+export const getFluctuationIcon = (eurInfo: Model) => {
   if (!eurInfo) return;
   if (eurInfo.basePrice - eurInfo.openingPrice > 0) {
     return '▲';
