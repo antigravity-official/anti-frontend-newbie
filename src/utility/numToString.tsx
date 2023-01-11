@@ -5,6 +5,9 @@ const commafy = (src: number, decimalDot: number = 2): string => {
     if (str[0].length > 3) {
         str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+
+    if (decimalDot == 0) return str[0];
+    
     if (str[1] && str[1].length >= decimalDot) {
         str[1] = str[1].slice(0,decimalDot);
     }
