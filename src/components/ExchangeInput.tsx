@@ -1,19 +1,32 @@
 import React, { useState } from "react";
 
 export default function ExchangeInput({ basePrice }: { basePrice: number }) {
-  const [inputValue, setInputValue] = useState(0);
+  const [krwValue, setKrwValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const exchangeEurToKrw = (krw: number) => krw * basePrice;
-    const krw = exchangeEurToKrw(Number(event.target.value));
+    const targetInputValue = event.target.value;
 
-    setInputValue(krw);
+    const [_, decimal] = targetInputValue.split(".");
+
+    if (decimal?.length > 2) {
+      return;
+    }
+
+    const exchangeEurToKrw = (krw: number) => krw * basePrice;
+    const krw = exchangeEurToKrw(Number(targetInputValue));
+    const { format } = new Intl.NumberFormat("ko", {
+      maximumFractionDigits: 0,
+    });
+
+    setKrwValue(format(krw));
+    setInputValue(targetInputValue);
   };
 
   return (
     <>
-      <input type="number" onChange={handleOnChange} /> 유로 ▶︎{" "}
-      <input value={inputValue} disabled /> 원
+      <input type="number" value={inputValue} onChange={handleOnChange} /> 유로
+      ▶︎ <input value={krwValue} disabled /> 원
     </>
   );
 }

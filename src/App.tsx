@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DisplayInfo from "./components/DisplayInfo";
 import ExchangeInput from "./components/ExchangeInput";
-import { ApiModel } from "./lib/api";
+import Loading from "./components/Loading";
+import { ApiModel } from "./lib/ApiModel";
 import { MoneyInfo } from "./lib/types";
 
 export const App = () => {
@@ -14,22 +15,24 @@ export const App = () => {
 
         setEurInfo(krweur);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     };
 
     getEurInfo();
   }, []);
 
-  if (!eurInfo) {
-    return null;
-  }
-
   return (
     <div className="App">
-      <DisplayInfo eurInfo={eurInfo} />
-      <hr />
-      <ExchangeInput basePrice={eurInfo.basePrice} />
+      {!eurInfo ? (
+        <Loading />
+      ) : (
+        <>
+          <DisplayInfo eurInfo={eurInfo} />
+          <hr />
+          <ExchangeInput basePrice={eurInfo.basePrice} />
+        </>
+      )}
     </div>
   );
 };
