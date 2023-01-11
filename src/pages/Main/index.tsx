@@ -23,15 +23,17 @@ const MainPage = () => {
     switch (requestState) {
       case 'hasValue':
         return (
-          <div>
-            <Referenced />
-            <Exchanged />
-          </div>
+          euroInfoState.length && (
+            <div>
+              <Referenced />
+              <Exchanged />
+            </div>
+          )
         );
       case 'loading':
         return (
           <div>
-            <Loading color={'black'} size={42} height='100%' />
+            <Loading color={'black'} size={42} height='20vh' />
           </div>
         );
       case 'hasError':
@@ -42,7 +44,7 @@ const MainPage = () => {
   return (
     <S.Wrapper>
       <TitleHeader />
-      {euroInfoState.length && showView(requestState)}
+      {showView(requestState)}
     </S.Wrapper>
   );
 };
