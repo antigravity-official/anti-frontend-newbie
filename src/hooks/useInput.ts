@@ -4,15 +4,14 @@ import useEurInfo from "./useEurInfo";
 type EventHandler = React.ChangeEventHandler<HTMLInputElement>;
 
 export default function useInput(
-  initialValue?: string,
-  validator?: (value: string) => boolean
+  initialValue?: string
 ): [string, EventHandler, number?] {
   const [value, setValue] = useState(initialValue ?? "");
-  const [exchangedKrw, setExchangedKrw] = useState<number>();
-  const { data } = useEurInfo();
+  const [exchangedPrice, setExchangedPrice] = useState<number>();
+  const { data: eurData } = useEurInfo();
 
   const exchangeEurToKrw = (eur: number) =>
-    data ? eur * data.basePrice : null;
+    eurData ? eur * eurData.basePrice : null;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regEx = /^\d*.?\d{0,2}$/;
@@ -24,8 +23,8 @@ export default function useInput(
     setValue(input);
 
     let krw = exchangeEurToKrw(Number(input));
-    krw != null && setExchangedKrw(Math.floor(krw));
+    krw != null && setExchangedPrice(Math.floor(krw));
   };
 
-  return [value, onChange, exchangedKrw];
+  return [value, onChange, exchangedPrice];
 }

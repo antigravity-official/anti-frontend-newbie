@@ -1,4 +1,4 @@
-import useEurInfo from "../hooks/useEurInfo";
+import useEuroInfo from "../hooks/useEurInfo";
 import styled from "styled-components";
 
 interface isPositiveProp {
@@ -6,22 +6,22 @@ interface isPositiveProp {
 }
 
 export default function ExchangeInfo() {
-  const { data } = useEurInfo();
+  const { data: eurData } = useEuroInfo();
 
   return (
     <Container>
       <TopContainer>
         <TitleWrapper>환율기준 (1 유로)</TitleWrapper>
-        {data && (
+        {eurData && (
           <BasePriceContainer>
-            <BasePriceWrapper>{data.basePrice}</BasePriceWrapper>
+            <BasePriceWrapper>{eurData.basePrice}</BasePriceWrapper>
             <ChangedPriceWrapper
-              isPositive={data.basePrice - data.openingPrice >= 0}
+              isPositive={eurData.basePrice - eurData.openingPrice >= 0}
             >
-              {data.basePrice - data.openingPrice > 0 && "▲"}
-              {data.basePrice - data.openingPrice < 0 && "▼"}
-              {data.changePrice}원 (
-              {((data.changePrice / data.basePrice) * 100).toFixed(2)}%)
+              {eurData.basePrice - eurData.openingPrice > 0 && "▲"}
+              {eurData.basePrice - eurData.openingPrice < 0 && "▼"}
+              {eurData.changePrice}원 (
+              {((eurData.changePrice / eurData.basePrice) * 100).toFixed(2)}%)
             </ChangedPriceWrapper>
           </BasePriceContainer>
         )}
@@ -30,21 +30,21 @@ export default function ExchangeInfo() {
         <PriceContainer>
           <PriceWrapper>
             <LabelWrapper>살때</LabelWrapper>
-            {data?.cashBuyingPrice}
+            {eurData?.cashBuyingPrice}
           </PriceWrapper>
           <PriceWrapper>
             <LabelWrapper>팔때</LabelWrapper>
-            {data?.cashSellingPrice}
+            {eurData?.cashSellingPrice}
           </PriceWrapper>
         </PriceContainer>
         <PriceContainer>
           <PriceWrapper>
             <LabelWrapper>보낼때</LabelWrapper>
-            {data?.ttSellingPrice}
+            {eurData?.ttSellingPrice}
           </PriceWrapper>
           <PriceWrapper>
             <LabelWrapper>받을때</LabelWrapper>
-            {data?.ttBuyingPrice}
+            {eurData?.ttBuyingPrice}
           </PriceWrapper>
         </PriceContainer>
       </BottomContainer>

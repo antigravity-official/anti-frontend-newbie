@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export const getEurInfo = async () => {
-  const { data } = await axios.get(
-    "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-  );
+  const { data } = await axios.get(`${process.env.REACT_APP_API_KEY}`);
   return data[0];
 };
