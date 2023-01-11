@@ -1,5 +1,9 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
 import { ExchangeContextProvider } from './context/exchangerate-context'
+
+import ViewModel from './ViewModel'
 
 const App = () => {
   const queryClient = new QueryClient()
@@ -7,8 +11,10 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ExchangeContextProvider>
-        <div className='App' />
+        {/* <div className='App' /> */}
+        <ViewModel />
       </ExchangeContextProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   )
 }
