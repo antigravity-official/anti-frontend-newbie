@@ -11,10 +11,10 @@ export const App = () => {
   return (
     <>
       {currencyInfo && (
-        <div className="App">
+        <>
           <ExchangeData currencyInfo={currencyInfo} />
           <ExchangeRate currencyInfo={currencyInfo} />
-        </div>
+        </>
       )}
     </>
   );
