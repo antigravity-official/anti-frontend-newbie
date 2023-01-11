@@ -1,34 +1,47 @@
-# 안티그래비티 프론트엔드 입사자 기술과제
+### 🚀 프로젝트 실행 방법
+```git clone https://github.com/klmhyeonwoo/anti-frontend-newbie.git``` <br/>
+```npm install``` <br/>
+```npm start``` <br/>
 
-이 프로젝트는 Typescript 언어를 사용하는 React 앱 입니다.
+### 🧀 사용한 기술
+[![My Skills](https://skillicons.dev/icons?i=react,emotion,redux,ts)](https://skillicons.dev)
 
-## 과제
+### 🧐 어떤 기술을 사용했고, 왜 이런 기술을 사용했나요?
+##### - 데이터 패칭에 관련된 부분을 애플리케이션에서 액션과 리듀서 등을 각각 모아 비즈니스 로직을 분리함으로써 비즈니스 로직을 파악하기 쉽게하기 위해 Redux를 사용하였어요
+##### - <strong>현재는 프로젝트 양이 그리 많지는 않지만</strong>, 한 컴포넌트 안에서 CSS를 관리하기 위해 Emotion 라이브러리를 사용하였고 CSS in JS로 구현을 하였어요
+##### - 자바스크립트는 런타임에서 오류를 체크하고, 타입스크립트는 컴파일 시점에서 타입의 오류를 제때 체크하여 사전에 오류를 방지해요 그래서 타입스크립트를 사용했어요
+##### - 아직 많이 부족합니다, 그래도 빠르게 배우고 흥미를 느끼며 습득하는 중이에요! 그 외에 와이어프레임을 그리고 와이어프레임에 맞게 디자인을 했어요
 
-소스코드를 분리하고 유사성격의 파일들을 폴더별로 재배치 하세요
-
-#### 필수 수행 항목
-
-1. any 를 사용하지 말고 Type을 지정해 주세요
-2. 컴포넌트를 분리하고, 적당한 폴더를 만들어 파일들을 배치하세요
-3. 유로화를 입력할 때마다 환율을 반영하여 원화로 표시해 주세요. (exchangeEurToKrw 함수를 사용하세요, 필요시 구현내용 변경 가능)
-4. 환율 정보 로딩중임을 사용자가 알 수 있도록 UI를 추가해 주세요.
-5. 금액은 세자리 마다 콤마(,) 를 표시하세요
-6. 유로화는 소수점 2자리까지 표시하고, 원화는 소수점을 표시하지 않습니다.
-7. 비니지스 로직을 분리하고 MVVM 구현패턴을 적용하세요.
-
-#### 옵션 수행 항목
-
-1. 비효율적으로 작성된 코드가 있다면 변경하세요
-2. 테스트 코드를 작성하세요
-
-### 제출내용
-
-1. git 레포지토리를 fork하여 작성한 후 PR을 보내세요
-2. 리팩토링 의도와 구조에 대한 간략한 설명을 PR본문에 적어주세요
-
-
-## 기타
-
-- 디자인은 마음대로 변경하셔도 됩니다.
-- 필요한 외부 라이브러리를 추가하여 사용하셔도 됩니다.
-- 환율조회 api는 하나은행 제공 API를 사용하고 있습니다.
+### 📦 프로젝트 파일 구조 
+```
+📦 
+├─ .gitignore
+├─ README.md
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ favicon.ico
+│  └─ index.html
+├─ src
+│  ├─ App.tsx
+│  ├─ app
+│  │  └─ store.ts // redux 사용을 위한 store 파일이 들어있습니다.
+│  ├component
+│  │  └─ Index.tsx // 일반 Index 파일입니다.
+│  ├─ custom.d.ts // 타입스크립트에서 이미지 파일을 가져오기 위한 custom.d.ts 파일입니다.
+│  ├─ features
+│  │  └─ fetcher
+│  │     └─ fetcherSlice.ts // redux 사용을 위한 action 파일이 들어있습니다.
+│  ├─ hooks
+│  │  └─ UseEurInfo.tsx // 처음 프로젝트에서 데이터 패칭 테스트를 하기 위해 만든 파일입니다, 그다지 쓸모는 없습니다.
+│  ├─ images
+│  │  ├─ EUR.png
+│  │  ├─ KOR.png
+│  │  ├─ loading.gif
+│  │  └─ women.png
+│  ├─ index.tsx
+│  └─ styles
+│     └─ GlobalFont.tsx // Emotion 라이브러리에서의 전역 폰트를 사용하기 위해 만든 파일입니다.
+├─ tsconfig.json
+└─ tslint.json
+```
