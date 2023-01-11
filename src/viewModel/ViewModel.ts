@@ -17,9 +17,18 @@ export default class ViewModel {
     };
   }
 
-  public async getEurInfo() {
+  async getEurInfo() {
     const data = await getEuroData();
 
     this._euroInfo = new GetEuroViewModel(data);
+  }
+
+  writeEuroInput(value: string, prev: string): string {
+    const regex = /^[0-9.]*$/;
+    if (!regex.test(value)) return prev;
+    if (value?.includes('.')) {
+      value = value.split('.')[0] + '.' + value.split('.')[1].slice(0, 2);
+    }
+    return value;
   }
 }

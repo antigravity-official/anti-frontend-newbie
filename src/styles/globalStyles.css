@@ -10,6 +10,18 @@ li {
   padding: 0;
 }
 
+table,
+th,
+td {
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #eee;
+}
+
 .up {
   color: #ff0000;
 }

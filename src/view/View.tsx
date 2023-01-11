@@ -10,7 +10,7 @@ import EuroInfoTypes from '../types/EuroInfoTypes';
 const View = ({ viewModel }: ViewProps) => {
   const [isReady, setIsReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<EuroInfoTypes | undefined>();
-  const [inputEuro, setInputEuro] = useState('');
+  const [EuroInput, setEuroInput] = useState('1');
 
   useEffect(() => {
     (async () => {
@@ -21,20 +21,13 @@ const View = ({ viewModel }: ViewProps) => {
   }, []);
 
   const exchangeEurToKrw = (krw: string) => {
-    if (!!!inputEuro) return '';
     if (!!eurInfo) {
       return Math.floor(Number(krw) * eurInfo.basePrice);
     }
   };
 
   const handleWriteEuro = (e: ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    const regex = /^[0-9.]*$/;
-    if (!regex.test(e.target.value)) return setInputEuro((prev) => prev);
-    if (value.includes('.')) {
-      value = value.split('.')[0] + '.' + value.split('.')[1].slice(0, 2);
-    }
-    setInputEuro(value);
+    setEuroInput(viewModel.writeEuroInput(e.target.value, EuroInput));
   };
 
   return !isReady ? (
@@ -44,7 +37,8 @@ const View = ({ viewModel }: ViewProps) => {
     </>
   ) : (
     <div className='ViewModel'>
-      <h4>환율기준 (1 유로)</h4>
+      <h1>유로 현재 환율</h1>
+      <p>환율기준 (1 유로)</p>
       {!!eurInfo && (
         <>
           <p
@@ -61,17 +55,31 @@ const View = ({ viewModel }: ViewProps) => {
             {addComma(eurInfo.changePrice)}원 (
             {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
           </p>
-          <ul>
-            <li>살때 : {addComma(transformInt(eurInfo.cashBuyingPrice))}</li>
-            <li>팔때 : {addComma(transformInt(eurInfo.cashSellingPrice))}</li>
-            <li>보낼때 : {addComma(transformInt(eurInfo.ttSellingPrice))}</li>
-            <li>받을때 : {addComma(transformInt(eurInfo.ttBuyingPrice))}</li>
-          </ul>
+          <table>
+            <tbody>
+              <tr>
+                <th>살때</th>
+                <td>{addComma(transformInt(eurInfo.cashBuyingPrice))}</td>
+              </tr>
+              <tr>
+                <th>팔때</th>
+                <td>{addComma(transformInt(eurInfo.cashSellingPrice))}</td>
+              </tr>
+              <tr>
+                <th>보낼때</th>
+                <td>{addComma(transformInt(eurInfo.ttSellingPrice))}</td>
+              </tr>
+              <tr>
+                <th>받을때</th>
+                <td>{addComma(transformInt(eurInfo.ttBuyingPrice))}</td>
+              </tr>
+            </tbody>
+          </table>
         </>
       )}
       <hr />
-      <input value={inputEuro} onChange={handleWriteEuro} /> 유로 ▶︎&nbsp;
-      <input disabled value={addComma(exchangeEurToKrw(inputEuro))} /> 원
+      <input value={EuroInput} onChange={handleWriteEuro} /> 유로 ▶︎&nbsp;
+      <input disabled value={addComma(exchangeEurToKrw(EuroInput))} /> 원
     </div>
   );
 };
