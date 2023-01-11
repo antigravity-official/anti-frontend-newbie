@@ -1,34 +1,112 @@
-# 안티그래비티 프론트엔드 입사자 기술과제
+### 타입 지정
+- type선언
+```typescript
+export interface EurInfoTypes {
+  basePrice: number;
+  cashBuyingPrice: number;
+  cashSellingPrice: number;
+  change: string;
+  changePrice: number;
+  changeRate: number;
+  code: string;
+  country: string;
+  createdAt: string;
+  currencyCode: string;
+  currencyName: string;
+  currencyUnit: number;
+  date: string;
+  exchangeCommission: number;
+  fcSellingPrice: null;
+  high52wDate: string;
+  high52wPrice: number;
+  highPrice: number;
+  id: number;
+  low52wDate: string;
+  low52wPrice: number;
+  lowPrice: number;
+  modifiedAt: string;
+  name: string;
+  openingPrice: number;
+  provider: string;
+  recurrenceCount: number;
+  signedChangePrice: number;
+  signedChangeRate: number;
+  tcBuyingPrice: null;
+  time: string;
+  timestamp: number;
+  ttBuyingPrice: number;
+  ttSellingPrice: number;
+  usDollarRate: number;
+}
+```
+- 사용예시
+```typescript
+  const { data = [], isLoading } = useFetch<EurInfoTypes[]>({
+    url: `${process.env.REACT_APP_API_URL}`,
+  });
+```
 
-이 프로젝트는 Typescript 언어를 사용하는 React 앱 입니다.
+### 컴포넌트 분리
+- src
+  - components
+    - main
+      - ExchangeInfo
+      - ExchangeInputs
+      - ExchangeRate
+    - ui
+      - Input
+      - Loading
+      - VerticalLine
+      
+### 환율을 통해 원화로 표시
+src/common/utils.ts
+```typescript
+ export const exchangeEurToKrw = (eur: number, basePrice: number) => {
+  const num = eur * basePrice;
+  return num.toLocaleString('ko-KR', {
+    maximumFractionDigits: 0,
+  });
+};
+```
 
-## 과제
+### 로딩 중 표시
+useFetch라는 커스텀 훅을 구현하여 로딩 시 isLoadding 이라는 값을 받아 사용하여 Loading 컴포넌트를 
+```typescript
+if (isLoading) return <Loading />;
+```
 
-소스코드를 분리하고 유사성격의 파일들을 폴더별로 재배치 하세요
+### 금액 3자리 콤마 표시, 유로화는 2자리까지 표시
+useEurKrw 라는 커스텀 훅 구현
+```typescript
+const useEurKrw = (euroPrice: number) => {
+  const [eur, setEur] = useState<string>('');
+  const [krw, setKrw] = useState<string>('');
 
-#### 필수 수행 항목
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!checkEuro(e.target.value)) return;
 
-1. any 를 사용하지 말고 Type을 지정해 주세요
-2. 컴포넌트를 분리하고, 적당한 폴더를 만들어 파일들을 배치하세요
-3. 유로화를 입력할 때마다 환율을 반영하여 원화로 표시해 주세요. (exchangeEurToKrw 함수를 사용하세요, 필요시 구현내용 변경 가능)
-4. 환율 정보 로딩중임을 사용자가 알 수 있도록 UI를 추가해 주세요.
-5. 금액은 세자리 마다 콤마(,) 를 표시하세요
-6. 유로화는 소수점 2자리까지 표시하고, 원화는 소수점을 표시하지 않습니다.
-7. 비니지스 로직을 분리하고 MVVM 구현패턴을 적용하세요.
+    setEur(e.target.value);
+    setKrw(exchangeEurToKrw(Number(e.target.value), euroPrice));
+  };
 
-#### 옵션 수행 항목
+  return { eur, krw, onChangeHandler };
+};
+```
+checkEuro 함수는
+common/validation/CheckEuro.ts 에 구현
+```typescript
+const REGEX = /^\d*.?\d{0,2}$/;
 
-1. 비효율적으로 작성된 코드가 있다면 변경하세요
-2. 테스트 코드를 작성하세요
+export const checkEuro = (v: string) => REGEX.test(v);
 
-### 제출내용
+```
 
-1. git 레포지토리를 fork하여 작성한 후 PR을 보내세요
-2. 리팩토링 의도와 구조에 대한 간략한 설명을 PR본문에 적어주세요
+### MVVM 패턴
+
+model은 useFetch 커스텀 훅으로 대체
+viewModel은 useEurKrw과 같이 커스텀훅으로 비지니스 로직과 view를 나누어 작업
+
+#### 추가 작업
+- API URL을 env에 옮김(노출이 되면 안 되기 때문)
 
 
-## 기타
-
-- 디자인은 마음대로 변경하셔도 됩니다.
-- 필요한 외부 라이브러리를 추가하여 사용하셔도 됩니다.
-- 환율조회 api는 하나은행 제공 API를 사용하고 있습니다.
