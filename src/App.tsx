@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import DisplayInfo from "./components/DisplayInfo";
 import ExchangeInput from "./components/ExchangeInput";
 import Loading from "./components/Loading";
-import { ApiModel } from "./lib/ApiModel";
+import { ApiModel } from "./model/ApiModel";
 import { MoneyInfo } from "./lib/types";
+import { MoneyInfoModel } from "./model/ViewModel";
 
-export const App = () => {
+const apiModel = new ApiModel();
+const moneyInfoModel = new MoneyInfoModel(apiModel);
+
+export default function App() {
   const [eurInfo, setEurInfo] = useState<MoneyInfo | null>(null);
 
   useEffect(() => {
     const getEurInfo = async () => {
       try {
-        const krweur = await ApiModel.fetchEurInfo();
+        const krweur = await moneyInfoModel.getMoneyInfo();
 
         setEurInfo(krweur);
       } catch (err) {
@@ -35,6 +39,4 @@ export const App = () => {
       )}
     </div>
   );
-};
-
-export default App;
+}

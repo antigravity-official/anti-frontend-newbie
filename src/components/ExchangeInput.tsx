@@ -5,13 +5,11 @@ export default function ExchangeInput({ basePrice }: { basePrice: number }) {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const targetInputValue = event.target.value;
+    const [value, decimal] = event.target.value.split(".");
 
-    const [_, decimal] = targetInputValue.split(".");
-
-    if (decimal?.length > 2) {
-      return;
-    }
+    const targetInputValue = decimal
+      ? `${value}.${decimal.slice(0, 2)}`
+      : value;
 
     const exchangeEurToKrw = (krw: number) => krw * basePrice;
     const krw = exchangeEurToKrw(Number(targetInputValue));
@@ -25,8 +23,13 @@ export default function ExchangeInput({ basePrice }: { basePrice: number }) {
 
   return (
     <>
-      <input type="number" value={inputValue} onChange={handleOnChange} /> 유로
-      ▶︎ <input value={krwValue} disabled /> 원
+      <input
+        type="number"
+        value={inputValue}
+        onChange={handleOnChange}
+        data-testid="userInput"
+      />{" "}
+      유로 ▶︎ <input value={krwValue} data-testid="krwInput" disabled /> 원
     </>
   );
 }
