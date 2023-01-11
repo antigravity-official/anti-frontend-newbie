@@ -20,8 +20,18 @@
     "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "src",
+    "types": [
+      "reflect-metadata",
+      "mocha",
+      "jest",
+      "jasmine",
+    ],
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": [
+    "src/**/*.test.tsx",
+  ],
 }
