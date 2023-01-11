@@ -15,7 +15,7 @@ class EurModel {
   }
 
   getIconForOpeningPriceComparison() {
-    return this.eurData.basePrice - this.eurData.openingPrice > 0 ? "▲" : "▼";
+    return this.eurData.basePrice - this.eurData.openingPrice > 0 ? "🔼" : "🔽";
   }
 
   getChangePrice() {

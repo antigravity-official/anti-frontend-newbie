@@ -1,13 +1,7 @@
 import React, { ChangeEvent } from "react";
+import styled from "styled-components";
+import { TextInputProp } from "../types/TextInputProp";
 
-interface TextInputProp {
-  type: string;
-  setValue?: (str: string) => void;
-  value: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  name: string;
-}
 const TextInput = ({
   type,
   setValue,
@@ -21,7 +15,7 @@ const TextInput = ({
   };
 
   return (
-    <div>
+    <InputWrapper>
       <input
         type={type}
         onChange={onChangeHandler}
@@ -30,8 +24,25 @@ const TextInput = ({
         readOnly={readOnly}
       />
       <span>{name}</span>
-    </div>
+    </InputWrapper>
   );
 };
 
+const InputWrapper = styled.div`
+  position: relative;
+  margin: 0.5rem auto 0;
+
+  input {
+    width: 90%;
+    padding: 0.6rem;
+    margin: 0.2rem auto;
+  }
+
+  span {
+    right: 4px;
+    padding: 0.7rem;
+    color: darkgray;
+    position: absolute;
+  }
+`;
 export default TextInput;

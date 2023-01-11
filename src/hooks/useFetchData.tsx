@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { EurInfo } from "../types/EurInfo";
 
-const initial = {
+const initialization = {
   basePrice: 0,
   openingPrice: 0,
   changePrice: 0,
@@ -14,8 +14,8 @@ const initial = {
 };
 
 const useFetchData = () => {
-  const [eurData, setEurData] = useState<EurInfo>(initial);
-  const [isLoading, setIsLoading] = useState(true);
+  const [eurData, setEurData] = useState<EurInfo>(initialization);
+  const [isReady, setIsReady] = useState(false);
 
   const getEurData = async () => {
     const response = await fetch(
@@ -25,14 +25,16 @@ const useFetchData = () => {
     const data = result[0];
 
     setEurData(data);
-    setIsLoading(false);
+    setIsReady(true);
   };
 
   useEffect(() => {
-    getEurData();
+    setInterval(() => {
+      getEurData();
+    }, 10000);
   }, []);
 
-  return { eurData, isLoading };
+  return { eurData, isReady };
 };
 
 export default useFetchData;
