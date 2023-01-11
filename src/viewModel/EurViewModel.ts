@@ -2,13 +2,11 @@ import { EurModel } from "../types/EurModel";
 
 class EurViewModel {
   model: EurModel;
+
   constructor(model: EurModel) {
     this.model = model;
   }
 
-  getAllEurInfo() {
-    return this.model.getAllEurInfo();
-  }
   getBasePrice() {
     return this.model.getBasePrice();
   }

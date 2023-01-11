@@ -29,9 +29,11 @@ const useFetchData = () => {
   };
 
   useEffect(() => {
-    setInterval(() => {
+    const timer = setInterval(() => {
       getEurData();
     }, 10000);
+
+    return () => clearInterval(timer);
   }, []);
 
   return { eurData, isReady };

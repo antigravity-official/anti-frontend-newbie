@@ -6,9 +6,6 @@ class EurModel {
   constructor(eurData: EurInfo) {
     this.eurData = eurData;
   }
-  getAllEurInfo() {
-    return this.eurData;
-  }
 
   getBasePrice() {
     return this.eurData.basePrice;
