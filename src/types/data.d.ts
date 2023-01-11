@@ -5,6 +5,7 @@ export interface IexchangeRate {
   cashSellingPrice: number | string
   ttSellingPrice: number | string
   ttBuyingPrice: number | string
-  changeRate: number | string
-  rate: number | string
+  openingPrice?: number | string
+  changeRate?: number | string
+  rate?: number | string
 }
