@@ -21,19 +21,15 @@ export const ExchangeContext = createContext({
 })
 
 export const ExchangeContextProvider = ({ children }: Children) => {
-  const { isFetching, data } = useQuery(
-    'exchangeData',
-    async () => {
-      const response = await fetch(
-        'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
-      )
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
-      return response.json().then((array) => array[0])
-    },
-    { retry: 3 }
-  )
+  const { isFetching, data } = useQuery('exchangeData', async () => {
+    const response = await fetch(
+      'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
+    )
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    return response.json().then((array) => array[0])
+  })
 
   const fetchData = useMemo(() => ({ data, isFetching }), [data, isFetching])
 

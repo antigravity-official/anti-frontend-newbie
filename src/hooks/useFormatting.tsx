@@ -25,7 +25,9 @@ const useFormatting = (exchangeData: IexchangeRate) => {
       ttSellingPrice: formattingPrice(exchangeData?.ttSellingPrice),
       ttBuyingPrice: formattingPrice(exchangeData?.ttBuyingPrice),
       changeRate: Number(exchangeData?.basePrice) - Number(exchangeData?.openingPrice),
-      rate: (Number(exchangeData?.changePrice) / Number(exchangeData?.basePrice)) * 100,
+      rate: ((Number(exchangeData?.changePrice) / Number(exchangeData?.basePrice)) * 100).toFixed(
+        2
+      ),
     })
   }, [exchangeData, formattingPrice])
 
