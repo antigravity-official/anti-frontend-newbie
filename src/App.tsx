@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+const Spinner = () => {
+  return <div>로딩중...</div>;
+};
+
 export const App = () => {
   interface EuroInfo {
     basePrice: number;
@@ -12,10 +16,11 @@ export const App = () => {
     [key: string]: string | number;
   }
 
-  const [isReady, setReady] = useState(false);
+  const [isReady, setReady] = useState<boolean>(false);
   const [eurInfo, setEurInfo] = useState<EuroInfo>();
   const [eurString, setEurString] = useState<string>("");
   const [eurNumber, setEurNumber] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -47,12 +52,13 @@ export const App = () => {
 
   useEffect(() => {
     getEurInfo();
-    return () => {};
-  }, []);
+    setLoading(false);
+  });
 
   if (!isReady) return null;
   return (
     <div className="App">
+      {loading ? <Spinner /> : "현재 환율"}
       <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
