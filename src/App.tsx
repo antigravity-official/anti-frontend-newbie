@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from "react";
 
+const Spinner = () => {
+  return <div>로딩중...</div>;
+};
+
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  interface EuroInfo {
+    basePrice: number;
+    openingPrice: number;
+    changePrice: number;
+    cashBuyingPrice: number;
+    cashSellingPrice: number;
+    ttBuyingPrice: number;
+    ttSellingPrice: number;
+    [key: string]: string | number;
+  }
+
+  const [isReady, setReady] = useState<boolean>(false);
+  const [eurInfo, setEurInfo] = useState<EuroInfo>();
+  const [eurString, setEurString] = useState<string>("");
+  const [eurNumber, setEurNumber] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -15,16 +33,33 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
+
+  const onChangeInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const eurValue: string = event.target.value;
+    const nonCommaEur: number = Number(eurValue.replaceAll(",", ""));
+    const commaEur: string = nonCommaEur.toLocaleString();
+
+    setEurString(commaEur);
+    setEurNumber(nonCommaEur);
+  };
+
+  const getResultValue = () => {
+    const krwValue: number = exchangeEurToKrw(eurNumber);
+    const floorKrw: number = Math.floor(krwValue);
+    const commaKrw: string = floorKrw.toLocaleString();
+    return commaKrw;
+  };
 
   useEffect(() => {
     getEurInfo();
-    return () => {};
-  }, []);
+    setLoading(false);
+  });
 
   if (!isReady) return null;
   return (
     <div className="App">
+      {loading ? <Spinner /> : "현재 환율"}
       <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
@@ -40,7 +75,9 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input type="text" value={eurString} onChange={onChangeInputValue} />
+      유로 ▶︎
+      <input disabled value={getResultValue()} /> 원
     </div>
   );
 };
