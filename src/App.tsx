@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import useEuroViewModel from "./viewModel/useEuroViewModel";
 import Spinner from "./components/Spinner";
-import InfoContent from "./views/InfoContent";
-import InputContent from "./views/InputContent";
+import InfoContent from "./view/InfoContent";
+import InputContent from "./view/InputContent";
 import AppContext from "./AppContext";
 
 const App = () => {
