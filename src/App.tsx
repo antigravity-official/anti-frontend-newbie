@@ -17,7 +17,7 @@ export const App = () => {
   }
 
   const [isReady, setReady] = useState<boolean>(false);
-  const [eurInfo, setEurInfo] = useState<EuroInfo>();
+  const [eurInfo, setEurInfo] = useState<any>({});
   const [eurString, setEurString] = useState<string>("");
   const [eurNumber, setEurNumber] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,7 +46,8 @@ export const App = () => {
 
   const getResultValue = () => {
     const krwValue: number = exchangeEurToKrw(eurNumber);
-    const commaKrw: string = krwValue.toLocaleString();
+    const floorKrw: number = Math.floor(krwValue);
+    const commaKrw: string = floorKrw.toLocaleString();
     return commaKrw;
   };
 
