@@ -1,48 +1,45 @@
-import React, { useEffect, useState } from "react";
+import { useEurState } from "./context/eurCtx";
+import { exchangeEurToKrw } from "./utils/exchange";
+import { useState } from "react";
+import { addComma } from "./utils/addComma";
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const { eurInfo, isReady } = useEurState();
+  const [exchangePrice, setExchangePrice] = useState(0);
+  const [inputEuro, setInputEuro] = useState("");
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
+  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputEuro(event.target.value);
+    if (eurInfo)
+      setExchangePrice(exchangeEurToKrw(event.target.value, eurInfo.basePrice));
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
-  return (
-    <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+  if (!isReady) return <div>로딩중</div>;
+  if (eurInfo) {
+    return (
+      <div className="App">
+        <div>환율기준 (1 유로)</div>
+        <div>
+          {eurInfo.basePrice}
+          {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
+          {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
+          {eurInfo.changePrice}원 (
+          {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
+        </div>
+        <div>
+          <div>살때 : {eurInfo.cashBuyingPrice}</div>
+          <div>팔때 : {eurInfo.cashSellingPrice}</div>
+          <div>보낼때 : {eurInfo.ttSellingPrice}</div>
+          <div>받을때 : {eurInfo.ttBuyingPrice}</div>
+        </div>
+        <hr />
+        <input type="number" value={inputEuro} onChange={changeInput} /> 유로 ▶︎{" "}
+        <input disabled value={addComma(exchangePrice)} /> 원
       </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
-    </div>
-  );
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default App;
