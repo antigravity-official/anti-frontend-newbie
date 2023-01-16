@@ -1,11 +1,13 @@
 import React from "react";
 import ExchangeView from "./ExchangeView";
 import useExchangeController from "../../hooks/useExchangeController";
+import Spinner from "../common/Spinner";
+import ExchangeLoading from "./ExchangeLoading";
 
 interface Props {}
 
 const ExchangeContainer: React.FC<Props> = () => {
-  const { eurInfo, exchangeEurToKrw } = useExchangeController();
+  const { eurInfo, exchangeEurToKrw, isLoading } = useExchangeController();
 
   // 퍼센트를 계산해주는 함수
   const getPercent = (changePrice?: number, basePrice?: number) => {
@@ -30,15 +32,17 @@ const ExchangeContainer: React.FC<Props> = () => {
   };
 
   return (
-    <ExchangeView
-      eurInfo={eurInfo}
-      kwr={0}
-      percent={getPercent(eurInfo?.changePrice, eurInfo?.basePrice)}
-      arrowDirection={getArrowDirection(
-        eurInfo?.basePrice,
-        eurInfo?.openingPrice
-      )}
-    />
+    <Spinner isLoading={isLoading} loadingContent={<ExchangeLoading />}>
+      <ExchangeView
+        eurInfo={eurInfo}
+        kwr={0}
+        percent={getPercent(eurInfo?.changePrice, eurInfo?.basePrice)}
+        arrowDirection={getArrowDirection(
+          eurInfo?.basePrice,
+          eurInfo?.openingPrice
+        )}
+      />
+    </Spinner>
   );
 };
 export default ExchangeContainer;
