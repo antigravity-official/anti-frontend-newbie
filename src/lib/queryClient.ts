@@ -1,6 +1,6 @@
 import { QueryClient } from 'react-query';
 
-type AnyOBJ = {
+export type AnyOBJ = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
@@ -25,7 +25,6 @@ export const getClient = (() => {
   };
 })();
 
-// /recent?codes=FRX.KRWEUR
 const BASE_URL = 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR';
 
 const fetcher = async ({
