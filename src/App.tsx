@@ -10,7 +10,7 @@ export const App = () => {
     )
       .then((response) => response.json())
       .then((array) => array[0]);
-
+    console.log("krweur", krweur);
     setEurInfo(krweur);
     setReady(true);
   };
