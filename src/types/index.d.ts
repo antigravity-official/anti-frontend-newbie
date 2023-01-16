@@ -34,8 +34,13 @@ export type TCurrency = {
   ttSellingPrice: number
   usDollarRate: number
 }
-
-
+export interface IViewModel {
+  info: TCurrency;
+  input: number;
+  output: number;
+  getCurrency: (value: number, basePrice: number) => number;
+  calOut: (val: string) => string;
+}
 
 export type TDashBoard = {
   basePrice: number;
