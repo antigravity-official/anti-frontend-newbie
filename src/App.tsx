@@ -1,31 +1,96 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useQuery } from 'react-query';
-import fetcher from 'lib/queryClient';
 import { QueryKeys } from './lib/queryClient';
+import EuroInfoApi from 'lib/apis/EuroInfoApi';
+import CurrencyInput from 'components/CurrencyInput';
+import ConvertCurrency from './lib/ConvertCurrency';
+import Loading from 'components/Loading';
+import Layout from 'components/Layout';
+import DropDowns from 'components/DropDowns';
+import useInput from './hooks/useInput';
+import useConvert from './hooks/useConvert';
+
+const trim = (amount: number, fraction?: number): number => {
+  return Number(amount.toFixed(fraction || 0));
+};
 
 export const App = () => {
-  const { data, isLoading } = useQuery(QueryKeys.EurInfo, () => fetcher({ method: 'GET', path: '' }));
-  console.log(data);
+  const [isReady, setIsReady] = useState(false);
+  const { data, isLoading } = useQuery(QueryKeys.EurInfo, () => EuroInfoApi.getKRW());
 
-  const exchangeEurToKrw = (krw: any) => krw * data.basePrice;
+  const priceOptions = [
+    { name: '기본', price: data?.basePrice },
+    { name: '살때', price: data?.cashBuyingPrice },
+    { name: '팔때', price: data?.cashSellingPrice },
+    { name: '보낼때', price: data?.ttSellingPrice },
+    { name: '받을때', price: data?.ttBuyingPrice },
+  ];
+
+  const [from, into, result, handleConvert, handleSwitch, handleCurrencyReset] = useConvert({
+    from: {
+      name: 'eur',
+      unit: '유로',
+      locale: 'en',
+      getCurrency: (amount: number, price: number) => trim(ConvertCurrency.krwToEur(amount, price), 2),
+    },
+    into: {
+      name: 'krw',
+      unit: '원',
+      locale: 'ko',
+      getCurrency: (amount: number, price: number) => trim(ConvertCurrency.eurToKrw(amount, price)),
+    },
+  });
+  const [amount, handleAmount, handleAmountReset] = useInput(1);
+  const [index, setIndex] = useState(0);
+
+  const onWhenChange = (e: ChangeEvent<HTMLSelectElement>) => setIndex(+e.target.value);
+
+  const handleReset = () => {
+    handleAmountReset();
+    handleCurrencyReset();
+  };
+
+  const convertCurrency = () => {
+    const price = priceOptions[index].price;
+
+    handleConvert(amount, price);
+    setIsReady(true);
+  };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="App">
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {data.basePrice}
-        {data.basePrice - data.openingPrice > 0 && '▲'}
-        {data.basePrice - data.openingPrice < 0 && '▼'}
-        {data.changePrice}원 ({(data.changePrice / data.basePrice) * 100}%)
-      </div>
-      <div>
-        <div>살때 : {data.cashBuyingPrice}</div>
-        <div>팔때 : {data.cashSellingPrice}</div>
-        <div>보낼때 : {data.ttSellingPrice}</div>
-        <div>받을때 : {data.ttBuyingPrice}</div>
-      </div>
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <Layout>
+        <p>유로 → 원</p>
+        <div>환율기준 (1 유로)</div>
+        <div>
+          {data.basePrice}
+          {data.basePrice - data.openingPrice > 0 && '▲'}
+          {data.basePrice - data.openingPrice < 0 && '▼'}
+          {data.changePrice}원 ({trim((data.changePrice / data.basePrice) * 100, 2)}%)
+        </div>
+        <hr />
+        <div className="from">
+          <h3>From</h3>
+          <DropDowns label={'종류'} index={index} info={priceOptions} onChangeIndex={onWhenChange} />
+          <br />
+          <CurrencyInput label={from.name} amount={amount} onAmountChange={handleAmount} />
+          <div>
+            <button onClick={convertCurrency}>convert</button>
+            <button onClick={handleReset}>reset</button>
+            <button onClick={handleSwitch}>switch</button>
+          </div>
+        </div>
+        {isReady && (
+          <>
+            <hr />
+            <div className="to">
+              <p>{result}</p>
+            </div>
+          </>
+        )}
+      </Layout>
     </div>
   );
 };
