@@ -2,14 +2,13 @@ import { useEurState } from "./context/eurCtx";
 import { exchangeEurToKrw } from "./utils/exchange";
 import { useState } from "react";
 import { addComma } from "./utils/addComma";
+import Input from "./style/Input";
 
 export const App = () => {
   const { eurInfo, isReady } = useEurState();
   const [exchangePrice, setExchangePrice] = useState(0);
-  const [inputEuro, setInputEuro] = useState("");
 
   const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputEuro(event.target.value);
     if (eurInfo)
       setExchangePrice(exchangeEurToKrw(event.target.value, eurInfo.basePrice));
   };
@@ -33,7 +32,7 @@ export const App = () => {
           <div>받을때 : {eurInfo.ttBuyingPrice}</div>
         </div>
         <hr />
-        <input type="number" value={inputEuro} onChange={changeInput} /> 유로 ▶︎{" "}
+        <Input type="number" onChange={changeInput} /> 유로 ▶︎{" "}
         <input disabled value={addComma(exchangePrice)} /> 원
       </div>
     );
