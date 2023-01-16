@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DashBoard, Input, Output } from '../components/UI';
-import { IViewModel, TCurrency } from '../types';
+import { IViewModel } from '../types';
+import styled from "styled-components";
 
 function CurrencyView({
   viewModel,
@@ -13,7 +14,7 @@ function CurrencyView({
 }) {
 
   return (
-    <>
+    <Wrapper>
       <DashBoard
         basePrice={viewModel.info.basePrice}
         openingPrice={viewModel.info.openingPrice}
@@ -23,12 +24,30 @@ function CurrencyView({
         ttSellingPrice={viewModel.info.ttSellingPrice}
         ttBuyingPrice={viewModel.info.ttBuyingPrice}
       />
-      <div>
+      <InputWrapper>
         <Input handleChange={handleChange} input={value} />
+        <h1>🔄</h1>
         <Output value={viewModel.calOut(value)} />
-      </div>
-    </>
+      </InputWrapper>
+    </Wrapper>
   );
 }
+
+
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputWrapper = styled.div`
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
 
 export default CurrencyView;
