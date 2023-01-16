@@ -1,37 +1,15 @@
 export interface EurInfo {
-  basePrice: 1341;
-  cashBuyingPrice: 1367.68;
-  cashSellingPrice: 1314.32;
-  change: "FALL";
-  changePrice: 4.21;
-  changeRate: 0.0031296229;
-  code: "FRX.KRWEUR";
-  country: "유로";
-  createdAt: "2016-10-21T06:13:30.000+0000";
-  currencyCode: "EUR";
-  currencyName: "유로";
-  currencyUnit: 1;
-  date: "2023-01-16";
-  exchangeCommission: 3.883;
-  fcSellingPrice: null;
-  high52wDate: "2022-10-27";
-  high52wPrice: 1440.2;
-  highPrice: 1343.45;
-  id: 25;
-  low52wDate: "2022-07-12";
-  low52wPrice: 1306.52;
-  lowPrice: 1337.33;
-  modifiedAt: "2023-01-16T11:13:11.000+0000";
-  name: "유로 (KRW/EUR)";
-  openingPrice: 1343.45;
-  provider: "하나은행";
-  recurrenceCount: 582;
-  signedChangePrice: -4.21;
-  signedChangeRate: -0.0031296229;
-  tcBuyingPrice: null;
-  time: "20:13:05";
-  timestamp: 1673867591471;
-  ttBuyingPrice: 1327.59;
-  ttSellingPrice: 1354.41;
-  usDollarRate: 1.0832;
+  basePrice: number;
+
+  cashBuyingPrice: number;
+
+  cashSellingPrice: number;
+
+  changePrice: number;
+
+  openingPrice: number;
+
+  ttBuyingPrice: number;
+
+  ttSellingPrice: number;
 }

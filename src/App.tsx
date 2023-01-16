@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import ExchangeContainer from "./components/exchange/ExchangeContainer";
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
-
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-    console.log("krweur", krweur);
-    setEurInfo(krweur);
-    setReady(true);
-  };
 
   const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
 
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
-
-  if (!isReady) return null;
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Suspense
+        fallback={
+          <div>환율 정보를 가져오고 있습니다... 잠시만 기다려 주세요</div>
+        }
+      >
+        <ExchangeContainer />
+      </Suspense>
+    </div>
+  );
 };
 
 export default App;
