@@ -1,7 +1,6 @@
 import Input from "../style/Input";
 import { useState, Fragment } from "react";
 import InputDiv from "../style/InputDiv";
-import { useEurInfo } from "../data-access/hooks/useEurInfo";
 import DisplayPrice from "./DisplayPrice";
 import { useBasePrice } from "../data-access/hooks/useBasePrice";
 
