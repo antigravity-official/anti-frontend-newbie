@@ -1,7 +1,7 @@
 import React from "react";
 import ExchangeView from "./ExchangeView";
 import useExchangeController from "../../hooks/useExchangeController";
-import Spinner from "../common/Spinner";
+import Loading from "../common/Loading";
 import ExchangeLoading from "./ExchangeLoading";
 
 interface Props {}
@@ -32,7 +32,7 @@ const ExchangeContainer: React.FC<Props> = () => {
   };
 
   return (
-    <Spinner isLoading={isLoading} loadingContent={<ExchangeLoading />}>
+    <Loading isLoading={isLoading} loadingContent={<ExchangeLoading />}>
       <ExchangeView
         eurInfo={eurInfo}
         kwr={0}
@@ -42,7 +42,7 @@ const ExchangeContainer: React.FC<Props> = () => {
           eurInfo?.openingPrice
         )}
       />
-    </Spinner>
+    </Loading>
   );
 };
 export default ExchangeContainer;
