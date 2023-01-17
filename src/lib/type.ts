@@ -1,4 +1,4 @@
-type EuroInfo = {
+export type EuroInfo = {
   basePrice: number;
   cashBuyingPrice: number;
   cashSellingPrice: number;

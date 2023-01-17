@@ -64,5 +64,5 @@ const fetcher = async ({
 export default fetcher;
 
 export const QueryKeys = {
-  EurInfo: 'EurInfo',
+  ConversionInfo: 'ConversionInfo',
 };
