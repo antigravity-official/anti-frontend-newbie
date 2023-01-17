@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import EurCtxProvider from "./context/eurCtx";
+import EurCtxProvider from "./data-access/context/eurCtx";
 
 ReactDOM.render(
   <React.StrictMode>

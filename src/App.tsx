@@ -1,40 +1,51 @@
-import { useEurState } from "./context/eurCtx";
-import { exchangeEurToKrw } from "./utils/exchange";
-import { useState } from "react";
-import { addComma } from "./utils/addComma";
-import Input from "./style/Input";
+import { Fragment } from "react";
+import Container from "./style/Container";
+import Loading from "./components/Loading";
+import ChangePrice from "./components/ChangePrice";
+import CalcEurForm from "./components/CalcEurForm";
+import { useIsReady } from "./data-access/hooks/useIsReady";
+import { useEurInfo } from "./data-access/hooks/useEurInfo";
+import DisplayPrice from "./components/DIsplayPrice";
 
 export const App = () => {
-  const { eurInfo, isReady } = useEurState();
-  const [exchangePrice, setExchangePrice] = useState(0);
+  const eurInfo = useEurInfo();
+  const isReady = useIsReady();
 
-  const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (eurInfo)
-      setExchangePrice(exchangeEurToKrw(event.target.value, eurInfo.basePrice));
-  };
-
-  if (!isReady) return <div>로딩중</div>;
   if (eurInfo) {
     return (
-      <div className="App">
-        <div>환율기준 (1 유로)</div>
-        <div>
-          {eurInfo.basePrice}
-          {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
-          {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-          {eurInfo.changePrice}원 (
-          {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
-        </div>
-        <div>
-          <div>살때 : {eurInfo.cashBuyingPrice}</div>
-          <div>팔때 : {eurInfo.cashSellingPrice}</div>
-          <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-          <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-        </div>
-        <hr />
-        <Input type="number" onChange={changeInput} /> 유로 ▶︎{" "}
-        <input disabled value={addComma(exchangePrice)} /> 원
-      </div>
+      <Container>
+        <h2>환율기준 (1 유로)</h2>
+        {isReady ? (
+          <Fragment>
+            <ChangePrice />
+            <div>
+              <DisplayPrice
+                prefix="살때 : "
+                price={eurInfo.cashBuyingPrice}
+                suffix="원"
+              />
+              <DisplayPrice
+                prefix="팔때 : "
+                price={eurInfo.cashSellingPrice}
+                suffix="원"
+              />
+              <DisplayPrice
+                prefix="보낼때 : "
+                price={eurInfo.ttSellingPrice}
+                suffix="원"
+              />
+              <DisplayPrice
+                prefix="받을때 : "
+                price={eurInfo.ttBuyingPrice}
+                suffix="원"
+              />
+            </div>
+          </Fragment>
+        ) : (
+          <Loading />
+        )}
+        <CalcEurForm />
+      </Container>
     );
   } else {
     return <div></div>;
