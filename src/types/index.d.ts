@@ -36,10 +36,9 @@ export type TCurrency = {
 }
 export interface IViewModel {
   info: TCurrency;
-  input: number;
-  output: number;
-  getCurrency: (value: number, basePrice: number) => number;
-  calOut: (val: string) => string;
+  value: string;
+  getCurrency: (value: string) => string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type TDashBoard = {

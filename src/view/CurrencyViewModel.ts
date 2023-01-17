@@ -1,25 +1,25 @@
 import { TCurrency } from './../types/index.d';
-import { exchangeEurToKrw } from '../util';
+import { exchangeEurToKrw, isLimitDecimal } from '../util';
 
 class CurrencyViewModel {
   info: TCurrency;
-  input: number;
-  output: number;
+  value: string;
 
   constructor(data: TCurrency,){
     this.info = data
-    this.input = 0
-    this.output = 0
+    this.value = ''
   }
 
-  getCurrency(value: number, basePrice: number) {
-    return exchangeEurToKrw(value, basePrice);
+  getCurrency(value: string) {
+    return exchangeEurToKrw(value, this.info.basePrice);
   }
   
-  calOut(value: string) {
-    return Math.ceil(Number(value) * this.info.basePrice).toLocaleString('ko-KR');
+  handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let input = e.target.value;
+    if(isLimitDecimal(input)) return;
+    this.value = e.target.value;
   }
-  
+
 }
 
 export default CurrencyViewModel

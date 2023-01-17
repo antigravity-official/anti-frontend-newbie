@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DashBoard, Input, Output } from '../components/UI';
 import { IViewModel } from '../types';
 import styled from "styled-components";
 
 function CurrencyView({
   viewModel,
-  handleChange,
-  value
 }: {
   viewModel: IViewModel;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  
 }) {
+  const [render, setRender] = useState<boolean>(false);
+  const testChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    viewModel.handleChange(e)
+    setRender(!render)
+  }
+
+  console.log('View Render');
 
   return (
     <Wrapper>
@@ -25,9 +29,9 @@ function CurrencyView({
         ttBuyingPrice={viewModel.info.ttBuyingPrice}
       />
       <InputWrapper>
-        <Input handleChange={handleChange} input={value} />
-        <h1>🔄</h1>
-        <Output value={viewModel.calOut(value)} />
+        <Input handleChange={testChange} input={viewModel.value} />
+        <Icon>🔄</Icon>
+        <Output value={viewModel.getCurrency(viewModel.value)} />
       </InputWrapper>
     </Wrapper>
   );
@@ -46,8 +50,11 @@ const Wrapper = styled.div`
 const InputWrapper = styled.div`
   width: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+`
+const Icon = styled.h1`
+  margin: 0 20px ;
 `
 
 export default CurrencyView;

@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function Result({input, handleChange}: {input: string, handleChange: (e: any) => void}) {
+function Result({input, handleChange}: {input: string, handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void}) {
   
-  console.log('Input')
-
   return (
     <Wrapper>
       <Label htmlFor="유로">EUR</Label>

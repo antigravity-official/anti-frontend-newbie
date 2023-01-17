@@ -11,7 +11,6 @@ function DashBoard({
   ttSellingPrice,
   ttBuyingPrice,
 }: TDashBoard) {
-  console.log('Dash')
   return (
     <Wrapper>
       <h1>환율기준 (1 유로)</h1>

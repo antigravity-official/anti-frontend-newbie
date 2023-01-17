@@ -15,10 +15,7 @@ Instance.interceptors.request.use(
 
 // 응답 인터셉터
 Instance.interceptors.response.use(
-  (response) => {
-    console.log('No error');
-    return response;
-  },
+  (response) => response,
   async (error) => {
     
   },
