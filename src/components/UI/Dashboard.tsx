@@ -18,7 +18,8 @@ function DashBoard({
         {basePrice.toLocaleString('ko-KR')}
         {basePrice - openingPrice > 0 && '▲'}
         {basePrice - openingPrice < 0 && '▼'}
-        {changePrice.toLocaleString('ko-KR')}원 ({((changePrice / basePrice) * 100).toFixed(2)}%)
+        {changePrice.toLocaleString('ko-KR')}원 (
+        {((changePrice / basePrice) * 100).toFixed(2)}%)
       </h2>
       <ListWrapper>
         <li>살때 : {cashBuyingPrice.toLocaleString('ko-KR')}</li>
@@ -29,9 +30,7 @@ function DashBoard({
     </Wrapper>
   );
 }
-const Wrapper = styled.div`
-
-`
+const Wrapper = styled.div``;
 
 const ListWrapper = styled.ul`
   height: 200px;
@@ -41,7 +40,6 @@ const ListWrapper = styled.ul`
   flex-direction: column;
   justify-content: space-around;
   align-items: space-around;
-
-`
+`;
 
 export default DashBoard;

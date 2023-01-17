@@ -1,15 +1,14 @@
-import React from 'react'
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 function Loading() {
   return (
     <Wrapper>
       <Spinner />
     </Wrapper>
-  )
+  );
 }
 
-export default Loading
+export default Loading;
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -30,11 +29,11 @@ const rotation = keyframes`
 `;
 
 const Spinner = styled.div`
-	height: 100px;
-	width: 100px;
-	border: 1px solid #58cc65;
-	border-radius: 50%;
-	border-top: none;
-	border-right: none;
-	animation: ${rotation} 1s linear infinite;
+  height: 100px;
+  width: 100px;
+  border: 1px solid #58cc65;
+  border-radius: 50%;
+  border-top: none;
+  border-right: none;
+  animation: ${rotation} 1s linear infinite;
 `;
