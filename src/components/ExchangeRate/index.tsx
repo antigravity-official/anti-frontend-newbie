@@ -13,14 +13,14 @@ interface Props {
 const ExchangeRate = ({ currency }: Props) => {
   const { isReady, exchangeInfo } = useFetchExchangeInfo(currency);
 
-  if (!isReady || exchangeInfo === null)
+  if (!isReady || exchangeInfo === null) {
     return (
       <>
         <SyncLoader color="#36d7b7" />
-
         <div>환율 정보를 로딩중입니다.</div>
       </>
     );
+  }
 
   return (
     <>

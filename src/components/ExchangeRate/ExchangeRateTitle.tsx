@@ -1,33 +1,35 @@
 import React, { memo } from "react";
 import { ExchangeInfo } from "../../../typing";
-import { addComma } from "../../utils";
+import { formattingWon } from "../../utils";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
 }
 
-const renderArrow = (basePrice: number, openingPrice: number) => {
-  if (basePrice - openingPrice > 0) {
-    return "▲";
-  }
-  if (basePrice - openingPrice < 0) {
-    return "▼";
-  }
-};
-
-const calcChangeRate = (changePrice: number, basePrice: number) => {
-  return (changePrice / basePrice) * 100;
-};
-
 const ExchangeRateTitle = memo(({ exchangeInfo }: Props) => {
+  const { currencyName, basePrice, openingPrice, changePrice } = exchangeInfo;
+
+  const renderArrow = (basePrice: number, openingPrice: number) => {
+    if (basePrice - openingPrice > 0) {
+      return "▲";
+    }
+    if (basePrice - openingPrice < 0) {
+      return "▼";
+    }
+    return "-";
+  };
+
+  const calcChangeRate = (changePrice: number, basePrice: number) => {
+    return (changePrice / basePrice) * 100;
+  };
+
   return (
     <>
-      <div>환율기준 (1 {exchangeInfo.currencyName})</div>
+      <div>환율기준 (1 {currencyName})</div>
       <div>
-        {addComma(exchangeInfo.basePrice)}
-        {renderArrow(exchangeInfo.basePrice, exchangeInfo.openingPrice)}
-        {addComma(exchangeInfo.changePrice)}원 (
-        {calcChangeRate(exchangeInfo.changePrice, exchangeInfo.basePrice)}%)
+        {formattingWon(basePrice)}
+        {renderArrow(basePrice, openingPrice)}
+        {formattingWon(changePrice)} ({calcChangeRate(changePrice, basePrice)}%)
       </div>
     </>
   );

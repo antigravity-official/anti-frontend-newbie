@@ -8,7 +8,6 @@ const useFetchExchangeInfo = (currency: Currency) => {
 
   const getEurInfo = async () => {
     const info = await fetchExchangeInfo(currency);
-    console.log(info);
     setExchangeInfo(info);
     setReady(true);
   };
