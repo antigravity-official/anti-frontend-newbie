@@ -7,7 +7,7 @@ import { addComma } from "../utils/addComma";
 const ChangePrice = () => {
   const eurInfo = useEurInfo();
   const isUp = useIsUp();
-  return eurInfo && typeof isUp === "boolean" ? (
+  return (
     <div>
       <ColorSpan isUp={isUp}>{isUp ? "▲" : "▼"}</ColorSpan>
       <Span size={30}>{addComma(Math.floor(eurInfo.basePrice))}</Span>
@@ -19,8 +19,6 @@ const ChangePrice = () => {
         ({((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
       </ColorSpan>
     </div>
-  ) : (
-    <div></div>
   );
 };
 

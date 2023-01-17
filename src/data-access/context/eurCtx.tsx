@@ -29,7 +29,7 @@ const EurCtxProvider: React.FC = ({ children }) => {
 
   const fetchEurInfo = async () => {
     const krweur = await getEurInfo();
-    if (krweur) setState({ eurInfo: krweur, isReady: true });
+    setState({ eurInfo: krweur, isReady: true });
   };
 
   return <eurCtx.Provider value={state}>{children}</eurCtx.Provider>;

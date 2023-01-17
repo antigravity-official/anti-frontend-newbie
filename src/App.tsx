@@ -11,45 +11,41 @@ export const App = () => {
   const eurInfo = useEurInfo();
   const isReady = useIsReady();
 
-  if (eurInfo) {
-    return (
-      <Container>
-        <h2>환율기준 (1 유로)</h2>
-        {isReady ? (
-          <Fragment>
-            <ChangePrice />
-            <div>
-              <DisplayPrice
-                prefix="살때 : "
-                price={eurInfo.cashBuyingPrice}
-                suffix="원"
-              />
-              <DisplayPrice
-                prefix="팔때 : "
-                price={eurInfo.cashSellingPrice}
-                suffix="원"
-              />
-              <DisplayPrice
-                prefix="보낼때 : "
-                price={eurInfo.ttSellingPrice}
-                suffix="원"
-              />
-              <DisplayPrice
-                prefix="받을때 : "
-                price={eurInfo.ttBuyingPrice}
-                suffix="원"
-              />
-            </div>
-          </Fragment>
-        ) : (
-          <Loading />
-        )}
-        <CalcEurForm />
-      </Container>
-    );
-  } else {
-    return <div></div>;
-  }
+  return (
+    <Container>
+      <h2>환율기준 (1 유로)</h2>
+      {isReady ? (
+        <Fragment>
+          <ChangePrice />
+          <div>
+            <DisplayPrice
+              prefix="살때 : "
+              price={eurInfo.cashBuyingPrice}
+              suffix="원"
+            />
+            <DisplayPrice
+              prefix="팔때 : "
+              price={eurInfo.cashSellingPrice}
+              suffix="원"
+            />
+            <DisplayPrice
+              prefix="보낼때 : "
+              price={eurInfo.ttSellingPrice}
+              suffix="원"
+            />
+            <DisplayPrice
+              prefix="받을때 : "
+              price={eurInfo.ttBuyingPrice}
+              suffix="원"
+            />
+          </div>
+        </Fragment>
+      ) : (
+        <Loading />
+      )}
+      <CalcEurForm />
+    </Container>
+  );
 };
 
 export default App;
