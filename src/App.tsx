@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import Spinner from "./components/Spinner";
 import EurInfoView from "./view/EurInfoView";
 import ExchangeView from "./view/ExchangeView";
@@ -10,12 +11,25 @@ export const App = () => {
   if (!isReady) return <Spinner />;
 
   return (
-    <div className="App">
+    <MainContainer>
       <EurInfoView />
       <hr />
       <ExchangeView />
-    </div>
+    </MainContainer>
   );
 };
 
 export default App;
+
+const MainContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 95vh;
+  margin: 10px;
+
+  hr {
+    width: 100%;
+  }
+`;
