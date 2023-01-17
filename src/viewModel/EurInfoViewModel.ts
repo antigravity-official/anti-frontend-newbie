@@ -19,7 +19,7 @@ const EurInfoViewModel = () => {
 
     setTimeout(() => {
       setReady(true);
-    }, 500);
+    }, 1000);
   };
 
   useEffect(() => {
