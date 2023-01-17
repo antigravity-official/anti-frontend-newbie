@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { TCurrency } from '../types'
-import { isLimitDecimal } from '../util'
 import CurrencyView from './CurrencyView'
 import CurrencyViewModel from './CurrencyViewModel'
 
