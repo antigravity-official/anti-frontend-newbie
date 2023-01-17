@@ -55,5 +55,12 @@ export const calculationWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 1.2rem;
+
+  input {
+    text-align: right;
+    font-size: large;
+    width: 130px;
+  }
 `;
