@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { EurInfo } from "../../model/eurInfo";
-import { NullCheck } from "../../utils";
+import { checkNull } from "../../utils";
+import ExchangeForm from "./ExchangeForm";
 
 interface Props {
   eurInfo?: EurInfo;
+  exchangeEurToKrw: (number: number) => number;
 }
 
-const ExchangeView: React.FC<Props> = ({ eurInfo }) => {
+const ExchangeView: React.FC<Props> = ({ eurInfo, exchangeEurToKrw }) => {
   // 퍼센트를 계산해주는 함수
   const getPercent = (changePrice?: number, basePrice?: number) => {
     if (!!changePrice && !!basePrice) {
@@ -33,21 +35,21 @@ const ExchangeView: React.FC<Props> = ({ eurInfo }) => {
     <>
       <div>환율기준 (1 유로)</div>
       <div>
-        <span>{NullCheck(eurInfo?.basePrice)}</span>
+        <span>{checkNull(eurInfo?.basePrice)}</span>
         <span>
           {getArrowDirection(eurInfo?.basePrice, eurInfo?.openingPrice)}
         </span>
-        <span>{NullCheck(eurInfo?.changePrice)}원</span>
+        <span>{checkNull(eurInfo?.changePrice)}원</span>
         <span>({getPercent(eurInfo?.changePrice, eurInfo?.basePrice)})</span>
       </div>
       <div>
-        <div>살때 : {NullCheck(eurInfo?.cashBuyingPrice)}</div>
-        <div>팔때 : {NullCheck(eurInfo?.cashSellingPrice)}</div>
-        <div>보낼때 : {NullCheck(eurInfo?.ttSellingPrice)}</div>
-        <div>받을때 : {NullCheck(eurInfo?.ttBuyingPrice)}</div>
+        <div>살때 : {checkNull(eurInfo?.cashBuyingPrice)}</div>
+        <div>팔때 : {checkNull(eurInfo?.cashSellingPrice)}</div>
+        <div>보낼때 : {checkNull(eurInfo?.ttSellingPrice)}</div>
+        <div>받을때 : {checkNull(eurInfo?.ttBuyingPrice)}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <ExchangeForm exchangeEurToKrw={exchangeEurToKrw} />
     </>
   );
 };
