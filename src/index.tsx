@@ -1,10 +1,16 @@
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import { RecoilRoot } from "recoil";
+import { Global } from "@emotion/react";
+import { globalStyles } from "./styles/globalStyles";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RecoilRoot>
+      <Global styles={globalStyles} />
+      <App />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );
