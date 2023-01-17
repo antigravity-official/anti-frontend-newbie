@@ -1,4 +1,4 @@
-.loading-spinner_background {
+.loading-spinner__background {
   position: absolute;
   top: 0;
   left: 0;
@@ -7,7 +7,7 @@
   background-color: rgba(128, 128, 128, 0.295);
 }
 
-.loading-spinner_content {
+.loading-spinner__content {
   width: 20rem;
   position: absolute;
   top: 8rem;
@@ -16,7 +16,7 @@
   font-weight: 600;
 }
 
-.loading-spinner_image img {
+.loading-spinner__image img {
   width: 3rem;
   height: 3rem;
   border-radius: 20px;

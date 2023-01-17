@@ -4,11 +4,11 @@
   width: 70%;
   max-width: 40rem;
 }
-.input-form_input-euro {
+.input-form__input-euro {
   padding: 1rem 0;
 }
 
-.input-form_changed-won {
+.input-form__changed-won {
   display: grid;
   grid-template-columns: 40% 20% 40%;
   background-color: rgba(37, 142, 255, 0.307);
@@ -16,14 +16,14 @@
   padding: 2rem 0;
 }
 
-.input-form_changed-won-div {
+.input-form__changed-won-div {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.input-form_changed-won input {
+.input-form__changed-won input {
   width: 60%;
   height: 1.5rem;
   font-size: 1rem;
