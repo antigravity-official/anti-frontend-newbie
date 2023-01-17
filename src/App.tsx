@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 export const App = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
-  const [eurInputValue, setEurInputValue] = useState(0);
+  const [eurInputValue, setEurInputValue] = useState('0');
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -25,6 +25,18 @@ export const App = () => {
 
   const onChangeEurInput = (e: any) => {
     setEurInputValue(e.target.value);
+    e.target.value = Number(
+      e.target.value.replace(/[^0-9]/g, '')
+    ).toLocaleString();
+  };
+
+  const commaEveryThreeDigits = (num: number) => {
+    return num.toLocaleString();
+  };
+
+  const krwInput = () => {
+    const krw = exchangeEurToKrw(eurInputValue.split(',').join(''));
+    return commaEveryThreeDigits(krw);
   };
 
   if (!isReady) return null;
@@ -45,11 +57,8 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input
-        placeholder="가격을 입력해주세요"
-        onChange={onChangeEurInput}
-      />{' '}
-      유로 ▶︎ <input value={exchangeEurToKrw(eurInputValue)} disabled /> 원
+      <input onChange={onChangeEurInput} /> 유로 ▶︎{' '}
+      <input value={krwInput()} disabled /> 원
     </div>
   );
 };
