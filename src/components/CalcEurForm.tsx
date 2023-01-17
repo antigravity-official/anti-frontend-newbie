@@ -1,5 +1,5 @@
 import Input from "../style/Input";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useRef } from "react";
 import InputDiv from "../style/InputDiv";
 import { useEurInfo } from "../data-access/hooks/useEurInfo";
 import DisplayPrice from "./DisplayPrice";
@@ -45,7 +45,7 @@ const CalcEurForm = () => {
         <label htmlFor="EUR">EUR</label>
       </InputDiv>
       <DisplayPrice
-        price={exchangeEurToKrw(inputEuro, eurInfo!.basePrice)}
+        price={exchangeEurToKrw(inputEuro, eurInfo.basePrice)}
         size={30}
         suffix="원"
       />

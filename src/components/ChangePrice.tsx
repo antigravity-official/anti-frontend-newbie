@@ -1,3 +1,4 @@
+import { useChangeRate } from "../data-access/hooks/useChangeRate";
 import { useEurInfo } from "../data-access/hooks/useEurInfo";
 import { useIsUp } from "../data-access/hooks/useIsUp";
 import ColorSpan from "../style/ColorSpan";
@@ -8,6 +9,7 @@ import UpNDown from "./UpNDown";
 const ChangePrice = () => {
   const eurInfo = useEurInfo();
   const isUp = useIsUp();
+  const changeRate = useChangeRate();
   return (
     <div>
       <UpNDown />
@@ -16,9 +18,7 @@ const ChangePrice = () => {
         {isUp ? "+" : "-"}
         {Math.floor(eurInfo.changePrice)}원
       </ColorSpan>{" "}
-      <ColorSpan isUp={isUp}>
-        ({((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
-      </ColorSpan>
+      <ColorSpan isUp={isUp}>({changeRate}%)</ColorSpan>
     </div>
   );
 };
