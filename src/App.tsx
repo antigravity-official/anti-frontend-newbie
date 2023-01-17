@@ -53,7 +53,7 @@ export const App = () => {
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
         {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
       </div>
       <div>
         <div>살때 : {eurInfo.cashBuyingPrice}</div>
