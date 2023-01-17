@@ -11,8 +11,8 @@ export const EurInfoSelector = selector({
   key: "EurInfoSelector",
   get: ({ get }) => {
     const eurInfo = get(EurInfoAtom);
-    const exchangeEurToKrw = (krw: number) =>
-      KrwFormatter(krw * eurInfo.basePrice);
+    const exchangeEurToKrw = (eur: number) =>
+      KrwFormatter(eur * eurInfo.basePrice);
 
     return { exchangeEurToKrw };
   },
