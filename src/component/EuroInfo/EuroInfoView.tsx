@@ -1,4 +1,5 @@
 import useEuroInfoViewModel from './EuroInfoViewModel';
+import styles from './EuroInfoView.module.css';
 
 export default function EuroInfoView() {
   const { euro, eurInfo, isLoading, isFetching, krw, onChange } =
@@ -8,24 +9,34 @@ export default function EuroInfoView() {
     return <div>Loading...</div>;
   }
 
+  const isHigherBasePrice =
+    eurInfo && eurInfo.basePrice - eurInfo.openingPrice > 0;
+
   return (
     <>
       {eurInfo && (
-        <div className='App'>
-          <div>환율기준 (1 유로)</div>
-          <div>
+        <div className={styles.info}>
+          <h1>환율기준 (1 유로)</h1>
+          <h2>
             {eurInfo.basePrice}
-            {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-            {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
-            {eurInfo.changePrice}원 (
-            {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
-          </div>
-          <div>
-            <div>살때 : {eurInfo.cashBuyingPrice}</div>
-            <div>팔때 : {eurInfo.cashSellingPrice}</div>
-            <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-            <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-          </div>
+            <span
+              className={`${styles.gap} ${
+                isHigherBasePrice ? styles.higher : styles.lower
+              }`}
+            >
+              <span>
+                {isHigherBasePrice ? '▲' : '▼'}
+                {eurInfo.changePrice}원
+              </span>
+              ({((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
+            </span>
+          </h2>
+          <ul className={styles.exchange}>
+            <li>살때 : {eurInfo.cashBuyingPrice}</li>
+            <li>팔때 : {eurInfo.cashSellingPrice}</li>
+            <li>보낼때 : {eurInfo.ttSellingPrice}</li>
+            <li>받을때 : {eurInfo.ttBuyingPrice}</li>
+          </ul>
           <hr />
           <input
             type='text'

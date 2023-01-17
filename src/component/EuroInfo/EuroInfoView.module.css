@@ -1,0 +1,21 @@
+.info {
+  padding: 0 1rem;
+}
+
+.gap {
+  padding-left: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.gap.higher {
+  color: #ed3738;
+}
+
+.gap.lower {
+  color: #097df3;
+}
+
+.exchange {
+  color: #3f3f46;
+}
