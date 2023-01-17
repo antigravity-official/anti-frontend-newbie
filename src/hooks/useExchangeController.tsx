@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import api from "../apis/common";
 import { EurInfo } from "../model/eurInfo";
@@ -8,14 +9,20 @@ const useExchangeController = () => {
 
   const getEurInfo = async () => {
     setIsLoading(true);
-    const { data } = await api<EurInfo[]>("v1/forex/recent?codes=FRX.KRWEUR");
-    setEurInfo(data[0]);
-    setIsLoading(false);
+    try {
+      const { data } = await api<EurInfo[]>("v1/forex/recent?codes=FRX.KRWEUR");
+      setEurInfo(data[0]);
+    } catch (e) {
+      const error = e as unknown as AxiosError;
+      throw new Error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const exchangeEurToKrw = (eur: number) => {
     if (eurInfo?.basePrice) {
-      return eur * eurInfo.basePrice;
+      return Math.floor(eur * eurInfo.basePrice);
     }
     return 0;
   };
