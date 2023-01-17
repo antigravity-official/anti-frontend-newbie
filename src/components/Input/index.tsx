@@ -12,12 +12,12 @@ export const Input = (props: InputProps) => {
   const { label, id, value, onChange, disabled } = props;
   const inputFormat = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.currentTarget.value = e.currentTarget.value.replace(/[^-\.0-9]/g, "");
-    const checkIsNumber = new RegExp(/(-?\d+)(\d{3})/);
+    const countNumberThree = new RegExp(/(-?\d+)(\d{3})/);
     const pointIdx = e.currentTarget.value.indexOf(".", 0);
     const splitPoint = e.currentTarget.value.split(".");
 
-    while (checkIsNumber.test(splitPoint[0])) {
-      splitPoint[0] = splitPoint[0].replace(checkIsNumber, "$1,$2");
+    while (countNumberThree.test(splitPoint[0])) {
+      splitPoint[0] = splitPoint[0].replace(countNumberThree, "$1,$2");
     }
 
     if (pointIdx > -1) {
