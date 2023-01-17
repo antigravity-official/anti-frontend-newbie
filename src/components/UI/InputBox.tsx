@@ -15,8 +15,6 @@ function CurrencyView({
     setRender(!render)
   }
 
-  console.log('View Render');
-
   return (
       <InputWrapper>
         <Input handleChange={testChange} input={viewModel.value} />
