@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useChangeRate } from "../data-access/hooks/useChangeRate";
 import { useEurInfo } from "../data-access/hooks/useEurInfo";
 import { useIsUp } from "../data-access/hooks/useIsUp";
@@ -11,7 +12,7 @@ const ChangePrice = () => {
   const isUp = useIsUp();
   const changeRate = useChangeRate();
   return (
-    <div>
+    <Fragment>
       <UpNDown />
       <Span size={30}>{addComma(Math.floor(eurInfo.basePrice))}</Span>
       <ColorSpan isUp={isUp}>
@@ -19,7 +20,7 @@ const ChangePrice = () => {
         {Math.floor(eurInfo.changePrice)}원
       </ColorSpan>{" "}
       <ColorSpan isUp={isUp}>({changeRate}%)</ColorSpan>
-    </div>
+    </Fragment>
   );
 };
 
