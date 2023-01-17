@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "./components/Spinner";
 import EurInfoView from "./view/EurInfoView";
 import ExchangeView from "./view/ExchangeView";
 import EurInfoViewModel from "./viewModel/EurInfoViewModel";
@@ -6,7 +7,7 @@ import EurInfoViewModel from "./viewModel/EurInfoViewModel";
 export const App = () => {
   const { isReady } = EurInfoViewModel();
   // view
-  if (!isReady) return <div>로딩중...</div>;
+  if (!isReady) return <Spinner />;
 
   return (
     <div className="App">
