@@ -1,9 +1,6 @@
-export const PointValidation = (inputData: string) => {
+export const PointValidation = (number: string) => {
   const pattern = /(^\d+$)|(^\d+\.\d{0,2}$)/;
-  if (pattern.test(inputData)) return inputData;
-};
-
-export const DeletePoint = (input: string) => {
-  const pattern = /(^\d+$)|(^\d+\.\d{0,2}$)/;
-  if (pattern.test(input)) return input.substring(0, input.length - 1);
+  number = number.replace(/[^\d.]/g, "").replace(/(\..*)\./g, "$1");
+  if (!pattern.test(number)) return number.substring(0, number.length - 1);
+  return number;
 };

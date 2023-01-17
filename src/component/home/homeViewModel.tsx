@@ -13,7 +13,8 @@ export default function HomeViewModel() {
   const exchangeUpDown = eurInfo.basePrice - eurInfo.openingPrice > 0;
 
   const onChangeInputEur = (e: ChangeEvent<HTMLInputElement>) => {
-    PointValidation(e.target.value)
+    e.target.value = PointValidation(e.target.value) as string;
+    e.target.value
       ? setEurTokrw(exchangeEurToKrw(Number(e.target.value)))
       : setEurTokrw(exchangeEurToKrw(0));
   };
