@@ -16,7 +16,10 @@ const EurInfoViewModel = () => {
 
   const getEurInfo = async () => {
     setEurInfo(await EurInfoModel());
-    setReady(true);
+
+    setTimeout(() => {
+      setReady(true);
+    }, 500);
   };
 
   useEffect(() => {
