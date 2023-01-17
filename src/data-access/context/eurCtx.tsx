@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import type { KrwEur } from "../../types/krweur";
 import { getEurInfo } from "../../api";
 
@@ -38,4 +38,3 @@ const EurCtxProvider: React.FC = ({ children }) => {
 };
 
 export default EurCtxProvider;
-export const useEurState = () => useContext(eurCtx);
