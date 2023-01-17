@@ -24,24 +24,24 @@ export const App = () => {
   }, []);
 
   const onChangeEurInput = (e: any) => {
-    /*  e.target.value = Number(
-      e.target.value.replace(/[^0-9]/g, '')
-    ).toLocaleString(); */
-    let inputValue = e.target.value.split('.');
-    console.log(inputValue);
-    const eurValue = [];
-    if (inputValue.length === 2) {
-      if (inputValue[1].length >= 2) {
-        eurValue.push(`${inputValue[0]}.${inputValue[1].slice(0, 2)}`);
+    const userInputValue = e.target.value.split('.');
+    const commaEveryThreeDigits = userInputValue.map(
+      (number: string, idx: number) => {
+        if (idx === 0) {
+          return Number(number.replace(/[^0-9]/g, '')).toLocaleString();
+        }
+        if (idx === 1) {
+          return number.slice(0, 2);
+        }
       }
-    }
-    setEurInputValue(
-      eurValue.length === 1 ? eurValue.join('') : e.target.value
     );
+
+    setEurInputValue(commaEveryThreeDigits.join('.'));
   };
 
   const krwInput = () => {
-    return Math.trunc(exchangeEurToKrw(eurInputValue)).toLocaleString();
+    const notComma = eurInputValue.split(',').join('');
+    return Math.trunc(exchangeEurToKrw(notComma)).toLocaleString();
   };
 
   if (!isReady) return null;
