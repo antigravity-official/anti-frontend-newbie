@@ -27,30 +27,21 @@ export const App = () => {
     /*  e.target.value = Number(
       e.target.value.replace(/[^0-9]/g, '')
     ).toLocaleString(); */
-    setEurInputValue(e.target.value);
-  };
-
-  const renderTwoDecimalPlaces = () => {
-    const num = eurInputValue.split('.');
-    let two = ['.'];
-    if (num.length >= 2) {
-      two.push(num[1].slice(0, 2));
+    let inputValue = e.target.value.split('.');
+    console.log(inputValue);
+    const eurValue = [];
+    if (inputValue.length === 2) {
+      if (inputValue[1].length >= 2) {
+        eurValue.push(`${inputValue[0]}.${inputValue[1].slice(0, 2)}`);
+      }
     }
-    if (two.length !== 2) {
-      return num[0];
-    }
-    if (two.length === 2) {
-      return `${num[0]}${two.join('')}`;
-    }
-  };
-
-  const commaEveryThreeDigits = (num: number) => {
-    return num.toLocaleString();
+    setEurInputValue(
+      eurValue.length === 1 ? eurValue.join('') : e.target.value
+    );
   };
 
   const krwInput = () => {
-    const krw = exchangeEurToKrw(eurInputValue.split(',').join(''));
-    return commaEveryThreeDigits(krw);
+    return Math.trunc(exchangeEurToKrw(eurInputValue)).toLocaleString();
   };
 
   if (!isReady) return null;
@@ -71,11 +62,8 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input
-        value={renderTwoDecimalPlaces()}
-        onChange={onChangeEurInput}
-      />{' '}
-      유로 ▶︎ <input value={krwInput()} disabled /> 원
+      <input value={eurInputValue} onChange={onChangeEurInput} /> 유로 ▶︎{' '}
+      <input value={krwInput()} disabled /> 원
     </div>
   );
 };
