@@ -3,13 +3,14 @@ import { useIsUp } from "../data-access/hooks/useIsUp";
 import ColorSpan from "../style/ColorSpan";
 import Span from "../style/Span";
 import { addComma } from "../utils/addComma";
+import UpNDown from "./UpNDown";
 
 const ChangePrice = () => {
   const eurInfo = useEurInfo();
   const isUp = useIsUp();
   return (
     <div>
-      <ColorSpan isUp={isUp}>{isUp ? "▲" : "▼"}</ColorSpan>
+      <UpNDown />
       <Span size={30}>{addComma(Math.floor(eurInfo.basePrice))}</Span>
       <ColorSpan isUp={isUp}>
         {isUp ? "+" : "-"}

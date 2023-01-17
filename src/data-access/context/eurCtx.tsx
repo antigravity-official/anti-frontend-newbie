@@ -19,17 +19,19 @@ const EurCtxProvider: React.FC = ({ children }) => {
   });
 
   useEffect(() => {
-    try {
-      fetchEurInfo();
-    } catch (error) {
-      console.error(error);
-      alert("환율 정보 조회에 실패했습니다.");
-    }
+    fetchEurInfo();
   }, []);
 
   const fetchEurInfo = async () => {
-    const krweur = await getEurInfo();
-    setState({ eurInfo: krweur, isReady: true });
+    try {
+      const krweur = await getEurInfo();
+      if (krweur) setState({ eurInfo: krweur, isReady: true });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+        alert(error.message);
+      }
+    }
   };
 
   return <eurCtx.Provider value={state}>{children}</eurCtx.Provider>;

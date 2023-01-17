@@ -2,12 +2,16 @@ import { KrwEur } from "../types/krweur";
 
 export const getEurInfo = async () => {
   try {
-    const krweur: KrwEur = await fetch(process.env.REACT_APP_API_URL!)
-      .then((response) => response.json())
-      .then((array) => array[0]);
+    const res = await fetch(
+      process.env.REACT_APP_API_URL! + "/v1/forex/recent?codes=FRX.KRWEUR"
+    );
+    const data = await res.json();
+    const krweur: KrwEur = await data[0];
+    if (!krweur) {
+      throw new Error("환율 정보 요청에 실패했습니다. 관리자에게 문의하세요.");
+    }
     return krweur;
   } catch (error) {
-    console.log(error);
-    throw new Error("실패");
+    if (error instanceof Error) throw new Error(error.message);
   }
 };

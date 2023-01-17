@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { useIsUp } from "../data-access/hooks/useIsUp";
-import ChangePrice from "./ChangePrice";
+import UpNDown from "./UpNDown";
 
 jest.mock("../data-access/hooks/useIsUp", () => ({
   useIsUp: jest.fn(),
@@ -8,7 +8,7 @@ jest.mock("../data-access/hooks/useIsUp", () => ({
 
 const renderComponent = ({ bool }: { bool: boolean }) => {
   (useIsUp as jest.Mock<any, any>).mockImplementation(() => bool);
-  return render(<ChangePrice />);
+  return render(<UpNDown />);
 };
 
 describe("UpNDown 테스트", () => {
