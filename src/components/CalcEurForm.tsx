@@ -1,13 +1,14 @@
 import Input from "../style/Input";
-import { useState, Fragment, useRef } from "react";
+import { useState, Fragment } from "react";
 import InputDiv from "../style/InputDiv";
 import { useEurInfo } from "../data-access/hooks/useEurInfo";
 import DisplayPrice from "./DisplayPrice";
+import { useBasePrice } from "../data-access/hooks/useBasePrice";
 
 const CalcEurForm = () => {
   const [inputEuro, setInputEuro] = useState("");
   const [isInputFocus, setIsInputFocus] = useState(false);
-  const eurInfo = useEurInfo();
+  const basePrice = useBasePrice();
 
   const exchangeEurToKrw = (inputPrice: string, basePrice: number) => {
     return Number(inputPrice) * basePrice;
@@ -45,7 +46,7 @@ const CalcEurForm = () => {
         <label htmlFor="EUR">EUR</label>
       </InputDiv>
       <DisplayPrice
-        price={exchangeEurToKrw(inputEuro, eurInfo.basePrice)}
+        price={exchangeEurToKrw(inputEuro, basePrice)}
         size={30}
         suffix="원"
       />
