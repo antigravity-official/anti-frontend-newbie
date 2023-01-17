@@ -24,10 +24,24 @@ export const App = () => {
   }, []);
 
   const onChangeEurInput = (e: any) => {
-    setEurInputValue(e.target.value);
-    e.target.value = Number(
+    /*  e.target.value = Number(
       e.target.value.replace(/[^0-9]/g, '')
-    ).toLocaleString();
+    ).toLocaleString(); */
+    setEurInputValue(e.target.value);
+  };
+
+  const renderTwoDecimalPlaces = () => {
+    const num = eurInputValue.split('.');
+    let two = ['.'];
+    if (num.length >= 2) {
+      two.push(num[1].slice(0, 2));
+    }
+    if (two.length !== 2) {
+      return num[0];
+    }
+    if (two.length === 2) {
+      return `${num[0]}${two.join('')}`;
+    }
   };
 
   const commaEveryThreeDigits = (num: number) => {
@@ -57,8 +71,11 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input onChange={onChangeEurInput} /> 유로 ▶︎{' '}
-      <input value={krwInput()} disabled /> 원
+      <input
+        value={renderTwoDecimalPlaces()}
+        onChange={onChangeEurInput}
+      />{' '}
+      유로 ▶︎ <input value={krwInput()} disabled /> 원
     </div>
   );
 };
