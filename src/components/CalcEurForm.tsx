@@ -1,9 +1,8 @@
 import Input from "../style/Input";
-import Span from "../style/Span";
-import { addComma } from "../utils/addComma";
 import { useState, Fragment } from "react";
 import InputDiv from "../style/InputDiv";
 import { useEurInfo } from "../data-access/hooks/useEurInfo";
+import DisplayPrice from "./DisplayPrice";
 
 const CalcEurForm = () => {
   const [inputEuro, setInputEuro] = useState("");
@@ -45,10 +44,11 @@ const CalcEurForm = () => {
         />
         <label htmlFor="EUR">EUR</label>
       </InputDiv>
-      <Span size={30}>
-        {addComma(Math.floor(exchangeEurToKrw(inputEuro, eurInfo!.basePrice)))}
-      </Span>{" "}
-      원
+      <DisplayPrice
+        price={exchangeEurToKrw(inputEuro, eurInfo!.basePrice)}
+        size={30}
+        suffix="원"
+      />
     </Fragment>
   );
 };

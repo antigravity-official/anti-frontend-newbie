@@ -5,7 +5,7 @@ import ChangePrice from "./components/ChangePrice";
 import CalcEurForm from "./components/CalcEurForm";
 import { useIsReady } from "./data-access/hooks/useIsReady";
 import { useEurInfo } from "./data-access/hooks/useEurInfo";
-import DisplayPrice from "./components/DIsplayPrice";
+import DisplayPrice from "./components/DisplayPrice";
 
 export const App = () => {
   const eurInfo = useEurInfo();

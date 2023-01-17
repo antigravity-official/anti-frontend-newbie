@@ -1,6 +1,6 @@
 import Skeleton from "../style/Skeleton";
 
 const Loading = () => {
-  return <Skeleton>로딩중</Skeleton>;
+  return <Skeleton>Loading...</Skeleton>;
 };
 export default Loading;
