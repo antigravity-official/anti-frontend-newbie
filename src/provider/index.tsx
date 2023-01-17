@@ -2,21 +2,21 @@ import { EuroInfoModel } from "../model/EuroInfoModel";
 import { ConvertEuroToKrw } from "../view/ConvertEuroToKrw";
 import { ExchangeRate } from "../view/ExchangeRate";
 import { Loading } from "../view/Loading/Loading";
-import { ConvertEuroToKrwViewModel } from "../viewModel/ConvertEuroToKrwViewModel";
-import { ExchangeRateViewModel } from "../viewModel/ExchangeRateViewModel";
-import { LoadingViewModel } from "../viewModel/LoadingViewModel";
+import { ConvertEuroToKrwViewModel } from "../vm/ConvertEuroToKrwViewModel";
+import { ExchangeRateViewModel } from "../vm/ExchangeRateViewModel";
+import { LoadingViewModel } from "../vm/LoadingViewModel";
 import * as S from "./style";
 
 export const Provider = () => {
   const { exchangeInput, onChangeExchangeValue, exchange } =
     ConvertEuroToKrwViewModel();
   const { eurInfo, exchangeEuroToKrw } = ExchangeRateViewModel();
-  const { isLoading, fetchAndLoading } = LoadingViewModel();
+  const { isReady, fetchAndLoading } = LoadingViewModel();
 
   return (
     <S.ProdiverWrap>
-      {isLoading ? (
-        <Loading isFetching={fetchAndLoading(EuroInfoModel.getEuroInfo())} />
+      {isReady ? (
+        <Loading isReady={fetchAndLoading(EuroInfoModel.getEuroInfo())} />
       ) : (
         <ExchangeRate euroInfo={eurInfo} />
       )}

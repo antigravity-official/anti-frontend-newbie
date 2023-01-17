@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { EuroInfoModel } from "../model/EuroInfoModel";
-import { EuroInfo } from "../types/types";
+import { EuroInfo } from "../types/Euroinfo";
 
 export const ExchangeRateViewModel = () => {
   const [eurInfo, setEurInfo] = useState<EuroInfo>({

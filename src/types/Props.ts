@@ -1,12 +1,4 @@
-export interface EuroInfo {
-  basePrice: number;
-  openingPrice: number;
-  changePrice: number;
-  cashBuyingPrice: number;
-  cashSellingPrice: number;
-  ttSellingPrice: number;
-  ttBuyingPrice: number;
-}
+import { EuroInfo } from "./Euroinfo";
 
 export interface EuroInfoProps {
   euroInfo: EuroInfo;
@@ -20,5 +12,5 @@ export interface ConvertEuroToKrwProps {
 }
 
 export interface LoadingProps {
-  isFetching: Promise<boolean>;
+  isReady: Promise<boolean>;
 }

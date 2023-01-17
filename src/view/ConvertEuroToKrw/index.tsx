@@ -1,6 +1,7 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
-import { ConvertEuroToKrwProps } from "../../types/types";
+import { ConvertEuroToKrwProps } from "../../types/Props";
+
 import * as S from "./style";
 
 export const ConvertEuroToKrw = ({

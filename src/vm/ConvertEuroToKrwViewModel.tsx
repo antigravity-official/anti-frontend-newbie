@@ -5,7 +5,7 @@ export const ConvertEuroToKrwViewModel = () => {
   const [exchange, setExchange] = useState(0);
 
   const exchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value: string = e.target.value;
+    const value = e.target.value;
     const removedCommaValue = Number(value.replaceAll(",", ""));
     return removedCommaValue;
   };

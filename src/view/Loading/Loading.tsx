@@ -1,6 +1,6 @@
-import { LoadingProps } from "../../types/types";
+import { LoadingProps } from "../../types/Props";
 
-export const Loading = ({ isFetching }: LoadingProps) => {
-  if (!isFetching) return <div>Loading...</div>;
+export const Loading = ({ isReady }: LoadingProps) => {
+  if (!isReady) return <div>Loading...</div>;
   return <></>;
 };

@@ -1,4 +1,4 @@
-import { EuroInfo } from "../types/types";
+import { EuroInfo } from "../types/Euroinfo";
 
 export const EuroInfoModel = {
   async getEuroInfo(): Promise<EuroInfo> {

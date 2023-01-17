@@ -1,4 +1,4 @@
-import { EuroInfoProps } from "../../types/types";
+import { EuroInfoProps } from "../../types/Props";
 import * as S from "./style";
 
 export const ExchangeRate = ({ euroInfo }: EuroInfoProps) => {
