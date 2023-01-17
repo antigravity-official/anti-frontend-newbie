@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { KrwEur } from "../../types/krweur";
-import { getEurInfo } from "../../api/api";
+import { getEurInfo } from "../../api";
 
 interface State {
   eurInfo: KrwEur;
