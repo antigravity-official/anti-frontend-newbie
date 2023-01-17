@@ -5,7 +5,7 @@ import { EuroInfoType } from "types/euroInfo";
 interface EuroInfoInitial {
   info: EuroInfoType;
   isLoading: boolean;
-  error: string;
+  error: string | undefined;
 }
 
 const initialState: EuroInfoInitial = {
@@ -47,8 +47,9 @@ const EuroInfoSlice = createSlice({
         state.info = action.payload as EuroInfoType;
         state.isLoading = false;
       })
-      .addCase(getEuroData.rejected, (state) => {
+      .addCase(getEuroData.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.error.message;
       });
   },
 });
