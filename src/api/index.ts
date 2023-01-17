@@ -7,11 +7,9 @@ export const getEurInfo = async () => {
     );
     const data = await res.json();
     const krweur: KrwEur = await data[0];
-    if (!krweur) {
-      throw new Error("환율 정보 요청에 실패했습니다. 관리자에게 문의하세요.");
-    }
     return krweur;
   } catch (error) {
-    if (error instanceof Error) throw new Error(error.message);
+    if (error instanceof Error)
+      throw new Error("환율 정보 요청에 실패했습니다. 관리자에게 문의하세요.");
   }
 };
