@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import BasicCard from './components/BasicCard';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -47,6 +48,37 @@ export const App = () => {
   if (!isReady) return null;
   return (
     <div className="App">
+      <section style={{ display: 'flex', gap: '0.75rem' }}>
+        <section
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.75rem',
+          }}
+        >
+          <section style={{ display: 'flex', gap: '0.75rem' }}>
+            <BasicCard width={16} height={5}>
+              EUR ▶ KWR
+            </BasicCard>
+            <BasicCard width={5} height={5}>
+              icon
+            </BasicCard>
+          </section>
+          <section style={{ display: 'flex', gap: '0.75rem' }}>
+            <BasicCard width={10.5} height={10.5}>
+              데이터
+            </BasicCard>
+            <BasicCard width={10.5} height={10.5}>
+              데이터
+            </BasicCard>
+          </section>
+        </section>
+        <section>
+          <BasicCard width={21.75} height={16.375}>
+            차트
+          </BasicCard>
+        </section>
+      </section>
       <div>환율기준 (1 유로)</div>
       <div>
         {eurInfo.basePrice}
