@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Input, RateTable } from "components";
 import { Wrapper, ChangeToEuro } from "./style";
 import { useAppDispatch, useAppSelector } from "hooks/useStore";
@@ -8,9 +8,9 @@ import { AiFillEuroCircle } from "react-icons/ai";
 import { FcCurrencyExchange } from "react-icons/fc";
 
 export const Home = () => {
-  const [kwrValue, setKwrValue] = useState("");
   const dispatch = useAppDispatch();
   const { info, isLoading } = useAppSelector(({ euroInfo }) => euroInfo);
+  const kwrInputRef = useRef<HTMLInputElement>(null);
 
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
     const euroValue = Number(e.target.value.replaceAll(",", ""));
@@ -18,7 +18,9 @@ export const Home = () => {
       const changedKrw = (euroValue * info.basePrice).toLocaleString("ko-KR", {
         maximumFractionDigits: 0,
       });
-      setKwrValue(changedKrw);
+      if (kwrInputRef.current) {
+        kwrInputRef.current.value = changedKrw;
+      }
     }
   };
 
@@ -49,9 +51,9 @@ export const Home = () => {
               <Input label="유로(EURO)" id="euro" onChange={exchangeEurToKrw} />
               <p>⬇️⬆️</p>
               <Input
+                ref={kwrInputRef}
                 label="대한민국 원화(KRW)"
                 id="krw"
-                value={kwrValue}
                 disabled
               />
             </div>
