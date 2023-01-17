@@ -1,0 +1,23 @@
+.loading-spinner_background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.295);
+}
+
+.loading-spinner_content {
+  width: 20rem;
+  position: absolute;
+  top: 8rem;
+  left: calc(50% - 10rem);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.loading-spinner_image img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 20px;
+}

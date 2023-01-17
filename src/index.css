@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+p,
+h1 {
+  padding: 0;
+  margin: 0;
+}

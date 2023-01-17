@@ -1,0 +1,33 @@
+.info-form {
+  border: 1px solid rgba(0, 0, 0, 0.275);
+  margin: 0 auto;
+  width: 70%;
+  max-width: 40rem;
+}
+
+.info-form_standard-title {
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+.info-form_standard-info {
+  margin: 0.5rem 0;
+}
+.info-form_sale-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.info-form_sale-info div {
+  border-top: 1px solid;
+  border: 0.1px solid rgba(0, 0, 0, 0.275);
+}
+.info-form_sale-info p {
+  padding: 1rem 0;
+}
+
+.info-form_sale-title {
+  background-color: rgba(128, 128, 128, 0.283);
+  padding: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
