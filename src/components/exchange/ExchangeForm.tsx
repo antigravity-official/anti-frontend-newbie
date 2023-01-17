@@ -17,7 +17,7 @@ const ExchangeForm: React.FC<Props> = ({ exchangeEurToKrw }) => {
   };
   return (
     <>
-      <input onChange={handleChangeEur} value={eur} maxLength={17} /> 유로 ▶︎{" "}
+      <input onChange={handleChangeEur} value={eur} /> 유로 ▶︎{" "}
       <input
         disabled
         value={exchangeEurToKrw(Number(removeComma(eur)))}
