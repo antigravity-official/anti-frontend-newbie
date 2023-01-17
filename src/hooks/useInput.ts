@@ -1,8 +1,9 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 
-type ReturnType<T> = [T, (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => T, () => void];
-export default function useInput<T>(initialValue: T): ReturnType<T> {
+export default function useInput<T>(
+  initialValue: T
+): [T, (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => T, () => void, Dispatch<SetStateAction<T>>] {
   const [value, setValue] = useState(initialValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -14,5 +15,5 @@ export default function useInput<T>(initialValue: T): ReturnType<T> {
 
   const handleReset = () => setValue(initialValue);
 
-  return [value, handleChange, handleReset];
+  return [value, handleChange, handleReset, setValue];
 }

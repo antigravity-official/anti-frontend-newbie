@@ -4,21 +4,41 @@ type ConvertInfo = {
   name: string;
   locale: string;
   unit: string;
-  getCurrency: any;
+  convert: (amount: number, price: number) => number;
+  format: (amount: number) => number;
 };
 
 type ConvertType = { from: ConvertInfo; into: ConvertInfo };
-type ReturnType = [ConvertInfo, ConvertInfo, string, (amount: number, price: number) => void, () => void, () => void];
+type ReturnType = {
+  from: ConvertInfo;
+  into: ConvertInfo;
+  result: string;
+  isReady: boolean;
+  handleConvert: (amount: number, price: number) => void;
+  handleSwitch: () => void;
+  handleReset: () => void;
+};
 
 export default function useConvert(initialValue: ConvertType): ReturnType {
   const [from, setFrom] = useState(initialValue.from);
   const [into, setInto] = useState(initialValue.into);
   const [result, setResult] = useState('');
-  const [value, setValue] = useState(initialValue);
+  const [isReady, setIsReady] = useState(false);
 
   const handleConvert = (amount: number, price: number) => {
-    const { getCurrency, locale, unit } = into;
-    setResult(getCurrency(amount, price).toLocaleString(locale) + unit);
+    const { convert } = from;
+    const { locale, unit, format } = into;
+
+    setResult(`${format(convert(amount, price)).toLocaleString(locale)}${unit}`);
+
+    setIsReady(false);
+    const timeout = setTimeout(() => {
+      setIsReady(true);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }, 1000);
   };
 
   const handleSwitch = () => {
@@ -26,6 +46,10 @@ export default function useConvert(initialValue: ConvertType): ReturnType {
     setInto(from);
   };
 
-  const handleReset = () => setValue(initialValue);
-  return [from, into, result, handleConvert, handleSwitch, handleReset];
+  const handleReset = () => {
+    setFrom(initialValue.from);
+    setInto(initialValue.into);
+  };
+
+  return { from, into, result, isReady, handleConvert, handleSwitch, handleReset };
 }
