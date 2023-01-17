@@ -15,10 +15,9 @@ export const Home = () => {
   const exchangeEurToKrw = (e: React.ChangeEvent<HTMLInputElement>) => {
     const euroValue = Number(e.target.value.replaceAll(",", ""));
     if (euroValue) {
-      const changedKrw = (euroValue * info.basePrice).toLocaleString(
-        undefined,
-        { maximumFractionDigits: 0 }
-      );
+      const changedKrw = (euroValue * info.basePrice).toLocaleString("ko-KR", {
+        maximumFractionDigits: 0,
+      });
       setKwrValue(changedKrw);
     }
   };
