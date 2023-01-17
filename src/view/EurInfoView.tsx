@@ -1,7 +1,9 @@
 import React from "react";
-import { EruInfoType } from "../types/EurInfoType";
+import EurInfoViewModel from "../viewModel/EurInfoViewModel";
 
-const EurInfoView = ({ eurInfo }: { eurInfo: EruInfoType }) => {
+const EurInfoView = () => {
+  const { eurInfo } = EurInfoViewModel();
+
   return (
     <>
       <div>환율기준 (1 유로)</div>
