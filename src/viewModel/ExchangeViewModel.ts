@@ -1,11 +1,12 @@
 import EurInfoModel from "../model/EurInfoModel";
+import ExchangeComaViewModel from "./ExchangeComaViewModel";
 
-const ExchangeViewModel = async (krw: string) => {
+const ExchangeViewModel = async (eur: string) => {
   const eurInfo = await EurInfoModel();
-  // model ExchangeCalculatorModel
-  const exchangeEurToKrw = Number(krw) * eurInfo.basePrice;
 
-  return exchangeEurToKrw;
+  const exchangeEurToKrw = Number(eur.replaceAll(",", "")) * eurInfo.basePrice;
+
+  return ExchangeComaViewModel(exchangeEurToKrw, "kr");
 };
 
 export default ExchangeViewModel;
