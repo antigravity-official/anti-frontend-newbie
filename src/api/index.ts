@@ -5,7 +5,6 @@ export const getEurInfo = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_API_URL}/v1/forex/recent?codes=FRX.KRWEUR`
     );
-    console.log(res);
     const data = await res.json();
     const krweur: KrwEur = await data[0];
     return krweur;
