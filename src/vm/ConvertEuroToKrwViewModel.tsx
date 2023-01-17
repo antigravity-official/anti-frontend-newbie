@@ -4,15 +4,17 @@ import { useState } from "react";
 export const ConvertEuroToKrwViewModel = () => {
   const [exchange, setExchange] = useState(0);
 
-  const exchangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeExchangeValue = (value: number) => {
+    setExchange(value);
+  };
+
+  const exchangeRemovedCommaValue = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     const removedCommaValue = Number(value.replaceAll(",", ""));
     return removedCommaValue;
   };
 
-  const onChangeExchangeValue = (value: number) => {
-    setExchange(value);
-  };
-
-  return { exchange, exchangeInput, onChangeExchangeValue };
+  return { exchange, exchangeRemovedCommaValue, onChangeExchangeValue };
 };

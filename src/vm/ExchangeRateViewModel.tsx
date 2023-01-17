@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { EuroInfoModel } from "../model/EuroInfoModel";
+import { EuroInfoModel } from "../model/api/EuroInfoModel";
 import { EuroInfo } from "../types/Euroinfo";
 
 export const ExchangeRateViewModel = () => {

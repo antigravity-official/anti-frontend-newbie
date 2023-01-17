@@ -1,5 +1,6 @@
-import { EuroInfoModel } from "../model/EuroInfoModel";
+import { EuroInfoModel } from "../model/api/EuroInfoModel";
 import { ConvertEuroToKrw } from "../view/ConvertEuroToKrw";
+
 import { ExchangeRate } from "../view/ExchangeRate";
 import { Loading } from "../view/Loading/Loading";
 import { ConvertEuroToKrwViewModel } from "../vm/ConvertEuroToKrwViewModel";
@@ -8,7 +9,7 @@ import { LoadingViewModel } from "../vm/LoadingViewModel";
 import * as S from "./style";
 
 export const Provider = () => {
-  const { exchangeInput, onChangeExchangeValue, exchange } =
+  const { exchangeRemovedCommaValue, onChangeExchangeValue, exchange } =
     ConvertEuroToKrwViewModel();
   const { eurInfo, exchangeEuroToKrw } = ExchangeRateViewModel();
   const { isReady, fetchAndLoading } = LoadingViewModel();
@@ -23,9 +24,9 @@ export const Provider = () => {
       <ConvertEuroToKrw
         exchangeEuroToKrw={exchangeEuroToKrw}
         exchange={exchange}
-        exchangeInput={exchangeInput}
         onChangeExchangeValue={onChangeExchangeValue}
-      />
+        exchangeRemovedCommaValue={exchangeRemovedCommaValue}
+      ></ConvertEuroToKrw>
     </S.ProdiverWrap>
   );
 };
