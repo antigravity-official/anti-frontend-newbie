@@ -7,7 +7,7 @@ import { ExchangeRateInfo, getExchangeRateInfo } from "../model/ExchangeRateInfo
 
 const useExchangeRate = () => {
   const [isReady, setReady] = useState<boolean>(false);
-  const [exchageRateInfo, setExchageRateInfo] = useState<ExchangeRateInfo>(new ExchangeRateInfo());
+  const [exchangeRateInfo, setExchageRateInfo] = useState<ExchangeRateInfo>(new ExchangeRateInfo());
 
   const loadExchangeRateInfo = (country: string) => {
     getExchangeRateInfo(country).then((result) => {
@@ -18,7 +18,7 @@ const useExchangeRate = () => {
 
   return {
     isReady,
-    exchageRateInfo,
+    exchangeRateInfo,
     loadExchangeRateInfo,
   };
 };

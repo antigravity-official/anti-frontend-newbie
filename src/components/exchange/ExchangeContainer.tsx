@@ -10,7 +10,7 @@ export const ExchangeContainer = () => {
     korName: "유로",
     enName: "EUR",
   });
-  const { isReady, exchageRateInfo, loadExchangeRateInfo } = useExchangeRate();
+  const { isReady, exchangeRateInfo, loadExchangeRateInfo } = useExchangeRate();
   const { input, result, exchangeToKrw } = useExchanger();
 
   useEffect(() => {
@@ -21,13 +21,13 @@ export const ExchangeContainer = () => {
     <>
       {isReady ? (
         <>
-          <ExchangeRate country={country} exchangeRateInfo={exchageRateInfo} />
+          <ExchangeRate country={country} exchangeRateInfo={exchangeRateInfo} />
           <Exchanger
             country={country}
             input={input}
             result={result}
             exchangeToKrw={exchangeToKrw}
-            basePrice={exchageRateInfo.basePrice}
+            basePrice={exchangeRateInfo.basePrice}
           />
         </>
       ) : (
