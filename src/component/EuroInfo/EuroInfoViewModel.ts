@@ -5,9 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useExchangeApi } from '../../context/ExchangeApiContext';
 import { EuroInfo } from './EuroInfoModel';
 // utils
-import { exchangeEurToKrw } from '../../utils/exchangeEurToKrw';
-import { applyThousandSeparator } from '../../utils/applyThousandSeparator';
-import { splitDecimal } from '../../utils/splitDecimal';
+import {
+  applyThousandSeparator,
+  checkDecimalScale,
+  convertOnlyNumOrDot,
+  exchangeEurToKrw,
+  splitDecimal,
+} from '../../utils/numberFormat';
 
 export default function EuroInfoViewModel() {
   const [euro, setEuro] = useState('');
@@ -21,10 +25,9 @@ export default function EuroInfoViewModel() {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredEuro = e.target.value;
-    const regex = /^\d*.?\d{0,2}$/;
-    const euroStr = enteredEuro.replace(/(^0+)/, '').replace(/[^0-9.]/g, '');
+    const euroStr = convertOnlyNumOrDot(enteredEuro);
 
-    if (!regex.test(euroStr)) return;
+    if (!checkDecimalScale(euroStr)) return;
 
     let { integer, decimal } = splitDecimal(euroStr);
     const hasDecimalPoint = enteredEuro.includes('.');
