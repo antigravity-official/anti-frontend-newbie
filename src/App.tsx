@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from "react";
 
+interface IeurInfo {
+  basePrice: number;
+  openingPrice: number;
+  changePrice: number;
+  cashBuyingPrice: number;
+  cashSellingPrice: number;
+  ttSellingPrice: number;
+  ttBuyingPrice: number;
+}
+
 export const App = () => {
   const [isReady, setReady] = useState(false);
-  const [eurInfo, setEurInfo] = useState<any>({});
+  const [eurInfo, setEurInfo] = useState<IeurInfo>({
+    basePrice: 0,
+    openingPrice: 0,
+    changePrice: 0,
+    cashBuyingPrice: 0,
+    cashSellingPrice: 0,
+    ttSellingPrice: 0,
+    ttBuyingPrice: 0,
+  });
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -15,7 +33,7 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
+  const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
 
   useEffect(() => {
     getEurInfo();
