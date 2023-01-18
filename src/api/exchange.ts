@@ -13,8 +13,6 @@ export default class ExchangeApi implements Exchange {
       },
     });
 
-    console.log('data', data[0]);
-
     return data[0];
   }
 }
