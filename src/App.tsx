@@ -21,6 +21,7 @@ export const App = () => {
     ttSellingPrice: 0,
     ttBuyingPrice: 0,
   });
+  const [eur, setEur] = useState<string>("0");
 
   const getEurInfo = async () => {
     const krweur = await fetch(
@@ -33,14 +34,37 @@ export const App = () => {
     setReady(true);
   };
 
-  const exchangeEurToKrw = (krw: number) => krw * eurInfo.basePrice;
+  const handleOnChangeEur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const WITH_DECIMAL_POINT = /^\d*.?\d{0,2}$/;
+    const WITH_ZERO = /^0+/;
+
+    const { value } = e.target;
+    
+    if (!value) {
+      setEur("0");
+
+      return;
+    }
+
+    if (!WITH_DECIMAL_POINT.test(value)) {
+      return;
+    }
+
+    setEur(value.replace(WITH_ZERO, ""));
+  };
+
+  const exchangeEurToKrw = (eur: string): string => (
+    Math.round(Number(eur) * eurInfo.basePrice)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  );
 
   useEffect(() => {
     getEurInfo();
-    return () => {};
   }, []);
 
   if (!isReady) return null;
+
   return (
     <div className="App">
       <div>환율기준 (1 유로)</div>
@@ -58,7 +82,7 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <input type="number" step="0.01" value={eur} onChange={handleOnChangeEur} /> 유로 ▶︎ <input disabled value={exchangeEurToKrw(eur)} /> 원
     </div>
   );
 };
