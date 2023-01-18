@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useExchanger from "../../hooks/useExchanger";
 import useExchangeRate from "../../hooks/useExchangeRate";
+import Loading from "../common/Loading";
 import Exchanger from "./Exchanger";
 import ExchangeRate from "./ExchangeRate";
 
@@ -18,13 +19,19 @@ export const ExchangeContainer = () => {
 
   return (
     <>
-      <ExchangeRate country={country} exchangeRateInfo={exchageRateInfo} />
-      <Exchanger
-        country={country}
-        result={result}
-        exchangeToKrw={exchangeToKrw}
-        basePrice={exchageRateInfo.basePrice}
-      />
+      {isReady ? (
+        <>
+          <ExchangeRate country={country} exchangeRateInfo={exchageRateInfo} />
+          <Exchanger
+            country={country}
+            result={result}
+            exchangeToKrw={exchangeToKrw}
+            basePrice={exchageRateInfo.basePrice}
+          />
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
