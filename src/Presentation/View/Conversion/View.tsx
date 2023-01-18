@@ -1,8 +1,12 @@
-import React from 'react';
 import useViewModel from './ViewModel';
-import Input from '../Components/Input';
-import Button from 'Presentation/View/Components/Button';
-import DropDowns from 'Presentation/View/Components/DropDowns';
+import Input from '../../Components/Input';
+import ActionButton from 'Presentation/Components/ActionButton';
+import DropDowns from 'Presentation/Components/DropDowns';
+import Layout from 'Presentation/Components/Layout';
+import { RxReset } from 'react-icons/rx';
+import { HiOutlineSwitchVertical } from 'react-icons/hi';
+import { RiGradienterLine } from 'react-icons/ri';
+import SubmitButton from '../../Components/SubmitButton';
 
 export default function ConvertCurrencyView() {
   const {
@@ -17,7 +21,7 @@ export default function ConvertCurrencyView() {
     isReady,
     onConvert,
     price,
-    onPriceChange,
+    setPrice,
     onReset,
     onSwitch,
     showResult,
@@ -26,27 +30,50 @@ export default function ConvertCurrencyView() {
 
   if (isLoading) return <div>로딩중...</div>;
   if (error) return <div>서버에서 에러가 발생했어요!</div>;
+
   return (
-    <div>
-      <h1>Currency Converter</h1>
-      <section className="from">
-        <DropDowns label={'종류'} array={kindOfPrice} value={price} onChange={onPriceChange} />
+    <Layout title="✅ 한국와 유럽의 환율을 알아보세요!">
+      <p className="flex items-center mb-2">
+        <span className="text-4xl">{from.name}</span>
+        <span className="mx-4"> ➡️ </span>
+        <span className="text-4xl">{into.name}</span>
+      </p>
+      <DropDowns
+        label={'가격 정보'}
+        summary={`${from.unit}에서 ${into.unit}(으)로`}
+        array={kindOfPrice}
+        state={price}
+        setState={setPrice}
+      />
+      <section className="flex flex-col items-center ">
         <Input
-          label={from.name}
+          label={from.unit}
           amount={amount}
           onAmountChange={onAmountChange}
           onSubmit={onConvert}
           onKeyDown={closeResult}
+          placeholder="금액을 입력하세요"
         />
-        <Button title={'convert'} onClick={onConvert} />
-        <Button title={'reset'} onClick={onReset} />
-        <Button title={'switch'} onClick={onSwitch} />
+        <div className="mt-4">
+          <ActionButton title={'초기화'} icon={RxReset} onClick={onReset} />
+          <ActionButton title={'유로 🔁 원'} icon={HiOutlineSwitchVertical} onClick={onSwitch} />
+        </div>
+        <div className="mt-10">
+          <SubmitButton
+            title={'변환하기'}
+            processingTitle={'변환 중...'}
+            icon={RiGradienterLine}
+            processing={!isReady}
+            onClick={onConvert}
+          />
+        </div>
       </section>
-      <section className="into">
-        <span>결과({into.name})</span>
-        <p>{showResult && isReady && result}</p>
-        <p>{showResult && !isReady && '👾'}</p>
-      </section>
-    </div>
+      {showResult && isReady && (
+        <section className="relative border-dotted border-gray-300 border-t-2 w-full  my-5 pt-16">
+          <img src="/complete.png" alt="complete.png" className="w-32 absolute top-3 left-5 opacity-80" />
+          <p className="text-center text-3xl z-10">{result}</p>
+        </section>
+      )}
+    </Layout>
   );
 }
