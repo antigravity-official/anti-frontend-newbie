@@ -34,33 +34,6 @@ const Title = styled.div`
   z-index: 1;
 `;
 
-const Input = styled.input`
-  width: 19.5rem;
-  height: 3.25rem;
-  position: absolute;
-  top: 3.6rem;
-  left: 1.25rem;
-  text-align: right;
-  background-color: transparent;
-  color: #e7e7ea;
-  border: none;
-  font-size: 1.5rem;
-  z-index: 1;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const MoneyUnit = styled.p`
-  width: 19.3rem;
-  position: absolute;
-  bottom: 1.3rem;
-  left: 1.25rem;
-  text-align: right;
-  font-size: 0.75rem;
-  z-index: 1;
-`;
-
 const Background = styled.div`
   position: absolute;
   background: linear-gradient(297.71deg, #1a1548 0%, #21143f 100%);
@@ -83,8 +56,6 @@ const InputCard = ({ children, width, height }: ParamProps) => {
       <Box width={`${width}rem`} height={`${height}rem`}>
         <TextArea>{children}</TextArea>
         <Title></Title>
-        <Input maxLength={15}></Input>
-        <MoneyUnit>1유로</MoneyUnit>
         <Background style={{ width: `${width}rem`, height: `${height}rem` }} />
         <Border style={{ width: `${width}rem`, height: `${height}rem` }} />
       </Box>

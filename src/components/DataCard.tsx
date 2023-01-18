@@ -22,7 +22,7 @@ const DataCard = ({ stateOne, stateTwo, priceOne, priceTwo }: ParamProps) => {
             marginLeft: '1.25rem',
           }}
         >
-          <p>
+          <div>
             <p
               style={{
                 marginBottom: '0.5rem',
@@ -42,8 +42,8 @@ const DataCard = ({ stateOne, stateTwo, priceOne, priceTwo }: ParamProps) => {
             >
               {priceOne}
             </p>
-          </p>
-          <p>
+          </div>
+          <div>
             <p
               style={{
                 marginBottom: '0.5rem',
@@ -63,7 +63,7 @@ const DataCard = ({ stateOne, stateTwo, priceOne, priceTwo }: ParamProps) => {
             >
               {priceTwo}
             </p>
-          </p>
+          </div>
         </div>
       </BasicCard>
     </>
