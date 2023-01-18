@@ -1,0 +1,17 @@
+@import "./components/common/loading.scss";
+@import "./components/exchange/exchange-rate.scss";
+@import "./components/exchange/exchanger.scss";
+
+.div {
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100%;
+  max-width: 480px;
+  min-width: 320px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

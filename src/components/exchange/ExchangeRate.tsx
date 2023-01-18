@@ -19,10 +19,12 @@ const ExchangeRate = ({ country, exchangeRateInfo }: ExchangeRateProps) => {
     <div className="exchange__container">
       <div className="exchange-title">환율기준 (1 {country.korName})</div>
       <div className="exchange-rate">
-        {exchangePrice.basePrice}
-        {exchangeRateInfo.isPriceUp() && "▲"}
-        {exchangeRateInfo.isPriceDown() && "▼"}
-        {exchangePrice.changePrice}원 ({exchangeRateInfo.getPriceRate()}%)
+        <span>{exchangePrice.basePrice}</span>
+        <span>{exchangeRateInfo.isPriceUp() && "▲"}</span>
+        <span>{exchangeRateInfo.isPriceDown() && "▼"}</span>
+        <span>
+          {exchangePrice.changePrice}원 ({exchangeRateInfo.getPriceRate()}%)
+        </span>
       </div>
       <div className="exchange-prices__container">
         <div className="exchange-price">살때 : {exchangePrice.cashBuyingPrice}원</div>
