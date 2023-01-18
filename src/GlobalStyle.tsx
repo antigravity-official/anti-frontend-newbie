@@ -62,6 +62,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    height: 100vh;
     font-family: 'Roboto', sans-serif;
     background-color: #0F0B21;
     color: #e7e7ea;

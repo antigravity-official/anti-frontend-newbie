@@ -14,6 +14,7 @@ const Box = styled.div<ParamProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   position: relative;
+  overflow: hidden;
 `;
 
 const TextArea = styled.div`

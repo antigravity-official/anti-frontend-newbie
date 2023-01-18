@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BasicCard from './components/BasicCard';
 import InputCard from './components/InputCard';
 import CircleCard from './components/CircleCard';
+import ChartCard from './components/ChartCard';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -23,6 +24,7 @@ export const App = () => {
 
   useEffect(() => {
     getEurInfo();
+    console.log(eurInfo);
     return () => {};
   }, []);
 
@@ -91,9 +93,11 @@ export const App = () => {
         <section
           style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
         >
-          <BasicCard width={21.75} height={16.375}>
-            차트
-          </BasicCard>
+          <ChartCard
+            basePrice={eurInfo.basePrice}
+            openingPrice={eurInfo.openingPrice}
+            changePrice={eurInfo.changePrice}
+          />
           <InputCard width={21.8} height={8.75}>
             <div style={{ display: 'flex' }}>
               <p style={{ marginRight: '0.625rem' }}>국기</p>
@@ -103,15 +107,6 @@ export const App = () => {
           </InputCard>
         </section>
       </section>
-      <div>환율기준 (1 유로)</div>
-      <div>
-        {eurInfo.basePrice}
-        {eurInfo.basePrice - eurInfo.openingPrice > 0 && '▲'}
-        {eurInfo.basePrice - eurInfo.openingPrice < 0 && '▼'}
-        {eurInfo.changePrice}원 (
-        {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
-      </div>
-      <hr />
       <input value={eurInputValue} onChange={onChangeEurInput} />
       <input value={krwInput()} disabled /> 원
     </div>
