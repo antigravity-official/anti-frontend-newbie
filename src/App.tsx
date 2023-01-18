@@ -1,13 +1,11 @@
 import React, { Suspense } from "react";
-import EurInfoViewModel from "./viewModel/EurInfoViewModel";
+import EurInfo from "./viewModel/EurInfo";
 
 export const App = () => {
   return (
     <Suspense fallback={<div>환율 정보를 로딩중입니다.</div>}>
       <div className="App">
-        <EurInfoViewModel />
-        <hr />
-        <input /> 유로 ▶︎ <input disabled /> 원
+        <EurInfo />
       </div>
     </Suspense>
   );
