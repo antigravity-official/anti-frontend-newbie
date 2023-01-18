@@ -5,7 +5,7 @@ export const requestApi = async (url: string, options = {}) => {
     });
     if (!res.ok) throw new Error(`${res.status} Error`);
     return res.json();
-  } catch (e: any) {
-    console.error(e.message);
+  } catch (e) {
+    console.error((e as Error).message);
   }
 };
