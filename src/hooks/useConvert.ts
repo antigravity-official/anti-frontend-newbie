@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-type ConvertInfo = {
+type AnyOBJ = {
+  [key: string]: unknown;
+};
+
+type ConvertInfo = AnyOBJ & {
   name: string;
   locale: string;
   unit: string;
@@ -20,19 +24,17 @@ type ReturnType = {
 };
 
 export default function useConvert(initialValue: ConvertType): ReturnType {
-  const [from, setFrom] = useState(initialValue.from);
-  const [into, setInto] = useState(initialValue.into);
+  const [values, setValues] = useState(initialValue);
   const [result, setResult] = useState('');
-  const [isReady, setIsReady] = useState(false);
+  const [isReady, setIsReady] = useState(true);
 
   const handleConvert = (amount: number, price: number) => {
-    const { convert } = from;
-    const { locale, unit, format } = into;
-
-    setResult(`${format(convert(amount, price)).toLocaleString(locale)}${unit}`);
+    const { convert } = values.from;
+    const { locale, unit, format } = values.into;
 
     setIsReady(false);
     const timeout = setTimeout(() => {
+      setResult(`${format(convert(amount, price)).toLocaleString(locale)}${unit}`);
       setIsReady(true);
 
       return () => {
@@ -42,14 +44,12 @@ export default function useConvert(initialValue: ConvertType): ReturnType {
   };
 
   const handleSwitch = () => {
-    setFrom(into);
-    setInto(from);
+    setValues(({ from, into }) => ({ from: into, into: from }));
   };
 
   const handleReset = () => {
-    setFrom(initialValue.from);
-    setInto(initialValue.into);
+    setValues(initialValue);
   };
 
-  return { from, into, result, isReady, handleConvert, handleSwitch, handleReset };
+  return { from: values.from, into: values.into, result, isReady, handleConvert, handleSwitch, handleReset };
 }
