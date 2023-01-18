@@ -2,6 +2,9 @@ interface Index {
   [key: string]: string | number;
 }
 
+export const KR_DECIMAL = 0;
+export const EUR_DECIMAL = 2;
+
 export const CASH_TT_INFO_LIST = ["cashBuyingPrice", "cashSellingPrice", "ttSellingPrice", "ttBuyingPrice"];
 
 export const CASH_TT_INFO_TEXT: Index = {

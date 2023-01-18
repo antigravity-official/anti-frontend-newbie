@@ -1,5 +1,5 @@
 import { EurInfo } from "../interfaces/euro";
-import { CASH_TT_INFO_LIST, CASH_TT_INFO_TEXT } from "./constant";
+import { CASH_TT_INFO_LIST, CASH_TT_INFO_TEXT, KR_DECIMAL } from "./constant";
 
 export const exchangeEurToKrw = (krw: number, basePrice: number) => krw * basePrice;
 
@@ -8,10 +8,10 @@ export const priceToLocaleString = (price: number) => {
 };
 
 export const getEurStandardText = (basePriceNumber: number, changePriceNumber: number, openingPriceNumber: number) => {
-  const basePrice = priceToLocaleString(basePriceNumber);
-  const changePrice = priceToLocaleString(changePriceNumber);
+  const basePrice = priceToLocaleString(Number(basePriceNumber.toFixed(KR_DECIMAL)));
+  const changePrice = priceToLocaleString(Number(changePriceNumber.toFixed(KR_DECIMAL)));
   const changeArrow = basePriceNumber - openingPriceNumber > 0 ? "▲" : "▼";
-  const changePricePercentage = `${(changePriceNumber / basePriceNumber) * 100}%`;
+  const changePricePercentage = `${((changePriceNumber / basePriceNumber) * 100).toFixed(2)}%`;
   return {
     basePrice,
     changeArrow,
@@ -21,5 +21,11 @@ export const getEurStandardText = (basePriceNumber: number, changePriceNumber: n
 };
 
 export const getCashTtInfoTextList = (eurInfo: EurInfo) => {
-  return CASH_TT_INFO_LIST.map((key) => `${CASH_TT_INFO_TEXT[key]} : ${priceToLocaleString(Number(eurInfo[key]))}`);
+  return CASH_TT_INFO_LIST.map(
+    (key) => `${CASH_TT_INFO_TEXT[key]} : ${priceToLocaleString(Number(Number(eurInfo[key]).toFixed(KR_DECIMAL)))}`
+  );
+};
+
+export const isNumberHundredths = (testNumber: number) => {
+  return /^[\d]*\.?[\d]{0,2}$/.test(testNumber.toString());
 };
