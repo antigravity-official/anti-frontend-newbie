@@ -1,10 +1,11 @@
 interface ExchangerProps {
+  country: { korName: string; enName: string };
   result: number;
   exchangeToKrw: (inputPrice: number, basePrice: number) => void;
   basePrice: number;
 }
 
-const Exchanger = ({ result, exchangeToKrw, basePrice }: ExchangerProps) => {
+const Exchanger = ({ country, result, exchangeToKrw, basePrice }: ExchangerProps) => {
   return (
     <div className="exchanger__container">
       <input
@@ -12,7 +13,7 @@ const Exchanger = ({ result, exchangeToKrw, basePrice }: ExchangerProps) => {
         type="number"
         onChange={(e) => exchangeToKrw(Number(e.target.value), basePrice)}
       />
-      <span className="exchanger-span">유로 ▶︎</span>
+      <span className="exchanger-span">{country.korName} ▶︎</span>
       <input className="exchanger__input" disabled value={result} />
       <span className="exchanger-span">원</span>
     </div>
