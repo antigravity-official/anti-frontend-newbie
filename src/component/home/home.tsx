@@ -1,6 +1,7 @@
 import * as S from "../../styles/homeStyles";
-import UseHomeViewModel from "../../hooks/homeViewModel";
+import UseHomeViewModel from "../../hooks/useHome";
 import { DepthPointTwo, EurFormatter } from "../../lib/utils";
+import Input from "../commons/input";
 
 export default function HomeView() {
   const { eurInfo, eurTokrw, exchangeUpDown, onChangeInputEur } =
@@ -39,11 +40,11 @@ export default function HomeView() {
         )}
         <S.calculationWrapper>
           <label htmlFor={"inputEur"}>
-            <input id={"inputEur"} onChange={onChangeInputEur} /> 유로
+            <Input id={"inputEur"} onChange={onChangeInputEur} /> 유로
           </label>
           <span>▶︎</span>
           <label htmlFor={"inputKrw"}>
-            <input id={"inputKrw"} disabled value={eurTokrw} /> 원
+            <Input id={"inputKrw"} disabled value={eurTokrw} /> 원
           </label>
         </S.calculationWrapper>
       </S.Main>

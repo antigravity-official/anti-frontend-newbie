@@ -3,7 +3,7 @@ import { PointValidation } from "../lib/validation";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { EurInfoAtom, EurInfoSelector } from "../store/eurInfo";
 
-export default function UseHomeViewModel() {
+export default function UseHome() {
   const [eurInfo] = useRecoilState(EurInfoAtom);
   const [eurTokrw, setEurTokrw] = useState("");
   const { exchangeEurToKrw } = useRecoilValue(EurInfoSelector);

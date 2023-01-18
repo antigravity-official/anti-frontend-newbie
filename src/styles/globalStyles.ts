@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 export const globalStyles = css`
   * {
@@ -50,4 +51,14 @@ export const globalStyles = css`
   h6 {
     margin: 0;
   }
+`;
+
+export const FallbackDiv = styled.section`
+  margin: 0 auto;
+  width: 500px;
+  text-align: center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
 `;
