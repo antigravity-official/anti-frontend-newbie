@@ -38,6 +38,8 @@ const InputStyle = styled.input`
   border: 1px solid gray;
   transition: all 0.3s ease;
   outline: none;
+  text-align: right;
+  font-size: large;
 
   :focus {
     border: 1px solid gray;

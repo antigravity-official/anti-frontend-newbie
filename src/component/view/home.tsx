@@ -40,11 +40,17 @@ export default function HomeView() {
         )}
         <S.calculationWrapper>
           <label htmlFor={"inputEur"}>
-            <Input id={"inputEur"} onChange={onChangeInputEur} /> 유로
+            <Input
+              id={"inputEur"}
+              onChange={onChangeInputEur}
+              width={"160px"}
+            />{" "}
+            유로
           </label>
           <span>▶︎</span>
           <label htmlFor={"inputKrw"}>
-            <Input id={"inputKrw"} disabled value={eurTokrw} /> 원
+            <Input id={"inputKrw"} disabled value={eurTokrw} width={"160px"} />{" "}
+            원
           </label>
         </S.calculationWrapper>
       </S.Main>
