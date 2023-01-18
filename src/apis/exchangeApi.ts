@@ -1,6 +1,6 @@
 import { requestApi } from './requestApi';
 
-export const getExchangeKrwEurDatasApi = async () => {
+export const getExchangeKrwEurInfosApi = async () => {
   const exchangeDatas = await requestApi(`/v1/forex/recent?codes=FRX.KRWEUR`, {
     method: 'GET',
   });
