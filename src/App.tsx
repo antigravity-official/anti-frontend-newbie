@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BasicCard from './components/BasicCard';
 import InputCard from './components/InputCard';
+import CircleCard from './components/CircleCard';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -83,6 +84,10 @@ export const App = () => {
             <em>(EUR)</em>
           </InputCard>
         </section>
+        <section style={{ alignSelf: 'end', marginBottom: '2.5rem' }}>
+          <CircleCard />
+        </section>
+
         <section
           style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
         >
