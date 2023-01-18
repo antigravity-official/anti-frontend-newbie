@@ -1,6 +1,6 @@
 import React from "react";
 import ExchangeRate from "./components/ExchangeRate";
-import { EUR } from "./constants";
+import { EUR, USD } from "./constants";
 
 export const App = () => {
   return (

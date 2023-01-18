@@ -88,7 +88,7 @@ const ExchangeInput = ({ exchangeInfo }: Props) => {
   return (
     <>
       <div>
-        <input type="text" pattern="[0-9]+" value={money} onChange={onChange} />
+        <input type="text" value={money} onChange={onChange} />
         {exchangeInfo.currencyName} ▶︎{" "}
         <input value={exchangeEurToKrw(money)} disabled /> 원
       </div>

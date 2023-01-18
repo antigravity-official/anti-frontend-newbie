@@ -9,18 +9,18 @@ interface Props {
 const ExchangeRateTitle = memo(({ exchangeInfo }: Props) => {
   const { currencyName, basePrice, openingPrice, changePrice } = exchangeInfo;
 
-  const renderArrow = (basePrice: number, openingPrice: number) => {
-    if (basePrice - openingPrice > 0) {
+  const renderArrow = (base: number, open: number) => {
+    if (base - open > 0) {
       return "▲";
     }
-    if (basePrice - openingPrice < 0) {
+    if (base - open < 0) {
       return "▼";
     }
     return "-";
   };
 
-  const calcChangeRate = (changePrice: number, basePrice: number) => {
-    return (changePrice / basePrice) * 100;
+  const calcChangeRate = (change: number, base: number) => {
+    return (change / base) * 100;
   };
 
   return (
