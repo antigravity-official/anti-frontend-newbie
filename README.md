@@ -16,11 +16,11 @@
 
 ## 실행 방법
 
-git clone https://github.com/unidagit/anti-frontend-newbie.git
+`git clone https://github.com/unidagit/anti-frontend-newbie.git`
 
-npm install
+`npm install`
 
-npm start
+`npm start`
 
 <br>
 
