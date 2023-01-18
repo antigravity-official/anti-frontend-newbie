@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BasicCard from './components/BasicCard';
+import InputCard from './components/InputCard';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -66,17 +67,35 @@ export const App = () => {
           </section>
           <section style={{ display: 'flex', gap: '0.75rem' }}>
             <BasicCard width={10.5} height={10.5}>
-              데이터
+              <p>살때 : {eurInfo.cashBuyingPrice}</p>
+              <p>팔때 : {eurInfo.cashSellingPrice}</p>
             </BasicCard>
             <BasicCard width={10.5} height={10.5}>
-              데이터
+              <p>보낼때 : {eurInfo.ttSellingPrice}</p>
+              <p>받을때 : {eurInfo.ttBuyingPrice}</p>
             </BasicCard>
           </section>
+          <InputCard width={21.8} height={8.75}>
+            <div style={{ display: 'flex' }}>
+              <p style={{ marginRight: '0.625rem' }}>국기</p>
+              <p>나라이름</p>
+            </div>
+            <em>(EUR)</em>
+          </InputCard>
         </section>
-        <section>
+        <section
+          style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
+        >
           <BasicCard width={21.75} height={16.375}>
             차트
           </BasicCard>
+          <InputCard width={21.8} height={8.75}>
+            <div style={{ display: 'flex' }}>
+              <p style={{ marginRight: '0.625rem' }}>국기</p>
+              <p>나라이름</p>
+            </div>
+            <em>(KRW)</em>
+          </InputCard>
         </section>
       </section>
       <div>환율기준 (1 유로)</div>
@@ -87,14 +106,8 @@ export const App = () => {
         {eurInfo.changePrice}원 (
         {((eurInfo.changePrice / eurInfo.basePrice) * 100).toFixed(2)}%)
       </div>
-      <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
-      </div>
       <hr />
-      <input value={eurInputValue} onChange={onChangeEurInput} /> 유로 ▶︎{' '}
+      <input value={eurInputValue} onChange={onChangeEurInput} />
       <input value={krwInput()} disabled /> 원
     </div>
   );
