@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import IndicatorView from "./views/IndicatorView";
+import TextFieldView from "./views/TextFieldView";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -8,6 +10,7 @@ export const App = () => {
     const krweur = await fetch(
       "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
     )
+    
       .then((response) => response.json())
       .then((array) => array[0]);
 
@@ -40,8 +43,10 @@ export const App = () => {
         <div>받을때 : {eurInfo.ttBuyingPrice}</div>
       </div>
       <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <TextFieldView/>
+      <IndicatorView/>
     </div>
+    
   );
 };
 
