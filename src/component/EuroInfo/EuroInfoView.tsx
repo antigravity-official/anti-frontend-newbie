@@ -2,11 +2,15 @@ import useEuroInfoViewModel from './EuroInfoViewModel';
 import styles from './EuroInfoView.module.css';
 
 export default function EuroInfoView() {
-  const { euro, eurInfo, isLoading, isFetching, krw, onChange } =
+  const { euro, eurInfo, error, isLoading, isFetching, krw, onChange } =
     useEuroInfoViewModel();
 
   if (isLoading || isFetching) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
   const isHigherBasePrice =

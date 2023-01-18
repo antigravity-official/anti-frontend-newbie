@@ -19,12 +19,18 @@ describe('EuroInfoView', () => {
 
   it('renders correctly while is loading', () => {
     mockedUseEuroInfoViewModel.mockReturnValue({
-      euro: '',
-      krw: '0',
-      eurInfo: null,
       isLoading: true,
       isFetching: true,
-      onChange: jest.fn(),
+    });
+    const tree = renderer
+      .create(withAllProviders(<EuroInfoView />, fakeApi))
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('render correctly when errors occur', () => {
+    mockedUseEuroInfoViewModel.mockReturnValue({
+      error: { message: 'Somethig is wrong' },
     });
     const tree = renderer
       .create(withAllProviders(<EuroInfoView />, fakeApi))
@@ -34,12 +40,8 @@ describe('EuroInfoView', () => {
 
   it('renders correctly while is fetching', () => {
     mockedUseEuroInfoViewModel.mockReturnValue({
-      euro: '',
-      krw: '0',
-      eurInfo: null,
       isLoading: false,
       isFetching: true,
-      onChange: jest.fn(),
     });
     const tree = renderer
       .create(withAllProviders(<EuroInfoView />, fakeApi))
@@ -47,7 +49,7 @@ describe('EuroInfoView', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders correctly', async () => {
+  it('renders correctly when baseprice > openingPrice', async () => {
     mockedUseEuroInfoViewModel.mockReturnValue({
       euro: '1',
       krw: '1300',
@@ -57,6 +59,30 @@ describe('EuroInfoView', () => {
         cashSellingPrice: 1313.32,
         changePrice: 3.86,
         openingPrice: 1336.18,
+        ttBuyingPrice: 1326.59,
+        ttSellingPrice: 1353.37,
+      },
+      isLoading: false,
+      isFetching: false,
+      onChange: jest.fn(),
+    });
+
+    const tree = renderer
+      .create(withAllProviders(<EuroInfoView />, fakeApi))
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correctly when baseprice < openingPrice', async () => {
+    mockedUseEuroInfoViewModel.mockReturnValue({
+      euro: '1',
+      krw: '1300',
+      eurInfo: {
+        basePrice: 1336.18,
+        cashBuyingPrice: 1366.64,
+        cashSellingPrice: 1313.32,
+        changePrice: 3.86,
+        openingPrice: 1339.98,
         ttBuyingPrice: 1326.59,
         ttSellingPrice: 1353.37,
       },

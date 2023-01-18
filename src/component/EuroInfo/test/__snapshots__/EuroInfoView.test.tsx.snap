@@ -1,6 +1,130 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EuroInfoView render correctly when errors occur 1`] = `
+<div>
+  Somethig is wrong
+</div>
+`;
+
 exports[`EuroInfoView renders correctly 1`] = `
+<div
+  className="info"
+>
+  <h1>
+    환율기준 (1 유로)
+  </h1>
+  <h2>
+    1339.98
+    <span
+      className="gap higher"
+    >
+      <span>
+        ▲
+        3.86
+        원
+      </span>
+      (
+      0.29
+      %)
+    </span>
+  </h2>
+  <ul
+    className="exchange"
+  >
+    <li>
+      살때 : 
+      1366.64
+    </li>
+    <li>
+      팔때 : 
+      1313.32
+    </li>
+    <li>
+      보낼때 : 
+      1353.37
+    </li>
+    <li>
+      받을때 : 
+      1326.59
+    </li>
+  </ul>
+  <hr />
+  <input
+    onChange={[MockFunction]}
+    placeholder="0"
+    type="text"
+    value="1"
+  />
+   
+  유로 ▶︎ 
+  <input
+    disabled={true}
+    value="1300"
+  />
+   원
+</div>
+`;
+
+exports[`EuroInfoView renders correctly when baseprice < openingPrice 1`] = `
+<div
+  className="info"
+>
+  <h1>
+    환율기준 (1 유로)
+  </h1>
+  <h2>
+    1336.18
+    <span
+      className="gap lower"
+    >
+      <span>
+        ▼
+        3.86
+        원
+      </span>
+      (
+      0.29
+      %)
+    </span>
+  </h2>
+  <ul
+    className="exchange"
+  >
+    <li>
+      살때 : 
+      1366.64
+    </li>
+    <li>
+      팔때 : 
+      1313.32
+    </li>
+    <li>
+      보낼때 : 
+      1353.37
+    </li>
+    <li>
+      받을때 : 
+      1326.59
+    </li>
+  </ul>
+  <hr />
+  <input
+    onChange={[MockFunction]}
+    placeholder="0"
+    type="text"
+    value="1"
+  />
+   
+  유로 ▶︎ 
+  <input
+    disabled={true}
+    value="1300"
+  />
+   원
+</div>
+`;
+
+exports[`EuroInfoView renders correctly when baseprice > openingPrice 1`] = `
 <div
   className="info"
 >

@@ -18,9 +18,12 @@ export default function EuroInfoViewModel() {
   const exchangeApi = useExchangeApi();
   const {
     data: eurInfo,
+    error,
     isLoading,
     isFetching,
-  } = useQuery<EuroInfo, AxiosError>(['euro'], async () => exchangeApi.euro());
+  } = useQuery<EuroInfo, AxiosError>(['euro'], async () => exchangeApi.euro(), {
+    staleTime: 30000,
+  });
   const krw = exchangeEurToKrw(euro, eurInfo?.basePrice as number);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,5 +40,5 @@ export default function EuroInfoViewModel() {
     setEuro(euro);
   };
 
-  return { euro, krw, eurInfo, isLoading, isFetching, onChange };
+  return { euro, krw, eurInfo, error, isLoading, isFetching, onChange };
 }
