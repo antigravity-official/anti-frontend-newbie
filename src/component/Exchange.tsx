@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import Info from "./Info";
 
 const Exchange = () => {
@@ -21,8 +21,8 @@ const Exchange = () => {
     setReady(false);
   };
 
-  const exchangeEurToKrw = (e: any) => {
-    setResult(e.currentTarget.value * eurInfo.basePrice);
+  const exchangeEurToKrw: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setResult(Number(e.currentTarget.value) * eurInfo.basePrice);
     if (e.currentTarget.value.includes(".")) {
       if (e.currentTarget.value.split(".")[1].length > 2) {
         setStopInput(true);
