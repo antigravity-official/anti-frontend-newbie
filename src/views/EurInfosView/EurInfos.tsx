@@ -1,5 +1,6 @@
-import { KrwEurInfosTypes } from '../../interfaces/exchange';
 import * as S from './EurInfos.style';
+import { KrwEurInfosTypes } from '../../interfaces/exchange';
+
 function ExchangeEurInfos({ krwEurInfos }: { krwEurInfos: KrwEurInfosTypes }) {
   return (
     <S.Container>
