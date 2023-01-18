@@ -1,5 +1,7 @@
 # 안티그래비티 프론트엔드 입사자 기술과제 : 이상현
 
+<img width="888" alt="Pasted Graphic 8" src="https://user-images.githubusercontent.com/110229788/213265891-d3482860-0c48-41ed-af6e-f679dc34967f.png">
+
 ## 의도
 
 향후 다양한 페이지 혹은 다양한 환율 계산이 추가된다는 가정하에 리팩토링했습니다. MVVM 패턴을 기반으로 관심사 별로 컴포넌트를 분리하고, input 등 공통 컴포넌트를 제작해 컴포넌트 재사용성을 높였습니다.
