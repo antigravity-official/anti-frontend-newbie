@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import { tExchangInfoData } from "../_types/exchangeInfo";
+import { floor } from "../_utils/demicalPoint";
+import { comma } from "../_utils/comma";
 
 export default function ExchangeInfoView({
   eurInfo,
@@ -11,7 +13,7 @@ export default function ExchangeInfoView({
     <>
       <div>환율기준 (1 유로)</div>
       <div>
-        {eurInfo.basePrice}
+        {comma(floor(eurInfo.basePrice, 0))} 원
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
         {eurInfo.changePrice}원 (
@@ -19,10 +21,10 @@ export default function ExchangeInfoView({
         %)
       </div>
       <div>
-        <div>살때 : {eurInfo.cashBuyingPrice}</div>
-        <div>팔때 : {eurInfo.cashSellingPrice}</div>
-        <div>보낼때 : {eurInfo.ttSellingPrice}</div>
-        <div>받을때 : {eurInfo.ttBuyingPrice}</div>
+        <div>살때 : {comma(floor(eurInfo.cashBuyingPrice, 0))} 원</div>
+        <div>팔때 : {comma(floor(eurInfo.cashSellingPrice, 0))} 원</div>
+        <div>보낼때 : {comma(floor(eurInfo.ttSellingPrice, 0))} 원</div>
+        <div>받을때 : {comma(floor(eurInfo.ttBuyingPrice, 0))} 원</div>
       </div>
     </>
   );
