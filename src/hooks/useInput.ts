@@ -1,24 +1,9 @@
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { addComma, formattingWon, unComma } from "../../../utils";
-import useFetchExchangeInfo from "../../../hooks/useFetchExchangeInfo";
-import { Currency } from "../../../../typing";
+import { addComma, unComma } from "../utils";
 
-const ExchangeRateViewModel = (currency: Currency) => {
-  const { isReady, exchangeInfo } = useFetchExchangeInfo(currency);
-
-  const [money, setMoney] = useState("");
+const useInput = (initialState: string) => {
+  const [money, setMoney] = useState(initialState);
   const [inputError, setInputError] = useState("");
-
-  const exchangeEurToKrw = useCallback(
-    (inputMoney: string, basePrice: number) => {
-      const pureMoney = Number(unComma(inputMoney));
-      const newBasePrice = Math.floor(basePrice);
-      const exchangedMoney = Math.floor(pureMoney * newBasePrice);
-      const formattingMoney = addComma(String(exchangedMoney));
-      return formattingMoney;
-    },
-    []
-  );
 
   // prevInteger 는 이전 숫자를 기억하고 사용자 커서 위치를 조작하는데 사용
   const prevInteger = useRef("");
@@ -86,61 +71,7 @@ const ExchangeRateViewModel = (currency: Currency) => {
     prevInteger.current = formattedInteger;
   }, []);
 
-  const renderArrow = (base: number, open: number) => {
-    if (base - open > 0) {
-      return "▲";
-    }
-    if (base - open < 0) {
-      return "▼";
-    }
-    return "-";
-  };
-
-  const calcChangeRate = (change: number, base: number) => {
-    return (change / base) * 100;
-  };
-
-  if (!isReady || exchangeInfo === null) {
-    return { isReady };
-  }
-
-  const {
-    basePrice,
-    openingPrice,
-    currencyName,
-    changePrice,
-    cashBuyingPrice,
-    cashSellingPrice,
-    ttSellingPrice,
-    ttBuyingPrice,
-  } = exchangeInfo;
-
-  const arrow = renderArrow(basePrice, openingPrice);
-  const formattingBasePrice = formattingWon(basePrice);
-  const formattingChangePrice = formattingWon(changePrice);
-  const changeRate = calcChangeRate(changePrice, basePrice);
-  const formattingCashBuyingPrice = formattingWon(cashBuyingPrice);
-  const formattingSellingPrice = formattingWon(cashSellingPrice);
-  const formattingTtSellingPrice = formattingWon(ttSellingPrice);
-  const formattingTtBuyingPrice = formattingWon(ttBuyingPrice);
-  const exchangedMoney = exchangeEurToKrw(money, basePrice);
-
-  return {
-    isReady,
-    arrow,
-    currencyName,
-    formattingBasePrice,
-    formattingChangePrice,
-    changeRate,
-    formattingCashBuyingPrice,
-    formattingSellingPrice,
-    formattingTtSellingPrice,
-    formattingTtBuyingPrice,
-    money,
-    exchangedMoney,
-    onChange,
-    inputError,
-  };
+  return { money, onChange, inputError };
 };
 
-export default ExchangeRateViewModel;
+export default useInput;

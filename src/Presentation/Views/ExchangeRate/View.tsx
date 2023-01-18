@@ -1,9 +1,10 @@
-import ExchangeRateTitle from "../../components/ExchangeRate/ExchangeRateTitle";
 import ExchangeRateInfo from "../../components/ExchangeRate/ExchangeRateInfo";
 import ExchangeInput from "../../components/ExchangeRate/ExchangeInput";
 import { Currency } from "../../../../typing";
 import { SyncLoader } from "react-spinners";
 import useViewModel from "./ViewModel";
+import React from "react";
+import ExchangeRateTitle from "../../components/ExchangeRate/ExchangeRateTitle";
 interface Props {
   currency: Currency;
 }
@@ -11,6 +12,7 @@ interface Props {
 const ExchangeRate = ({ currency }: Props) => {
   const {
     isReady,
+    exchangeInfo,
     arrow,
     currencyName,
     formattingBasePrice,
@@ -26,7 +28,7 @@ const ExchangeRate = ({ currency }: Props) => {
     inputError,
   } = useViewModel(currency);
 
-  if (!isReady) {
+  if (!isReady || exchangeInfo === null) {
     return (
       <>
         <SyncLoader color="#36d7b7" />
@@ -38,11 +40,11 @@ const ExchangeRate = ({ currency }: Props) => {
   return (
     <>
       <ExchangeRateTitle
-        arrow={arrow}
         currencyName={currencyName}
-        formattingBasePrice={formattingBasePrice}
-        formattingChangePrice={formattingChangePrice}
         changeRate={changeRate}
+        arrow={arrow}
+        formattingChangePrice={formattingChangePrice}
+        formattingBasePrice={formattingBasePrice}
       />
       <ExchangeRateInfo
         formattingCashBuyingPrice={formattingCashBuyingPrice}
@@ -50,7 +52,6 @@ const ExchangeRate = ({ currency }: Props) => {
         formattingTtBuyingPrice={formattingTtBuyingPrice}
         formattingTtSellingPrice={formattingTtSellingPrice}
       />
-      <hr />
       <ExchangeInput
         money={money}
         onChange={onChange}

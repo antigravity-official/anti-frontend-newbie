@@ -7,22 +7,20 @@ interface Props {
   formattingTtBuyingPrice: string | undefined;
 }
 
-const ExchangeRateInfo = memo(
-  ({
-    formattingCashBuyingPrice,
-    formattingSellingPrice,
-    formattingTtSellingPrice,
-    formattingTtBuyingPrice,
-  }: Props) => {
-    return (
-      <>
-        <div>살때 : {formattingCashBuyingPrice}</div>
-        <div>팔때 : {formattingSellingPrice}</div>
-        <div>보낼때 : {formattingTtSellingPrice}</div>
-        <div>받을때 : {formattingTtBuyingPrice}</div>
-      </>
-    );
-  }
-);
+const ExchangeRateInfo = ({
+  formattingCashBuyingPrice,
+  formattingSellingPrice,
+  formattingTtSellingPrice,
+  formattingTtBuyingPrice,
+}: Props) => {
+  return (
+    <>
+      <div>살때 : {formattingCashBuyingPrice}</div>
+      <div>팔때 : {formattingSellingPrice}</div>
+      <div>보낼때 : {formattingTtSellingPrice}</div>
+      <div>받을때 : {formattingTtBuyingPrice}</div>
+    </>
+  );
+};
 
-export default ExchangeRateInfo;
+export default memo(ExchangeRateInfo);

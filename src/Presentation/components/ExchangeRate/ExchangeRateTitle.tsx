@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 interface Props {
   arrow: string | undefined;
@@ -28,4 +28,4 @@ const ExchangeRateTitle = ({
   );
 };
 
-export default ExchangeRateTitle;
+export default memo(ExchangeRateTitle);

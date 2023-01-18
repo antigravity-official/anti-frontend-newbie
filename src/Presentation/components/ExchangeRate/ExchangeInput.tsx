@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 interface Props {
   money: string | undefined;
@@ -17,6 +17,7 @@ const ExchangeInput = ({
 }: Props) => {
   return (
     <>
+      <hr />
       <div>
         <input type="text" value={money} onChange={onChange} />
         {currencyName} ▶︎ <input value={exchangedMoney} disabled /> 원

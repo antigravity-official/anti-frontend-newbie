@@ -6,7 +6,6 @@ export const App = () => {
   return (
     <div className="App">
       <ExchangeRate currency={EUR} />
-      <ExchangeRate currency={USD} />
     </div>
   );
 };
