@@ -1,4 +1,5 @@
 export interface EurInfo {
+  [key: string]: string | number | null;
   basePrice: number;
   cashBuyingPrice: number;
   cashSellingPrice: number;

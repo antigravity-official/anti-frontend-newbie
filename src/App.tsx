@@ -3,7 +3,7 @@ import EuroInfoViewModel from "./viewModel/EuroInfoViewModel";
 
 export const App = () => {
   return (
-    <Suspense fallback={<div>Loading Euro Information</div>}>
+    <Suspense fallback={<div>환율 정보를 로딩중입니다.</div>}>
       <div className="App">
         <EuroInfoViewModel />
         {/* <div>환율기준 (1 유로)</div>
