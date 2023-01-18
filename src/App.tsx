@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import ExchangeInfoView from "./view/ExchangeInfoView";
-import InputView from "./view/InputView";
+import * as React from "react";
+import ExchangeRatePage from "./view";
 
 export const App = () => {
-  const [isReady, setReady] = useState(false);
-
-  return (
-    <div className="App">
-      <ExchangeInfoView />
-      <hr />
-      <InputView />
-    </div>
-  );
+  return <ExchangeRatePage />;
 };
 
 export default App;
