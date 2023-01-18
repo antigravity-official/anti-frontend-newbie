@@ -39,9 +39,9 @@ function ExchangeInfoViewModel() {
 
   useEffect(() => {
     let buffer = setTimeout(() => setReady(true), 1000);
-    setReady(false);
     return () => {
       clearTimeout(buffer);
+      setReady(false);
     };
   }, [eurInfo.basePrice]);
 
