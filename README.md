@@ -238,7 +238,12 @@ export const App = () => {
   );
 };
 
+// 또한 Title과 Info의 경우 Input이 입력되었을때 리랜더링되지 않도록 하기 위해
+// React.memo로 최적화 하였습니다.
+export default memo(ExchangeRateInfo);
+export default memo(ExchangeRateTitle);
 ```
+
 ```dotenv
 # api 주소는 .env 파일을 만들어 환경변수로 설정하였지만, .gitignore에서는 제거하여 push하였습니다.
 #.env
