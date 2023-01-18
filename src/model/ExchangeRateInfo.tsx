@@ -2,6 +2,8 @@
  * 환율정보 (하나은행 환율 API 결과값)
  */
 
+import { getFormattedNumber } from "../utils/Util";
+
 export class ExchangeRateInfo {
   basePrice: number;
   openingPrice: number;
@@ -37,8 +39,8 @@ export class ExchangeRateInfo {
     return this.basePrice - this.openingPrice < 0;
   }
 
-  getPriceRate(): number {
-    return (this.changePrice / this.basePrice) * 100;
+  getPriceRate(): string {
+    return getFormattedNumber((this.changePrice / this.basePrice) * 100, 2);
   }
 }
 

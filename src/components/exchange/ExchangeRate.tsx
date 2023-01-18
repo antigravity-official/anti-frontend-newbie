@@ -9,7 +9,7 @@ interface ExchangeRateProps {
 const ExchangeRate = ({ country, exchangeRateInfo }: ExchangeRateProps) => {
   const exchangePrice = {
     basePrice: getFormattedNumber(exchangeRateInfo.basePrice),
-    changePrice: getFormattedNumber(exchangeRateInfo.changePrice),
+    changePrice: getFormattedNumber(exchangeRateInfo.changePrice, 2),
     cashBuyingPrice: getFormattedNumber(exchangeRateInfo.cashBuyingPrice),
     cashSellingPrice: getFormattedNumber(exchangeRateInfo.cashSellingPrice),
     ttSellingPrice: getFormattedNumber(exchangeRateInfo.ttSellingPrice),
