@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdRefresh } from 'react-icons/md';
-import BasicCard from './BasicCard';
+import BasicCard from '../BasicCard';
 import Timer from './Timer';
 
 const TitleWrap = styled.section`

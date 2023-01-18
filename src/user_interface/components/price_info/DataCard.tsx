@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicCard from './BasicCard';
+import BasicCard from '../BasicCard';
 
 interface ParamProps {
   stateOne: string;

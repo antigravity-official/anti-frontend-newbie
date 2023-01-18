@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 // components file
-import InputCard from './components/InputCard';
-import CircleCard from './components/CircleCard';
-import ChartCard from './components/ChartCard';
-import DataCard from './components/DataCard';
-import CountryInfo from './components/CountryInfo';
-import TitleCard from './components/TitleCard';
-import DataCardSet from './components/DataCardSet';
+import InputCard from '../components/InputCard';
+import CircleCard from '../components/CircleCard';
+import ChartCard from '../components/chart/ChartCard';
+import CountryInfo from '../components/CountryInfo';
+import TitleCard from '../components/title/TitleCard';
+import DataCardSet from '../components/price_info/DataCardSet';
 
 // img file
-import europe from './asset/europe.png';
-import korea from './asset/korea.png';
+import europe from '../../assets/images/europe.png';
+import korea from '../../assets/images/korea.png';
 
 const FlexVerticalAlign = styled.section`
   display: flex;

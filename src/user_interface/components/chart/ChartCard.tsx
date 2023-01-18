@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import BasicCard from './BasicCard';
+import BasicCard from '../BasicCard';
 import Chart from './Chart';
-import CountryInfo from './CountryInfo';
-import europe from '../asset/europe.png';
+import CountryInfo from '../CountryInfo';
+import europe from '../../../assets/images/europe.png';
 
 interface ParamProps {
   basePrice: number;

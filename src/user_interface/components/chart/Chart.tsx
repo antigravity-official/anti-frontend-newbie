@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import monthlyExchangeRate from '../monthlyExchangeRate.json';
+import monthlyExchangeRate from '../../../model/monthlyExchangeRate.json';
 
 const MyResponsiveLine = () => {
   return (
