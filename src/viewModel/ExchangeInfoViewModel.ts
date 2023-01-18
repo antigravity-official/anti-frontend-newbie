@@ -3,7 +3,6 @@ import KrewurModel from "../model/KrewurModel";
 import { tExchangInfoData } from "../_types/exchangeInfo";
 
 function ExchangeInfoViewModel() {
-  const [isChange, setIsChange] = useState(false);
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<tExchangInfoData>({
     basePrice: 1,
@@ -20,7 +19,6 @@ function ExchangeInfoViewModel() {
   const setExchange = async () => {
     const data = await getEurInfo();
     if (data) {
-      setIsChange(data.basePrice !== eurInfo.basePrice);
       setEurInfo({
         basePrice: data.basePrice,
         cashBuyingPrice: data.cashBuyingPrice,
@@ -44,9 +42,8 @@ function ExchangeInfoViewModel() {
     return () => {
       clearTimeout(buffer);
       setReady(false);
-      setIsChange(false);
     };
-  }, [isChange]);
+  }, [eurInfo.basePrice]);
 
   return { eurInfo, isReady };
 }
