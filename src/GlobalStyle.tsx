@@ -68,6 +68,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
+    font-weight: 700;
     background-color: #0F0B21;
     color: #e7e7ea;
   }

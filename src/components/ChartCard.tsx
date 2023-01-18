@@ -71,16 +71,22 @@ const ChartCard = ({ basePrice, openingPrice, changePrice }: ParamProps) => {
           >
             {basePrice}
           </p>
-          <p style={{ fontSize: '0.875rem', color: '#55FED8' }}>
-            {basePrice - openingPrice > 0 &&
-              `▲ ${changePrice}원 (${((changePrice / basePrice) * 100).toFixed(
-                2
-              )}%)`}
-            {basePrice - openingPrice < 0 &&
-              `▼ ${changePrice}원 -(${((changePrice / basePrice) * 100).toFixed(
-                2
-              )}%)`}
-          </p>
+          {basePrice - openingPrice > 0 ? (
+            <p style={{ fontSize: '0.875rem', color: '#55FED8' }}>
+              ▲ {changePrice}원{' '}
+              <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
+                ({((changePrice / basePrice) * 100).toFixed(2)}%)
+              </span>
+            </p>
+          ) : (
+            <p style={{ fontSize: '0.875rem', color: '#FE55F7' }}>
+              ▼ {changePrice}원{' '}
+              <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
+                (-
+                {((changePrice / basePrice) * 100).toFixed(2)}%)
+              </span>
+            </p>
+          )}
         </ChartData>
       </BasicCard>
     </>
