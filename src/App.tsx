@@ -3,6 +3,7 @@ import BasicCard from './components/BasicCard';
 import InputCard from './components/InputCard';
 import CircleCard from './components/CircleCard';
 import ChartCard from './components/ChartCard';
+import Timer from './components/Timer';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -62,7 +63,10 @@ export const App = () => {
         >
           <section style={{ display: 'flex', gap: '0.75rem' }}>
             <BasicCard width={16} height={5}>
-              EUR ▶ KWR
+              <div style={{ marginLeft: '1.25rem' }}>
+                <p style={{ fontSize: '1.5rem', fontWeight: 900 }}>EUR ▶ KWR</p>
+                <Timer />
+              </div>
             </BasicCard>
             <BasicCard width={5} height={5}>
               icon

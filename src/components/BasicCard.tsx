@@ -9,7 +9,6 @@ interface ParamProps {
 
 const Box = styled.div<ParamProps>`
   display: flex;
-  justify-content: center;
   align-items: center;
   width: ${(props) => props.width};
   height: ${(props) => props.height};

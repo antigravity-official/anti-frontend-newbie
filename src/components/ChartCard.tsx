@@ -16,10 +16,10 @@ const ChartWrap = styled.div`
 `;
 
 const ChartSize = styled.div`
-  width: 34rem;
+  width: 32.4rem;
   height: 14rem;
   margin-top: 3rem;
-  margin-left: 3rem;
+  margin-left: -11rem;
   color: #0f0b21;
 `;
 
