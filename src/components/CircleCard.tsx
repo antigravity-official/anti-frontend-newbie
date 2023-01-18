@@ -31,7 +31,7 @@ const Border = styled.div`
   mix-blend-mode: overlay;
   border: 1px solid #e7e7ea;
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.75;
 `;
 
 const CircleCard = () => {

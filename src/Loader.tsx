@@ -56,7 +56,7 @@ const Dot = styled.div`
 `;
 
 const Dot1 = styled(Dot)`
-  background-color: #f1e9ae;
+  background-color: #fff29a;
   animation: ${dot1} 2s ease infinite, index 6s -2s ease infinite;
 `;
 

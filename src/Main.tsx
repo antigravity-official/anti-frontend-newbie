@@ -1,50 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { MdRefresh } from 'react-icons/md';
 
 // components file
-import BasicCard from './components/BasicCard';
 import InputCard from './components/InputCard';
 import CircleCard from './components/CircleCard';
 import ChartCard from './components/ChartCard';
 import DataCard from './components/DataCard';
-import Timer from './components/Timer';
 import CountryInfo from './components/CountryInfo';
+import TitleCard from './components/TitleCard';
+import DataCardSet from './components/DataCardSet';
 
 // img file
 import europe from './asset/europe.png';
 import korea from './asset/korea.png';
 
-const ElemAlignCenter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DefaultMargin = styled.div`
-  margin-left: 1.25rem;
-`;
-
-const Title = styled.p`
-  font-size: 1.5rem;
-  font-weight: 900;
-`;
-
-const IconWrap = styled(ElemAlignCenter)`
-  width: 5rem;
-  height: 5rem;
-  font-size: 2rem;
-`;
-
 const FlexVerticalAlign = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  @media screen and (max-width: 850px) {
+  }
 `;
 
 const FlexHorizontalAlign = styled.section`
   display: flex;
   gap: 0.75rem;
+  @media screen and (max-width: 850px) {
+    width: 21.77rem;
+    height: 51.94rem;
+    flex-direction: column;
+    position: relative;
+  }
 `;
 
 const Input = styled.input`
@@ -61,6 +47,32 @@ const Input = styled.input`
   z-index: 1;
   &:focus {
     outline: none;
+  }
+`;
+
+const InputWrapOne = styled.section`
+  @media screen and (max-width: 850px) {
+    position: absolute;
+    top: 34.4rem;
+  }
+`;
+
+const InputWrapTwo = styled.section`
+  @media screen and (max-width: 850px) {
+    position: absolute;
+    top: 43.15rem;
+  }
+`;
+
+const CircleWrap = styled.section`
+  align-self: end;
+  margin-bottom: 2.5rem;
+  @media screen and (max-width: 850px) {
+    margin-bottom: 0;
+    position: absolute;
+    top: 41.9rem;
+    left: 9.7rem;
+    z-index: 3;
   }
 `;
 
@@ -113,10 +125,6 @@ export const Main = () => {
     setEurInputValue(commaEveryThreeDigits.join('.'));
   };
 
-  const onClickRefresh = (e: any) => {
-    window.location.reload();
-  };
-
   const krwInput = () => {
     const notComma = eurInputValue.split(',').join('');
     return Math.trunc(exchangeEurToKrw(notComma)).toLocaleString();
@@ -128,55 +136,34 @@ export const Main = () => {
       <FlexHorizontalAlign style={{ display: 'flex', gap: '0.75rem' }}>
         {/* left box */}
         <FlexVerticalAlign>
-          <FlexHorizontalAlign>
-            <BasicCard width={16} height={5}>
-              <DefaultMargin>
-                <Title>EUR ▶ KWR</Title>
-                <Timer />
-              </DefaultMargin>
-            </BasicCard>
-            <BasicCard width={5} height={5}>
-              <IconWrap>
-                <MdRefresh
-                  onClick={onClickRefresh}
-                  style={{ cursor: 'pointer' }}
-                />
-              </IconWrap>
-            </BasicCard>
-          </FlexHorizontalAlign>
-          <FlexHorizontalAlign>
-            <DataCard
-              stateOne={'살 때'}
-              stateTwo={'팔 때'}
-              priceOne={eurInfo.cashBuyingPrice}
-              priceTwo={eurInfo.cashSellingPrice}
-            />
-            <DataCard
-              stateOne={'보낼 때'}
-              stateTwo={'받을 때'}
-              priceOne={eurInfo.ttSellingPrice}
-              priceTwo={eurInfo.ttBuyingPrice}
-            />
-          </FlexHorizontalAlign>
-          <InputCard width={21.8} height={8.75}>
-            <CountryInfo
-              flag={<img src={europe} alt="유럽연합 국기" />}
-              CountryKor={'유럽연합'}
-              CountryEng={'(EUR)'}
-            />
-            <Input
-              value={eurInputValue}
-              onChange={onChangeEurInput}
-              maxLength={20}
-            ></Input>
-            <MoneyUnit>{eurInputValue}유로</MoneyUnit>
-          </InputCard>
+          <TitleCard />
+          <DataCardSet
+            cashBuyingPrice={eurInfo.cashBuyingPrice}
+            cashSellingPrice={eurInfo.cashSellingPrice}
+            ttSellingPrice={eurInfo.ttSellingPrice}
+            ttBuyingPrice={eurInfo.ttBuyingPrice}
+          />
+          <InputWrapOne>
+            <InputCard width={21.8} height={8.75}>
+              <CountryInfo
+                flag={<img src={europe} alt="유럽연합 국기" />}
+                CountryKor={'유럽연합'}
+                CountryEng={'(EUR)'}
+              />
+              <Input
+                value={eurInputValue}
+                onChange={onChangeEurInput}
+                maxLength={20}
+              ></Input>
+              <MoneyUnit>{eurInputValue}유로</MoneyUnit>
+            </InputCard>
+          </InputWrapOne>
         </FlexVerticalAlign>
 
         {/* circle */}
-        <section style={{ alignSelf: 'end', marginBottom: '2.5rem' }}>
+        <CircleWrap>
           <CircleCard />
-        </section>
+        </CircleWrap>
 
         {/* right box */}
         <FlexVerticalAlign>
@@ -185,15 +172,17 @@ export const Main = () => {
             openingPrice={eurInfo.openingPrice}
             changePrice={eurInfo.changePrice}
           />
-          <InputCard width={21.8} height={8.75}>
-            <CountryInfo
-              flag={<img src={korea} alt="대한민국 국기" />}
-              CountryKor={'대한민국'}
-              CountryEng={'(KRW)'}
-            />
-            <Input value={krwInput()} disabled></Input>
-            <MoneyUnit style={{ color: '#55FED8' }}>{krwInput()}원</MoneyUnit>
-          </InputCard>
+          <InputWrapTwo>
+            <InputCard width={21.8} height={8.75}>
+              <CountryInfo
+                flag={<img src={korea} alt="대한민국 국기" />}
+                CountryKor={'대한민국'}
+                CountryEng={'(KRW)'}
+              />
+              <Input value={krwInput()} disabled></Input>
+              <MoneyUnit style={{ color: '#55FED8' }}>{krwInput()}원</MoneyUnit>
+            </InputCard>
+          </InputWrapTwo>
         </FlexVerticalAlign>
       </FlexHorizontalAlign>
     </>

@@ -11,6 +11,15 @@ interface ParamProps {
   changePrice: number;
 }
 
+const Wrap = styled.div`
+  width: 21.75rem;
+  height: 16.375rem;
+  @media screen and (max-width: 850px) {
+    position: absolute;
+    top: 5.8rem;
+  }
+`;
+
 const ChartWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -47,48 +56,50 @@ const ChartData = styled.div`
 const ChartCard = ({ basePrice, openingPrice, changePrice }: ParamProps) => {
   return (
     <>
-      <BasicCard width={21.75} height={16.375}>
-        <ChartWrap>
-          <ChartSize>
-            <Chart />
-          </ChartSize>
-        </ChartWrap>
-        <ChartCountry>
-          <CountryInfo
-            flag={<img src={europe} alt="유럽연합 국기" />}
-            CountryKor={'유럽연합'}
-            CountryEng={'(EUR)'}
-          />
-        </ChartCountry>
-        <ChartData>
-          <p
-            style={{
-              marginBottom: '0.3rem',
-              fontSize: '1.5rem',
-              fontWeight: '700',
-              color: '#55FED8',
-            }}
-          >
-            {basePrice}
-          </p>
-          {basePrice - openingPrice > 0 ? (
-            <p style={{ fontSize: '0.875rem', color: '#55FED8' }}>
-              ▲ {changePrice}원{' '}
-              <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
-                ({((changePrice / basePrice) * 100).toFixed(2)}%)
-              </span>
+      <Wrap>
+        <BasicCard width={21.75} height={16.375}>
+          <ChartWrap>
+            <ChartSize>
+              <Chart />
+            </ChartSize>
+          </ChartWrap>
+          <ChartCountry>
+            <CountryInfo
+              flag={<img src={europe} alt="유럽연합 국기" />}
+              CountryKor={'유럽연합'}
+              CountryEng={'(EUR)'}
+            />
+          </ChartCountry>
+          <ChartData>
+            <p
+              style={{
+                marginBottom: '0.3rem',
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#55FED8',
+              }}
+            >
+              {basePrice}
             </p>
-          ) : (
-            <p style={{ fontSize: '0.875rem', color: '#FE55F7' }}>
-              ▼ {changePrice}원{' '}
-              <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
-                (-
-                {((changePrice / basePrice) * 100).toFixed(2)}%)
-              </span>
-            </p>
-          )}
-        </ChartData>
-      </BasicCard>
+            {basePrice - openingPrice > 0 ? (
+              <p style={{ fontSize: '0.875rem', color: '#55FED8' }}>
+                ▲ {changePrice}원{' '}
+                <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
+                  ({((changePrice / basePrice) * 100).toFixed(2)}%)
+                </span>
+              </p>
+            ) : (
+              <p style={{ fontSize: '0.875rem', color: '#FE55F7' }}>
+                ▼ {changePrice}원{' '}
+                <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>
+                  (-
+                  {((changePrice / basePrice) * 100).toFixed(2)}%)
+                </span>
+              </p>
+            )}
+          </ChartData>
+        </BasicCard>
+      </Wrap>
     </>
   );
 };
