@@ -25,7 +25,12 @@
     "tslint-plugin-prettier"
   ],
   "rules": {
-    "prettier": true,
+    "prettier":  [
+        "error",
+        {
+            "endOfLine": "auto"
+        }
+],
     "interface-name": false,
     "object-literal-sort-keys": false,
     "no-console": false,
