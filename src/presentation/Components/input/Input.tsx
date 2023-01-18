@@ -1,17 +1,8 @@
 import React from "react";
+import { INumberInput } from "../../../types/types";
 import { Input } from "./Input.style";
 
-function NumberInput({
-  placeholder,
-  disabled,
-  onChange,
-  value,
-}: {
-  placeholder?: string;
-  disabled?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string | number;
-}) {
+function NumberInput({ placeholder, disabled, onChange, value }: INumberInput) {
   return (
     <Input
       placeholder={placeholder}

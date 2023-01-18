@@ -19,3 +19,18 @@ export interface IEurInfo {
   ttSellingPrice: number;
   error?: unknown;
 }
+
+export interface IProductView {
+  data?: IEurInfo;
+  inputValue: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  exchangeEurToKrw: (krw: number) => number;
+  priceComma: (num: number) => string;
+}
+
+export interface INumberInput {
+  placeholder?: string;
+  disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+}

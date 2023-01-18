@@ -1,4 +1,5 @@
-import { IEurInfo } from "../../types/types";
+import { IProductView } from "../../types/types";
+import Arrow from "../Components/arrow/Arrow";
 import NumberInput from "../Components/input/Input";
 import * as S from "./ProductView.style";
 
@@ -8,13 +9,7 @@ function ProductView({
   handleChange,
   exchangeEurToKrw,
   priceComma,
-}: {
-  data?: IEurInfo;
-  inputValue: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  exchangeEurToKrw: (krw: number) => number;
-  priceComma: (num: number) => string;
-}) {
+}: IProductView) {
   return (
     <S.Container>
       <S.Wrapper>
@@ -29,11 +24,11 @@ function ProductView({
               <S.ExchangeRateNumber>
                 {priceComma(data.basePrice)}
               </S.ExchangeRateNumber>
-              <S.ExchangeRateArrow>
+              <Arrow color={"red"}>
                 {data.basePrice - data.openingPrice > 0 && "▲"}
-                {data.basePrice - data.openingPrice < 0 && "▼"}
-                {data.changePrice} 원
-              </S.ExchangeRateArrow>
+              </Arrow>
+              <Arrow>{data.basePrice - data.openingPrice < 0 && "▼"}</Arrow>
+              {data.changePrice} 원
               <S.ExchangeRateText>
                 ({(data.changePrice / data.basePrice) * 100}
                 %)
