@@ -6,65 +6,6 @@ exports[`EuroInfoView render correctly when errors occur 1`] = `
 </div>
 `;
 
-exports[`EuroInfoView renders correctly 1`] = `
-<div
-  className="info"
->
-  <h1>
-    환율기준 (1 유로)
-  </h1>
-  <h2>
-    1339.98
-    <span
-      className="gap higher"
-    >
-      <span>
-        ▲
-        3.86
-        원
-      </span>
-      (
-      0.29
-      %)
-    </span>
-  </h2>
-  <ul
-    className="exchange"
-  >
-    <li>
-      살때 : 
-      1366.64
-    </li>
-    <li>
-      팔때 : 
-      1313.32
-    </li>
-    <li>
-      보낼때 : 
-      1353.37
-    </li>
-    <li>
-      받을때 : 
-      1326.59
-    </li>
-  </ul>
-  <hr />
-  <input
-    onChange={[MockFunction]}
-    placeholder="0"
-    type="text"
-    value="1"
-  />
-   
-  유로 ▶︎ 
-  <input
-    disabled={true}
-    value="1300"
-  />
-   원
-</div>
-`;
-
 exports[`EuroInfoView renders correctly when baseprice < openingPrice 1`] = `
 <div
   className="info"
@@ -184,13 +125,123 @@ exports[`EuroInfoView renders correctly when baseprice > openingPrice 1`] = `
 `;
 
 exports[`EuroInfoView renders correctly while is fetching 1`] = `
-<div>
-  Loading...
+<div
+  className="loading"
+>
+  <div
+    aria-busy={true}
+    aria-label="oval-loading"
+    className=""
+    data-testid="oval-loading"
+    role="status"
+    style={
+      Object {
+        "display": "flex",
+        "padding": 3,
+      }
+    }
+  >
+    <svg
+      data-testid="oval-svg"
+      height={50}
+      stroke="#6b7280"
+      viewBox="-20 -20 42 42"
+      width={50}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fillRule="evenodd"
+      >
+        <g
+          data-testid="oval-secondary-group"
+          strokeWidth={2}
+          transform="translate(1 1)"
+        >
+          <circle
+            cx="0"
+            cy="0"
+            r={20}
+            stroke="#6b7280"
+            strokeOpacity=".5"
+            strokeWidth={2}
+          />
+          <path
+            d="M20 0c0-9.94-8.06-20-20-20"
+          >
+            <animateTransform
+              attributeName="transform"
+              dur="1s"
+              from="0 0 0"
+              repeatCount="indefinite"
+              to="360 0 0"
+              type="rotate"
+            />
+          </path>
+        </g>
+      </g>
+    </svg>
+  </div>
 </div>
 `;
 
 exports[`EuroInfoView renders correctly while is loading 1`] = `
-<div>
-  Loading...
+<div
+  className="loading"
+>
+  <div
+    aria-busy={true}
+    aria-label="oval-loading"
+    className=""
+    data-testid="oval-loading"
+    role="status"
+    style={
+      Object {
+        "display": "flex",
+        "padding": 3,
+      }
+    }
+  >
+    <svg
+      data-testid="oval-svg"
+      height={50}
+      stroke="#6b7280"
+      viewBox="-20 -20 42 42"
+      width={50}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fillRule="evenodd"
+      >
+        <g
+          data-testid="oval-secondary-group"
+          strokeWidth={2}
+          transform="translate(1 1)"
+        >
+          <circle
+            cx="0"
+            cy="0"
+            r={20}
+            stroke="#6b7280"
+            strokeOpacity=".5"
+            strokeWidth={2}
+          />
+          <path
+            d="M20 0c0-9.94-8.06-20-20-20"
+          >
+            <animateTransform
+              attributeName="transform"
+              dur="1s"
+              from="0 0 0"
+              repeatCount="indefinite"
+              to="360 0 0"
+              type="rotate"
+            />
+          </path>
+        </g>
+      </g>
+    </svg>
+  </div>
 </div>
 `;

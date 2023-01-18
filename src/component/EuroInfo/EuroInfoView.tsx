@@ -1,4 +1,5 @@
 import useEuroInfoViewModel from './EuroInfoViewModel';
+import Loading from '../Loading/Loading';
 import styles from './EuroInfoView.module.css';
 
 export default function EuroInfoView() {
@@ -6,7 +7,7 @@ export default function EuroInfoView() {
     useEuroInfoViewModel();
 
   if (isLoading || isFetching) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
