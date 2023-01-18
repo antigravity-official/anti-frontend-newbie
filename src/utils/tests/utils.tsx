@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Exchange } from '../../api/exchange';
 import { ExchangeApiContext } from '../../context/ExchangeApiContext';
 
-export function createWrapper(
+export function withAllProviders(
   children: React.ReactNode,
   exchangeApi: Exchange
 ) {

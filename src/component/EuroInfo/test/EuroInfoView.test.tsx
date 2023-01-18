@@ -1,7 +1,7 @@
 import renderer from 'react-test-renderer';
 import EuroInfoView from '../EuroInfoView';
 import useEuroInfoViewModel from '../EuroInfoViewModel';
-import { createWrapper } from '../../../utils/tests/utils';
+import { withAllProviders } from '../../../utils/tests/utils';
 
 const mockedUseEuroInfoViewModel = useEuroInfoViewModel as jest.Mock;
 jest.mock('../EuroInfoViewModel');
@@ -27,7 +27,7 @@ describe('EuroInfoView', () => {
       onChange: jest.fn(),
     });
     const tree = renderer
-      .create(createWrapper(<EuroInfoView />, fakeApi))
+      .create(withAllProviders(<EuroInfoView />, fakeApi))
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -42,7 +42,7 @@ describe('EuroInfoView', () => {
       onChange: jest.fn(),
     });
     const tree = renderer
-      .create(createWrapper(<EuroInfoView />, fakeApi))
+      .create(withAllProviders(<EuroInfoView />, fakeApi))
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -66,7 +66,7 @@ describe('EuroInfoView', () => {
     });
 
     const tree = renderer
-      .create(createWrapper(<EuroInfoView />, fakeApi))
+      .create(withAllProviders(<EuroInfoView />, fakeApi))
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
