@@ -8,13 +8,18 @@ const ExchangeView = () => {
   const [eru, setEru] = useState<string>("");
 
   const HandleEurExchange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEru(ExchangeComaViewModel(event.target.value, "eu"));
-    setKrw(await ExchangeViewModel(event.target.value));
+    let money = event.target.value;
+
+    if (Number(money.replaceAll(",", ""))) {
+      setEru(ExchangeComaViewModel(money, "eu"));
+      setKrw(await ExchangeViewModel(money));
+    }
   };
 
   return (
     <ExchangeContainer>
-      <ExchangeInput value={eru} onChange={HandleEurExchange} /> 유로 ▶︎ <ExchangeInput disabled value={krw} /> 원
+      <ExchangeInput value={eru} onChange={HandleEurExchange} />
+      유로 ▶︎ <ExchangeInput disabled value={krw} /> 원
     </ExchangeContainer>
   );
 };
