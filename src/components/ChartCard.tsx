@@ -79,7 +79,7 @@ const ChartCard = ({ basePrice, openingPrice, changePrice }: ParamProps) => {
                 color: '#55FED8',
               }}
             >
-              {basePrice}
+              {basePrice.toLocaleString()}
             </p>
             {basePrice - openingPrice > 0 ? (
               <p style={{ fontSize: '0.875rem', color: '#55FED8' }}>

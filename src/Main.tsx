@@ -138,10 +138,10 @@ export const Main = () => {
         <FlexVerticalAlign>
           <TitleCard />
           <DataCardSet
-            cashBuyingPrice={eurInfo.cashBuyingPrice}
-            cashSellingPrice={eurInfo.cashSellingPrice}
-            ttSellingPrice={eurInfo.ttSellingPrice}
-            ttBuyingPrice={eurInfo.ttBuyingPrice}
+            cashBuyingPrice={eurInfo.cashBuyingPrice.toLocaleString()}
+            cashSellingPrice={eurInfo.cashSellingPrice.toLocaleString()}
+            ttSellingPrice={eurInfo.ttSellingPrice.toLocaleString()}
+            ttBuyingPrice={eurInfo.ttBuyingPrice.toLocaleString()}
           />
           <InputWrapOne>
             <InputCard width={21.8} height={8.75}>
