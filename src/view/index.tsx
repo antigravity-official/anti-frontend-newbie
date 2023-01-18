@@ -5,16 +5,16 @@ import InputView from "./InputView";
 import LodingView from "./LodingView";
 
 export default function ExchangeRatePage() {
-  const { isReady } = ExchangeInfoViewModel();
+  const { isReady, eurInfo } = ExchangeInfoViewModel();
 
   return (
     <>
       <div className="App">
         {isReady ? (
           <>
-            <ExchangeInfoView />
+            <ExchangeInfoView eurInfo={eurInfo} />
             <hr />
-            <InputView />
+            <InputView eurInfo={eurInfo} />
           </>
         ) : (
           <LodingView />

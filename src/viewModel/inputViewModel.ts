@@ -1,9 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import { tExchangInfoData } from "../_types/exchangeInfo";
 import { tKrw } from "../_types/input";
-import ExchangeInfoViewModel from "./ExchangeInfoViewModel";
 
-function InputViewModel() {
-  const { eurInfo } = ExchangeInfoViewModel();
+function InputViewModel(eurInfo: tExchangInfoData) {
   const [changeValue, setChangeValue] = useState<number>();
 
   const exchangeEurToKrw = (krw: tKrw) => krw * eurInfo.basePrice;

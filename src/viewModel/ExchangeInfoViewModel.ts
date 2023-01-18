@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import KrewurModel from "../model/KrewurModel";
+import useInterval from "../_hooks/useInterval";
 import { tExchangInfoData } from "../_types/exchangeInfo";
 
 function ExchangeInfoViewModel() {
@@ -16,26 +17,23 @@ function ExchangeInfoViewModel() {
 
   const { getEurInfo } = KrewurModel();
 
-  const setExchange = async () => {
-    const data = await getEurInfo();
-    if (data) {
-      setEurInfo({
-        basePrice: data.basePrice,
-        cashBuyingPrice: data.cashBuyingPrice,
-        cashSellingPrice: data.cashSellingPrice,
-        changePrice: data.changePrice,
-        openingPrice: data.openingPrice,
-        ttBuyingPrice: data.ttBuyingPrice,
-        ttSellingPrice: data.ttSellingPrice,
-      });
-    }
-  };
-
-  useEffect(() => {
+  useInterval(() => {
+    const setExchange = async () => {
+      const data = await getEurInfo();
+      if (data) {
+        setEurInfo({
+          basePrice: data.basePrice,
+          cashBuyingPrice: data.cashBuyingPrice,
+          cashSellingPrice: data.cashSellingPrice,
+          changePrice: data.changePrice,
+          openingPrice: data.openingPrice,
+          ttBuyingPrice: data.ttBuyingPrice,
+          ttSellingPrice: data.ttSellingPrice,
+        });
+      }
+    };
     setExchange();
-    return () => {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getEurInfo]);
+  }, 1000);
 
   useEffect(() => {
     let buffer = setTimeout(() => setReady(true), 1000);

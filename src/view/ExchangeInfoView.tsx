@@ -1,9 +1,12 @@
 import * as React from "react";
-import ExchangeInfoViewModel from "../viewModel/ExchangeInfoViewModel";
 
-export default function ExchangeInfoView() {
-  const { eurInfo } = ExchangeInfoViewModel();
+import { tExchangInfoData } from "../_types/exchangeInfo";
 
+export default function ExchangeInfoView({
+  eurInfo,
+}: {
+  eurInfo: tExchangInfoData;
+}) {
   return (
     <>
       <div>환율기준 (1 유로)</div>
