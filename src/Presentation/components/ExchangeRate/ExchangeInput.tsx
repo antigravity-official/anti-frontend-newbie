@@ -1,20 +1,25 @@
-import { ExchangeInfo } from "../../../../typing";
-import useViewModel from "../../Views/ExchangeRate/ViewModel";
+import { ChangeEvent } from "react";
 
 interface Props {
-  exchangeInfo: ExchangeInfo;
-  exchangeEurToKrw: (inputMoney: string, basePrice: number) => string;
+  money: string | undefined;
+  exchangedMoney: string | undefined;
+  onChange: ((e: ChangeEvent<HTMLInputElement>) => void) | undefined;
+  currencyName: string | undefined;
+  inputError: string | undefined;
 }
 
-const ExchangeInput = ({ exchangeInfo, exchangeEurToKrw }: Props) => {
-  const basePrice = exchangeInfo.basePrice;
-  const { money, onChange, inputError } = useViewModel();
+const ExchangeInput = ({
+  money,
+  onChange,
+  exchangedMoney,
+  currencyName,
+  inputError,
+}: Props) => {
   return (
     <>
       <div>
         <input type="text" value={money} onChange={onChange} />
-        {exchangeInfo.currencyName} ▶︎{" "}
-        <input value={exchangeEurToKrw(money, basePrice)} disabled /> 원
+        {currencyName} ▶︎ <input value={exchangedMoney} disabled /> 원
       </div>
       {inputError && <div style={{ color: "orange" }}>{inputError}</div>}
     </>

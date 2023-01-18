@@ -1,22 +1,28 @@
 import React, { memo } from "react";
-import { ExchangeInfo } from "../../../../typing";
-import { formattingWon } from "../../../utils";
 
 interface Props {
-  exchangeInfo: ExchangeInfo;
+  formattingCashBuyingPrice: string | undefined;
+  formattingSellingPrice: string | undefined;
+  formattingTtSellingPrice: string | undefined;
+  formattingTtBuyingPrice: string | undefined;
 }
 
-const ExchangeRateInfo = memo(({ exchangeInfo }: Props) => {
-  const { cashBuyingPrice, cashSellingPrice, ttSellingPrice, ttBuyingPrice } =
-    exchangeInfo;
-  return (
-    <>
-      <div>살때 : {formattingWon(cashBuyingPrice)}</div>
-      <div>팔때 : {formattingWon(cashSellingPrice)}</div>
-      <div>보낼때 : {formattingWon(ttSellingPrice)}</div>
-      <div>받을때 : {formattingWon(ttBuyingPrice)}</div>
-    </>
-  );
-});
+const ExchangeRateInfo = memo(
+  ({
+    formattingCashBuyingPrice,
+    formattingSellingPrice,
+    formattingTtSellingPrice,
+    formattingTtBuyingPrice,
+  }: Props) => {
+    return (
+      <>
+        <div>살때 : {formattingCashBuyingPrice}</div>
+        <div>팔때 : {formattingSellingPrice}</div>
+        <div>보낼때 : {formattingTtSellingPrice}</div>
+        <div>받을때 : {formattingTtBuyingPrice}</div>
+      </>
+    );
+  }
+);
 
 export default ExchangeRateInfo;

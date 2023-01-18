@@ -1,8 +1,11 @@
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { addComma, unComma } from "../../../utils";
+import { addComma, formattingWon, unComma } from "../../../utils";
 import useFetchExchangeInfo from "../../../hooks/useFetchExchangeInfo";
+import { Currency } from "../../../../typing";
 
-const ExchangeRateViewModel = () => {
+const ExchangeRateViewModel = (currency: Currency) => {
+  const { isReady, exchangeInfo } = useFetchExchangeInfo(currency);
+
   const [money, setMoney] = useState("");
   const [inputError, setInputError] = useState("");
 
@@ -83,8 +86,6 @@ const ExchangeRateViewModel = () => {
     prevInteger.current = formattedInteger;
   }, []);
 
-  const getExchangeInfo = useFetchExchangeInfo;
-
   const renderArrow = (base: number, open: number) => {
     if (base - open > 0) {
       return "▲";
@@ -99,13 +100,45 @@ const ExchangeRateViewModel = () => {
     return (change / base) * 100;
   };
 
+  if (!isReady || exchangeInfo === null) {
+    return { isReady };
+  }
+
+  const {
+    basePrice,
+    openingPrice,
+    currencyName,
+    changePrice,
+    cashBuyingPrice,
+    cashSellingPrice,
+    ttSellingPrice,
+    ttBuyingPrice,
+  } = exchangeInfo;
+
+  const arrow = renderArrow(basePrice, openingPrice);
+  const formattingBasePrice = formattingWon(basePrice);
+  const formattingChangePrice = formattingWon(changePrice);
+  const changeRate = calcChangeRate(changePrice, basePrice);
+  const formattingCashBuyingPrice = formattingWon(cashBuyingPrice);
+  const formattingSellingPrice = formattingWon(cashSellingPrice);
+  const formattingTtSellingPrice = formattingWon(ttSellingPrice);
+  const formattingTtBuyingPrice = formattingWon(ttBuyingPrice);
+  const exchangedMoney = exchangeEurToKrw(money, basePrice);
+
   return {
-    renderArrow,
-    getExchangeInfo,
-    calcChangeRate,
+    isReady,
+    arrow,
+    currencyName,
+    formattingBasePrice,
+    formattingChangePrice,
+    changeRate,
+    formattingCashBuyingPrice,
+    formattingSellingPrice,
+    formattingTtSellingPrice,
+    formattingTtBuyingPrice,
     money,
+    exchangedMoney,
     onChange,
-    exchangeEurToKrw,
     inputError,
   };
 };

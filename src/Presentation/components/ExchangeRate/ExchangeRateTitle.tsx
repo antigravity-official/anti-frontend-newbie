@@ -1,29 +1,31 @@
-import React, { memo } from "react";
-import { ExchangeInfo } from "../../../../typing";
-import { formattingWon } from "../../../utils";
+import React from "react";
 
 interface Props {
-  exchangeInfo: ExchangeInfo;
-  renderArrow: (base: number, open: number) => "▲" | "▼" | "-";
-  calcChangeRate: (change: number, base: number) => number;
+  arrow: string | undefined;
+  currencyName: string | undefined;
+  formattingBasePrice: string | undefined;
+  formattingChangePrice: string | undefined;
+  changeRate: number | undefined;
 }
 
-const ExchangeRateTitle = memo(
-  ({ exchangeInfo, renderArrow, calcChangeRate }: Props) => {
-    const { currencyName, basePrice, openingPrice, changePrice } = exchangeInfo;
-
-    return (
-      <>
-        <div>환율기준 (1 {currencyName})</div>
-        <div>
-          {formattingWon(basePrice)}
-          {renderArrow(basePrice, openingPrice)}
-          {formattingWon(changePrice)} ({calcChangeRate(changePrice, basePrice)}
-          %)
-        </div>
-      </>
-    );
-  }
-);
+const ExchangeRateTitle = ({
+  arrow,
+  currencyName,
+  formattingBasePrice,
+  formattingChangePrice,
+  changeRate,
+}: Props) => {
+  return (
+    <>
+      <div>환율기준 (1 {currencyName})</div>
+      <div>
+        {formattingBasePrice}
+        {arrow}
+        {formattingChangePrice} ({changeRate}
+        %)
+      </div>
+    </>
+  );
+};
 
 export default ExchangeRateTitle;

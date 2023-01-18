@@ -9,12 +9,24 @@ interface Props {
 }
 
 const ExchangeRate = ({ currency }: Props) => {
-  const { renderArrow, calcChangeRate, exchangeEurToKrw, getExchangeInfo } =
-    useViewModel();
+  const {
+    isReady,
+    arrow,
+    currencyName,
+    formattingBasePrice,
+    formattingChangePrice,
+    changeRate,
+    formattingCashBuyingPrice,
+    formattingSellingPrice,
+    formattingTtSellingPrice,
+    formattingTtBuyingPrice,
+    money,
+    onChange,
+    exchangedMoney,
+    inputError,
+  } = useViewModel(currency);
 
-  const { isReady, exchangeInfo } = getExchangeInfo(currency);
-
-  if (!isReady || exchangeInfo === null) {
+  if (!isReady) {
     return (
       <>
         <SyncLoader color="#36d7b7" />
@@ -26,15 +38,25 @@ const ExchangeRate = ({ currency }: Props) => {
   return (
     <>
       <ExchangeRateTitle
-        exchangeInfo={exchangeInfo}
-        renderArrow={renderArrow}
-        calcChangeRate={calcChangeRate}
+        arrow={arrow}
+        currencyName={currencyName}
+        formattingBasePrice={formattingBasePrice}
+        formattingChangePrice={formattingChangePrice}
+        changeRate={changeRate}
       />
-      <ExchangeRateInfo exchangeInfo={exchangeInfo} />
+      <ExchangeRateInfo
+        formattingCashBuyingPrice={formattingCashBuyingPrice}
+        formattingSellingPrice={formattingSellingPrice}
+        formattingTtBuyingPrice={formattingTtBuyingPrice}
+        formattingTtSellingPrice={formattingTtSellingPrice}
+      />
       <hr />
       <ExchangeInput
-        exchangeInfo={exchangeInfo}
-        exchangeEurToKrw={exchangeEurToKrw}
+        money={money}
+        onChange={onChange}
+        exchangedMoney={exchangedMoney}
+        currencyName={currencyName}
+        inputError={inputError}
       />
     </>
   );
