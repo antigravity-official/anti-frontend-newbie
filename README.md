@@ -1,9 +1,5 @@
 # 안티그래비티 프론트엔드 입사자 기술과제
 
-## 배포 URL
-
-- URL :
-
 <br>
 
 ## 프로젝트 소개
@@ -14,7 +10,17 @@
 
 ## ⚒ 개발 기간
 
-2022.01.16 ~ 2022.01.19
+2022.01.16 ~ 2022.01.18
+
+<br>
+
+## 실행 방법
+
+git clone https://github.com/unidagit/anti-frontend-newbie.git
+
+npm install
+
+npm start
 
 <br>
 
@@ -31,10 +37,12 @@
 - Styled Component
 
   - 동적인 스타일링과 스타일 재사용을 위해 적용했습니다.
-    -React Spinners
+
+- React Spinners
+
   - api를 호출하고 데이터를 받아오는 동안 사용자들에게 로딩중이라는 것을 알리기 위해 적용했습니다.
 
-    <br>
+  <br>
 
 ## 구현 내용
 
