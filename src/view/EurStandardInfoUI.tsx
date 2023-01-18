@@ -7,7 +7,7 @@ interface Props {
   changePricePercentage: string;
 }
 
-const EurStandardInfo = ({ eurStandard }: { eurStandard: Props }) => {
+const EurStandardInfoUI = ({ eurStandard }: { eurStandard: Props }) => {
   return (
     <div>
       <h1>환율기준 (1유로)</h1>
@@ -20,4 +20,4 @@ const EurStandardInfo = ({ eurStandard }: { eurStandard: Props }) => {
   );
 };
 
-export default EurStandardInfo;
+export default EurStandardInfoUI;
