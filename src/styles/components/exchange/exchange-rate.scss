@@ -7,9 +7,11 @@
 .exchange-title {
   font-size: 24px;
   font-weight: 600;
+  text-align: center;
 }
 
 .exchange-rate {
+  text-align: center;
   span {
     font-size: 18px;
   }
@@ -21,5 +23,6 @@
 
 .exchange-prices__container {
   padding: 15px;
+  padding-left: 30px;
   font-size: 18px;
 }
