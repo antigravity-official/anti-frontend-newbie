@@ -13,15 +13,9 @@ const queryClient = new QueryClient({
   },
 });
 
-export function wrapper(fakeApi: Exchange | undefined = undefined) {
-  if (fakeApi) {
-    return ({ children }: { children: React.ReactNode }) =>
-      withAllProviders(children, fakeApi);
-  }
-
-  return ({ children }: { children: React.ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+export function wrapper(fakeApi: Exchange) {
+  return ({ children }: { children: React.ReactNode }) =>
+    withAllProviders(children, fakeApi);
 }
 
 export function withAllProviders(
