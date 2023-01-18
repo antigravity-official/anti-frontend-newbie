@@ -29,15 +29,15 @@ export class ExchangeRateInfo {
     this.ttSellingPrice = ttSellingPrice;
   }
 
-  isUp(): boolean {
+  isPriceUp(): boolean {
     return this.basePrice - this.openingPrice > 0;
   }
 
-  isDown(): boolean {
+  isPriceDown(): boolean {
     return this.basePrice - this.openingPrice < 0;
   }
 
-  getRate(): number {
+  getPriceRate(): number {
     return (this.changePrice / this.basePrice) * 100;
   }
 }
