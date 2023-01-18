@@ -1,4 +1,4 @@
-import { EuroInfo } from '../component/EuroInfo/EuroInfoModel';
+import { EuroInfo } from '../pages/EuroInfo/EuroInfoModel';
 import client from './client';
 
 export interface Exchange {

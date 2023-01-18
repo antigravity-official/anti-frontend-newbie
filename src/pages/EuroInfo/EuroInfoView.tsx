@@ -1,5 +1,5 @@
 import useEuroInfoViewModel from './EuroInfoViewModel';
-import Loading from '../Loading/Loading';
+import Loading from '../../component/Loading/Loading';
 import styles from './EuroInfoView.module.css';
 
 export default function EuroInfoView() {

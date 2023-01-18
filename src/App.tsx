@@ -1,5 +1,5 @@
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import EuroInfoView from './component/EuroInfo/EuroInfoView';
+import EuroInfoView from './pages/EuroInfo/EuroInfoView';
 import { ExchangeApiProvider } from './context/ExchangeApiProvider';
 
 const queryClient = new QueryClient();
