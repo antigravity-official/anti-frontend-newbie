@@ -7,11 +7,15 @@ const useExchanger = () => {
 
   const exchangeToKrw = (inputPrice: string, basePrice: number) => {
     const removeComma = removeCommaFromString(inputPrice);
-    const inputPriceToNumber = Number(removeComma);
-    setInput(getFormattedNumber(inputPriceToNumber, 2));
+    let isHaveDot = false;
+    if (removeComma[removeComma.length - 1] === ".") isHaveDot = true;
+    if (Number(removeComma)) {
+      const inputPriceToNumber = Number(removeComma);
+      setInput(`${getFormattedNumber(inputPriceToNumber, 2)}${isHaveDot ? "." : ""}`);
 
-    const krw = inputPriceToNumber * basePrice;
-    setResult(getFormattedNumber(krw, 0));
+      const krw = inputPriceToNumber * basePrice;
+      setResult(getFormattedNumber(krw, 0));
+    }
   };
 
   return {
