@@ -3,6 +3,7 @@ import KrewurModel from "../model/KrewurModel";
 import { tExchangInfoData } from "../_types/exchangeInfo";
 
 function ExchangeInfoViewModel() {
+  const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<tExchangInfoData>({
     basePrice: 1,
     cashBuyingPrice: 1,
@@ -36,7 +37,15 @@ function ExchangeInfoViewModel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getEurInfo]);
 
-  return [eurInfo];
+  useEffect(() => {
+    let buffer = setTimeout(() => setReady(true), 1000);
+    setReady(false);
+    return () => {
+      clearTimeout(buffer);
+    };
+  }, [eurInfo.basePrice]);
+
+  return { eurInfo, isReady };
 }
 
 export default ExchangeInfoViewModel;

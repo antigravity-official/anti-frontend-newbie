@@ -2,7 +2,7 @@ import * as React from "react";
 import ExchangeInfoViewModel from "../viewModel/ExchangeInfoViewModel";
 
 export default function ExchangeInfoView() {
-  const [eurInfo] = ExchangeInfoViewModel();
+  const { eurInfo } = ExchangeInfoViewModel();
 
   return (
     <>
@@ -12,7 +12,8 @@ export default function ExchangeInfoView() {
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
         {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {(eurInfo.changePrice / eurInfo.basePrice) * 100}
+        %)
       </div>
       <div>
         <div>살때 : {eurInfo.cashBuyingPrice}</div>

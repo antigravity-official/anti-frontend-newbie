@@ -3,7 +3,7 @@ import { tKrw } from "../_types/input";
 import ExchangeInfoViewModel from "./ExchangeInfoViewModel";
 
 function InputViewModel() {
-  const [eurInfo] = ExchangeInfoViewModel();
+  const { eurInfo } = ExchangeInfoViewModel();
   const [changeValue, setChangeValue] = useState<number>();
 
   const exchangeEurToKrw = (krw: tKrw) => krw * eurInfo.basePrice;
