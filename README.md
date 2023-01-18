@@ -78,7 +78,7 @@ REACT_APP_API_ENDPOINT=https://quotation-api-cdn.dunamu.com
 
 ## 1. 디자인 시스템
 
-<img width="846" alt="Screen Shot 2022-10-31 at 7 19 25 PM" src="https://user-images.githubusercontent.com/53526987/213299431-cbb625c7-21e7-4ced-ad0f-559da35924aa.png">
+<img width="846" alt="Screen Shot 2022-10-31 at 7 19 25 PM" src="https://user-images.githubusercontent.com/53526987/213304667-acfda05f-daca-4419-8093-a7b1c251bb8d.png">
 
 - 구현을 위한 `figma`로 디자인 구성도 구축
 
