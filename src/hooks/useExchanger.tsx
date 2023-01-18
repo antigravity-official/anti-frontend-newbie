@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { ExchangeRateInfo } from "../model/ExchangeRateInfo";
 
 const useExchanger = () => {
   const [result, setResult] = useState<number>(0);
 
-  const exchangeToKrw = (inputPrice: number, exchageRateInfo: ExchangeRateInfo) => {
-    const krw = inputPrice * exchageRateInfo.basePrice;
+  const exchangeToKrw = (inputPrice: number, basePrice: number) => {
+    const krw = inputPrice * basePrice;
     setResult(krw);
   };
 

@@ -19,7 +19,7 @@ export const ExchangeContainer = () => {
   return (
     <>
       <ExchangeRate country={country} exchangeRateInfo={exchageRateInfo} />
-      <Exchanger result={result} exchangeToKrw={exchangeToKrw} exchageRateInfo={exchageRateInfo} />
+      <Exchanger result={result} exchangeToKrw={exchangeToKrw} basePrice={exchageRateInfo.basePrice} />
     </>
   );
 };

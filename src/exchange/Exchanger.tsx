@@ -1,18 +1,16 @@
-import { ExchangeRateInfo } from "../model/ExchangeRateInfo";
-
 interface ExchangerProps {
   result: number;
-  exchangeToKrw: (inputPrice: number, exchageRateInfo: ExchangeRateInfo) => void;
-  exchageRateInfo: ExchangeRateInfo;
+  exchangeToKrw: (inputPrice: number, basePrice: number) => void;
+  basePrice: number;
 }
 
-const Exchanger = ({ result, exchangeToKrw, exchageRateInfo }: ExchangerProps) => {
+const Exchanger = ({ result, exchangeToKrw, basePrice }: ExchangerProps) => {
   return (
     <div className="exchanger__container">
       <input
         className="exchanger__input"
         type="number"
-        onChange={(e) => exchangeToKrw(Number(e.target.value), exchageRateInfo)}
+        onChange={(e) => exchangeToKrw(Number(e.target.value), basePrice)}
       />
       <span className="exchanger-span">유로 ▶︎</span>
       <input className="exchanger__input" disabled value={result} />
