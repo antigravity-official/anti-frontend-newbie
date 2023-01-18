@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
   const [eurInfo, setEurInfo] = useState<any>({});
 
-  const getEurInfo = async () => {
-    const krweur = await fetch(
-      "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR"
-    )
-      .then((response) => response.json())
-      .then((array) => array[0]);
-
-    setEurInfo(krweur);
-    setReady(true);
-  };
-
   const exchangeEurToKrw = (krw: any) => krw * eurInfo.basePrice;
-
-  useEffect(() => {
-    getEurInfo();
-    return () => {};
-  }, []);
 
   if (!isReady) return null;
   return (
@@ -30,8 +14,7 @@ export const App = () => {
         {eurInfo.basePrice}
         {eurInfo.basePrice - eurInfo.openingPrice > 0 && "▲"}
         {eurInfo.basePrice - eurInfo.openingPrice < 0 && "▼"}
-        {eurInfo.changePrice}원 (
-        {(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
+        {eurInfo.changePrice}원 ({(eurInfo.changePrice / eurInfo.basePrice) * 100}%)
       </div>
       <div>
         <div>살때 : {eurInfo.cashBuyingPrice}</div>
