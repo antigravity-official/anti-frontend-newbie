@@ -26,7 +26,7 @@ const ChartSize = styled.div`
 const ChartCountry = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 6.5rem;
+  width: 9rem;
   height: 3rem;
   position: absolute;
   top: 1.25rem;
@@ -53,7 +53,7 @@ const ChartCard = ({ basePrice, openingPrice, changePrice }: ParamProps) => {
         </ChartWrap>
         <ChartCountry>
           <p>국기</p>
-          <p>나라이름</p>
+          <p>유럽연합(EUR)</p>
         </ChartCountry>
         <ChartData>
           <p

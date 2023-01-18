@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { MdRefresh } from 'react-icons/md';
 import BasicCard from './components/BasicCard';
 import InputCard from './components/InputCard';
 import CircleCard from './components/CircleCard';
 import ChartCard from './components/ChartCard';
+import DataCard from './components/DataCard';
 import Timer from './components/Timer';
 
 export const App = () => {
@@ -25,7 +27,6 @@ export const App = () => {
 
   useEffect(() => {
     getEurInfo();
-    console.log(eurInfo);
     return () => {};
   }, []);
 
@@ -69,18 +70,33 @@ export const App = () => {
               </div>
             </BasicCard>
             <BasicCard width={5} height={5}>
-              icon
+              <p
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '5rem',
+                  height: '5rem',
+                  fontSize: '2rem',
+                }}
+              >
+                <MdRefresh />
+              </p>
             </BasicCard>
           </section>
           <section style={{ display: 'flex', gap: '0.75rem' }}>
-            <BasicCard width={10.5} height={10.5}>
-              <p>살때 : {eurInfo.cashBuyingPrice}</p>
-              <p>팔때 : {eurInfo.cashSellingPrice}</p>
-            </BasicCard>
-            <BasicCard width={10.5} height={10.5}>
-              <p>보낼때 : {eurInfo.ttSellingPrice}</p>
-              <p>받을때 : {eurInfo.ttBuyingPrice}</p>
-            </BasicCard>
+            <DataCard
+              stateOne={'살 때'}
+              stateTwo={'팔 때'}
+              priceOne={eurInfo.cashBuyingPrice}
+              priceTwo={eurInfo.cashSellingPrice}
+            />
+            <DataCard
+              stateOne={'보낼 때'}
+              stateTwo={'받을 때'}
+              priceOne={eurInfo.cashBuyingPrice}
+              priceTwo={eurInfo.cashSellingPrice}
+            />
           </section>
           <InputCard width={21.8} height={8.75}>
             <div style={{ display: 'flex' }}>

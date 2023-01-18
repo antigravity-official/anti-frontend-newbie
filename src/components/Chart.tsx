@@ -33,7 +33,7 @@ const MyResponsiveLine = () => {
       pointLabelYOffset={-12}
       enableArea={true}
       areaBlendMode="multiply"
-      areaOpacity={0.05}
+      areaOpacity={0.1}
       enableSlices="x"
       useMesh={true}
       legends={[]}
