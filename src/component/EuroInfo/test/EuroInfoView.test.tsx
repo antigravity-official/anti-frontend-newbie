@@ -1,7 +1,7 @@
 import renderer from 'react-test-renderer';
+import { withAllProviders } from '../../../test/utils';
 import EuroInfoView from '../EuroInfoView';
 import useEuroInfoViewModel from '../EuroInfoViewModel';
-import { withAllProviders } from '../../../utils/tests/utils';
 
 const mockedUseEuroInfoViewModel = useEuroInfoViewModel as jest.Mock;
 jest.mock('../EuroInfoViewModel');
