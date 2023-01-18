@@ -33,14 +33,8 @@ export const ExchangeRateNumber = styled.p`
   font-weight: 700;
 `;
 
-export const ExchangeRateArrow = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 10px;
-  color: ${(props) => props.theme.palette["point"]};
-`;
-
 export const ExchangeRateText = styled.small`
+  display: block;
   color: ${(props) => props.theme.palette["darkGray"]};
   font-weight: 500;
   margin-top: 8px;
