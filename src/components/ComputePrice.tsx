@@ -1,7 +1,7 @@
 import React from "react";
 import { Block2 } from "../styles/Styles";
 import { marking } from "../utils/condition"
-import { useSampleState, useSampleDispatch } from "../components/Context"
+import { useSampleState, useSampleDispatch } from "../Models/Context"
 
 export const ComputePrice = () => {
   const state = useSampleState();

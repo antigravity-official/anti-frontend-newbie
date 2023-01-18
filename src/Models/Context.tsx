@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, useContext, createContext, useState, Dispatch } from 'react'
 import { money } from "../store/Types/type";
-import model from "../Models/Model"
+import model from "./Model"
 import Loading from "../components/Loading";
 
 

@@ -3,7 +3,7 @@ import ShowPrice from "../components/ShowPrice";
 import ComputePrice from "../components/ComputePrice";
 import { ExchangeMoney } from "../components/ExchangeMoney";
 import { AppCss } from "../styles/Styles";
-import Context from "../components/Context"
+import Context from "../Models/Context"
 
 export const Main = () => {
     return (

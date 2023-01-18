@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Block3 } from "../styles/Styles";
 import { exchangeEurToKrw } from "../utils/condition"
-import { useSampleState, useSampleDispatch } from "../components/Context"
+import { useSampleState, useSampleDispatch } from "../Models/Context"
 
 export const ExchangeMoney = () => {
     const state = useSampleState();
