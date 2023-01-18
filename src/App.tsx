@@ -6,6 +6,9 @@ import CircleCard from './components/CircleCard';
 import ChartCard from './components/ChartCard';
 import DataCard from './components/DataCard';
 import Timer from './components/Timer';
+import CountryInfo from './components/CountryInfo';
+import europe from './asset/europe.png';
+import korea from './asset/korea.png';
 
 export const App = () => {
   const [isReady, setReady] = useState(false);
@@ -99,11 +102,11 @@ export const App = () => {
             />
           </section>
           <InputCard width={21.8} height={8.75}>
-            <div style={{ display: 'flex' }}>
-              <p style={{ marginRight: '0.625rem' }}>국기</p>
-              <p>나라이름</p>
-            </div>
-            <em>(EUR)</em>
+            <CountryInfo
+              flag={<img src={europe} alt="유럽연합 국기" />}
+              CountryKor={'유럽연합'}
+              CountryEng={'(EUR)'}
+            />
           </InputCard>
         </section>
         <section style={{ alignSelf: 'end', marginBottom: '2.5rem' }}>
@@ -119,11 +122,11 @@ export const App = () => {
             changePrice={eurInfo.changePrice}
           />
           <InputCard width={21.8} height={8.75}>
-            <div style={{ display: 'flex' }}>
-              <p style={{ marginRight: '0.625rem' }}>국기</p>
-              <p>나라이름</p>
-            </div>
-            <em>(KRW)</em>
+            <CountryInfo
+              flag={<img src={korea} alt="대한민국 국기" />}
+              CountryKor={'대한민국'}
+              CountryEng={'(KRW)'}
+            />
           </InputCard>
         </section>
       </section>

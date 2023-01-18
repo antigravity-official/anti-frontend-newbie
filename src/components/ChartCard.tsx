@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import BasicCard from './BasicCard';
 import Chart from './Chart';
+import CountryInfo from './CountryInfo';
+import europe from '../asset/europe.png';
 
 interface ParamProps {
   basePrice: number;
@@ -26,8 +28,8 @@ const ChartSize = styled.div`
 const ChartCountry = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 9rem;
-  height: 3rem;
+  align-items: center;
+  width: 8rem;
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
@@ -52,8 +54,11 @@ const ChartCard = ({ basePrice, openingPrice, changePrice }: ParamProps) => {
           </ChartSize>
         </ChartWrap>
         <ChartCountry>
-          <p>국기</p>
-          <p>유럽연합(EUR)</p>
+          <CountryInfo
+            flag={<img src={europe} alt="유럽연합 국기" />}
+            CountryKor={'유럽연합'}
+            CountryEng={'(EUR)'}
+          />
         </ChartCountry>
         <ChartData>
           <p
