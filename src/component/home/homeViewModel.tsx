@@ -1,12 +1,11 @@
 import HomeView from "./view/home";
-import { useRecoilValue } from "recoil";
 import { ChangeEvent, useState } from "react";
-import { useGetEurInfo } from "../../api/getEurInfo";
-import { EurInfoSelector } from "../../store/eurInfo";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { PointValidation } from "../../lib/validation";
+import { EurInfoAtom, EurInfoSelector } from "../../store/eurInfo";
 
 export default function HomeViewModel() {
-  const eurInfo = useGetEurInfo();
+  const [eurInfo] = useRecoilState(EurInfoAtom);
   const [eurTokrw, setEurTokrw] = useState("");
   const { exchangeEurToKrw } = useRecoilValue(EurInfoSelector);
 
