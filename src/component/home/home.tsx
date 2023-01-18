@@ -1,13 +1,11 @@
-import { DepthPointTwo, EurFormatter } from "../../../lib/utils";
-import { IHomeViewProps } from "../../../types/homeView";
-import * as S from "../homeStyles";
+import * as S from "../../styles/homeStyles";
+import UseHomeViewModel from "../../hooks/homeViewModel";
+import { DepthPointTwo, EurFormatter } from "../../lib/utils";
 
-export default function HomeView({
-  eurInfo,
-  eurTokrw,
-  exchangeUpDown,
-  onChangeInputEur,
-}: IHomeViewProps) {
+export default function HomeView() {
+  const { eurInfo, eurTokrw, exchangeUpDown, onChangeInputEur } =
+    UseHomeViewModel();
+
   return (
     <S.Container>
       <S.H1>유로(EUR)/원(KRW) 환율</S.H1>
@@ -40,12 +38,12 @@ export default function HomeView({
           <S.InfoWrapper>환율 정보를 불러오는 중입니다.</S.InfoWrapper>
         )}
         <S.calculationWrapper>
-          <label>
-            <input onChange={onChangeInputEur} /> 유로
+          <label htmlFor={"inputEur"}>
+            <input id={"inputEur"} onChange={onChangeInputEur} /> 유로
           </label>
           <span>▶︎</span>
-          <label>
-            <input disabled defaultValue={eurTokrw} /> 원
+          <label htmlFor={"inputKrw"}>
+            <input id={"inputKrw"} disabled value={eurTokrw} /> 원
           </label>
         </S.calculationWrapper>
       </S.Main>

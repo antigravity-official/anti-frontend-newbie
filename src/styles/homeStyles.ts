@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { IStylesProps } from "../../types/homeView";
+import { IStylesProps } from "../types/homeView";
 
 export const Container = styled.section`
   margin: 0 auto;
