@@ -1,4 +1,4 @@
-import { ExchangeContainer } from "./exchange/ExchangeContainer";
+import { ExchangeContainer } from "./components/exchange/ExchangeContainer";
 
 export const App = () => {
   return (

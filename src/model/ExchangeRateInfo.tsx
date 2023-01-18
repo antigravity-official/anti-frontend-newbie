@@ -28,6 +28,18 @@ export class ExchangeRateInfo {
     this.ttBuyingPrice = ttBuyingPrice;
     this.ttSellingPrice = ttSellingPrice;
   }
+
+  isUp(): boolean {
+    return this.basePrice - this.openingPrice > 0;
+  }
+
+  isDown(): boolean {
+    return this.basePrice - this.openingPrice < 0;
+  }
+
+  getRate(): number {
+    return (this.changePrice / this.basePrice) * 100;
+  }
 }
 
 export async function getExchangeRateInfo(country: string): Promise<ExchangeRateInfo> {

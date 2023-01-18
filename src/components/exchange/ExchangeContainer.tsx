@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useExchanger from "../hooks/useExchanger";
-import useExchangeRate from "../hooks/useExchangeRate";
+import useExchanger from "../../hooks/useExchanger";
+import useExchangeRate from "../../hooks/useExchangeRate";
 import Exchanger from "./Exchanger";
 import ExchangeRate from "./ExchangeRate";
 

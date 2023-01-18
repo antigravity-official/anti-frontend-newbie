@@ -1,4 +1,4 @@
-import { ExchangeRateInfo } from "../model/ExchangeRateInfo";
+import { ExchangeRateInfo } from "../../model/ExchangeRateInfo";
 
 interface ExchangeRateProps {
   country: { korName: string; enName: string };
