@@ -1,9 +1,9 @@
-import ExchangeKrwEur from './views/ExchangeKrwEurView/ExchangeKrwEur';
+import { useLayoutEffect, useState } from 'react';
 import GlobalStyle from './styles/global.style';
 import { getExchangeKrwEurInfosApi } from './apis/exchangeApi';
+import ExchangeKrwEur from './views/ExchangeKrwEurSectionView/ExchangeKrwEurSection';
 import KrwEurModel from './models/krwEurModel';
 import KrwEurViewModel from './viewModels/krwEurViewModel';
-import { useLayoutEffect, useState } from 'react';
 
 export const App = () => {
   const [kwrEurViewModel, setKwrEurViewModel] = useState<KrwEurViewModel>();

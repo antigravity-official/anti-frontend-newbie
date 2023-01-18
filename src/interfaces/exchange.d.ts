@@ -1,3 +1,8 @@
+type Brand<K, T> = K & { __brand: T };
+
+export type EurTypes = Brand<number, 'EUR'>;
+export type KrwTypes = Brand<number, 'KRW'>;
+
 export interface KrwEurInfosTypes {
   code: string;
   currencyCode: string;

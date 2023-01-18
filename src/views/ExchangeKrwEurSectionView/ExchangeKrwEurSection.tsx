@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import ExchangeEurInfos from '../EurInfosView/EurInfos';
+import * as S from './ExchangeKrwEurSection.style';
 import { KrwEurInfosTypes } from '../../interfaces/exchange';
-import * as S from './ExchangeKrwEur.style';
+import ExchangeEurInfos from '../EurInfosView/EurInfos';
 import KrwEurViewModel from '../../viewModels/krwEurViewModel';
+import ExchangeEurToKrw from '../ExchangeEurToKrwView/ExchangeEurToKrw';
 
 function ExchangeKrwEur({ props }: { props: KrwEurViewModel }) {
-  const [isReady, setReady] = useState(false);
   const [krwEurInfo, setKrwEurInfo] = useState<KrwEurInfosTypes>();
 
   useEffect(() => {
-    (async () => {
-      const eurInfosToViewModel = await props.model.getEurInfos();
-      setKrwEurInfo(eurInfosToViewModel);
-      setReady(true);
-    })();
-    return () => {};
+    const eurInfosToViewModel = props.model.getEurInfos();
+    setKrwEurInfo(eurInfosToViewModel);
   }, []);
 
-  if (!isReady) return null;
   if (!krwEurInfo) return null;
   return (
     <S.Container>
       <ExchangeEurInfos krwEurInfos={krwEurInfo} />
-      <hr />
-      <input /> 유로 ▶︎ <input disabled /> 원
+      <ExchangeEurToKrw props={props} />
     </S.Container>
   );
 }
