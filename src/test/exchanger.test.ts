@@ -25,6 +25,18 @@ describe("환율 계산", () => {
     const expected = ["1,234.5", "1,648,267"];
     expect(exchangeToKrw(inputPrice, basePrice)).toStrictEqual(expected);
   });
+  it("입력값에 .을 제외한 문자가 포함된 경우", () => {
+    const inputPrice = "1234.5문";
+    const basePrice = 1335.17;
+    const expected = false;
+    expect(exchangeToKrw(inputPrice, basePrice)).toStrictEqual(expected);
+  });
+  it("입력값에 끝에 .이 있는 경우", () => {
+    const inputPrice = "1234.";
+    const basePrice = 1335.17;
+    const expected = ["1,234.", "1,647,600"];
+    expect(exchangeToKrw(inputPrice, basePrice)).toStrictEqual(expected);
+  });
 });
 
 const exchangeToKrw = (inputPrice: string, basePrice: number) => {
@@ -38,4 +50,5 @@ const exchangeToKrw = (inputPrice: string, basePrice: number) => {
     const result = getFormattedNumber(krw, 0);
     return [input, result];
   }
+  return false;
 };
