@@ -1,10 +1,10 @@
 import React from "react";
-import { EurInfo } from "../interfaces/euro";
+import { EurInfo } from "../interfaces/eur";
 import { getCashTtInfoTextList } from "../utils/util";
 import List from "../view/List";
 
-const CashTtInfoList = ({ euroInfo }: { euroInfo: EurInfo }) => {
-  const cashTtInfoList = getCashTtInfoTextList(euroInfo);
+const CashTtInfoList = ({ eurInfo }: { eurInfo: EurInfo }) => {
+  const cashTtInfoList = getCashTtInfoTextList(eurInfo);
   return <List infoArray={cashTtInfoList} />;
 };
 

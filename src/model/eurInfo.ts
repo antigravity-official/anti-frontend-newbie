@@ -1,4 +1,4 @@
-import { EurInfo } from "../interfaces/euro";
+import { EurInfo } from "../interfaces/eur";
 
 const EUR_API_URL = "https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR";
 

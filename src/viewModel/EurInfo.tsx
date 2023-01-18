@@ -4,10 +4,10 @@ import CashTtInfoList from "./CashTtInfoList";
 import CurrencyConverter from "./CurrencyConverter";
 import EurStandardInfo from "./EurStandardInfo";
 
-const getEuroData = getEurInfo();
+const getEurData = getEurInfo();
 
-const EuroInfo = () => {
-  const eurInfo = getEuroData.read();
+const EurInfo = () => {
+  const eurInfo = getEurData.read();
   return (
     <div>
       <EurStandardInfo
@@ -15,10 +15,10 @@ const EuroInfo = () => {
         changePrice={eurInfo.changePrice}
         openingPrice={eurInfo.openingPrice}
       />
-      <CashTtInfoList euroInfo={eurInfo} />
+      <CashTtInfoList eurInfo={eurInfo} />
       <CurrencyConverter basePrice={eurInfo.basePrice} />
     </div>
   );
 };
 
-export default EuroInfo;
+export default EurInfo;

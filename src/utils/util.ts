@@ -1,4 +1,4 @@
-import { EurInfo } from "../interfaces/euro";
+import { EurInfo } from "../interfaces/eur";
 import { CASH_TT_INFO_LIST, CASH_TT_INFO_TEXT, KR_DECIMAL } from "./constant";
 
 export const exchangeEurToKrw = (krw: number, basePrice: number) => krw * basePrice;
