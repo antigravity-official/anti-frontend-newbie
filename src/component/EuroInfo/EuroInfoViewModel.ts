@@ -1,28 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { useExchangeApi } from '../../context/ExchangeApiContext';
 import { EuroInfo } from './EuroInfoModel';
 // utils
 import { exchangeEurToKrw } from '../../utils/exchangeEurToKrw';
 import { applyThousandSeparator } from '../../utils/applyThousandSeparator';
 import { splitDecimal } from '../../utils/splitDecimal';
 
-const getEurInfo = async () => {
-  const res = await axios.get(
-    'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWEUR'
-  );
-
-  return res.data[0];
-};
-
 export default function EuroInfoViewModel() {
   const [euro, setEuro] = useState('');
+  const exchangeApi = useExchangeApi();
   const {
     data: eurInfo,
     isLoading,
     isFetching,
-  } = useQuery<EuroInfo, AxiosError>(['euro'], getEurInfo);
+  } = useQuery<EuroInfo, AxiosError>(['euro'], async () => exchangeApi.euro());
   const krw = exchangeEurToKrw(euro, eurInfo?.basePrice as number);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
