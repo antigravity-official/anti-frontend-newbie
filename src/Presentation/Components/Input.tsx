@@ -1,5 +1,6 @@
-import React, { ChangeEvent, InputHTMLAttributes, KeyboardEvent } from 'react';
+import { ChangeEvent, InputHTMLAttributes, KeyboardEvent } from 'react';
 import { FaRegHandPointRight } from 'react-icons/fa';
+
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   amount: number;

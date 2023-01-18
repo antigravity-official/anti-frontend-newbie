@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { IconType } from 'react-icons';
 
 type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> & {

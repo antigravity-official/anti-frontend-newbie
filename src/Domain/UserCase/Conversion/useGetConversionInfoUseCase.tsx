@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 import { QueryKeys } from 'lib/queryClient';
 import { getConversionInfo } from 'Data/Repository/ConversionRepository';

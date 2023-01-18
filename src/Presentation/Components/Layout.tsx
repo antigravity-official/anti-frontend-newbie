@@ -1,5 +1,3 @@
-import React from 'react';
-
 type LayoutProps = {
   title: string;
   children: React.ReactNode;
