@@ -44,7 +44,7 @@ web_modules
 
 # Unit tests coverage
 src/apis/coverage
-src/components/coverage
+src/Presentation/components/coverage
 # src/components/**/**/__snapshots__
 src/pages/coverage
 src/stores/coverage

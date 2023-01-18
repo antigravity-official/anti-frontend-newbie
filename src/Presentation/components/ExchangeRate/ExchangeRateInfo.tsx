@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import { ExchangeInfo } from "../../../typing";
-import { formattingWon } from "../../utils";
+import { ExchangeInfo } from "../../../../typing";
+import { formattingWon } from "../../../utils";
 
 interface Props {
   exchangeInfo: ExchangeInfo;

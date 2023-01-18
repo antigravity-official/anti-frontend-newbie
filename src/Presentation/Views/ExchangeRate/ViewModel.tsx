@@ -1,23 +1,21 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from "react";
-import { ExchangeInfo } from "../../../typing";
-import { addComma, unComma } from "../../utils";
+import { ChangeEvent, useCallback, useRef, useState } from "react";
+import { addComma, unComma } from "../../../utils";
+import useFetchExchangeInfo from "../../../hooks/useFetchExchangeInfo";
 
-interface Props {
-  exchangeInfo: ExchangeInfo;
-}
-
-const ExchangeInput = ({ exchangeInfo }: Props) => {
+const ExchangeRateViewModel = () => {
   const [money, setMoney] = useState("");
   const [inputError, setInputError] = useState("");
-  const { basePrice } = exchangeInfo;
 
-  const exchangeEurToKrw = useCallback((inputMoney: string) => {
-    const pureMoney = Number(unComma(inputMoney));
-    const newBasePrice = Math.floor(basePrice);
-    const exchangedMoney = Math.floor(pureMoney * newBasePrice);
-    const formattingMoney = addComma(String(exchangedMoney));
-    return formattingMoney;
-  }, []);
+  const exchangeEurToKrw = useCallback(
+    (inputMoney: string, basePrice: number) => {
+      const pureMoney = Number(unComma(inputMoney));
+      const newBasePrice = Math.floor(basePrice);
+      const exchangedMoney = Math.floor(pureMoney * newBasePrice);
+      const formattingMoney = addComma(String(exchangedMoney));
+      return formattingMoney;
+    },
+    []
+  );
 
   // prevInteger 는 이전 숫자를 기억하고 사용자 커서 위치를 조작하는데 사용
   const prevInteger = useRef("");
@@ -85,16 +83,31 @@ const ExchangeInput = ({ exchangeInfo }: Props) => {
     prevInteger.current = formattedInteger;
   }, []);
 
-  return (
-    <>
-      <div>
-        <input type="text" value={money} onChange={onChange} />
-        {exchangeInfo.currencyName} ▶︎{" "}
-        <input value={exchangeEurToKrw(money)} disabled /> 원
-      </div>
-      {inputError && <div style={{ color: "orange" }}>{inputError}</div>}
-    </>
-  );
+  const getExchangeInfo = useFetchExchangeInfo;
+
+  const renderArrow = (base: number, open: number) => {
+    if (base - open > 0) {
+      return "▲";
+    }
+    if (base - open < 0) {
+      return "▼";
+    }
+    return "-";
+  };
+
+  const calcChangeRate = (change: number, base: number) => {
+    return (change / base) * 100;
+  };
+
+  return {
+    renderArrow,
+    getExchangeInfo,
+    calcChangeRate,
+    money,
+    onChange,
+    exchangeEurToKrw,
+    inputError,
+  };
 };
 
-export default ExchangeInput;
+export default ExchangeRateViewModel;
