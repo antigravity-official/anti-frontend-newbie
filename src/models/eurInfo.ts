@@ -18,6 +18,7 @@ const setEurInfo = (data: IEurInfo) => {
 const getEurInfo = async () => {
   if(eurInfoLoading) {
     await fetchEurInfo();
+
     eurInfoLoading = true;
   }
 
