@@ -102,7 +102,6 @@ export const Main = () => {
       .then((response) => response.json())
       .then((array) => array[0]);
     setEurInfo(krweur.cashBuyingPrice);
-    console.log(krweur.cashBuyingPrice);
   };
 
   useEffect(() => {
