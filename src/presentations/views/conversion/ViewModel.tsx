@@ -3,10 +3,10 @@ import useConvert from '../../../hooks/useConvert';
 import ConvertCurrency from 'lib/ConvertCurrency';
 import trimAmount from '../../../lib/trimAmount';
 import useInput from '../../../hooks/useInput';
-import useGetConversionInfoUseCase from '../../../Domain/UserCase/Conversion/useGetConversionInfoUseCase';
+import useGetEuroInfo from '../../../hooks/useGetEuroInfo';
 
 export default function useViewModel() {
-  const { data, isLoading, error } = useGetConversionInfoUseCase();
+  const { data, isLoading, error } = useGetEuroInfo();
   const [kindOfPrice, , , setKindOfPrice] = useInput<{ name: string; data: number }[]>([]);
   const [amount, onAmountChange, onAmountReset] = useInput(1);
   const [price, setPrice] = useState(JSON.stringify({ name: '기본', data: 1 }));

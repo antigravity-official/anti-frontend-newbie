@@ -1,14 +1,14 @@
 import useViewModel from './ViewModel';
-import Input from '../../Components/Input';
-import ActionButton from 'Presentation/Components/ActionButton';
-import DropDowns from 'Presentation/Components/DropDowns';
-import Layout from 'Presentation/Components/Layout';
+import Input from '../../components/Input';
+import ActionButton from 'presentations/components/ActionButton';
+import DropDowns from 'presentations/components/DropDowns';
+import Layout from 'presentations/components/Layout';
 import { RxReset } from 'react-icons/rx';
 import { HiOutlineSwitchVertical } from 'react-icons/hi';
 import { RiGradienterLine } from 'react-icons/ri';
-import SubmitButton from '../../Components/SubmitButton';
-import Loading from 'Presentation/Components/Loading';
-import Error from 'Presentation/Components/Error';
+import SubmitButton from '../../components/SubmitButton';
+import Loading from 'presentations/components/Loading';
+import Error from 'presentations/components/Error';
 
 export default function ConvertCurrencyView() {
   const {

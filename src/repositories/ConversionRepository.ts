@@ -1,5 +1,5 @@
 import fetcher from 'lib/queryClient';
 
-export async function getConversionInfo() {
+export async function getEuroInfo() {
   return await fetcher({ method: 'GET', path: '' });
 }

@@ -1,4 +1,4 @@
-import ConvertCurrencyView from 'Presentation/View/Conversion/View';
+import ConvertCurrencyView from 'presentations/views/conversion/View';
 
 export const App = () => {
   return <ConvertCurrencyView />;
