@@ -7,6 +7,8 @@ import { RxReset } from 'react-icons/rx';
 import { HiOutlineSwitchVertical } from 'react-icons/hi';
 import { RiGradienterLine } from 'react-icons/ri';
 import SubmitButton from '../../Components/SubmitButton';
+import Loading from 'Presentation/Components/Loading';
+import Error from 'Presentation/Components/Error';
 
 export default function ConvertCurrencyView() {
   const {
@@ -28,11 +30,11 @@ export default function ConvertCurrencyView() {
     closeResult,
   } = useViewModel();
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (error) return <div>서버에서 에러가 발생했어요!</div>;
+  if (isLoading) return <Loading />;
+  if (error) return <Error />;
 
   return (
-    <Layout title="✅ 한국와 유럽의 환율을 알아보세요!">
+    <Layout title="한국와 유럽의 환율을 알아보세요!">
       <p className="flex items-center mb-2">
         <span className="text-4xl">{from.name}</span>
         <span className="mx-4"> ➡️ </span>
@@ -45,7 +47,7 @@ export default function ConvertCurrencyView() {
         state={price}
         setState={setPrice}
       />
-      <section className="flex flex-col items-center ">
+      <section className="flex flex-col items-center">
         <Input
           label={from.unit}
           amount={amount}
