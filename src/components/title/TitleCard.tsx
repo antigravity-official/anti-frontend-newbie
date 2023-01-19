@@ -32,7 +32,7 @@ const IconWrap = styled.div`
 `;
 
 const TitleCard = () => {
-  const onClickRefresh = (e: any) => {
+  const onClickRefresh = (e: React.MouseEvent) => {
     window.location.reload();
   };
   return (
