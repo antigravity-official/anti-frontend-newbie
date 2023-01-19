@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <div>로딩중...</div>;
+  return <img src={require('../../assets/loading.gif')} alt="loading..." />;
 }
