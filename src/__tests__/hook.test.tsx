@@ -63,3 +63,17 @@ test('useConvert', async () => {
   await waitForValueToChange(() => result.current!.result);
   expect(result.current.result).toContain('0유로');
 });
+
+test('ConvertCurrency', () => {
+  expect(ConvertCurrency.eurToKrw(1, 2000)).toBe(2000);
+  expect(ConvertCurrency.eurToKrw(1, 2000)).not.toBe(1000);
+
+  expect(ConvertCurrency.krwToEur(2000, 1000)).toBe(2);
+  expect(ConvertCurrency.krwToEur(2000, 1000)).not.toBe(1);
+});
+
+test('trimAmount', () => {
+  expect(trimAmount(2)(1000.12222)).toBe(1000.12);
+  expect(trimAmount(2)(1000.12222)).not.toBe(1000.1212);
+  expect(trimAmount(2)(1000.12222)).not.toBe(1000.0);
+});
