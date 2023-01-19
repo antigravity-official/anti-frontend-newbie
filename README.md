@@ -2,10 +2,11 @@
 
 ![sample video](https://user-images.githubusercontent.com/95073450/213273225-b251f374-1ce1-40b3-a0c8-41ede90d0613.gif)
 
+<br>
+
 ### 실행 방법
 
-`git clone anti-frontend-newbie.git` <br>
-`p/anti` <br>
+`git clone https://github.com/project-mizzu/anti-frontend-newbie.git` <br>
 `npm install (--legacy-peer-deps)` <br>
 `npm start`
 
@@ -16,7 +17,8 @@
 ![design system](https://user-images.githubusercontent.com/95073450/213270230-684e8a2f-2354-4598-9a79-428f15ca9e1e.png)
 
 코드를 작성하기 전에 기능 요구사항이 필요한 것처럼, 디자인도 통일된 가이드가 필요합니다. <br>
-피그마를 통해 작성한 디자인 시스템을 토대로 미리 시각적으로 컴포넌트 활용에 대한 인지를 해볼 수 있었으며, 더 나아가 웹모바일 반응형 디자인 구현까지 미리 시도해 볼 수 있었습니다. <br>
+피그마를 통해 작성한 디자인 시스템을 토대로 미리 시각적으로 컴포넌트 활용에 대한 인지를 해볼 수 있었으며, <br>
+더 나아가 웹모바일 반응형 디자인 구현까지 미리 시도해 볼 수 있었습니다. <br>
 
 <br>
 
@@ -50,7 +52,7 @@ src
 
 #### 필수 수행 항목
 
-- [△] any를 사용하지 말고 Type을 지정
+- [x] any를 사용하지 말고 Type을 지정
 - [x] 컴포넌트 분리하고, 적당한 폴더 만들어 파일 배치
 - [x] 유로화 입력할 때마다 환율 반영하여 원화로 표시
 - [x] 환율 정보 로딩중임을 사용자가 알 수 있도록 UI 추가
