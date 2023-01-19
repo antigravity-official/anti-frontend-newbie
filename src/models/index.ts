@@ -1,3 +1,4 @@
-import { getEurInfo, setEurInfo, fetchEurInfo } from "./eurInfo";
+import { eur, getEur, setEur } from "./eur";
+import { eurInfo, getEurInfo, setEurInfo, fetchEurInfo, eurInfoLoading } from "./eurInfo";
 
-export { getEurInfo, setEurInfo, fetchEurInfo };
+export { eur, getEur, setEur, eurInfo, eurInfoLoading, getEurInfo, setEurInfo, fetchEurInfo };

@@ -1,6 +1,6 @@
 import { IEurInfo } from "../types";
 
-let loading = true;
+let eurInfoLoading = true;
 let eurInfo: IEurInfo = {
   basePrice: 0,
   openingPrice: 0,
@@ -16,9 +16,9 @@ const setEurInfo = (data: IEurInfo) => {
 };
 
 const getEurInfo = async () => {
-  if(loading) {
+  if(eurInfoLoading) {
     await fetchEurInfo();
-    loading = true;
+    eurInfoLoading = true;
   }
 
   return eurInfo;
@@ -34,4 +34,4 @@ const fetchEurInfo = async () => {
   eurInfo = data;
 };
 
-export { eurInfo, setEurInfo, getEurInfo, fetchEurInfo };
+export { eurInfo, eurInfoLoading, setEurInfo, getEurInfo, fetchEurInfo };
