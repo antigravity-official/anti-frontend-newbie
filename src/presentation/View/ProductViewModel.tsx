@@ -12,7 +12,10 @@ function ProductViewModel() {
 
   const { data, isLoading, isError, error } = useQuery<IEurInfo, Error>(
     ["EurInfo"],
-    getEurInfo
+    getEurInfo,
+    {
+      retry: 0,
+    }
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
